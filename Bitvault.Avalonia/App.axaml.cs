@@ -23,8 +23,8 @@ public partial class App : Application
                 services.AddAvalonia();
                 services.AddHandler<AppHandler>();
 
-                //services.AddTransient<IVaultComponent, VaultComponent>();
-                //services.AddInitializer<VaultComponentsCollectionInitializer>();
+                services.AddTransient<IVaultComponent, VaultComponent>();
+                services.AddInitializer<VaultComponentsInitializer>();
 
                 if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
                 {
@@ -42,9 +42,7 @@ public partial class App : Application
 
                 services.AddTemplate<VaultViewModel, VaultView>("Vault");
 
-                services.AddConfiguration<VaultConfiguration>(args => args.Name = "foo1", $"{nameof(VaultConfiguration)}:Personal");
-                services.AddConfiguration<VaultConfiguration>(args => args.Name = "foo2", $"{nameof(VaultConfiguration)}:Test");
-
+                services.AddConfiguration<VaultConfiguration>($"{nameof(VaultConfiguration)}:Personal");
             })
         .Build();
 
