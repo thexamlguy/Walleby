@@ -1,4 +1,5 @@
-﻿using Toolkit.Foundation;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Toolkit.Foundation;
 
 namespace Bitvault;
 
@@ -6,14 +7,19 @@ public partial class VaultNavigationViewModel :
     ObservableCollectionViewModel<IMainNavigationViewModel>,
     IMainNavigationViewModel
 {
+    [ObservableProperty]
+    private string name;
+
     public VaultNavigationViewModel(IServiceProvider serviceProvider,
-        IServiceFactory serviceFactory,
+            IServiceFactory serviceFactory,
         IPublisher publisher,
         ISubscriber subscriber,
         IDisposer disposer,
-        IContentTemplate template) : base(serviceProvider, serviceFactory, publisher, subscriber, disposer)
+        IContentTemplate template,
+        string name) : base(serviceProvider, serviceFactory, publisher, subscriber, disposer)
     {
         Template = template;
+        Name = name;
 
         Add<AllNavigationViewModel>();
         Add<StarredNavigationViewModel>();

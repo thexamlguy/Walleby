@@ -2,6 +2,7 @@
 
 namespace Bitvault;
 
+[Notification(nameof(MainViewModel))]
 public partial class MainViewModel : 
     ObservableCollectionViewModel<IMainNavigationViewModel>
 {
@@ -13,7 +14,6 @@ public partial class MainViewModel :
         IContentTemplate template) : base(serviceProvider, serviceFactory, publisher, subscriber, disposer)
     {
         Template = template;
-        Add<VaultNavigationViewModel>();
     }
 
     public IContentTemplate Template { get; set; }

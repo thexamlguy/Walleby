@@ -31,18 +31,13 @@ public partial class App : Application
                     services.AddTemplate<MainWindowViewModel, MainWindow>("MainWindow");
                 }
 
+                services.AddSingleton<IVaultHostCollection, VaultHostCollection>();
+
                 services.AddTemplate<MainViewModel, MainView>("Main");
-                services.AddHandler<MainViewHandler>();
+                services.AddHandler<MainViewModelHandler>();
 
-                services.AddTemplate<VaultNavigationViewModel, VaultNavigationView>();
-                services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
-                services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();
-                services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
-                services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
-
-                services.AddTemplate<VaultViewModel, VaultView>("Vault");
-
-                services.AddConfiguration<VaultConfiguration>($"{nameof(VaultConfiguration)}:Personal");
+                services.AddConfiguration<VaultConfiguration>(args => args.Name = "Personal", 
+                    $"{nameof(VaultConfiguration)}:Personal");
             })
         .Build();
 

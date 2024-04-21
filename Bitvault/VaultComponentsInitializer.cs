@@ -5,7 +5,8 @@ namespace Bitvault;
 
 public class VaultComponentsInitializer(IServiceProvider provider,
     IProxyServiceCollection<IComponentBuilder> proxy,
-    IEnumerable<IConfiguration<VaultConfiguration>> configurations) : IInitializer
+    IEnumerable<IConfiguration<VaultConfiguration>> configurations,
+    IVaultHostCollection vaults) : IInitializer
 {
     public Task Initialize()
     {
@@ -37,10 +38,11 @@ public class VaultComponentsInitializer(IServiceProvider provider,
                     services.AddRange(proxy.Services);
                 });
 
-                builder.AddConfiguration<VaultConfiguration>(configuration.Section);
-
+                builder.AddConfiguration(configuration.Section, configuration.Value);
                 IComponentHost host = builder.Build();
                 host.StartAsync();
+
+                vaults.Add(host);
             }
         }
 

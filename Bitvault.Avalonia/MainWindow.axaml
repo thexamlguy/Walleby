@@ -2,14 +2,16 @@
     x:Class="Bitvault.Avalonia.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
     xmlns:windowing="using:FluentAvalonia.UI.Windowing"
+    x:DataType="vm:MainWindowViewModel"
     Background="Transparent"
-	TransparencyLevelHint="Mica">
-    <!--<ContentControl x:Name="Window">
+    TransparencyLevelHint="Mica">
+    <ContentControl x:Name="Window">
         <Interaction.Behaviors>
             <AttachedBehavior>
                 <NavigateAction Context="Window" Route="Main" />
             </AttachedBehavior>
         </Interaction.Behaviors>
-    </ContentControl>-->
+    </ContentControl>
 </windowing:AppWindow>

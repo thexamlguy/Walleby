@@ -4,5 +4,5 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
     x:DataType="vm:VaultNavigationViewModel"
-    Content="Test"
+    Content="{Binding Name}"
     MenuItemsSource="{Binding}" />

@@ -9,6 +9,12 @@ public class VaultComponent :
         ComponentBuilder.Create()
             .AddServices(services =>
             {
-       
+                services.AddTemplate<VaultNavigationViewModel, VaultNavigationView>();
+                services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
+                services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();
+                services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
+                services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
+
+                services.AddTemplate<VaultViewModel, VaultView>("Vault");
             });
 }
