@@ -1,10 +1,64 @@
-<Application xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="Bitvault.Avalonia.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
+<Application
+    x:Class="Bitvault.Avalonia.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
+    RequestedThemeVariant="Default">
     <Application.Styles>
-        <FluentTheme />
+        <ThemeResources />
+        <Style Selector="ui|SettingsExpanderItem">
+            <Style Selector="^ /template/ Expander#Expander">
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+            <Style Selector="^:footerBottom /template/ ContentPresenter#FooterPresenter">
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+            </Style>
+        </Style>
+        <Style Selector="ui|SettingsExpander /template/ Expander#Expander ToggleButton">
+            <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="BorderThickness" Value="0 0 0 2" />
+            <Style Selector="^:focus">
+                <Style Selector="^ /template/ Border#PART_BorderElement">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0 0 0 2" />
+                </Style>
+            </Style>
+        </Style>
+        <Style Selector="OverlayPopupHost">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <!--  Do not forget to update Templated_Control_With_Popup_In_Template_Should_Set_TemplatedParent test  -->
+                    <LayoutTransformControl LayoutTransform="{TemplateBinding Transform}">
+                        <VisualLayerManager IsPopup="True">
+                            <LayoutTransformControl>
+                                <LayoutTransformControl.LayoutTransform>
+                                    <ScaleTransform ScaleX="1.4" ScaleY="1.4" />
+                                </LayoutTransformControl.LayoutTransform>
+                                <ContentPresenter
+                                    Name="PART_ContentPresenter"
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{TemplateBinding Background}"
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+                            </LayoutTransformControl>
+                        </VisualLayerManager>
+                    </LayoutTransformControl>
+                </ControlTemplate>
+            </Setter>
+        </Style>
     </Application.Styles>
+    <Application.Resources>
+        <Thickness x:Key="TextControlThemePadding">0,5,6,6</Thickness>
+        <FontFamily x:Key="SymbolFontFamily">avares://HyperX.Launcher.Avalonia/Assets/SegoeIcons.ttf#Segoe Fluent Icons</FontFamily>
+        <StaticResource x:Key="TextControlBackground" ResourceKey="ControlFillColorTransparentBrush" />
+        <StaticResource x:Key="TextControlBackgroundPointerOver" ResourceKey="ControlFillColorTransparentBrush" />
+        <x:Double x:Key="SettingsExpanderItemAdaptiveWidthTrigger">0</x:Double>
+        <Thickness x:Key="SettingsExpanderItemBottomFooterMargin">0,8,0,0</Thickness>
+    </Application.Resources>
 </Application>

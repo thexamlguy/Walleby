@@ -9,11 +9,22 @@
 		<AvaloniaResource Include="Assets\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
-		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
-		<PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+		<PackageReference Include="Avalonia" Version="11.1.0-beta1" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0-beta1" />
+		<PackageReference Include="Avalonia.Labs.Controls" Version="11.0.10.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="FluentAvaloniaUI" Version="2.1.0-preview2" />
+		<PackageReference Include="System.Reactive" Version="6.0.1-preview.1" />
+		<PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.1.0-beta1" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0-preview.3.24172.9" />
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0-beta1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Bitvault\Bitvault.csproj" />
+	  <ProjectReference Include="..\Toolkit\Toolkit.Avalonia\Toolkit.Avalonia.csproj" />
+	  <ProjectReference Include="..\Toolkit\Toolkit.Foundation\Toolkit.Foundation.csproj" />
+	  <ProjectReference Include="..\Toolkit\Toolkit.UI.Avalonia\Toolkit.UI.Avalonia.csproj" />
+	  <ProjectReference Include="..\Toolkit\Toolkit.UI.Controls.Avalonia\Toolkit.UI.Controls.Avalonia.csproj" />
 	</ItemGroup>
 </Project>

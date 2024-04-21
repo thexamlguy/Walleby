@@ -1,12 +1,11 @@
 using Avalonia.Controls;
+using Toolkit.Foundation;
 
-namespace Bitvault.Avalonia
+namespace Bitvault.Avalonia;
+
+
+[NavigationTarget("Main")]
+public partial class MainView : UserControl
 {
-    public partial class MainView : UserControl
-    {
-        public MainView()
-        {
-            InitializeComponent();
-        }
-    }
+    public MainView() => InitializeComponent();
 }

@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public class LockViewModel(IServiceProvider serviceProvider,
+public class MainWindowViewModel(IServiceProvider serviceProvider,
     IServiceFactory serviceFactory,
     IPublisher publisher,
     ISubscriber subscriber,

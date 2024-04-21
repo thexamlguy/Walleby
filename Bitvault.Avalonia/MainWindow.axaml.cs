@@ -1,12 +1,14 @@
-using Avalonia.Controls;
+using FluentAvalonia.UI.Windowing;
+using Toolkit.Foundation;
 
-namespace Bitvault.Avalonia
+namespace Bitvault.Avalonia;
+
+[NavigationTarget("Window")]
+public partial class MainWindow : AppWindow
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        TitleBar.ExtendsContentIntoTitleBar = true;
     }
 }
