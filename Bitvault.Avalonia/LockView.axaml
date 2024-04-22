@@ -7,9 +7,11 @@
             Width="300"
             Classes="revealPasswordButton"
             PasswordChar="&#x25CF;">
-            <TextBox.KeyBindings>
-                <KeyBinding Gesture="Enter" />
-            </TextBox.KeyBindings>
+            <Interaction.Behaviors>
+				<KeyBindingTriggerBehavior Gesture="Enter">
+					<NavigateAction Context="Main" Route="Vault" />
+				</KeyBindingTriggerBehavior>
+            </Interaction.Behaviors>
         </TextBox>
     </StackPanel>
 </UserControl>
