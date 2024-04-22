@@ -1,3 +1,5 @@
-﻿namespace Bitvault;
+﻿using Toolkit.Foundation;
 
-public record Unlocked;
+namespace Bitvault;
+
+public record Unlocked : INotification;

@@ -7,4 +7,11 @@ public class LockViewModel(IServiceProvider serviceProvider,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer) :
-    ObservableViewModel(serviceProvider, serviceFactory, publisher, subscriber, disposer);
+    ObservableViewModel(serviceProvider, serviceFactory, publisher, subscriber, disposer),
+    IConfirmation
+{
+    public Task<bool> Confirm()
+    {
+        return Task.FromResult(false);
+    }
+}

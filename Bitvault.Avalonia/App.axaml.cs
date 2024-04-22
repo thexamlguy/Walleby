@@ -36,8 +36,7 @@ public partial class App : Application
                 services.AddTemplate<MainViewModel, MainView>("Main");
                 services.AddHandler<MainViewModelHandler>();
 
-                services.AddConfiguration<VaultConfiguration>(args => args.Name = "Personal", 
-                    $"{nameof(VaultConfiguration)}:Personal");
+                services.AddConfiguration<VaultConfiguration>(args => args.Name = "Personal", "Vault:Personal");
             })
         .Build();
 

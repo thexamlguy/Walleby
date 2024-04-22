@@ -16,5 +16,7 @@ public class VaultComponent :
                 services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
 
                 services.AddTemplate<VaultViewModel, VaultView>("Vault");
+                services.AddTemplate<LockViewModel, LockView>("Lock");
+
             });
 }

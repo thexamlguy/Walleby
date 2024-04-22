@@ -5,12 +5,13 @@ namespace Bitvault;
 
 public class VaultComponentsInitializer(IServiceProvider provider,
     IProxyServiceCollection<IComponentBuilder> proxy,
-    IEnumerable<IConfiguration<VaultConfiguration>> configurations,
+    IEnumerable<IConfigurationDescriptor<VaultConfiguration>> configurations,
+    IComponentScopeCollection scopes,
     IVaultHostCollection vaults) : IInitializer
 {
-    public Task Initialize()
+    public async Task Initialize()
     {
-        foreach (IConfiguration<VaultConfiguration> configuration in configurations)
+        foreach (IConfigurationDescriptor<VaultConfiguration> configuration in configurations)
         {
             if (provider.GetRequiredService<IVaultComponent>() is IVaultComponent component)
             {
@@ -36,16 +37,19 @@ public class VaultComponentsInitializer(IServiceProvider provider,
                         provider.GetRequiredService<IComponentScopeProvider>());
 
                     services.AddRange(proxy.Services);
+
+                    services.AddSingleton(new ComponentScope(configuration.Section));
                 });
 
                 builder.AddConfiguration(configuration.Section, configuration.Value);
                 IComponentHost host = builder.Build();
-                host.StartAsync();
+
+                scopes.Add(new ComponentScopeDescriptor(configuration.Section,
+                     host.Services.GetRequiredService<IServiceProvider>()));
 
                 vaults.Add(host);
+                await host.StartAsync();
             }
         }
-
-        return Task.CompletedTask;
     }
 }

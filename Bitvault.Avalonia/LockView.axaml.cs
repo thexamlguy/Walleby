@@ -1,12 +1,8 @@
 using Avalonia.Controls;
 
-namespace Bitvault.Avalonia
+namespace Bitvault.Avalonia;
+
+public partial class LockView : UserControl
 {
-    public partial class LockView : Window
-    {
-        public LockView()
-        {
-            InitializeComponent();
-        }
-    }
+    public LockView() => InitializeComponent();
 }

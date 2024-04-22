@@ -5,4 +5,10 @@
     xmlns:vm="using:Bitvault"
     x:DataType="vm:VaultNavigationViewModel"
     Content="{Binding Name}"
-    MenuItemsSource="{Binding}" />
+    MenuItemsSource="{Binding}">
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Loaded">
+            <NavigateAction Context="Main" Route="Lock" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
+</NavigationViewItem>

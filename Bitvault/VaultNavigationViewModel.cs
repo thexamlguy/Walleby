@@ -5,13 +5,18 @@ namespace Bitvault;
 
 public partial class VaultNavigationViewModel :
     ObservableCollectionViewModel<IMainNavigationViewModel>,
-    IMainNavigationViewModel
+    IMainNavigationViewModel,
+    INotificationHandler<Unlocked>,
+    INotificationHandler<Locked>
 {
+    [ObservableProperty]
+    private bool locked;
+
     [ObservableProperty]
     private string name;
 
     public VaultNavigationViewModel(IServiceProvider serviceProvider,
-            IServiceFactory serviceFactory,
+        IServiceFactory serviceFactory,
         IPublisher publisher,
         ISubscriber subscriber,
         IDisposer disposer,
@@ -21,11 +26,30 @@ public partial class VaultNavigationViewModel :
         Template = template;
         Name = name;
 
+
+
+    }
+
+    public IContentTemplate Template { get; set; }
+
+    public Task Handle(Unlocked args, CancellationToken cancellationToken = default)
+    {
+        Locked = true;
+
         Add<AllNavigationViewModel>();
         Add<StarredNavigationViewModel>();
         Add<ArchiveNavigationViewModel>();
         Add<CategoriesNavigationViewModel>();
+
+        return Task.CompletedTask;
+
     }
 
-    public IContentTemplate Template { get; set; }
+    public Task Handle(Locked args, CancellationToken cancellationToken = default)
+    {
+        Locked = true;
+        Clear();
+
+        return Task.CompletedTask;
+    }
 }
