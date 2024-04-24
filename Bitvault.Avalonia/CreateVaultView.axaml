@@ -1,0 +1,18 @@
+<ContentDialog
+    x:Class="Bitvault.Avalonia.CreateVaultView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    Title="Create vault"
+    x:DataType="vm:CreateVaultViewModel"
+    CloseButtonText="Cancel"
+    PrimaryButtonText="Create">
+    <StackPanel Width="400">
+        <TextBox
+            Margin="0,0,0,18"
+            Text="{Binding Name}"
+            Watermark="Enter vault name" />
+        <TextBox Margin="0,0,0,18" Watermark="Enter password" />
+        <TextBox Watermark="Confirm password" />
+    </StackPanel>
+</ContentDialog>

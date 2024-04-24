@@ -4,7 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
     x:DataType="vm:MainViewModel">
-    <NavigationView MenuItemTemplate="{Binding Template}" MenuItemsSource="{Binding}">
+    <NavigationView
+        FooterMenuItemsSource="{Binding Footer}"
+        MenuItemTemplate="{Binding Template}"
+        MenuItemsSource="{Binding}">
         <Frame x:Name="Main">
             <Interaction.Behaviors>
                 <EventTriggerBehavior EventName="Loaded">

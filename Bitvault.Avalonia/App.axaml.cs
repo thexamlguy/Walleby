@@ -18,13 +18,15 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         IHost? host = DefaultBuilder.Create()
+            .AddConfiguration<VaultConfiguration>(args => args.Name = "Personal",
+                   "Vault:*")
             .ConfigureServices((context, services) =>
             {
                 services.AddAvalonia();
                 services.AddHandler<AppHandler>();
 
                 services.AddTransient<IVaultComponent, VaultComponent>();
-                services.AddInitializer<VaultComponentsInitializer>();
+                services.AddInitializer<VaultConfigurationInitializer>();
 
                 if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
                 {
@@ -32,11 +34,19 @@ public partial class App : Application
                 }
 
                 services.AddSingleton<IVaultHostCollection, VaultHostCollection>();
+                services.AddSingleton<IVaultFactory, VaultFactory>();
+                services.AddHandler<VaultHandler>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
                 services.AddHandler<MainViewModelHandler>();
 
-                services.AddConfiguration<VaultConfiguration>(args => args.Name = "Personal", "Vault:Personal");
+                services.AddTransient<FooterViewModel>();
+
+                services.AddTemplate<ManageNavigationViewModel, ManageNavigationView>();
+                services.AddTemplate<ManageViewModel, ManageView>("Manage");
+
+                services.AddTemplate<CreateVaultNavigationViewModel, CreateVaultNavigationView>();
+                services.AddTemplate<CreateVaultViewModel, CreateVaultView>("CreateVault");
             })
         .Build();
 

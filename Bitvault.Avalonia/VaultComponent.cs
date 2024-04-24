@@ -1,4 +1,5 @@
-﻿using Toolkit.Foundation;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Toolkit.Foundation;
 
 namespace Bitvault.Avalonia;
 
@@ -17,6 +18,5 @@ public class VaultComponent :
 
                 services.AddTemplate<VaultViewModel, VaultView>("Vault");
                 services.AddTemplate<LockViewModel, LockView>("Lock");
-
             });
 }

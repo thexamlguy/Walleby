@@ -1,4 +1,5 @@
-﻿using Toolkit.Foundation;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Toolkit.Foundation;
 
 namespace Bitvault;
 
@@ -6,14 +7,19 @@ namespace Bitvault;
 public partial class MainViewModel : 
     ObservableCollectionViewModel<IMainNavigationViewModel>
 {
+    [ObservableProperty]
+    private FooterViewModel footer;
+
     public MainViewModel(IServiceProvider serviceProvider,
         IServiceFactory serviceFactory,
         IPublisher publisher,
         ISubscriber subscriber,
         IDisposer disposer,
-        IContentTemplate template) : base(serviceProvider, serviceFactory, publisher, subscriber, disposer)
+        IContentTemplate template,
+        FooterViewModel footer) : base(serviceProvider, serviceFactory, publisher, subscriber, disposer)
     {
         Template = template;
+        Footer = footer;
     }
 
     public IContentTemplate Template { get; set; }

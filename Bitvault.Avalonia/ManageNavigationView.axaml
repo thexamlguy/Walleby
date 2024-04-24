@@ -1,14 +1,11 @@
 <NavigationViewItem
-    x:Class="Bitvault.Avalonia.VaultNavigationView"
+    x:Class="Bitvault.Avalonia.ManageNavigationView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:vm="using:Bitvault"
-    x:DataType="vm:VaultNavigationViewModel"
-    Content="{Binding Name}"
-    MenuItemsSource="{Binding}">
+    Content="Manage Vaults">
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Tapped">
-            <NavigateAction Context="Main" Route="Lock" />
+            <NavigateAction Context="Main" Route="Manage" />
         </EventTriggerBehavior>
     </Interaction.Behaviors>
 </NavigationViewItem>
