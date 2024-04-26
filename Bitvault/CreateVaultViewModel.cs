@@ -4,12 +4,13 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class CreateVaultViewModel(IServiceProvider serviceProvider,
-    IServiceFactory serviceFactory,
+public partial class CreateVaultViewModel(IServiceProvider provider,
+    IServiceFactory factory,
     IPublisher publisher,
+    IMediator mediator,
     ISubscriber subscriber,
     IDisposer disposer) :
-    ObservableViewModel(serviceProvider, serviceFactory, publisher, subscriber, disposer),
+    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
     IPrimaryConfirmation
 {
     [MaybeNull]

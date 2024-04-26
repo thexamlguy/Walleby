@@ -6,11 +6,12 @@ public partial class ManageNavigationViewModel :
     ObservableViewModel, 
     IMainNavigationViewModel
 {
-    public ManageNavigationViewModel(IServiceProvider serviceProvider,
-        IServiceFactory serviceFactory,
+    public ManageNavigationViewModel(IServiceProvider provider,
+        IServiceFactory factory,
+        IMediator mediator,
         IPublisher publisher, 
         ISubscriber subscriber, 
-        IDisposer disposer) : base(serviceProvider, serviceFactory, publisher, subscriber, disposer)
+        IDisposer disposer) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
 
     }

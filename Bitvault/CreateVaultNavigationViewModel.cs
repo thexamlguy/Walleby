@@ -2,16 +2,11 @@
 
 namespace Bitvault;
 
-public partial class CreateVaultNavigationViewModel :
-    ObservableViewModel,
-    IMainNavigationViewModel
-{
-    public CreateVaultNavigationViewModel(IServiceProvider serviceProvider,
-        IServiceFactory serviceFactory,
-        IPublisher publisher,
-        ISubscriber subscriber,
-        IDisposer disposer) : base(serviceProvider, serviceFactory, publisher, subscriber, disposer)
-    {
-
-    }
-}
+public partial class CreateVaultNavigationViewModel(IServiceProvider provider,
+    IServiceFactory factory,
+    IMediator mediator,
+    IPublisher publisher,
+    ISubscriber subscriber,
+    IDisposer disposer) :
+    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
+    IMainNavigationViewModel;

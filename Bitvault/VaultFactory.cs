@@ -8,7 +8,7 @@ public class VaultFactory(IServiceProvider provider,
     IComponentScopeCollection scopes,
     IVaultHostCollection vaults) : IVaultFactory
 {
-    public async Task CreateAsync(string name,
+    public IComponentHost? Create(string name,
         VaultConfiguration configuration)
     {
         if (provider.GetRequiredService<IVaultComponent>() is IVaultComponent component)
@@ -45,7 +45,9 @@ public class VaultFactory(IServiceProvider provider,
                  host.Services.GetRequiredService<IServiceProvider>()));
 
             vaults.Add(host);
-            await host.StartAsync();
+            return host;
         }
+
+        return default;
     }
 }

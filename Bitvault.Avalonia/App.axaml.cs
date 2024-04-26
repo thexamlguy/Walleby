@@ -26,7 +26,8 @@ public partial class App : Application
                 services.AddHandler<AppHandler>();
 
                 services.AddTransient<IVaultComponent, VaultComponent>();
-                services.AddInitializer<VaultConfigurationInitializer>();
+                services.AddTransient<IVaultFactory, VaultFactory>();
+                services.AddInitializer<VaultsInitializer>();
 
                 if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
                 {
@@ -38,7 +39,7 @@ public partial class App : Application
                 services.AddHandler<VaultHandler>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
-                services.AddHandler<MainViewModelHandler>();
+                services.AddHandler<VaultNavigationViewModelHandler>();
 
                 services.AddTransient<FooterViewModel>();
 

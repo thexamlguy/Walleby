@@ -2,10 +2,11 @@
 
 namespace Bitvault;
 
-public class ArchiveNavigationViewModel(IServiceProvider serviceProvider,
-    IServiceFactory serviceFactory,
+public class ArchiveNavigationViewModel(IServiceProvider provider,
+    IServiceFactory factory,
+    IMediator mediator,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer) :
-    ObservableViewModel(serviceProvider, serviceFactory, publisher, subscriber, disposer),
+    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
     IMainNavigationViewModel;

@@ -15,17 +15,17 @@ public partial class VaultNavigationViewModel :
     [ObservableProperty]
     private string name;
 
-    public VaultNavigationViewModel(IServiceProvider serviceProvider,
-        IServiceFactory serviceFactory,
+    public VaultNavigationViewModel(IServiceProvider provider,
+        IServiceFactory factory,
+        IMediator mediator,
         IPublisher publisher,
         ISubscriber subscriber,
         IDisposer disposer,
         IContentTemplate template,
-        string name) : base(serviceProvider, serviceFactory, publisher, subscriber, disposer)
+        string name) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Name = name;
-
 
 
     }

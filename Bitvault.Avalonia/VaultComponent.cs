@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Toolkit.Foundation;
+﻿using Toolkit.Foundation;
 
 namespace Bitvault.Avalonia;
 
@@ -10,6 +9,8 @@ public class VaultComponent :
         ComponentBuilder.Create()
             .AddServices(services =>
             {
+                services.AddInitializer<VaultInitializer>();
+
                 services.AddTemplate<VaultNavigationViewModel, VaultNavigationView>();
                 services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
                 services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();

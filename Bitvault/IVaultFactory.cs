@@ -1,8 +1,9 @@
-﻿
+﻿using Toolkit.Foundation;
+
 namespace Bitvault
 {
     public interface IVaultFactory
     {
-        Task CreateAsync(string name, VaultConfiguration configuration);
+        IComponentHost? Create(string name, VaultConfiguration configuration);
     }
 }

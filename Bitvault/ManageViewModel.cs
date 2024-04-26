@@ -7,12 +7,13 @@ public partial class ManageViewModel :
     ObservableCollectionViewModel,
     IMainNavigationViewModel
 {
-    public ManageViewModel(IServiceProvider serviceProvider,
-        IServiceFactory serviceFactory,
+    public ManageViewModel(IServiceProvider provider,
+        IServiceFactory factory,
+        IMediator mediator,
         IPublisher publisher,
         ISubscriber subscriber,
         IDisposer disposer,
-        IContentTemplate template) : base(serviceProvider, serviceFactory, publisher, subscriber, disposer)
+        IContentTemplate template) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
 

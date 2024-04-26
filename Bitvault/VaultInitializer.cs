@@ -3,14 +3,12 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class MainViewModelHandler(IPublisher publisher,
-    IVaultHostCollection vaults) :
-    INotificationHandler<Enumerate<IMainNavigationViewModel>>
+public class VaultInitializer(IServiceProvider provider,
+    IProxyService<IPublisher> publisher) : IInitializer
 {
-    public async Task Handle(Enumerate<IMainNavigationViewModel> args,
-        CancellationToken cancellationToken = default)
+    public async Task Initialize()
     {
-        foreach (IComponentHost vault in vaults)
+        if (provider.GetService<IComponentHost>() is IComponentHost vault)
         {
             if (vault.Services.GetRequiredService<VaultConfiguration>() is VaultConfiguration configuration)
             {
@@ -18,8 +16,8 @@ public class MainViewModelHandler(IPublisher publisher,
                 {
                     if (factory.Create<VaultNavigationViewModel>(configuration.Name) is VaultNavigationViewModel viewModel)
                     {
-                        await publisher.Publish(new Create<IMainNavigationViewModel>(viewModel),
-                            nameof(MainViewModel), cancellationToken);
+                        await publisher.Proxy.Publish(new Create<IMainNavigationViewModel>(viewModel),
+                            nameof(MainViewModel));
                     }
                 }
             }

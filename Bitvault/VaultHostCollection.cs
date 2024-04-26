@@ -9,10 +9,7 @@ public class VaultHostCollection :
 {
     private readonly List<IComponentHost> hosts = [];
 
-    public void Add(IComponentHost host)
-    {
-        hosts.Add(host);
-    }
+    public void Add(IComponentHost host) => hosts.Add(host);
 
     public IEnumerator<IComponentHost> GetEnumerator() =>
         hosts.GetEnumerator();
