@@ -26,8 +26,6 @@ public partial class VaultNavigationViewModel :
     {
         Template = template;
         Name = name;
-
-
     }
 
     public IContentTemplate Template { get; set; }
@@ -42,7 +40,6 @@ public partial class VaultNavigationViewModel :
         Add<CategoriesNavigationViewModel>();
 
         return Task.CompletedTask;
-
     }
 
     public Task Handle(Locked args, CancellationToken cancellationToken = default)

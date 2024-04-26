@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 [Notification(nameof(MainViewModel))]
-public partial class MainViewModel : 
+public partial class MainViewModel :
     ObservableCollectionViewModel<IMainNavigationViewModel>
 {
     [ObservableProperty]

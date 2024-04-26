@@ -8,5 +8,5 @@ public class AllNavigationViewModel(IServiceProvider provider,
         IPublisher publisher,
         ISubscriber subscriber,
         IDisposer disposer) :
-        ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer), 
+        ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
         IMainNavigationViewModel;

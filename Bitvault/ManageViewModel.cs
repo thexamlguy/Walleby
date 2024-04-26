@@ -1,5 +1,4 @@
-﻿using Avalonia.Styling;
-using Toolkit.Foundation;
+﻿using Toolkit.Foundation;
 
 namespace Bitvault;
 

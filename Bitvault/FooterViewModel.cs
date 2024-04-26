@@ -5,7 +5,7 @@ namespace Bitvault;
 public partial class FooterViewModel :
     ObservableCollectionViewModel<IMainNavigationViewModel>
 {
-    public FooterViewModel(IServiceProvider provider, 
+    public FooterViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,

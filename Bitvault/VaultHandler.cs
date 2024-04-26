@@ -2,7 +2,6 @@
 
 namespace Bitvault;
 
-
 public class VaultStorageHandler :
     INotificationHandler<Create<VaultStorage>>
 {
@@ -18,7 +17,7 @@ public record VaultStorage(string Name);
 public class VaultHandler(IVaultFactory factory) :
     IHandler<Create<Vault>, bool>
 {
-    //public async Task Handle(Create<Vault> args, 
+    //public async Task Handle(Create<Vault> args,
     //    CancellationToken cancellationToken = default)
     //{
     //    if (args.Value is Vault vault)
