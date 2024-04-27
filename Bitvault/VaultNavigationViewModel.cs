@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public partial class VaultNavigationViewModel :
-    ObservableCollectionViewModel<IMainNavigationViewModel>,
+    ObservableCollectionViewModel<IVaultNavigationViewModel>,
     IMainNavigationViewModel,
     INotificationHandler<Unlocked>,
     INotificationHandler<Locked>

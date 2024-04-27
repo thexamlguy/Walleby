@@ -39,6 +39,8 @@ public partial class App : Application
                 services.AddHandler<VaultHandler>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
+
+                services.AddTemplate<VaultNavigationViewModel, VaultNavigationView>();
                 services.AddHandler<VaultNavigationViewModelHandler>();
 
                 services.AddTransient<FooterViewModel>();

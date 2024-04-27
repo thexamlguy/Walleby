@@ -19,7 +19,6 @@ public partial class CreateVaultViewModel(IServiceProvider provider,
 
     public async Task<bool> Confirm()
     {
-        await Publisher.Publish(Create.As(new Vault(Name)));
-        return true;
+        return await Mediator.Handle<Create<Vault>, bool>(Create.As(new Vault(Name)));
     }
 }

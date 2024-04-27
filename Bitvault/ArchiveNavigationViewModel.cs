@@ -9,4 +9,4 @@ public class ArchiveNavigationViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer) :
     ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
-    IMainNavigationViewModel;
+    IVaultNavigationViewModel;
