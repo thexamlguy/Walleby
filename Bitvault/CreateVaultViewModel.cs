@@ -19,6 +19,6 @@ public partial class CreateVaultViewModel(IServiceProvider provider,
 
     public async Task<bool> Confirm()
     {
-        return await Mediator.Handle<Create<Vault>, bool>(Create.As(new Vault(Name)));
+        return await Mediator.Handle<Create<Vault>, bool>(Create.As(new Vault(Name, "")));
     }
 }

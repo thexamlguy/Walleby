@@ -9,10 +9,10 @@ public class VaultsInitializer(IEnumerable<IConfigurationDescriptor<VaultConfigu
     {
         foreach (IConfigurationDescriptor<VaultConfiguration> configuration in configurations)
         {
-            if (factory.Create(configuration.Section, configuration.Value) is IComponentHost host)
-            {
-                await host.StartAsync();
-            }
+            //if (factory.Create(configuration.Section, configuration.Value) is IComponentHost host)
+            //{
+            //    await host.StartAsync();
+            //}
         }
     }
 }

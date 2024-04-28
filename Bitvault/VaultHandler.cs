@@ -1,37 +1,29 @@
-﻿using LiteDB;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class VaultStorageHandler :
-    IHandler<Create<VaultStorage>, bool>
-{
-    public Task<bool> Handle(Create<VaultStorage> args, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-}
 
-public class DatabaseFactory
-{
-
-}
-
-public record VaultStorage(string Name);
-
-public class VaultHandler(IVaultFactory factory) :
+public class VaultHandler(IComponentFactory factory) :
     IHandler<Create<Vault>, bool>
 {
-    public async Task<bool> Handle(Create<Vault> args, CancellationToken cancellationToken)
+    public async Task<bool> Handle(Create<Vault> args, 
+        CancellationToken cancellationToken)
     {
         if (args.Value is Vault vault)
         {
-            if (factory.Create($"Vault:{vault.Name}", new VaultConfiguration { Name = vault.Name }) is IComponentHost host)
+            if (factory.Create<IVaultComponent>($"Vault:{vault.Name}", new VaultConfiguration { Name = vault.Name }) is IComponentHost host)
             {
-                await host.StartAsync(cancellationToken);
+                if (host.Services.GetRequiredService<IMediator>() is IMediator mediator)
+                {
+                    if (await mediator.Handle<Create<VaultStorage>, bool>(Create.As(new VaultStorage(vault.Name, vault.Password)), cancellationToken))
+                    {
+                        await host.StartAsync(cancellationToken);
+                    }
+                }
             }
         }
 
-        return true;
+        return false;
     }
 }

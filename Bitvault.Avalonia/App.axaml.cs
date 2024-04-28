@@ -1,6 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Toolkit.Avalonia;
@@ -17,7 +19,26 @@ public partial class App : Application
 
     public override async void OnFrameworkInitializationCompleted()
     {
-        IHost? host = DefaultBuilder.Create()
+        //var connectionString = new SqliteConnectionStringBuilder(@"Filename=C:\\Users\\dan_c\\source\\repos\\Bitvault\\Bitvault.Avalonia.Desktop\\bin\\Debug\\net8.0\\SQssLite.sql")
+        //{
+        //    Mode = SqliteOpenMode.ReadWriteCreate,
+        //    Password = "Test123"
+        //}.ToString();
+
+        //var connection = new SqliteConnection(connectionString);
+        //connection.Open();
+
+        //var command = connection.CreateCommand();
+        //command.CommandText = "SELECT quote($newPassword);";
+        //command.Parameters.AddWithValue("$newPassword", "Test123");
+        //var quotedNewPassword = (string)command.ExecuteScalar();
+
+        //command.CommandText = "PRAGMA rekey = " + quotedNewPassword;
+        //command.Parameters.Clear();
+        //command.ExecuteNonQuery();
+
+
+        IHost? host = DefaultHostBuilder.Create()
             .AddConfiguration<VaultConfiguration>(args => args.Name = "Personal",
                    "Vault:*")
             .ConfigureServices((context, services) =>
@@ -25,18 +46,37 @@ public partial class App : Application
                 services.AddAvalonia();
                 services.AddHandler<AppHandler>();
 
-                services.AddTransient<IVaultComponent, VaultComponent>();
-                services.AddTransient<IVaultFactory, VaultFactory>();
-                services.AddInitializer<VaultsInitializer>();
-
                 if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
                 {
                     services.AddTemplate<MainWindowViewModel, MainWindow>("MainWindow");
                 }
 
+                services.AddTransient<IVaultComponent> (provider => Component.Create<VaultComponent>(provider, args =>
+                {
+                    args.AddServices(services =>
+                    {
+                        services.AddDbContextFactory<VaultDbContext>(args =>
+                        {
+                            args.UseSqlite();
+                        });
+
+                        services.AddDbContextFactory<VaultDbContext>();
+                        services.AddHandler<VaultStorageHandler>();
+
+                        services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
+                        services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();
+                        services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
+                        services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
+
+                        services.AddTemplate<VaultViewModel, VaultView>("Vault");
+                        services.AddTemplate<LockViewModel, LockView>("Lock");
+                    });
+                })!);
+
                 services.AddSingleton<IVaultHostCollection, VaultHostCollection>();
-                services.AddSingleton<IVaultFactory, VaultFactory>();
                 services.AddHandler<VaultHandler>();
+
+                //services.AddInitializer<VaultsInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
 
