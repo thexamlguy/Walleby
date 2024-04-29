@@ -1,16 +1,19 @@
 <UserControl
     x:Class="Bitvault.Avalonia.LockView"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:LockViewModel">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBox
             Width="300"
             Classes="revealPasswordButton"
-            PasswordChar="&#x25CF;">
+            PasswordChar="&#x25CF;"
+            Text="{Binding Password}">
             <Interaction.Behaviors>
-				<KeyBindingTriggerBehavior Gesture="Enter">
-					<NavigateAction Context="Main" Route="Vault" />
-				</KeyBindingTriggerBehavior>
+                <KeyBindingTriggerBehavior Gesture="Enter">
+                    <InvokeCommandAction Command="{Binding UnlockCommand}" />
+                </KeyBindingTriggerBehavior>
             </Interaction.Behaviors>
         </TextBox>
     </StackPanel>

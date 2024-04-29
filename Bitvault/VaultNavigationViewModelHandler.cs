@@ -1,21 +1,27 @@
-﻿using Toolkit.Foundation;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Toolkit.Foundation;
 
 namespace Bitvault;
 
 public class VaultNavigationViewModelHandler(IPublisher publisher,
-    IServiceFactory factory,
-    IEnumerable<IConfigurationDescriptor<VaultConfiguration>> descriptors) :
+    IVaultHostCollection vaults) :
     INotificationHandler<Enumerate<IMainNavigationViewModel>>
 {
     public async Task Handle(Enumerate<IMainNavigationViewModel> args,
         CancellationToken cancellationToken = default)
     {
-        foreach (IConfigurationDescriptor<VaultConfiguration> descriptor in descriptors)
+        foreach (IComponentHost vault in vaults)
         {
-            if (factory.Create<VaultNavigationViewModel>(descriptor.Value.Name) is VaultNavigationViewModel viewModel)
+            if (vault.Services.GetRequiredService<VaultConfiguration>() is VaultConfiguration configuration)
             {
-                await publisher.Publish(new Create<IMainNavigationViewModel>(viewModel),
-                    nameof(MainViewModel), cancellationToken);
+                if (vault.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
+                {
+                    if (factory.Create<VaultNavigationViewModel>(configuration.Name) is VaultNavigationViewModel viewModel)
+                    {
+                        await publisher.Publish(new Create<IMainNavigationViewModel>(viewModel),
+                            nameof(MainViewModel), cancellationToken);
+                    }
+                }
             }
         }
     }

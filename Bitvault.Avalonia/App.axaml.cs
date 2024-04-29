@@ -1,7 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -55,14 +54,25 @@ public partial class App : Application
                 {
                     args.AddServices(services =>
                     {
+                        services.AddTransient<IEncryptor, AesEncryptor>();
+                        services.AddTransient<IDecryptor, AesDecryptor>();
+
+                        services.AddTransient<IPasswordHasher, PasswordHasher>();
+                        services.AddTransient<IKeyDeriver, KeyDeriver>();
+                        
                         services.AddDbContextFactory<VaultDbContext>(args =>
                         {
                             args.UseSqlite();
                         });
 
                         services.AddDbContextFactory<VaultDbContext>();
-                        services.AddHandler<VaultStorageHandler>();
 
+                        services.AddHandler<OpenVaultHandler>();
+
+                        services.AddHandler<CreateVaultStorageHandler>();
+                        services.AddHandler<OpenVaultStorageHandler>();
+
+                        services.AddTemplate<VaultNavigationViewModel, VaultNavigationView>();
                         services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
                         services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();
                         services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
@@ -74,15 +84,13 @@ public partial class App : Application
                 })!);
 
                 services.AddSingleton<IVaultHostCollection, VaultHostCollection>();
-                services.AddHandler<VaultHandler>();
+                services.AddHandler<CreateVaultHandler>();
 
-                //services.AddInitializer<VaultsInitializer>();
+                services.AddInitializer<VaultCollectionInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
 
-                services.AddTemplate<VaultNavigationViewModel, VaultNavigationView>();
                 services.AddHandler<VaultNavigationViewModelHandler>();
-
                 services.AddTransient<FooterViewModel>();
 
                 services.AddTemplate<ManageNavigationViewModel, ManageNavigationView>();
