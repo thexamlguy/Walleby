@@ -1,8 +1,7 @@
-﻿namespace Bitvault
-{
-    public interface IEncryptor
-    {
+﻿namespace Bitvault;
 
-        string? Encrypt(string plainText, byte[] key);
-    }
+public interface IEncryptor
+{
+
+    byte[] Encrypt(byte[] data, byte[] key);
 }

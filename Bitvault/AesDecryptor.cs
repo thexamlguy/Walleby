@@ -7,23 +7,22 @@ public class AesDecryptor :
 {
     private const int IvSize = 16;
 
-    public string Decrypt(string cipherText, byte[] key)
+    public byte[] Decrypt(byte[] cipher, byte[] key)
     {
-        byte[] cipherData = Convert.FromBase64String(cipherText);
+        Span<byte> iv = cipher.AsSpan(0, IvSize);
+        ReadOnlySpan<byte> encryptedContent = cipher.AsSpan(IvSize);
 
-        byte[] iv = new byte[IvSize];
-        Array.Copy(cipherData, 0, iv, 0, IvSize); // Extract the IV from the start of the cipher data
-
-        using var aes = Aes.Create();
+        using Aes aes = Aes.Create();
         aes.Key = key;
-        aes.IV = iv;
+        aes.IV = iv.ToArray();
 
-        using var memoryStream = new MemoryStream(cipherData, IvSize, cipherData.Length - IvSize);
-        using (var decryptor = aes.CreateDecryptor(aes.Key, aes.IV))
-        using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
-        using (var streamReader = new StreamReader(cryptoStream))
-        {
-            return streamReader.ReadToEnd(); // Return the decrypted text
-        }
+        using MemoryStream memoryStream = new(encryptedContent.ToArray());
+        using ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+        using CryptoStream cryptoStream = new(memoryStream, decryptor, CryptoStreamMode.Read);
+
+        using MemoryStream resultStream = new();
+        cryptoStream.CopyTo(resultStream);
+
+        return resultStream.ToArray();
     }
 }

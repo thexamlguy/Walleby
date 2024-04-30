@@ -2,28 +2,33 @@
 
 namespace Bitvault;
 
-public class AesEncryptor : IEncryptor
+public class AesEncryptor : 
+    IEncryptor
 {
-    public string Encrypt(string plainText, byte[] key)
-    {
-        const int IvSize = 16;
+    private const int IvSize = 16;
 
-        using var aes = Aes.Create();
+    public byte[] Encrypt(byte[] data, 
+        byte[] key)
+    {
+        if (key.Length != 32)
+        {
+            throw new ArgumentException("Key must be 256 bits (32 bytes).");
+        }
+
+        using Aes aes = Aes.Create();
         aes.Key = key;
         aes.GenerateIV();
 
-        byte[] iv = aes.IV;
+        using MemoryStream memoryStream = new();
+        memoryStream.Write(aes.IV.AsSpan(0, IvSize));
 
-        using var memoryStream = new MemoryStream();
-        memoryStream.Write(iv, 0, IvSize); // Store IV at the start of the stream
-
-        using (var encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
-        using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-        using (var streamWriter = new StreamWriter(cryptoStream))
+        using (ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+        using (CryptoStream cryptoStream = new(memoryStream, encryptor, CryptoStreamMode.Write))
         {
-            streamWriter.Write(plainText);
+            cryptoStream.Write(data, 0, data.Length);
+            cryptoStream.FlushFinalBlock();
         }
 
-        return Convert.ToBase64String(memoryStream.ToArray()); // Return the encrypted data in base64
+        return memoryStream.ToArray();
     }
 }

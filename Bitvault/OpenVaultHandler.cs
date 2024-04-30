@@ -12,10 +12,10 @@ public class OpenVaultHandler(IMediator mediator) :
         {
             if (vault.Password is { Length: > 0 } password)
             {
-                if (await mediator.Handle<Open<VaultStorage>, bool>(Open.As(new VaultStorage("Personal", password)), cancellationToken))
-                {
-                    return true;
-                }
+                //if (await mediator.Handle<Open<VaultStorage>, bool>(Open.As(new VaultStorage("Personal", password)), cancellationToken))
+                //{
+                //    return true;
+                //}
             }
         }
 

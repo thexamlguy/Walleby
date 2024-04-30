@@ -1,7 +1,7 @@
-﻿namespace Bitvault
+﻿namespace Bitvault;
+
+public interface IDecryptor
 {
-    public interface IDecryptor
-    {
-        string? Decrypt(string cipherText, byte[] key);
-    }
+    byte[] Decrypt(byte[] cipher,
+        byte[] key);
 }

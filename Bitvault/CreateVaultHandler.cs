@@ -3,30 +3,23 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class CreateVaultHandler(IComponentFactory componentFactory) :
+public class CreateVaultHandler(IVaultComponentFactory vaultComponentFactory) :
     IHandler<Create<Vault>, bool>
 {
-    public async Task<bool> Handle(Create<Vault> args, 
+    public Task<bool> Handle(Create<Vault> args, 
         CancellationToken cancellationToken)
     {
-        if (args.Value is Vault vault)
+        if (args.Value is Vault vault && vault.Name is { Length: > 0 } name && vault.Password is { Length: > 0 } password)
         {
-            if (vault.Name is { Length: > 0 } name && vault.Password is { Length: > 0 } password)
+            if (vaultComponentFactory.Create(name) is IComponentHost host)
             {
-                if (componentFactory.Create<IVaultComponent, VaultConfiguration>($"Vault:{name}", new VaultConfiguration { Name = name }) is IComponentHost host)
-                {
-                    if (host.Services.GetRequiredService<IMediator>() is IMediator mediator)
-                    {
-                        if (await mediator.Handle<Create<VaultStorage>, bool>(Create.As(new VaultStorage(name, password)), cancellationToken))
-                        {
-                            await host.StartAsync(cancellationToken);
-                            return true;
-                        }
-                    }
-                }
+                IVaultFactory factory = host.Services.GetRequiredService<IVaultFactory>();
+                factory.Create(name, password);
+
+                return Task.FromResult(true);
             }
         }
 
-        return false;
+        return Task.FromResult(false);
     }
 }

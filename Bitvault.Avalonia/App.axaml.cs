@@ -54,12 +54,17 @@ public partial class App : Application
                 {
                     args.AddServices(services =>
                     {
+                        services.AddTransient<IKeyGenerator, KeyGenerator>();
                         services.AddTransient<IEncryptor, AesEncryptor>();
                         services.AddTransient<IDecryptor, AesDecryptor>();
 
                         services.AddTransient<IPasswordHasher, PasswordHasher>();
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
-                        
+
+                        services.AddTransient<IVaultFactory, VaultFactory>();
+                        services.AddTransient<IVaultKeyGenerator, VaultKeyGenerator>();
+                        services.AddTransient<IVaultStorage, VaultStorage>();
+
                         services.AddDbContextFactory<VaultDbContext>(args =>
                         {
                             args.UseSqlite();
@@ -68,9 +73,6 @@ public partial class App : Application
                         services.AddDbContextFactory<VaultDbContext>();
 
                         services.AddHandler<OpenVaultHandler>();
-
-                        services.AddHandler<CreateVaultStorageHandler>();
-                        services.AddHandler<OpenVaultStorageHandler>();
 
                         services.AddTemplate<VaultNavigationViewModel, VaultNavigationView>();
                         services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
@@ -83,13 +85,13 @@ public partial class App : Application
                     });
                 })!);
 
-                services.AddSingleton<IVaultHostCollection, VaultHostCollection>();
+                services.AddTransient<IVaultComponentFactory,  VaultComponentFactory>();
                 services.AddHandler<CreateVaultHandler>();
 
+                services.AddSingleton<IVaultHostCollection, VaultHostCollection>();
                 services.AddInitializer<VaultCollectionInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
-
                 services.AddHandler<VaultNavigationViewModelHandler>();
                 services.AddTransient<FooterViewModel>();
 
