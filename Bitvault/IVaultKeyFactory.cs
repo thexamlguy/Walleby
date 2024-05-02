@@ -1,6 +1,6 @@
 ﻿namespace Bitvault;
 
-public interface IVaultKeyGenerator
+public interface IVaultKeyFactory
 {
     VaultKey Create(string password);
 }

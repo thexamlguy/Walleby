@@ -2,5 +2,5 @@
 
 public interface IVaultStorage
 {
-    bool Create(string name, VaultKey key);
+    Task<bool> CreateAsync(string name, VaultKey key);
 }

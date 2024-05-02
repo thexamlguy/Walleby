@@ -1,10 +1,12 @@
-﻿namespace Bitvault;
+﻿using Toolkit.Foundation;
 
-public class VaultKeyGenerator(IKeyGenerator generator,
+namespace Bitvault;
+
+public class VaultKeyFactory(IKeyGenerator generator,
     IKeyDeriver deriver,
     IEncryptor encryptor,
     IDecryptor decryptor) : 
-    IVaultKeyGenerator
+    IVaultKeyFactory
 {
     public VaultKey Create(string password)
     {
@@ -19,3 +21,4 @@ public class VaultKeyGenerator(IKeyGenerator generator,
         return new VaultKey(salt, publicKey, privateKey);
     }
 }
+

@@ -4,8 +4,11 @@ using Avalonia.Markup.Xaml;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using Toolkit.Avalonia;
 using Toolkit.Foundation;
+using System.IO;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Bitvault.Avalonia;
 
@@ -61,16 +64,20 @@ public partial class App : Application
                         services.AddTransient<IPasswordHasher, PasswordHasher>();
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
 
-                        services.AddTransient<IVaultFactory, VaultFactory>();
-                        services.AddTransient<IVaultKeyGenerator, VaultKeyGenerator>();
+                        services.AddTransient<IVaultKeyFactory, VaultKeyFactory>();
+                        services.AddTransient<IVaultInitializer, VaultInitializer>();
                         services.AddTransient<IVaultStorage, VaultStorage>();
+                        services.TryAddSingleton<IContainer<VaultKey>, Container<VaultKey>>();
+                        services.TryAddSingleton<IContainer<VaultStorageConnection>, Container<VaultStorageConnection>>();
 
-                        services.AddDbContextFactory<VaultDbContext>(args =>
+                        services.AddDbContextFactory<VaultDbContext>((provider, args) =>
                         {
-                            args.UseSqlite();
+                            if (provider.GetRequiredService<IContainer<VaultStorageConnection>>() 
+                                is IContainer<VaultStorageConnection> connection)
+                            {
+                                args.UseSqlite($"{connection.Value}");
+                            }
                         });
-
-                        services.AddDbContextFactory<VaultDbContext>();
 
                         services.AddHandler<OpenVaultHandler>();
 
