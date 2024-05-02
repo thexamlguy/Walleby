@@ -8,17 +8,17 @@ public class VaultKeyFactory(IKeyGenerator generator,
     IDecryptor decryptor) : 
     IVaultKeyFactory
 {
-    public VaultKey Create(string password)
+    public VaultKey Create(byte[] phrase,
+        byte[]? encryptedKey = null,
+        byte[]? salt = null)
     {
-        byte[] salt = generator.Generate(16);
-        byte[] key = generator.Generate(32);
+        salt ??= generator.Generate(16);
+        byte[] derivedKey = deriver.DeriveKey(phrase, salt);
 
-        byte[] derivedKey = deriver.DeriveKey(password, salt);
+        encryptedKey ??= encryptor.Encrypt(generator.Generate(32), derivedKey);
+        byte[] decryptedKey = decryptor.Decrypt(encryptedKey, derivedKey);
 
-        byte[] publicKey = encryptor.Encrypt(key, derivedKey);
-        byte[] privateKey = decryptor.Decrypt(publicKey, derivedKey);
-
-        return new VaultKey(salt, publicKey, privateKey);
+        return new VaultKey(salt, encryptedKey, decryptedKey);
     }
 }
 

@@ -4,10 +4,8 @@ using Avalonia.Markup.Xaml;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using Toolkit.Avalonia;
 using Toolkit.Foundation;
-using System.IO;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Bitvault.Avalonia;
@@ -21,15 +19,6 @@ public partial class App : Application
 
     public override async void OnFrameworkInitializationCompleted()
     {
-        //var connectionString = new SqliteConnectionStringBuilder(@"Filename=C:\\Users\\dan_c\\source\\repos\\Bitvault\\Bitvault.Avalonia.Desktop\\bin\\Debug\\net8.0\\SQssLite.sql")
-        //{
-        //    Mode = SqliteOpenMode.ReadWriteCreate,
-        //    Password = "Test123"
-        //}.ToString();
-
-        //var connection = new SqliteConnection(connectionString);
-        //connection.Open();
-
         //var command = connection.CreateCommand();
         //command.CommandText = "SELECT quote($newPassword);";
         //command.Parameters.AddWithValue("$newPassword", "Test123");
@@ -65,7 +54,6 @@ public partial class App : Application
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
 
                         services.AddTransient<IVaultKeyFactory, VaultKeyFactory>();
-                        services.AddTransient<IVaultInitializer, VaultInitializer>();
                         services.AddTransient<IVaultStorage, VaultStorage>();
                         services.TryAddSingleton<IContainer<VaultKey>, Container<VaultKey>>();
                         services.TryAddSingleton<IContainer<VaultStorageConnection>, Container<VaultStorageConnection>>();

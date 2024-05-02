@@ -1,14 +1,14 @@
 ﻿namespace Bitvault;
 
-public record VaultKey(byte[] Phrase, byte[] Public, byte[] Private) :
+public record VaultKey(byte[] Salt, byte[] EncryptedKey, byte[] DecryptedKey) :
     IDisposable
 {
     public void Dispose()
     {
         GC.SuppressFinalize(this);
 
-        Array.Clear(Phrase, 0, Phrase.Length);
-        Array.Clear(Public, 0, Public.Length);
-        Array.Clear(Private, 0, Private.Length);
+        Array.Clear(Salt, 0, Salt.Length);
+        Array.Clear(EncryptedKey, 0, EncryptedKey.Length);
+        Array.Clear(DecryptedKey, 0, DecryptedKey.Length);
     }
 }

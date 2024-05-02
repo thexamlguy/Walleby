@@ -14,7 +14,7 @@ public class VaultStorage(IContainer<VaultStorageConnection> connection,
         VaultKey key)
     {
         connection.Set(new VaultStorageConnection($"Data Source={Path.Combine(environment.ContentRootPath, name)}" +
-            $".vault;Mode=ReadWriteCreate;Pooling=false;Password={Convert.ToBase64String(key.Private)}"));
+            $".vault;Mode=ReadWriteCreate;Pooling=false;Password={Convert.ToBase64String(key.DecryptedKey)}"));
 
         IDbContextFactory<VaultDbContext> dbContextFactory = provider.GetRequiredService<IDbContextFactory<VaultDbContext>>();
         using VaultDbContext context = await dbContextFactory.CreateDbContextAsync();

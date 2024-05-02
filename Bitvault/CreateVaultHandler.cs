@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text;
 using Toolkit.Foundation;
 
 namespace Bitvault;
@@ -15,10 +16,22 @@ public class CreateVaultHandler(IVaultComponentFactory componentFactory) :
         {
             if (componentFactory.Create(name) is IComponentHost host)
             {
-                IVaultInitializer initializer = host.Services.GetRequiredService<IVaultInitializer>();
-                if (await initializer.Initialize(name, password))
+                IVaultKeyFactory keyVaultFactory = host.Services.GetRequiredService<IVaultKeyFactory>();
+                IContainer<VaultKey> vaultKeyContainer = host.Services.GetRequiredService<IContainer<VaultKey>>();
+                IVaultStorage vaultStorage = host.Services.GetRequiredService<IVaultStorage>();
+
+                VaultKey key = keyVaultFactory.Create(Encoding.UTF8.GetBytes(password));
+                vaultKeyContainer.Set(key);
+
+                if (await vaultStorage.CreateAsync(name, key))
                 {
+                    IWritableConfiguration<VaultConfiguration> configuration =
+                        host.Services.GetRequiredService<IWritableConfiguration<VaultConfiguration>>();
+
+                    configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");
                     host.Start();
+
+                    return true;
                 }
             }
         }
