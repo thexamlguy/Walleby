@@ -3,6 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
+    x:Name="NavigationViewItem"
     x:DataType="vm:VaultNavigationViewModel"
     Content="{Binding Name}"
     IsExpanded="{Binding Expanded, Mode=TwoWay}"
@@ -34,9 +35,21 @@
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="False" />
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="False" />
+                        <ComparisonCondition LeftOperand="{Binding #NavigationViewItem.IsChildSelected}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Context="Main" Route="Open" />
+            </ConditionAction>
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="True" />
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="False" />
+                        <ComparisonCondition LeftOperand="{Binding #NavigationViewItem.IsChildSelected}" RightOperand="False" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateAction Context="Main" Route="Vault" />
             </ConditionAction>
         </EventTriggerBehavior>
     </Interaction.Behaviors>
