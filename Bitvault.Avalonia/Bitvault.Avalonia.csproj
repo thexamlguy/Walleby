@@ -32,6 +32,9 @@
 	  <ProjectReference Include="..\Toolkit\Toolkit.UI.Controls.Avalonia\Toolkit.UI.Controls.Avalonia.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="OpenVaultView.axaml.cs">
+	    <DependentUpon>OpenVaultView.axaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="ManageNavigationView.axaml.cs">
 	    <DependentUpon>ManageNavigationView.axaml</DependentUpon>
 	  </Compile>

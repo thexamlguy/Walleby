@@ -76,7 +76,7 @@ public partial class App : Application
                         services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
 
                         services.AddTemplate<VaultViewModel, VaultView>("Vault");
-                        services.AddTemplate<LockViewModel, LockView>("Lock");
+                        services.AddTemplate<OpenVaultViewModel, OpenVaultView>("Open");
                     });
                 })!);
 

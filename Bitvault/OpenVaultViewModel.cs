@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class LockViewModel(IServiceProvider provider,
+public partial class OpenVaultViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
@@ -16,11 +16,14 @@ public partial class LockViewModel(IServiceProvider provider,
     private string? password;
 
     [RelayCommand]
-    private void Unlock()
+    private async Task Invoke()
     {
         if (Password is { Length: > 0 })
         {
-            Mediator.Handle<Open<Vault>, bool>(Open.As(new Vault(Password)));
+            if (await Mediator.Handle<Open<Vault>, bool>(Open.As(new Vault(Password))))
+            {
+                await Publisher.Publish<Opened>();
+            }
         }
     }
 }

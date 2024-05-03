@@ -10,7 +10,7 @@ public class VaultStorage(IContainer<VaultStorageConnection> connection,
     IServiceProvider provider) :
     IVaultStorage
 {
-    public async Task<bool> CreateAsync(string name, 
+    public async Task<bool> Create(string name, 
         VaultKey key)
     {
         connection.Set(new VaultStorageConnection($"Data Source={Path.Combine(environment.ContentRootPath, name)}" +

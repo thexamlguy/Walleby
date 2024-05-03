@@ -18,10 +18,12 @@ public class OpenVaultHandler(VaultConfiguration configuration,
                 byte[]? salt = Convert.FromBase64String(keyPart[0]);
                 byte[]? encryptedKey = Convert.FromBase64String(keyPart[1]);
 
-                VaultKey key = keyVaultFactory.Create(Encoding.UTF8.GetBytes(password), encryptedKey, salt);
-                if (await vaultStorage.CreateAsync(name, key))
+                if ( keyVaultFactory.Create(Encoding.UTF8.GetBytes(password), encryptedKey, salt) is VaultKey key)
                 {
-
+                    if (await vaultStorage.Create(name, key))
+                    {
+                        return true;
+                    }
                 }
             }
         }

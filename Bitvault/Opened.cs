@@ -1,3 +1,3 @@
 ﻿namespace Bitvault;
 
-public record Locked;
+public record Opened;

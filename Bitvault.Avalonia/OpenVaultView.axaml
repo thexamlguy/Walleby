@@ -1,9 +1,9 @@
 <UserControl
-    x:Class="Bitvault.Avalonia.LockView"
+    x:Class="Bitvault.Avalonia.OpenVaultView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
-    x:DataType="vm:LockViewModel">
+    x:DataType="vm:OpenVaultViewModel">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBox
             Width="300"
@@ -12,7 +12,7 @@
             Text="{Binding Password}">
             <Interaction.Behaviors>
                 <KeyBindingTriggerBehavior Gesture="Enter">
-                    <InvokeCommandAction Command="{Binding UnlockCommand}" />
+                    <InvokeCommandAction Command="{Binding InvokeCommand}" />
                 </KeyBindingTriggerBehavior>
             </Interaction.Behaviors>
         </TextBox>

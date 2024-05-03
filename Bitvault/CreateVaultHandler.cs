@@ -20,18 +20,20 @@ public class CreateVaultHandler(IVaultComponentFactory componentFactory) :
                 IContainer<VaultKey> vaultKeyContainer = host.Services.GetRequiredService<IContainer<VaultKey>>();
                 IVaultStorage vaultStorage = host.Services.GetRequiredService<IVaultStorage>();
 
-                VaultKey key = keyVaultFactory.Create(Encoding.UTF8.GetBytes(password));
-                vaultKeyContainer.Set(key);
-
-                if (await vaultStorage.CreateAsync(name, key))
+                if (keyVaultFactory.Create(Encoding.UTF8.GetBytes(password)) is VaultKey key)
                 {
-                    IWritableConfiguration<VaultConfiguration> configuration =
-                        host.Services.GetRequiredService<IWritableConfiguration<VaultConfiguration>>();
+                    vaultKeyContainer.Set(key);
 
-                    configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");
-                    host.Start();
+                    if (await vaultStorage.Create(name, key))
+                    {
+                        IWritableConfiguration<VaultConfiguration> configuration =
+                            host.Services.GetRequiredService<IWritableConfiguration<VaultConfiguration>>();
 
-                    return true;
+                        configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");
+                        host.Start();
+
+                        return true;
+                    }
                 }
             }
         }

@@ -2,7 +2,7 @@
 
 public interface IVaultKeyFactory
 {
-    VaultKey Create(byte[] phrase,
+    VaultKey? Create(byte[] phrase,
         byte[]? encryptedKey = null,
         byte[]? salt = null);
 }
