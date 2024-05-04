@@ -9,7 +9,9 @@ public class VaultViewModelHandler(IServiceFactory factory,
     public async Task Handle(Enumerate<LockerNavigationViewModel> args,
         CancellationToken cancellationToken = default)
     {
-        for (int i = 0; i < 5000;  i++)
+        Random rnd = new Random();
+        int d = rnd.Next(5, 10);
+        for (int i = 0; i < 2;  i++)
         {
             if (factory.Create<LockerNavigationViewModel>() is LockerNavigationViewModel viewModel)
             {

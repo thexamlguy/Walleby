@@ -8,7 +8,8 @@
     Content="{Binding Name}"
     IsExpanded="{Binding Expanded, Mode=TwoWay}"
     IsSelected="{Binding Selected}"
-    MenuItemsSource="{Binding}">
+    MenuItemsSource="{Binding}"
+    SelectsOnInvoked="True">
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding Opened}" Value="False">
             <ConditionAction>
@@ -18,6 +19,10 @@
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Context="Main" Route="OpenVault" />
+                <ChangePropertyAction
+                    PropertyName="SelectsOnInvoked"
+                    TargetObject="{Binding #NavigationViewItem}"
+                    Value="True" />
             </ConditionAction>
         </DataTriggerBehavior>
         <DataTriggerBehavior Binding="{Binding Opened}" Value="True">
@@ -28,14 +33,18 @@
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Context="Main" Route="Vault" />
+                <ChangePropertyAction
+                    PropertyName="SelectsOnInvoked"
+                    TargetObject="{Binding #NavigationViewItem}"
+                    Value="False" />
+                <SelectNavigationViewItemAction />
             </ConditionAction>
         </DataTriggerBehavior>
-        <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
+        <NavigationViewItemInvokedBehaviour SelectsChildOnInvoked="True">
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="False" />
-                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="False" />
                         <ComparisonCondition LeftOperand="{Binding #NavigationViewItem.IsChildSelected}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
@@ -45,12 +54,11 @@
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="True" />
-                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="False" />
                         <ComparisonCondition LeftOperand="{Binding #NavigationViewItem.IsChildSelected}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Context="Main" Route="Vault" />
             </ConditionAction>
-        </DataTriggerBehavior>
+        </NavigationViewItemInvokedBehaviour>
     </Interaction.Behaviors>
 </NavigationViewItem>

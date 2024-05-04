@@ -38,13 +38,12 @@ public partial class VaultNavigationViewModel :
 
     public Task Handle(Opened args, CancellationToken cancellationToken = default)
     {
-        Opened = true;
-
         Add<AllNavigationViewModel>();
         Add<StarredNavigationViewModel>();
         Add<ArchiveNavigationViewModel>();
         Add<CategoriesNavigationViewModel>();
 
+        Opened = true;
         return Task.CompletedTask;
     }
 

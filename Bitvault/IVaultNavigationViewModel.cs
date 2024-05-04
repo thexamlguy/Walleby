@@ -1,3 +1,5 @@
-﻿namespace Bitvault;
+﻿using Toolkit.Foundation;
 
-public interface IVaultNavigationViewModel;
+namespace Bitvault;
+
+public interface IVaultNavigationViewModel : ISelectable;

@@ -4,6 +4,9 @@ namespace Bitvault.Avalonia
 {
     public partial class VaultNavigationView : NavigationViewItem
     {
-        public VaultNavigationView() => InitializeComponent();
+        public VaultNavigationView()
+        {
+            InitializeComponent();
+        }
     }
 }

@@ -9,9 +9,9 @@
     TransparencyLevelHint="Mica">
     <ContentControl x:Name="Window">
         <Interaction.Behaviors>
-            <AttachedBehavior>
+			<AttachedBehaviour>
                 <NavigateAction Context="Window" Route="Main" />
-            </AttachedBehavior>
+            </AttachedBehaviour>
         </Interaction.Behaviors>
     </ContentControl>
 </windowing:AppWindow>

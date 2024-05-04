@@ -1,12 +1,17 @@
-﻿using Toolkit.Foundation;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class CategoriesNavigationViewModel(IServiceProvider provider,
+public partial class CategoriesNavigationViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer) :
     ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
-    IVaultNavigationViewModel;
+    IVaultNavigationViewModel
+{
+    [ObservableProperty]
+    private bool selected;
+}

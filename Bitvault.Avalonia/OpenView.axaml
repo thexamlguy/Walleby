@@ -11,9 +11,9 @@
             PasswordChar="&#x25CF;"
             Text="{Binding Password}">
             <Interaction.Behaviors>
-                <KeyBindingTriggerBehavior Gesture="Enter">
-                    <InvokeCommandAction Command="{Binding InvokeCommand}" />
-                </KeyBindingTriggerBehavior>
+				<KeyBindingTriggerBehaviour Gesture="Enter">
+					<InvokeCommandAction Command="{Binding InvokeCommand}" />
+				</KeyBindingTriggerBehaviour>
             </Interaction.Behaviors>
         </TextBox>
     </StackPanel>
