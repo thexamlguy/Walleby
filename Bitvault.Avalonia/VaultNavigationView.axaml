@@ -17,7 +17,7 @@
                         <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Context="Main" Route="Open" />
+                <NavigateAction Context="Main" Route="OpenVault" />
             </ConditionAction>
         </DataTriggerBehavior>
         <DataTriggerBehavior Binding="{Binding Opened}" Value="True">
@@ -30,7 +30,7 @@
                 <NavigateAction Context="Main" Route="Vault" />
             </ConditionAction>
         </DataTriggerBehavior>
-        <EventTriggerBehavior EventName="Tapped">
+        <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
@@ -39,7 +39,7 @@
                         <ComparisonCondition LeftOperand="{Binding #NavigationViewItem.IsChildSelected}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Context="Main" Route="Open" />
+                <NavigateAction Context="Main" Route="OpenVault" />
             </ConditionAction>
             <ConditionAction>
                 <ConditionAction.Condition>
@@ -51,6 +51,6 @@
                 </ConditionAction.Condition>
                 <NavigateAction Context="Main" Route="Vault" />
             </ConditionAction>
-        </EventTriggerBehavior>
+        </DataTriggerBehavior>
     </Interaction.Behaviors>
 </NavigationViewItem>

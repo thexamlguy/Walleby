@@ -7,5 +7,9 @@ public class LockerNavigationViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscriber subscriber,
-    IDisposer disposer) :
-    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer);
+    IDisposer disposer,
+    IContentTemplate template) :
+    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
+{
+    public IContentTemplate Template { get; set; } = template;
+}

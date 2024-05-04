@@ -2,12 +2,25 @@
 
 namespace Bitvault;
 
-public class VaultDbContext: DbContext
+public class VaultDbContext(DbContextOptions<VaultDbContext> options) : 
+    DbContext(options)
 {
+    public DbSet<Category> Categories { get; set; }
+
+    public DbSet<Document> Documents { get; set; }
+
     public DbSet<Locker> Lockers { get; set; }
 
-    public VaultDbContext(DbContextOptions<VaultDbContext> options): base(options)
-    {
+    public DbSet<Tag> Tags { get; set; }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Locker>()
+            .HasMany(x => x.Tags)
+            .WithOne();
+
+        modelBuilder.Entity<Locker>()
+            .HasMany(x => x.Documents)
+            .WithOne();
     }
 }

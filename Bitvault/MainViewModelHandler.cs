@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class VaultNavigationViewModelHandler(IPublisher publisher,
+public class MainViewModelHandler(IPublisher publisher,
     IVaultHostCollection vaults) :
     INotificationHandler<Enumerate<IMainNavigationViewModel>>
 {

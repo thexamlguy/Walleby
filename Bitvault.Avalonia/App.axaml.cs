@@ -12,23 +12,10 @@ namespace Bitvault.Avalonia;
 
 public partial class App : Application
 {
-    public override void Initialize()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+    public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
     public override async void OnFrameworkInitializationCompleted()
     {
-        //var command = connection.CreateCommand();
-        //command.CommandText = "SELECT quote($newPassword);";
-        //command.Parameters.AddWithValue("$newPassword", "Test123");
-        //var quotedNewPassword = (string)command.ExecuteScalar();
-
-        //command.CommandText = "PRAGMA rekey = " + quotedNewPassword;
-        //command.Parameters.Clear();
-        //command.ExecuteNonQuery();
-
-
         IHost? host = DefaultHostBuilder.Create()
             .AddConfiguration<VaultConfiguration>(args => args.Name = "Personal",
                    "Vault:*")
@@ -75,8 +62,14 @@ public partial class App : Application
                         services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
                         services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
 
+                        services.AddTemplate<OpenVaultViewModel, OpenView>("OpenVault");
+
                         services.AddTemplate<VaultViewModel, VaultView>("Vault");
-                        services.AddTemplate<OpenVaultViewModel, OpenVaultView>("Open");
+                        services.AddHandler<VaultViewModelHandler>();
+
+                        services.AddTemplate<LockerNavigationViewModel, LockerNavigationView>();
+
+                        services.AddTemplate<VaultCommandViewModel, VaultCommandView>("VaultCommands");
                     });
                 })!);
 
@@ -87,7 +80,8 @@ public partial class App : Application
                 services.AddInitializer<VaultCollectionInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
-                services.AddHandler<VaultNavigationViewModelHandler>();
+                services.AddHandler<MainViewModelHandler>();
+
                 services.AddTransient<FooterViewModel>();
 
                 services.AddTemplate<ManageNavigationViewModel, ManageNavigationView>();

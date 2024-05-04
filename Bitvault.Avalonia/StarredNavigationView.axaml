@@ -2,4 +2,14 @@
     x:Class="Bitvault.Avalonia.StarredNavigationView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Content="Starred" />
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:StarredNavigationViewModel"
+    Content="Starred"
+    IsSelected="{Binding Selected, Mode=TwoWay}">
+    <Interaction.Behaviors>
+        <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
+            <InvokeCommandAction Command="{Binding InvokeCommand}" />
+        </DataTriggerBehavior>
+    </Interaction.Behaviors>
+</NavigationViewItem>
+
