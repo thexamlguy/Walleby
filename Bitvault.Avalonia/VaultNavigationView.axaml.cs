@@ -1,3 +1,4 @@
+using Toolkit.UI.Avalonia;
 using Toolkit.UI.Controls.Avalonia;
 
 namespace Bitvault.Avalonia
@@ -7,6 +8,11 @@ namespace Bitvault.Avalonia
         public VaultNavigationView()
         {
             InitializeComponent();
+        }
+
+        public void Test(object? sender, ItemInvokedEventArgs args)
+        {
+
         }
     }
 }
