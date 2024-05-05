@@ -6,7 +6,7 @@
     x:Name="NavigationViewItem"
     x:DataType="vm:VaultNavigationViewModel"
     Content="{Binding Name}"
-    IsExpanded="{Binding Expanded, Mode=TwoWay}"
+    IsExpanded="{Binding Expanded}"
     IsSelected="{Binding Selected}"
     MenuItemsSource="{Binding}"
     NavigationViewItemExtension.IsItemClickEnabled="True"
@@ -38,7 +38,7 @@
                     PropertyName="SelectsOnInvoked"
                     TargetObject="{Binding #NavigationViewItem}"
                     Value="False" />
-                <SelectNavigationViewItemAction />
+                <InvokeNavigationViewItemAction />
             </ConditionAction>
         </DataTriggerBehavior>
         <AttachedEventTriggerBehaviour RoutedEvent="{x:Static NavigationViewItemExtension.ItemClickEvent}">
@@ -46,7 +46,6 @@
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="False" />
-                        <ComparisonCondition LeftOperand="{Binding #NavigationViewItem.IsChildSelected}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Context="Main" Route="OpenVault" />
@@ -55,11 +54,11 @@
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="True" />
-                        <ComparisonCondition LeftOperand="{Binding #NavigationViewItem.IsChildSelected}" RightOperand="False" />
+                        <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Context="Main" Route="Vault" />
-                <SelectNavigationViewItemAction />
+                <InvokeNavigationViewItemAction />
             </ConditionAction>
         </AttachedEventTriggerBehaviour>
     </Interaction.Behaviors>

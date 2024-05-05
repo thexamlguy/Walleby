@@ -8,7 +8,14 @@
     IsSelected="{Binding Selected, Mode=TwoWay}">
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
-            <InvokeCommandAction Command="{Binding InvokeCommand}" />
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateAction Context="Main" Route="Vault" />
+            </ConditionAction>        
         </DataTriggerBehavior>
     </Interaction.Behaviors>
 </NavigationViewItem>

@@ -35,13 +35,5 @@
                 ItemTemplate="{ReflectionBinding Template}"
                 ItemsSource="{Binding}" />
         </Grid>
-        <GridSplitter Grid.Column="1" Background="Transparent" />
-        <Rectangle
-            Grid.Column="1"
-            Width="1"
-            HorizontalAlignment="Center"
-            Fill="{DynamicResource DividerStrokeColorDefaultBrush}"
-            IsHitTestVisible="False" />
-        <Frame Grid.Row="1" Grid.Column="2" />
     </Grid>
 </UserControl>

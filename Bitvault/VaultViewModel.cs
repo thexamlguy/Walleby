@@ -12,4 +12,16 @@ public partial class VaultViewModel(IServiceProvider provider,
     IContentTemplate template) : ObservableCollectionViewModel<LockerNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer)
 {
     public IContentTemplate Template { get; set; } = template;
+
+    public override async Task Activated()
+    {
+        await Publisher.Publish(Vault.As<Activated>());
+        await base.Activated();
+    }
+
+    public override async Task Deactivated()
+    {
+        await Publisher.Publish(Vault.As<Deactivated>());
+        await base.Deactivated();
+    }
 }

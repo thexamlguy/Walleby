@@ -6,9 +6,14 @@ namespace Bitvault;
 public partial class VaultNavigationViewModel :
     ObservableCollectionViewModel<IVaultNavigationViewModel>,
     IMainNavigationViewModel,
-    INotificationHandler<Opened>,
-    INotificationHandler<Closed>
+    INotificationHandler<Vault<Opened>>,
+    INotificationHandler<Vault<Closed>>,
+    INotificationHandler<Vault<Activated>>,
+    INotificationHandler<Vault<Deactivated>>
 {
+    [ObservableProperty]
+    private bool activated;
+
     [ObservableProperty]
     private bool expanded = true;
 
@@ -36,22 +41,32 @@ public partial class VaultNavigationViewModel :
 
     public IContentTemplate Template { get; set; }
 
-    public Task Handle(Opened args, CancellationToken cancellationToken = default)
+    public Task Handle(Vault<Opened> args,
+        CancellationToken cancellationToken = default)
     {
-        Add<AllNavigationViewModel>();
-        Add<StarredNavigationViewModel>();
-        Add<ArchiveNavigationViewModel>();
-        Add<CategoriesNavigationViewModel>();
+        Add<AllNavigationViewModel>("All");
+        Add<StarredNavigationViewModel>("Starred");
+        Add<ArchiveNavigationViewModel>("Archive");
+        Add<CategoriesNavigationViewModel>("Categories");
 
         Opened = true;
         return Task.CompletedTask;
     }
 
-    public Task Handle(Closed args, CancellationToken cancellationToken = default)
+    public Task Handle(Vault<Closed> args,
+        CancellationToken cancellationToken = default)
     {
         Opened = true;
         Clear();
 
         return Task.CompletedTask;
     }
+
+    public Task Handle(Vault<Deactivated> args,
+        CancellationToken cancellationToken = default) =>
+            Task.FromResult(Activated = false);
+
+    public Task Handle(Vault<Activated> args,
+        CancellationToken cancellationToken = default) =>
+            Task.FromResult(Activated = true);
 }

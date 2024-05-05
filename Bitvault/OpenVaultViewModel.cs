@@ -22,7 +22,7 @@ public partial class OpenVaultViewModel(IServiceProvider provider,
         {
             if (await Mediator.Handle<Open<Vault>, bool>(Open.As(new Vault(Password))))
             {
-                await Publisher.Publish<Opened>();
+                await Publisher.Publish(Vault.As<Opened>());
             }
         }
     }

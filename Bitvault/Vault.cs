@@ -2,6 +2,8 @@
 
 namespace Bitvault;
 
+public record Vault<TValue>(TValue? Value = default);
+
 public record Vault
 {
     public Vault(string name, string password)
@@ -16,10 +18,10 @@ public record Vault
     }
 
 
-    public Vault()
-    {
+    public static Vault<TValue> As<TValue>(TValue value) => new(value);
 
-    }
+    public static Vault<TValue> As<TValue>() where TValue : new() => new(new TValue());
+
 
     [MaybeNull]
     public string Name { get; }
