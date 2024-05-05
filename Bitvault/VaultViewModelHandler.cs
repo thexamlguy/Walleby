@@ -4,19 +4,44 @@ namespace Bitvault;
 
 public class VaultViewModelHandler(IServiceFactory factory,
     IPublisher publisher) :
-    INotificationHandler<Enumerate<LockerNavigationViewModel>>
+    INotificationHandler<Enumerate<LockerNavigationViewModel, VaultViewModelOptions>>
 {
-    public async Task Handle(Enumerate<LockerNavigationViewModel> args,
+    public async Task Handle(Enumerate<LockerNavigationViewModel, VaultViewModelOptions> args,
         CancellationToken cancellationToken = default)
     {
-        Random rnd = new Random();
-        int d = rnd.Next(5, 10);
-        for (int i = 0; i < 2;  i++)
+        if (args.Options?.Filter is "All")
         {
-            if (factory.Create<LockerNavigationViewModel>() is LockerNavigationViewModel viewModel)
+            for (int i = 0; i < 100; i++)
             {
-                await publisher.Publish(new Create<LockerNavigationViewModel>(viewModel),
-                    nameof(VaultViewModel), cancellationToken);
+                if (factory.Create<LockerNavigationViewModel>() is LockerNavigationViewModel viewModel)
+                {
+                    await publisher.Publish(new Create<LockerNavigationViewModel>(viewModel),
+                        nameof(VaultViewModel), cancellationToken);
+                }
+            }
+        }
+
+        if (args.Options?.Filter is "Starred")
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                if (factory.Create<LockerNavigationViewModel>() is LockerNavigationViewModel viewModel)
+                {
+                    await publisher.Publish(new Create<LockerNavigationViewModel>(viewModel),
+                        nameof(VaultViewModel), cancellationToken);
+                }
+            }
+        }
+
+        if (args.Options?.Filter is "Archive")
+        {
+            for (int i = 0; i < 100000; i++)
+            {
+                if (factory.Create<LockerNavigationViewModel>() is LockerNavigationViewModel viewModel)
+                {
+                    await publisher.Publish(new Create<LockerNavigationViewModel>(viewModel),
+                        nameof(VaultViewModel), cancellationToken);
+                }
             }
         }
     }

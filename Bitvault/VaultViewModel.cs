@@ -1,16 +1,22 @@
-﻿using Toolkit.Foundation;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Toolkit.Foundation;
 
 namespace Bitvault;
 
 [Notification(nameof(VaultViewModel))]
 public partial class VaultViewModel(IServiceProvider provider,
     IServiceFactory factory,
-    IMediator mediator, 
-    IPublisher publisher, 
+    IMediator mediator,
+    IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer,
-    IContentTemplate template) : ObservableCollectionViewModel<LockerNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer)
+    IContentTemplate template,
+    string? filter = null) : ObservableCollectionViewModel<LockerNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
+    INotificationHandler<Vault<Filter<string>>>
 {
+    [ObservableProperty]
+    private string? filter = filter;
+
     public IContentTemplate Template { get; set; } = template;
 
     public override async Task Activated()
@@ -23,5 +29,18 @@ public partial class VaultViewModel(IServiceProvider provider,
     {
         await Publisher.Publish(Vault.As<Deactivated>());
         await base.Deactivated();
+    }
+
+    protected override IEnumerate CreateEnumeration(object? key) => 
+        Enumerate<LockerNavigationViewModel>.With(new VaultViewModelOptions { Filter = Filter }) with { Key = key };
+
+    public async Task Handle(Vault<Filter<string>> args, 
+        CancellationToken cancellationToken = default)
+    {
+        if (args.Value is Filter<string> filter)
+        {
+            Filter = filter.Value;
+            await Enumerate();
+        }
     }
 }

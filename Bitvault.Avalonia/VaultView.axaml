@@ -17,7 +17,7 @@
                 Height="40"
                 Margin="0,4,0,0"
                 ColumnDefinitions="*,Auto">
-                <TextBlock Grid.Column="0" Text="Title goes here" />
+                <TextBlock Grid.Column="0" Text="{Binding Filter}" />
                 <Button
                     Grid.Column="1"
                     Width="{StaticResource ButtonWidth}"

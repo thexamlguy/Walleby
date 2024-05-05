@@ -8,4 +8,4 @@ public partial class AllNavigationViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer,
-    string name) : FilterVaultNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, name);
+    string filter) : FilterVaultNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, filter);

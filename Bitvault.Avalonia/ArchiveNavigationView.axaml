@@ -14,7 +14,19 @@
                         <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Context="Main" Route="Vault" />
+                <NavigateAction Context="Main" Route="Vault">
+                    <NavigateAction.ParameterBindings>
+                        <ParameterBinding Key="Filter" Value="{Binding Filter}" />
+                    </NavigateAction.ParameterBindings>
+                </NavigateAction>
+            </ConditionAction>
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="True" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <InvokeCommandAction Command="{Binding InvokeCommand}" />
             </ConditionAction>
         </DataTriggerBehavior>
     </Interaction.Behaviors>

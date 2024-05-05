@@ -4,14 +4,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class FilterVaultNavigationViewModel(IServiceProvider provider,
-    IServiceFactory factory,
-    IMediator mediator,
-    IPublisher publisher,
-    ISubscriber subscriber,
-    IDisposer disposer,
-    string name) :
-    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
+public partial class FilterVaultNavigationViewModel : ObservableViewModel,
     IVaultNavigationViewModel,
     INotificationHandler<Vault<Activated>>,
     INotificationHandler<Vault<Deactivated>>
@@ -20,7 +13,21 @@ public partial class FilterVaultNavigationViewModel(IServiceProvider provider,
     private bool activated;
 
     [ObservableProperty]
+    private string? filter;
+
+    [ObservableProperty]
     private bool selected;
+
+    public FilterVaultNavigationViewModel(IServiceProvider provider,
+        IServiceFactory factory,
+        IMediator mediator,
+        IPublisher publisher,
+        ISubscriber subscriber,
+        IDisposer disposer,
+        string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
+    {
+        Filter = filter;
+    }
 
     public Task Handle(Vault<Deactivated> args,
         CancellationToken cancellationToken = default) =>
@@ -31,5 +38,5 @@ public partial class FilterVaultNavigationViewModel(IServiceProvider provider,
             Task.FromResult(Activated = true);
 
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Vault.As(new Selected<string>(name)));
+    public async Task Invoke() => await Publisher.Publish(Vault.As(new Filter<string>(Filter)), nameof(VaultViewModel));
 }
