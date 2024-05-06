@@ -1,0 +1,15 @@
+<ListBoxItem
+    x:Class="Bitvault.Avalonia.VaultContentNavigationView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:Name="Name"
+    x:CompileBindings="False"
+    x:DataType="vm:VaultContentNavigationViewModel"
+    Content="{Binding Name}">
+    <Interaction.Behaviors>
+        <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
+            <NavigateAction Context="Content" Route="AddVaultContent" />
+        </DataTriggerBehavior>
+    </Interaction.Behaviors>
+</ListBoxItem>

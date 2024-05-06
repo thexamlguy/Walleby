@@ -24,9 +24,4 @@ public partial class VaultContentNavigationViewModel(IServiceProvider provider,
     private string? description = description;
 
     public IContentTemplate Template { get; set; } = template;
-
-    partial void OnSelectedChanged(bool value)
-    {
-        throw new NotImplementedException();
-    }
 }
