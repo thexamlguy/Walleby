@@ -38,5 +38,5 @@ public partial class FilterVaultNavigationViewModel : ObservableViewModel,
             Task.FromResult(Activated = true);
 
     [RelayCommand]
-    public async Task Invoke() => await Publisher.Publish(Vault.As(new Filter<string>(Filter)), nameof(VaultViewModel));
+    public async Task Invoke() => await Publisher.Publish(Vault.As(new Filter<string>(Filter)));
 }

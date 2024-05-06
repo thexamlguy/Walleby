@@ -3,9 +3,9 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="using:FluentAvalonia.UI.Controls"
-    RequestedThemeVariant="Dark">
+    RequestedThemeVariant="Default">
     <Application.Styles>
-        <ThemeResources />
+        <ThemeResources PreferUserAccentColor="True" />
         <Style Selector="ui|SettingsExpanderItem">
             <Style Selector="^ /template/ Expander#Expander">
                 <Setter Property="IsVisible" Value="False" />

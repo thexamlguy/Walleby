@@ -5,7 +5,7 @@
     xmlns:vm="using:Bitvault"
     x:DataType="vm:AllNavigationViewModel"
     Content="All"
-    IsSelected="{Binding Selected, Mode=TwoWay}">
+    IsSelected="{Binding Selected}">
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
             <ConditionAction>

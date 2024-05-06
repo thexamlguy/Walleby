@@ -1,0 +1,6 @@
+<UserControl
+    x:Class="Bitvault.Avalonia.VaultContentView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    Vault content placeholder
+</UserControl>

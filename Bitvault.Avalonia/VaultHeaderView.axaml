@@ -1,0 +1,27 @@
+<UserControl
+    x:Class="Bitvault.Avalonia.VaultHeaderView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:VaultHeaderViewModel">
+    <Grid ColumnDefinitions="*,Auto">
+        <TextBlock
+            Grid.Column="0"
+            Margin="16,0,0,0"
+            VerticalAlignment="Center"
+            Text="{Binding Value}"
+            Theme="{DynamicResource BodyStrongTextBlockStyle}" />
+        <ItemsControl
+            Grid.Column="1"
+            Margin="0,0,4,0"
+            VerticalAlignment="Center"
+            ItemTemplate="{ReflectionBinding Template}"
+            ItemsSource="{Binding}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</UserControl>

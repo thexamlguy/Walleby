@@ -11,29 +11,27 @@
         <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{DynamicResource SubtleFillColorSecondary}" />
         <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{DynamicResource SubtleFillColorTertiary}" />
     </UserControl.Resources>
-    <Grid ColumnDefinitions="1*,Auto,2*">
-        <Grid Grid.Column="0" RowDefinitions="Auto,*">
-            <Grid
-                Height="40"
-                Margin="0,4,0,0"
-                ColumnDefinitions="*,Auto">
-                <TextBlock Grid.Column="0" Text="{Binding Filter}" />
-                <Button
-                    Grid.Column="1"
-                    Width="{StaticResource ButtonWidth}"
-                    Height="{StaticResource ButtonHeight}"
-                    VerticalAlignment="Center"
-                    BorderThickness="0"
-                    Content="&#xE72B;"
-                    FontFamily="{DynamicResource SymbolThemeFontFamily}"
-                    FontSize="16" />
-            </Grid>
-            <ListBox
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="0,-1,0,0"
-                ItemTemplate="{ReflectionBinding Template}"
-                ItemsSource="{Binding}" />
-        </Grid>
+    <Grid ColumnDefinitions="320,*" RowDefinitions="Auto,*">
+        <ContentControl
+            Grid.Row="0"
+            Grid.Column="0"
+            Height="40"
+            Margin="4,4,0,0">
+            <Interaction.Behaviors>
+                <EventTriggerBehavior EventName="Loaded">
+                    <NavigateAction Context="{Binding $self}" Route="VaultHeader" />
+                </EventTriggerBehavior>
+            </Interaction.Behaviors>
+        </ContentControl>
+        <ListBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="2,-1,0,0"
+            ItemTemplate="{ReflectionBinding Template}"
+            ItemsSource="{Binding}" />
+        <Frame
+            x:Name="Content"
+            Grid.Row="1"
+            Grid.Column="1" />
     </Grid>
 </UserControl>

@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public class LockerNavigationViewModel(IServiceProvider provider,
+public class VaultContentViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,

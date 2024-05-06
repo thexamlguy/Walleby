@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace Bitvault.Avalonia
 {
-    public partial class LockerNavigationView : UserControl
+    public partial class VaultSearchHeaderView : UserControl
     {
-        public LockerNavigationView()
+        public VaultSearchHeaderView()
         {
             InitializeComponent();
         }

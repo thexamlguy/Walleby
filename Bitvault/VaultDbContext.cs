@@ -9,17 +9,17 @@ public class VaultDbContext(DbContextOptions<VaultDbContext> options) :
 
     public DbSet<Document> Documents { get; set; }
 
-    public DbSet<Locker> Lockers { get; set; }
+    public DbSet<Content> Items { get; set; }
 
     public DbSet<Tag> Tags { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Locker>()
+        modelBuilder.Entity<Content>()
             .HasMany(x => x.Tags)
             .WithOne();
 
-        modelBuilder.Entity<Locker>()
+        modelBuilder.Entity<Content>()
             .HasMany(x => x.Documents)
             .WithOne();
     }

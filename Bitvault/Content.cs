@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public record Locker
+public record Content
 {
     [Key]
     public int Id { get; set; }

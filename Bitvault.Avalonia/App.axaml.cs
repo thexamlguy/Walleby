@@ -72,9 +72,13 @@ public partial class App : Application
                         services.AddTemplate<VaultViewModel, VaultView>("Vault");
                         services.AddHandler<VaultViewModelHandler>();
 
-                        services.AddTemplate<LockerNavigationViewModel, LockerNavigationView>();
+                        services.AddTemplate<VaultSearchHeaderViewModel, VaultSearchHeaderView>("VaultSearchHeader");
+                        services.AddTemplate<VaultHeaderViewModel, VaultHeaderView>("VaultHeader");
+                        services.AddTemplate<AddVaultContentActionViewModel, AddVaultContentActionView>();
+                        services.AddTemplate<AddVaultContentViewModel, AddVaultContentView>("AddVaultContent");
+                        services.AddTemplate<VaultContentViewModel, VaultContentView>("VaultContent");
 
-                        services.AddTemplate<VaultCommandViewModel, VaultCommandView>("VaultCommands");
+                        services.AddTemplate<VaultContentNavigationViewModel, VaultContentNavigationView>();
                     });
                 })!);
 

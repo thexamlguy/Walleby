@@ -3,7 +3,8 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Notification(nameof(VaultViewModel))]
+
+[Enumerate(nameof(VaultViewModel))]
 public partial class VaultViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
@@ -11,7 +12,7 @@ public partial class VaultViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer,
     IContentTemplate template,
-    string? filter = null) : ObservableCollectionViewModel<LockerNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
+    string? filter = null) : ObservableCollectionViewModel<VaultContentNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<Vault<Filter<string>>>
 {
     [ObservableProperty]
@@ -31,8 +32,8 @@ public partial class VaultViewModel(IServiceProvider provider,
         await base.Deactivated();
     }
 
-    protected override IEnumerate CreateEnumeration(object? key) => 
-        Enumerate<LockerNavigationViewModel>.With(new VaultViewModelOptions { Filter = Filter }) with { Key = key };
+    protected override IEnumerate PrepareEnumeration(object? key) => 
+        Enumerate<VaultContentNavigationViewModel>.With(new VaultViewModelOptions { Filter = Filter }) with { Key = key };
 
     public async Task Handle(Vault<Filter<string>> args, 
         CancellationToken cancellationToken = default)

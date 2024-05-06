@@ -1,0 +1,21 @@
+<UserControl
+    x:Class="Bitvault.Avalonia.AddVaultContentActionView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Button
+        Grid.Column="1"
+        Width="{StaticResource ButtonWidth}"
+        Height="{StaticResource ButtonHeight}"
+        VerticalAlignment="Center"
+        BorderThickness="0"
+        Content="&#xE710;"
+        FontFamily="{DynamicResource SymbolThemeFontFamily}"
+        FontSize="16"
+        ToolTip.Tip="Add item">
+        <Interaction.Behaviors>
+            <EventTriggerBehavior EventName="Click">
+                <NavigateAction Context="Content" Route="AddVaultContent" />
+            </EventTriggerBehavior>
+        </Interaction.Behaviors>
+    </Button>
+</UserControl>
