@@ -21,8 +21,6 @@ public partial class CreateVaultViewModel(IServiceProvider provider,
     [ObservableProperty]
     private string password;
 
-    public async Task<bool> Confirm()
-    {
-        return await Mediator.Handle<Create<Vault>, bool>(Create.As(new Vault(Name, Password)));
-    }
+    public async Task<bool> Confirm() => 
+        await Mediator.Handle<Create<Vault>, bool>(Create.As(new Vault(Name, Password)));
 }

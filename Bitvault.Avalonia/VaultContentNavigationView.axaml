@@ -9,7 +9,7 @@
     Content="{Binding Name}">
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
-            <NavigateAction Context="Content" Route="AddVaultContent" />
+            <NavigateAction Context="Content" Route="VaultContent" />
         </DataTriggerBehavior>
     </Interaction.Behaviors>
 </ListBoxItem>

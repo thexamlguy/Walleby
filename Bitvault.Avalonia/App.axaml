@@ -5,7 +5,7 @@
     xmlns:ui="using:FluentAvalonia.UI.Controls"
     RequestedThemeVariant="Default">
     <Application.Styles>
-        <ThemeResources PreferUserAccentColor="True" />
+        <ThemeResources PreferSystemTheme="True" PreferUserAccentColor="True" />
         <Style Selector="ui|SettingsExpanderItem">
             <Style Selector="^ /template/ Expander#Expander">
                 <Setter Property="IsVisible" Value="False" />

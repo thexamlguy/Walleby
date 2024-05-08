@@ -4,14 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
     x:DataType="vm:VaultViewModel">
-    <UserControl.Resources>
-        <x:Double x:Key="ButtonWidth">40</x:Double>
-        <x:Double x:Key="ButtonHeight">36</x:Double>
-        <SolidColorBrush x:Key="ButtonBackground" Color="{DynamicResource SubtleFillColorTransparent}" />
-        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{DynamicResource SubtleFillColorSecondary}" />
-        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{DynamicResource SubtleFillColorTertiary}" />
-    </UserControl.Resources>
-    <Grid ColumnDefinitions="320,*" RowDefinitions="Auto,*">
+    <Grid ColumnDefinitions="320,Auto,*" RowDefinitions="Auto,*">
         <ContentControl
             Grid.Row="0"
             Grid.Column="0"
@@ -35,9 +28,29 @@
                 </Style>
             </ListBox.Styles>
         </ListBox>
-        <Frame
-            x:Name="Content"
+        <GridSplitter
             Grid.Row="1"
-            Grid.Column="1" />
+            Grid.Column="1"
+            MinWidth="2"
+            MaxWidth="2"
+            Background="Transparent" />
+        <Border
+            Grid.Row="1"
+            Grid.Column="2"
+            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+            BorderThickness="1,1,0,0"
+            CornerRadius="8 0 0 0">
+            <Grid RowDefinitions="Auto, *">
+                <Border
+                    Grid.Row="0"
+                    Padding="4"
+                    BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}"
+                    BorderThickness="0,0,0,1">
+                    <ContentControl x:Name="ContentHeader" />
+                </Border>
+                <Frame x:Name="Content" Grid.Row="1" />
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

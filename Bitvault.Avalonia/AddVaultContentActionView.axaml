@@ -7,7 +7,6 @@
         Width="{StaticResource ButtonWidth}"
         Height="{StaticResource ButtonHeight}"
         VerticalAlignment="Center"
-        BorderThickness="0"
         Content="&#xE710;"
         FontFamily="{DynamicResource SymbolThemeFontFamily}"
         FontSize="16"

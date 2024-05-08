@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public partial class AddVaultContentActionViewModel(IServiceProvider provider,
+public partial class VaultContentHeaderViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,

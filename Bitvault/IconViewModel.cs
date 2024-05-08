@@ -2,13 +2,13 @@
 
 namespace Bitvault;
 
-public partial class AddVaultContentViewModel : ObservableCollectionViewModel
+public partial class IconViewModel : ObservableViewModel
 {
-    public AddVaultContentViewModel(IServiceProvider provider, 
-        IServiceFactory factory, 
+    public IconViewModel(IServiceProvider provider,
+        IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscriber subscriber, 
+        ISubscriber subscriber,
         IDisposer disposer) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
 
