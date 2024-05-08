@@ -1,7 +1,8 @@
 <UserControl
     x:Class="Bitvault.Avalonia.AddVaultContentView"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ge="clr-namespace:GridExtra.Avalonia;assembly=GridExtra.Avalonia">
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Loaded">
             <NavigateAction Context="ContentHeader" Route="AddVaultContentHeader" />
