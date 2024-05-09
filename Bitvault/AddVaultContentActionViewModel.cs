@@ -1,4 +1,5 @@
-﻿using Toolkit.Foundation;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Toolkit.Foundation;
 
 namespace Bitvault;
 
@@ -7,4 +8,10 @@ public partial class AddVaultContentActionViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscriber subscriber,
-    IDisposer disposer) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer);
+    IDisposer disposer,
+    NamedComponent named) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
+{
+
+    [ObservableProperty]
+    private string named = $"{named}";
+}

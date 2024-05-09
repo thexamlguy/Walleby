@@ -2,10 +2,11 @@
     x:Class="Bitvault.Avalonia.AddVaultContentView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ge="clr-namespace:GridExtra.Avalonia;assembly=GridExtra.Avalonia">
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:AddVaultContentViewModel">
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Loaded">
-            <NavigateAction Context="ContentHeader" Route="AddVaultContentHeader" />
+            <NavigateAction Context="{Binding Named, StringFormat='{}{0}:ContentHeader'}" Route="AddVaultContentHeader" />
         </EventTriggerBehavior>
     </Interaction.Behaviors>
     <Grid>
@@ -34,7 +35,6 @@
                 <Setter Property="ResponsiveGrid.ExtraSmall" Value="12" />
             </Style>
         </Grid.Styles>
-
         <ResponsiveGrid>
             <Border Classes="Header" />
             <Border Classes="Section1" />
@@ -45,6 +45,5 @@
             <Border Classes="Section2" />
             <Border Classes="Footer" />
         </ResponsiveGrid>
-
     </Grid>
 </UserControl>
