@@ -47,9 +47,21 @@
                     Padding="4"
                     BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}"
                     BorderThickness="0,0,0,1">
-                    <ContentControl x:Name="ContentHeader" />
+                    <ContentControl x:Name="ContentHeader">
+                        <Interaction.Behaviors>
+                            <AttachedBehaviour>
+                                <NavigateRegionAction Name="{Binding Named, StringFormat='{}{0}:ContentHeader'}" />
+                            </AttachedBehaviour>
+                        </Interaction.Behaviors>
+                    </ContentControl>
                 </Border>
-                <Frame x:Name="Content" Grid.Row="1" />
+                <Frame x:Name="Content" Grid.Row="1">
+                    <Interaction.Behaviors>
+                        <AttachedBehaviour>
+                            <NavigateRegionAction Name="{Binding Named, StringFormat='{}{0}:Content'}" />
+                        </AttachedBehaviour>
+                    </Interaction.Behaviors>
+                </Frame>
             </Grid>
         </Border>
     </Grid>

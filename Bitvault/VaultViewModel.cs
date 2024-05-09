@@ -12,11 +12,15 @@ public partial class VaultViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer,
     IContentTemplate template,
+    NamedComponent named,
     string? filter = null) : ObservableCollectionViewModel<VaultContentNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<Vault<Filter<string>>>
 {
     [ObservableProperty]
     private string? filter = filter;
+
+    [ObservableProperty]
+    private string named = $"{named}";
 
     public IContentTemplate Template { get; set; } = template;
 
@@ -32,16 +36,16 @@ public partial class VaultViewModel(IServiceProvider provider,
         await base.Deactivated();
     }
 
-    protected override IEnumerate PrepareEnumeration(object? key) => 
-        Enumerate<VaultContentNavigationViewModel>.With(new VaultViewModelOptions { Filter = Filter }) with { Key = key };
-
-    public async Task Handle(Vault<Filter<string>> args, 
-        CancellationToken cancellationToken = default)
-    {
-        if (args.Value is Filter<string> filter)
+        public async Task Handle(Vault<Filter<string>> args,
+            CancellationToken cancellationToken = default)
         {
-            Filter = filter.Value;
-            await Enumerate();
+            if (args.Value is Filter<string> filter)
+            {
+                Filter = filter.Value;
+                await Enumerate();
+            }
         }
-    }
+
+        protected override IEnumerate PrepareEnumeration(object? key) =>
+            Enumerate<VaultContentNavigationViewModel>.With(new VaultViewModelOptions { Filter = Filter }) with { Key = key };
 }

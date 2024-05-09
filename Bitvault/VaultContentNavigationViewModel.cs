@@ -10,18 +10,21 @@ public partial class VaultContentNavigationViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer,
     IContentTemplate template,
+    NamedComponent named,
     string name,
     string description) :
     ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [ObservableProperty]
-    private bool selected;
+    private string? description = description;
 
     [ObservableProperty]
     private string? name = name;
 
     [ObservableProperty]
-    private string? description = description;
+    private string named = $"{named}";
 
+    [ObservableProperty]
+    private bool selected;
     public IContentTemplate Template { get; set; } = template;
 }

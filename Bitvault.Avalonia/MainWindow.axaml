@@ -7,10 +7,12 @@
     x:DataType="vm:MainWindowViewModel"
     Background="Transparent"
     TransparencyLevelHint="Mica">
-    <ContentControl x:Name="Window">
+    <ContentControl>
         <Interaction.Behaviors>
             <AttachedBehaviour>
-                <NavigateAction Context="Window" Route="Main" />
+                <NavigateRegionAction Name="Window">
+                    <NavigateAction Context="Window" Route="Main" />
+                </NavigateRegionAction>
             </AttachedBehaviour>
         </Interaction.Behaviors>
     </ContentControl>
