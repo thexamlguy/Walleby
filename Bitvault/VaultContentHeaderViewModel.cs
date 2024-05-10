@@ -7,4 +7,9 @@ public partial class VaultContentHeaderViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscriber subscriber,
-    IDisposer disposer) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer);
+    IDisposer disposer) : ObservableViewModel<string, string>(provider, factory, mediator, publisher, subscriber, disposer),
+    IVaultContentEntryViewModel
+{
+    public void Invoke(VaultContentConfiguration args) => 
+        args.Name = Value;
+}

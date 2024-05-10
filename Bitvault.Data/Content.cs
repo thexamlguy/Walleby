@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Bitvault.Data;
+using System.ComponentModel.DataAnnotations;
 
-namespace Bitvault;
+namespace Bitvault.Data;
 
 public record Content
 {

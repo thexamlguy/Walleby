@@ -8,6 +8,7 @@ using Toolkit.Avalonia;
 using Toolkit.Foundation;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using HotAvalonia;
+using Bitvault.Data;
 
 namespace Bitvault.Avalonia;
 
@@ -80,10 +81,12 @@ public partial class App : Application
                         services.AddTemplate<VaultContentViewModel, VaultContentView>("VaultContent");
 
                         services.AddTemplate<AddVaultContentViewModel, AddVaultContentView>("AddVaultContent");
-                        services.AddTemplate<AddVaultContentHeaderViewModel, AddVaultContentHeaderView>("AddVaultContentHeader");
+                        services.AddTemplate<AddVaultContentCommandHeaderViewModel, AddVaultContentCommandHeaderView>("AddVaultContentCommandHeader");
 
                         services.AddTemplate<ConfirmVaultContentActionViewModel, ConfirmVaultContentActionView>();
                         services.AddTemplate<DismissVaultContentActionViewModel, DismissVaultContentActionView>();
+
+                        services.AddTemplate<VaultContentHeaderViewModel, VaultContentHeaderView>();
                     });
                 })!);
 

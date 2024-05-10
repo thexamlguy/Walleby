@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Bitvault;
+namespace Bitvault.Data;
 
 public record Category
 {

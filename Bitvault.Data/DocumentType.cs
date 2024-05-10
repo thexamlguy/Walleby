@@ -1,4 +1,4 @@
-﻿namespace Bitvault;
+﻿namespace Bitvault.Data;
 
 public enum DocumentType
 {

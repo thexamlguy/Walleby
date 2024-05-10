@@ -43,6 +43,12 @@
 	  <Compile Update="AddVaultContentActionView.axaml.cs">
 	    <DependentUpon>AddVaultContentActionView.axaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="AddVaultContentCommandHeaderView.axaml.cs">
+	    <DependentUpon>AddVaultContentCommandHeaderView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="VaultContentHeaderView.axaml.cs">
+	    <DependentUpon>VaultContentHeaderView.axaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="OpenView.axaml.cs">
 	    <DependentUpon>OpenView.axaml</DependentUpon>
 	  </Compile>

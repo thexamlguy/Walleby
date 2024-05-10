@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bitvault.Data;
+using Microsoft.EntityFrameworkCore;
 
-namespace Bitvault;
+namespace Bitvault.Data;
 
 public class VaultDbContext(DbContextOptions<VaultDbContext> options) : 
     DbContext(options)
