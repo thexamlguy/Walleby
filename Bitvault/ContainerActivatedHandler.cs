@@ -32,14 +32,3 @@ public class ContainerActivatedHandler(IContainerHostCollection containers,
         }
     }
 }
-
-public class ItemActivatedHandler(IServiceFactory serviceFactory,
-    IPublisher publisher) :
-    INotificationHandler<ActivatedEventArgs<ItemConfiguration>>
-{
-    public async Task Handle(ActivatedEventArgs<ItemConfiguration> args,
-        CancellationToken cancellationToken = default)
-    {
-
-    }
-}

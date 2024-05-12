@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bitvault.Data;
 
-public class Tag
+[Table("Tags")]
+public class TagEntry
 {
     [Key]
     public int Id { get; set; }

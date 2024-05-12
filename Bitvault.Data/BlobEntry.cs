@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bitvault.Data;
 
-public record Document
+[Table("Blobs")]
+public record BlobEntry
 {
-    public byte[]? Blob { get; set; }
+    public byte[]? Data { get; set; }
 
     public DocumentType Type { get; set; }
 

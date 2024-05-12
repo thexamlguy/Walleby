@@ -90,6 +90,7 @@ public partial class App : Application
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
 
                         services.AddHandler<CreateItemHandler>();
+                        services.AddHandler<ItemActivatedHandler>();
                     });
                 })!);
 

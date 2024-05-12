@@ -1,5 +1,6 @@
 ﻿using Bitvault.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Toolkit.Foundation;
 
 namespace Bitvault;
@@ -14,16 +15,21 @@ public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFa
         {
             try
             {
+                using ContainerDbContext context = dbContextFactory.CreateDbContext();
+                EntityEntry<ItemEntry>? result = null;
+                
                 await Task.Run(async () =>
                 {
-                    using ContainerDbContext context = dbContextFactory.CreateDbContext();
-                    await context.AddAsync(new Data.Item { Name = configuration.Name }, cancellationToken);
+                    result = await context.AddAsync(new ItemEntry { Name = configuration.Name }, cancellationToken);
                     await context.SaveChangesAsync(cancellationToken);
 
                 }, cancellationToken);
 
-                await publisher.Publish(Activated.As(configuration));
-                return true;
+                if (result is not null)
+                {
+                    await publisher.Publish(Activated.As(new Item { Id = result.Entity.Id }), cancellationToken);
+                    return true;
+                }
             }
             catch
             {

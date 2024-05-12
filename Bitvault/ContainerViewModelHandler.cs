@@ -16,7 +16,7 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
     {
         if (args.Options is ContainerViewModelConfiguration configuration)
         {
-            ExpressionStarter<Data.Item> predicate = PredicateBuilder.New<Data.Item>(true);
+            ExpressionStarter<ItemEntry> predicate = PredicateBuilder.New<ItemEntry>(true);
 
             if (configuration.Filter == "All")
             {
@@ -36,7 +36,7 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
             var items = await Task.Run(async () =>
             {
                 using ContainerDbContext context = dbContextFactory.CreateDbContext();
-                return await context.Set<Data.Item>().Where(predicate).Select(x => new
+                return await context.Set<ItemEntry>().Where(predicate).Select(x => new
                 {
                     x.Id,
                     x.Name

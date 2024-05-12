@@ -5,20 +5,20 @@ namespace Bitvault.Data;
 public class ContainerDbContext(DbContextOptions<ContainerDbContext> options) : 
     DbContext(options)
 {
-    public DbSet<Document> Documents { get; set; }
+    public DbSet<BlobEntry> Blobs { get; set; }
 
-    public DbSet<Item> Items { get; set; }
+    public DbSet<ItemEntry> Items { get; set; }
 
-    public DbSet<Tag> Tags { get; set; }
+    public DbSet<TagEntry> Tags { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Item>()
+        modelBuilder.Entity<ItemEntry>()
             .HasMany(x => x.Tags)
             .WithOne();
 
-        modelBuilder.Entity<Item>()
-            .HasMany(x => x.Documents)
+        modelBuilder.Entity<ItemEntry>()
+            .HasMany(x => x.Blobs)
             .WithOne();
     }
 }
