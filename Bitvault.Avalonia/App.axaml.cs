@@ -49,7 +49,7 @@ public partial class App : Application
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
 
                         services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
-                        services.AddTransient<IContainerFactory, ContainerFactory>();
+                        services.AddTransient<IContainerStorageFactory, ContainerStorageFactory>();
                         services.TryAddSingleton<IValueStore<SecurityKey>, ValueStore<SecurityKey>>();
                         services.TryAddSingleton<IValueStore<ContainerConnection>, ValueStore<ContainerConnection>>();
 
@@ -93,7 +93,7 @@ public partial class App : Application
                     });
                 })!);
 
-                services.AddTransient<IContainerComponentFactory,  ContainerComponentFactory>();
+                services.AddTransient<IContainerFactory,  ContainerFactory>();
                 services.AddHandler<CreateContainerHandler>();
 
                 services.AddSingleton<IContainerHostCollection, ContainerHostCollection>();

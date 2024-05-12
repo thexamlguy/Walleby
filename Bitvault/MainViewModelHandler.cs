@@ -10,7 +10,8 @@ public class MainViewModelHandler(IPublisher publisher,
     public async Task Handle(Enumerate<IMainNavigationViewModel> args,
         CancellationToken cancellationToken = default)
     {
-        foreach (IComponentHost container in containers)
+        foreach (IComponentHost container in containers.OrderBy(x => x.GetConfiguration<ContainerConfiguration>() 
+            is ContainerConfiguration configuration ? configuration.Name : null))
         {
             if (container.Services.GetRequiredService<ContainerConfiguration>() is ContainerConfiguration configuration)
             {

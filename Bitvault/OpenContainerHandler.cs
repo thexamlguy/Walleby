@@ -5,7 +5,7 @@ namespace Bitvault;
 
 public class OpenContainerHandler(ContainerConfiguration configuration,
     ISecurityKeyFactory keyVaultFactory,
-    IContainerFactory vaultStorage) :
+    IContainerStorageFactory vaultStorage) :
     IHandler<Open<Container>, bool>
 {
     public async Task<bool> Handle(Open<Container> args,

@@ -5,7 +5,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class CreateContainerHandler(IContainerComponentFactory componentFactory,
+public class CreateContainerHandler(IContainerFactory componentFactory,
     IPublisher publisher) :
     IHandler<Create<Container>, bool>
 {
@@ -19,7 +19,7 @@ public class CreateContainerHandler(IContainerComponentFactory componentFactory,
             {
                 ISecurityKeyFactory keyVaultFactory = host.Services.GetRequiredService<ISecurityKeyFactory>();
                 IValueStore<SecurityKey> secureKeyStore = host.Services.GetRequiredService<IValueStore<SecurityKey>>();
-                IContainerFactory containerFactory = host.Services.GetRequiredService<IContainerFactory>();
+                IContainerStorageFactory containerFactory = host.Services.GetRequiredService<IContainerStorageFactory>();
 
                 if (keyVaultFactory.Create(Encoding.UTF8.GetBytes(password)) is SecurityKey key)
                 {

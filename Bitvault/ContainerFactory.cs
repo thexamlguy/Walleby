@@ -1,41 +1,18 @@
-﻿using Bitvault.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Toolkit.Foundation;
+﻿using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class ContainerFactory(IValueStore<ContainerConnection> connection,
-    IHostEnvironment environment,
-    IServiceProvider provider) :
+public class ContainerFactory(IComponentFactory componentFactory) : 
     IContainerFactory
 {
-    public async Task<bool> Create(string name, 
-        SecurityKey key)
+    public IComponentHost? Create(string name)
     {
-        connection.Set(new ContainerConnection($"Data Source={Path.Combine(environment.ContentRootPath, name)}" +
-            $".vault;Mode=ReadWriteCreate;Pooling=false;Password={Convert.ToBase64String(key.DecryptedKey)}"));
-
-        IDbContextFactory<ContainerDbContext> dbContextFactory = provider.GetRequiredService<IDbContextFactory<ContainerDbContext>>();
-        using ContainerDbContext context = await dbContextFactory.CreateDbContextAsync();
-
-        try
+        if (componentFactory.Create<IContainerComponent, ContainerConfiguration>($"Vault:{name}", 
+            new ContainerConfiguration { Name = name }) is IComponentHost host)
         {
-            await Task.Run(async () =>
-            {
-                await context.Database.EnsureCreatedAsync().ConfigureAwait(false);
-                await context.Database.CloseConnectionAsync().ConfigureAwait(false);
-
-                context.Database.SetConnectionString(null);
-
-            }).ConfigureAwait(false);
-        }
-        catch
-        {
-            return false;
+            return host;
         }
 
-        return true;
+        return default;
     }
 }

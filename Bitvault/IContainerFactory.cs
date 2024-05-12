@@ -1,6 +1,9 @@
-﻿namespace Bitvault;
+﻿using Toolkit.Foundation;
 
-public interface IContainerFactory
+namespace Bitvault
 {
-    Task<bool> Create(string name, SecurityKey key);
+    public interface IContainerFactory
+    {
+        IComponentHost? Create(string name);
+    }
 }
