@@ -35,6 +35,8 @@ public partial class App : Application
                     services.AddTemplate<MainWindowViewModel, MainWindow>("MainWindow");
                 }
 
+                services.AddHandler<ContainerActivatedHandler>();
+
                 services.AddTransient<IContainerComponent> (provider => Component.Create<ContainerComponent>(provider, args =>
                 {
                     args.AddServices(services =>
@@ -47,14 +49,14 @@ public partial class App : Application
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
 
                         services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
-                        services.AddTransient<IContainer, ContainerFactory>();
-                        services.TryAddSingleton<IContainer<SecurityKey>, Container<SecurityKey>>();
-                        services.TryAddSingleton<IContainer<ContainerConnection>, Container<ContainerConnection>>();
+                        services.AddTransient<IContainerFactory, ContainerFactory>();
+                        services.TryAddSingleton<IValueStore<SecurityKey>, ValueStore<SecurityKey>>();
+                        services.TryAddSingleton<IValueStore<ContainerConnection>, ValueStore<ContainerConnection>>();
 
                         services.AddDbContextFactory<ContainerDbContext>((provider, args) =>
                         {
-                            if (provider.GetRequiredService<IContainer<ContainerConnection>>() 
-                                is IContainer<ContainerConnection> connection)
+                            if (provider.GetRequiredService<IValueStore<ContainerConnection>>() 
+                                is IValueStore<ContainerConnection> connection)
                             {
                                 args.UseSqlite($"{connection.Value}");
                             }
@@ -80,8 +82,7 @@ public partial class App : Application
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
 
-                        services.AddTemplate<AddItemViewModel, AddItemView>("AddItem");
-                        services.AddTemplate<AddItemCommandHeaderViewModel, AddItemCommandHeaderView>("AddVaultContentCommandHeader");
+                        services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
                         services.AddTemplate<ConfirmItemActionViewModel, ConfirmItemActionView>();
                         services.AddTemplate<DismissItemActionViewModel, DismissItemActionView>();

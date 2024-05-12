@@ -1,34 +1,59 @@
 ﻿using Bitvault.Data;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
 public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbContextFactory,
-    IServiceFactory factory,
+    IServiceProvider serviceProvider,
     IPublisher publisher) :
     INotificationHandler<Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration>>
 {
     public async Task Handle(Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration> args,
         CancellationToken cancellationToken = default)
     {
-        var items = await Task.Run(async () =>
+        if (args.Options is ContainerViewModelConfiguration configuration)
         {
-            using ContainerDbContext context = dbContextFactory.CreateDbContext();
-            return await context.Set<Data.Item>().Select(x => new 
-            { 
-                x.Name,
-                x.State 
-            }).Where(x => x.State != 3).ToListAsync();
+            ExpressionStarter<Data.Item> predicate = PredicateBuilder.New<Data.Item>(true);
 
-        }, cancellationToken);
-
-        foreach (var item in items)
-        {
-            if (factory.Create<ItemNavigationViewModel>(item.Name, "Description " + 1) is ItemNavigationViewModel viewModel)
+            if (configuration.Filter == "All")
             {
-                await publisher.Publish(new Create<ItemNavigationViewModel>(viewModel),
-                    nameof(ContainerViewModel), cancellationToken);
+                predicate = predicate.And(x => x.State != 3);
+            }
+
+            if (configuration.Filter == "Starred")
+            {
+                predicate = predicate.And(x => x.State != 3 && x.State == 2);
+            }
+
+            if (configuration.Filter == "Archive")
+            {
+                predicate = predicate.And(x => x.State == 3);
+            }
+
+            var items = await Task.Run(async () =>
+            {
+                using ContainerDbContext context = dbContextFactory.CreateDbContext();
+                return await context.Set<Data.Item>().Where(predicate).Select(x => new
+                {
+                    x.Id,
+                    x.Name
+                }).ToListAsync();
+
+            }, cancellationToken);
+
+            foreach (var item in items)
+            {
+                IServiceScope serviceScope = serviceProvider.CreateScope();
+                IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
+
+                if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description " + 1) is ItemNavigationViewModel viewModel)
+                {
+                    await publisher.Publish(new Create<ItemNavigationViewModel>(viewModel),
+                        nameof(ContainerViewModel), cancellationToken);
+                }
             }
         }
     }

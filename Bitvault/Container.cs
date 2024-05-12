@@ -2,25 +2,25 @@
 
 namespace Bitvault;
 
-public record SecureStorage<TValue>(TValue? Value = default);
+public record Container<TValue>(TValue? Value = default);
 
-public record Vault
+public record Container
 {
-    public Vault(string name, string password)
+    public Container(string name, string password)
     {
         Name = name;
         Password = password;
     }
 
-    public Vault(string password)
+    public Container(string password)
     {
         Password = password;
     }
 
 
-    public static SecureStorage<TValue> As<TValue>(TValue value) => new(value);
+    public static Container<TValue> As<TValue>(TValue value) => new(value);
 
-    public static SecureStorage<TValue> As<TValue>() where TValue : new() => new(new TValue());
+    public static Container<TValue> As<TValue>() where TValue : new() => new(new TValue());
 
 
     [MaybeNull]

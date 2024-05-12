@@ -6,10 +6,10 @@ namespace Bitvault;
 public partial class ContainerNavigationViewModel :
     ObservableCollectionViewModel<IContainerNavigationViewModel>,
     IMainNavigationViewModel,
-    INotificationHandler<SecureStorage<Opened>>,
-    INotificationHandler<SecureStorage<Closed>>,
-    INotificationHandler<SecureStorage<Activated>>,
-    INotificationHandler<SecureStorage<Deactivated>>
+    INotificationHandler<Container<Opened>>,
+    INotificationHandler<Container<Closed>>,
+    INotificationHandler<Container<Activated>>,
+    INotificationHandler<Container<Deactivated>>
 {
     [ObservableProperty]
     private bool activated;
@@ -41,7 +41,7 @@ public partial class ContainerNavigationViewModel :
 
     public IContentTemplate Template { get; set; }
 
-    public Task Handle(SecureStorage<Opened> args,
+    public Task Handle(Container<Opened> args,
         CancellationToken cancellationToken = default)
     {
         Add<AllNavigationViewModel>("All");
@@ -53,7 +53,7 @@ public partial class ContainerNavigationViewModel :
         return Task.CompletedTask;
     }
 
-    public Task Handle(SecureStorage<Closed> args,
+    public Task Handle(Container<Closed> args,
         CancellationToken cancellationToken = default)
     {
         Opened = true;
@@ -62,11 +62,11 @@ public partial class ContainerNavigationViewModel :
         return Task.CompletedTask;
     }
 
-    public Task Handle(SecureStorage<Deactivated> args,
+    public Task Handle(Container<Deactivated> args,
         CancellationToken cancellationToken = default) =>
             Task.FromResult(Activated = false);
 
-    public Task Handle(SecureStorage<Activated> args,
+    public Task Handle(Container<Activated> args,
         CancellationToken cancellationToken = default) =>
             Task.FromResult(Activated = true);
 }

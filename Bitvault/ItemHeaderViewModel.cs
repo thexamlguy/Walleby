@@ -7,9 +7,11 @@ public partial class ItemHeaderViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscriber subscriber,
-    IDisposer disposer) : ObservableViewModel<string, string>(provider, factory, mediator, publisher, subscriber, disposer),
+    IDisposer disposer,
+    string? value = null) : ObservableViewModel<string, string>(provider, factory, mediator, publisher, subscriber, disposer, value),
     IItemViewModel
 {
     public void Invoke(ItemConfiguration args) => 
         args.Name = Value;
+
 }

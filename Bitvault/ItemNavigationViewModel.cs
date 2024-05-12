@@ -11,12 +11,16 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     IDisposer disposer,
     IContentTemplate template,
     NamedComponent named,
+    int id,
     string name,
     string description) :
     ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [ObservableProperty]
     private string? description = description;
+
+    [ObservableProperty]
+    private int id = id;
 
     [ObservableProperty]
     private string? name = name;

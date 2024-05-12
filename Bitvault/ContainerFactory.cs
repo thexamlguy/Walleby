@@ -6,10 +6,10 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class ContainerFactory(IContainer<ContainerConnection> connection,
+public class ContainerFactory(IValueStore<ContainerConnection> connection,
     IHostEnvironment environment,
     IServiceProvider provider) :
-    IContainer
+    IContainerFactory
 {
     public async Task<bool> Create(string name, 
         SecurityKey key)

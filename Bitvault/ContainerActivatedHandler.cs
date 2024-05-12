@@ -3,14 +3,12 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class MainViewModelHandler(IPublisher publisher,
-    IContainerHostCollection containers) :
-    INotificationHandler<Enumerate<IMainNavigationViewModel>>
+public record ContainerActivatedHandler(IPublisher publisher) : 
+    INotificationHandler<Activated<IComponentHost>>
 {
-    public async Task Handle(Enumerate<IMainNavigationViewModel> args,
-        CancellationToken cancellationToken = default)
+    public async Task Handle(Activated<IComponentHost> args, CancellationToken cancellationToken = default)
     {
-        foreach (IComponentHost container in containers)
+        if (args.Value is IComponentHost container)
         {
             if (container.Services.GetRequiredService<ContainerConfiguration>() is ContainerConfiguration configuration)
             {

@@ -17,7 +17,6 @@ public class ItemConfigurationHandler(IDbContextFactory<ContainerDbContext> dbCo
                 await Task.Run(async () =>
                 {
                     using ContainerDbContext context = dbContextFactory.CreateDbContext();
-
                     await context.AddAsync(new Data.Item { Name = configuration.Name }, cancellationToken);
                     await context.SaveChangesAsync(cancellationToken);
                 }, cancellationToken);

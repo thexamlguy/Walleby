@@ -1,9 +1,9 @@
 <UserControl
-    x:Class="Bitvault.Avalonia.AddItemCommandHeaderView"
+    x:Class="Bitvault.Avalonia.ItemCommandHeaderView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
-    x:DataType="vm:AddItemCommandHeaderViewModel">
+    x:DataType="vm:ItemCommandHeaderViewModel">
     <UserControl.Resources>
         <ResourceDictionary>
             <x:Double x:Key="ButtonWidth">40</x:Double>

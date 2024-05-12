@@ -1,6 +1,10 @@
 <UserControl
     x:Class="Bitvault.Avalonia.ItemView"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    Vault content placeholder
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:ItemViewModel">
+    <ScrollViewer Padding="12,12,12,0">
+        <ItemsControl ItemTemplate="{ReflectionBinding Template}" ItemsSource="{Binding}" />
+    </ScrollViewer>
 </UserControl>

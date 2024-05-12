@@ -1,6 +1,6 @@
 ﻿namespace Bitvault;
 
-public interface IContainer
+public interface IContainerFactory
 {
     Task<bool> Create(string name, SecurityKey key);
 }

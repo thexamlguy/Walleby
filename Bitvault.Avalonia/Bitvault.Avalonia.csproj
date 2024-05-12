@@ -43,11 +43,8 @@
 	  <Compile Update="AddItemActionView.axaml.cs">
 	    <DependentUpon>AddItemActionView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="AddItemCommandHeaderView.axaml.cs">
-	    <DependentUpon>AddItemCommandHeaderView.axaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="AddItemView.axaml.cs">
-	    <DependentUpon>AddItemView.axaml</DependentUpon>
+	  <Compile Update="ItemCommandHeaderView.axaml.cs">
+	    <DependentUpon>ItemCommandHeaderView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="ConfirmItemActionView.axaml.cs">
 	    <DependentUpon>ConfirmItemActionView.axaml</DependentUpon>

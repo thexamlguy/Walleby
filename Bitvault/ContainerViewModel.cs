@@ -14,7 +14,7 @@ public partial class ContainerViewModel(IServiceProvider provider,
     IContentTemplate template,
     NamedComponent named,
     string? filter = null) : ObservableCollectionViewModel<ItemNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
-    INotificationHandler<SecureStorage<Filter<string>>>
+    INotificationHandler<Container<Filter<string>>>
 {
     [ObservableProperty]
     private string? filter = filter;
@@ -26,17 +26,17 @@ public partial class ContainerViewModel(IServiceProvider provider,
 
     public override async Task Activated()
     {
-        await Publisher.Publish(Vault.As<Activated>());
+        await Publisher.Publish(Container.As<Activated>());
         await base.Activated();
     }
 
     public override async Task Deactivated()
     {
-        await Publisher.Publish(Vault.As<Deactivated>());
+        await Publisher.Publish(Container.As<Deactivated>());
         await base.Deactivated();
     }
 
-    public async Task Handle(SecureStorage<Filter<string>> args,
+    public async Task Handle(Container<Filter<string>> args,
         CancellationToken cancellationToken = default)
     {
         if (args.Value is Filter<string> filter)

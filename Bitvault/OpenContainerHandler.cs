@@ -5,13 +5,13 @@ namespace Bitvault;
 
 public class OpenContainerHandler(ContainerConfiguration configuration,
     ISecurityKeyFactory keyVaultFactory,
-    IContainer vaultStorage) :
-    IHandler<Open<Vault>, bool>
+    IContainerFactory vaultStorage) :
+    IHandler<Open<Container>, bool>
 {
-    public async Task<bool> Handle(Open<Vault> args,
+    public async Task<bool> Handle(Open<Container> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is Vault vault && configuration.Name is { Length: > 0 } name && vault.Password is { Length: > 0 } password)
+        if (args.Value is Container container && configuration.Name is { Length: > 0 } name && container.Password is { Length: > 0 } password)
         {
             if (configuration.Key?.Split(':') is { Length: >= 2 } keyPart)
             {
