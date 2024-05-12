@@ -3,6 +3,4 @@
 namespace Bitvault;
 
 public class ContainerComponent(IComponentBuilder builder) : Component(builder),
-    IContainerComponent
-{
-}
+    IContainerComponent;

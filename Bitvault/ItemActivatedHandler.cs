@@ -1,23 +1,29 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentAvalonia.Core;
+using Microsoft.Extensions.DependencyInjection;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
 public class ItemActivatedHandler(IServiceProvider serviceProvider,
-    IProxyService<IPublisher> proxyPublisher) :
+    ICache<Item> cache,
+    IPublisher publisher) :
     INotificationHandler<ActivatedEventArgs<Item>>
 {
     public async Task Handle(ActivatedEventArgs<Item> args,
         CancellationToken cancellationToken = default)
     {
-        IServiceScope serviceScope = serviceProvider.CreateScope();
-        IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
-
-        if (serviceFactory.Create<ItemNavigationViewModel>(2, "efesf", "Description " + 1) is ItemNavigationViewModel viewModel)
+        if (args.Value is Item item)
         {
-            // somehow, we need to get back out of the scope back to the compoment level, this currently doesnt work, and we need a better and cleaner way
-            await proxyPublisher.Proxy.Publish(new CreateEventArgs<ItemNavigationViewModel>(viewModel),
-                nameof(ContainerViewModel), cancellationToken);
+            IServiceScope serviceScope = serviceProvider.CreateScope();
+            IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
+
+            cache.Add(item);
+            int index = cache.IndexOf(item);
+
+            if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description " + 1) is ItemNavigationViewModel viewModel)
+            {
+                await publisher.Publish(Insert.As(index, viewModel), nameof(ContainerViewModel), cancellationToken);
+            }
         }
     }
 }

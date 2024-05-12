@@ -8,6 +8,7 @@ namespace Bitvault;
 
 public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbContextFactory,
     IServiceProvider serviceProvider,
+    ICache<Item> cache,
     IPublisher publisher) :
     INotificationHandler<Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration>>
 {
@@ -16,6 +17,8 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
     {
         if (args.Options is ContainerViewModelConfiguration configuration)
         {
+            cache.Clear();
+
             ExpressionStarter<ItemEntry> predicate = PredicateBuilder.New<ItemEntry>(true);
 
             if (configuration.Filter == "All")
@@ -40,7 +43,7 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
                 {
                     x.Id,
                     x.Name
-                }).ToListAsync();
+                }).OrderBy(x => x.Name).ToListAsync();
 
             }, cancellationToken);
 
@@ -51,8 +54,8 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
 
                 if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description " + 1) is ItemNavigationViewModel viewModel)
                 {
-                    await publisher.Publish(new CreateEventArgs<ItemNavigationViewModel>(viewModel),
-                        nameof(ContainerViewModel), cancellationToken);
+                    cache.Add(new Item { Id = item.Id, Name = item.Name });
+                    await publisher.Publish(Create.As(viewModel), nameof(ContainerViewModel), cancellationToken);
                 }
             }
         }

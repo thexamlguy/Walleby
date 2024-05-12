@@ -1,11 +1,13 @@
 ﻿using Bitvault.Data;
+using HarfBuzzSharp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFactory, IPublisher publisher) :
+public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFactory,
+    IPublisher publisher) :
     IHandler<CreateEventArgs<ItemConfiguration>, bool>
 {
     public async Task<bool> Handle(CreateEventArgs<ItemConfiguration> args,
@@ -27,7 +29,9 @@ public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFa
 
                 if (result is not null)
                 {
-                    await publisher.Publish(Activated.As(new Item { Id = result.Entity.Id }), cancellationToken);
+                    Item item = new() { Id = result.Entity.Id, Name = configuration.Name };
+                    await publisher.Publish(Activated.As(item), cancellationToken);
+
                     return true;
                 }
             }
