@@ -2,8 +2,6 @@
 
 namespace Bitvault;
 
-public record Container<TValue>(TValue? Value = default);
-
 public record Container
 {
     public Container(string name, string password)
@@ -17,10 +15,10 @@ public record Container
         Password = password;
     }
 
+    public Container()
+    {
 
-    public static Container<TValue> As<TValue>(TValue value) => new(value);
-
-    public static Container<TValue> As<TValue>() where TValue : new() => new(new TValue());
+    }
 
 
     [MaybeNull]

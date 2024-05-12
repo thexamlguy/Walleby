@@ -51,7 +51,7 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
 
                 if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description " + 1) is ItemNavigationViewModel viewModel)
                 {
-                    await publisher.Publish(new Create<ItemNavigationViewModel>(viewModel),
+                    await publisher.Publish(new CreateEventArgs<ItemNavigationViewModel>(viewModel),
                         nameof(ContainerViewModel), cancellationToken);
                 }
             }

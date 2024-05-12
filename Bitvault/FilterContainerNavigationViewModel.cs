@@ -6,8 +6,8 @@ namespace Bitvault;
 
 public partial class FilterContainerNavigationViewModel : ObservableViewModel,
     IContainerNavigationViewModel,
-    INotificationHandler<Container<Activated>>,
-    INotificationHandler<Container<Deactivated>>
+    INotificationHandler<ActivatedEventArgs<Container>>,
+    INotificationHandler<DeactivatedEventArgs<Container>>
 {
     [ObservableProperty]
     private bool activated;
@@ -29,14 +29,14 @@ public partial class FilterContainerNavigationViewModel : ObservableViewModel,
         Filter = filter;
     }
 
-    public Task Handle(Container<Deactivated> args,
+    public Task Handle(DeactivatedEventArgs<Container> args,
         CancellationToken cancellationToken = default) =>
             Task.FromResult(Activated = false);
 
-    public Task Handle(Container<Activated> args,
+    public Task Handle(ActivatedEventArgs<Container> args,
         CancellationToken cancellationToken = default) =>
             Task.FromResult(Activated = true);
 
     [RelayCommand]
-    public async Task Invoke() => await Publisher.Publish(Container.As(new Filter<string>(Filter)));
+    public async Task Invoke() => await Publisher.Publish(Request.As(new Filter<string>(Filter)));
 }

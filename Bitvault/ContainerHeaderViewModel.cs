@@ -3,7 +3,7 @@
 namespace Bitvault;
 
 public partial class ContainerHeaderViewModel : ObservableCollectionViewModel<string, IDisposable>,
-    INotificationHandler<Container<Filter<string>>>
+    INotificationHandler<ActivateEventArgs<Filter<string>>>
 {
     public ContainerHeaderViewModel(IServiceProvider provider, 
         IServiceFactory factory,
@@ -20,7 +20,7 @@ public partial class ContainerHeaderViewModel : ObservableCollectionViewModel<st
 
     public IContentTemplate Template { get; set; }
 
-    public Task Handle(Container<Filter<string>> args,
+    public Task Handle(ActivateEventArgs<Filter<string>> args,
         CancellationToken cancellationToken = default)
     {
         if (args.Value is Filter<string> filter)

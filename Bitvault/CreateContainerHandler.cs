@@ -7,9 +7,9 @@ namespace Bitvault;
 
 public class CreateContainerHandler(IContainerFactory componentFactory,
     IPublisher publisher) :
-    IHandler<Create<Container>, bool>
+    IHandler<CreateEventArgs<Container>, bool>
 {
-    public async Task<bool> Handle(Create<Container> args, 
+    public async Task<bool> Handle(CreateEventArgs<Container> args, 
         CancellationToken cancellationToken)
     {
         if (args.Value is Container container && container.Name is { Length: > 0 } name &&

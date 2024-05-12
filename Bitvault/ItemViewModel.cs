@@ -5,7 +5,7 @@ namespace Bitvault;
 
 public partial class ItemViewModel : 
     ObservableCollectionViewModel<IItemViewModel>,
-    INotificationHandler<Confirm<Item>>
+    INotificationHandler<ConfirmEventArgs<Item>>
 {
     [ObservableProperty]
     private int? id;
@@ -33,7 +33,7 @@ public partial class ItemViewModel :
 
     public IContentTemplate Template { get; set; }
 
-    public async Task Handle(Confirm<Item> args, CancellationToken cancellationToken = default)
+    public async Task Handle(ConfirmEventArgs<Item> args, CancellationToken cancellationToken = default)
     {
         ItemConfiguration configuration = new();
         foreach (IItemViewModel item in this)
@@ -41,6 +41,6 @@ public partial class ItemViewModel :
             item.Invoke(configuration);
         }
 
-         await Mediator.Handle<Create<ItemConfiguration>, bool>(Create.As(configuration), cancellationToken);
+         await Mediator.Handle<CreateEventArgs<ItemConfiguration>, bool>(Create.As(configuration), cancellationToken);
     }
 }

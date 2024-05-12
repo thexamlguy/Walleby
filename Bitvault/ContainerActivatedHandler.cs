@@ -1,13 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
 public class ContainerActivatedHandler(IContainerHostCollection containers,
     IPublisher publisher) : 
-    INotificationHandler<Activated<IComponentHost>>
+    INotificationHandler<ActivatedEventArgs<IComponentHost>>
 {
-    public async Task Handle(Activated<IComponentHost> args, CancellationToken cancellationToken = default)
+    public async Task Handle(ActivatedEventArgs<IComponentHost> args,
+        CancellationToken cancellationToken = default)
     {
         if (args.Value is IComponentHost container)
         {
@@ -18,15 +20,26 @@ public class ContainerActivatedHandler(IContainerHostCollection containers,
 
             if (container.Services.GetRequiredService<ContainerConfiguration>() is ContainerConfiguration configuration)
             {
-                if (container.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
+                if (container.Services.GetRequiredService<IServiceFactory>() is IServiceFactory serviceFactory)
                 {
-                    if (factory.Create<ContainerNavigationViewModel>(configuration.Name) is ContainerNavigationViewModel viewModel)
+                    if (serviceFactory.Create<ContainerNavigationViewModel>(configuration.Name) is ContainerNavigationViewModel viewModel)
                     {
-                        await publisher.Publish(new Insert<IMainNavigationViewModel>(index, viewModel),
+                        await publisher.Publish(new InsertEventArgs<IMainNavigationViewModel>(index, viewModel),
                             nameof(MainViewModel), cancellationToken);
                     }
                 }
             }
         }
+    }
+}
+
+public class ItemActivatedHandler(IServiceFactory serviceFactory,
+    IPublisher publisher) :
+    INotificationHandler<ActivatedEventArgs<ItemConfiguration>>
+{
+    public async Task Handle(ActivatedEventArgs<ItemConfiguration> args,
+        CancellationToken cancellationToken = default)
+    {
+
     }
 }

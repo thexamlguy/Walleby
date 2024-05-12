@@ -5,9 +5,9 @@ namespace Bitvault;
 
 public class MainViewModelHandler(IPublisher publisher,
     IContainerHostCollection containers) :
-    INotificationHandler<Enumerate<IMainNavigationViewModel>>
+    INotificationHandler<EnumerateEventArgs<IMainNavigationViewModel>>
 {
-    public async Task Handle(Enumerate<IMainNavigationViewModel> args,
+    public async Task Handle(EnumerateEventArgs<IMainNavigationViewModel> args,
         CancellationToken cancellationToken = default)
     {
         foreach (IComponentHost container in containers.OrderBy(x => x.GetConfiguration<ContainerConfiguration>() 
@@ -19,7 +19,7 @@ public class MainViewModelHandler(IPublisher publisher,
                 {
                     if (factory.Create<ContainerNavigationViewModel>(configuration.Name) is ContainerNavigationViewModel viewModel)
                     {
-                        await publisher.Publish(new Create<IMainNavigationViewModel>(viewModel),
+                        await publisher.Publish(new CreateEventArgs<IMainNavigationViewModel>(viewModel),
                             nameof(MainViewModel), cancellationToken);
                     }
                 }

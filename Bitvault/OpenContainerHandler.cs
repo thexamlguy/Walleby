@@ -6,9 +6,9 @@ namespace Bitvault;
 public class OpenContainerHandler(ContainerConfiguration configuration,
     ISecurityKeyFactory keyVaultFactory,
     IContainerStorageFactory vaultStorage) :
-    IHandler<Open<Container>, bool>
+    IHandler<ActivateEventArgs<Container>, bool>
 {
-    public async Task<bool> Handle(Open<Container> args,
+    public async Task<bool> Handle(ActivateEventArgs<Container> args,
         CancellationToken cancellationToken)
     {
         if (args.Value is Container container && configuration.Name is { Length: > 0 } name && container.Password is { Length: > 0 } password)
