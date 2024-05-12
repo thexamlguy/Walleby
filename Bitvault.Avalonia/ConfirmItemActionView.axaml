@@ -1,11 +1,14 @@
 <UserControl
-    x:Class="Bitvault.Avalonia.ConfirmVaultContentActionView"
+    x:Class="Bitvault.Avalonia.ConfirmItemActionView"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:ConfirmItemActionViewModel">
     <Button
         Width="{StaticResource ButtonWidth}"
         Height="{StaticResource ButtonHeight}"
         VerticalAlignment="Center"
+        Command="{Binding InvokeCommand}"
         Foreground="{DynamicResource IconForegroundBrush}"
         ToolTip.Tip="Save">
         <TextBlock

@@ -15,7 +15,7 @@ public partial class ContainerHeaderViewModel : ObservableCollectionViewModel<st
     {
         Template = template;
 
-        Add<AddItemActionViewModel>();
+        Add<AddItemActionViewModel>(scope: true);
     }
 
     public IContentTemplate Template { get; set; }

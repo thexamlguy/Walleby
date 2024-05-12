@@ -49,6 +49,9 @@
 	  <Compile Update="AddItemView.axaml.cs">
 	    <DependentUpon>AddItemView.axaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="ConfirmItemActionView.axaml.cs">
+	    <DependentUpon>ConfirmItemActionView.axaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="CreateContainerNavigationView.axaml.cs">
 	    <DependentUpon>CreateContainerNavigationView.axaml</DependentUpon>
 	  </Compile>

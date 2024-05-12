@@ -1,6 +1,6 @@
 ﻿namespace Bitvault;
 
-public class ContaienrConnection(string connection)
+public class ContainerConnection(string connection)
 {
     private readonly string connection = connection;
 

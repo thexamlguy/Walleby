@@ -8,7 +8,7 @@
     x:DataType="vm:ItemNavigationViewModel">
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
-            <NavigateAction Context="{Binding Named, StringFormat='{}{0}:Content'}" Route="AddItem" />
+            <NavigateAction Context="{Binding Named, StringFormat='{}{0}:Content'}" Route="Item" />
         </DataTriggerBehavior>
     </Interaction.Behaviors>
     <Grid ColumnDefinitions="Auto,*">

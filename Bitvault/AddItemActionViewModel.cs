@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Toolkit.Foundation;
 
 namespace Bitvault;
@@ -14,4 +15,7 @@ public partial class AddItemActionViewModel(IServiceProvider provider,
 
     [ObservableProperty]
     private string named = $"{named}";
+
+    [RelayCommand]
+    public async Task Invoke() => await Publisher.Publish(new Test());
 }

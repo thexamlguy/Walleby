@@ -4,7 +4,8 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public partial class AddItemViewModel : 
-    ObservableCollectionViewModel<IItemViewModel>
+    ObservableCollectionViewModel<IItemViewModel>,
+    INotificationHandler<Test>
 {
     [ObservableProperty]
     private string named;
@@ -35,5 +36,10 @@ public partial class AddItemViewModel :
         }
 
         return Task.FromResult(true);
+    }
+
+    public Task Handle(Test args, CancellationToken cancellationToken = default)
+    {
+        return Task.CompletedTask;
     }
 }

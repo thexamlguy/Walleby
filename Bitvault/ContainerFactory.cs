@@ -6,7 +6,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class ContainerFactory(IContainer<ContaienrConnection> connection,
+public class ContainerFactory(IContainer<ContainerConnection> connection,
     IHostEnvironment environment,
     IServiceProvider provider) :
     IContainer
@@ -14,7 +14,7 @@ public class ContainerFactory(IContainer<ContaienrConnection> connection,
     public async Task<bool> Create(string name, 
         SecurityKey key)
     {
-        connection.Set(new ContaienrConnection($"Data Source={Path.Combine(environment.ContentRootPath, name)}" +
+        connection.Set(new ContainerConnection($"Data Source={Path.Combine(environment.ContentRootPath, name)}" +
             $".vault;Mode=ReadWriteCreate;Pooling=false;Password={Convert.ToBase64String(key.DecryptedKey)}"));
 
         IDbContextFactory<VaultDbContext> dbContextFactory = provider.GetRequiredService<IDbContextFactory<VaultDbContext>>();

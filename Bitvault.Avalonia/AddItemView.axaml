@@ -6,7 +6,10 @@
     x:DataType="vm:AddItemViewModel">
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Loaded">
-            <NavigateAction Context="{Binding Named, StringFormat='{}{0}:ContentHeader'}" Route="AddVaultContentCommandHeader" />
+            <NavigateAction
+                Context="{Binding Named, StringFormat='{}{0}:ContentHeader'}"
+                Route="AddVaultContentCommandHeader"
+                Scope="self" />
         </EventTriggerBehavior>
     </Interaction.Behaviors>
     <ScrollViewer Padding="12,12,12,0">
