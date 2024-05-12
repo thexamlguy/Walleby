@@ -36,16 +36,16 @@ public partial class ContainerViewModel(IServiceProvider provider,
         await base.Deactivated();
     }
 
-        public async Task Handle(SecureStorage<Filter<string>> args,
-            CancellationToken cancellationToken = default)
+    public async Task Handle(SecureStorage<Filter<string>> args,
+        CancellationToken cancellationToken = default)
+    {
+        if (args.Value is Filter<string> filter)
         {
-            if (args.Value is Filter<string> filter)
-            {
-                Filter = filter.Value;
-                await Enumerate();
-            }
+            Filter = filter.Value;
+            await Enumerate();
         }
+    }
 
-        protected override IEnumerate PrepareEnumeration(object? key) =>
-            Enumerate<ItemNavigationViewModel>.With(new ContainerViewModelConfiguration { Filter = Filter }) with { Key = key };
+    protected override IEnumerate PrepareEnumeration(object? key) =>
+        Enumerate<ItemNavigationViewModel>.With(new ContainerViewModelConfiguration { Filter = Filter }) with { Key = key };
 }

@@ -13,8 +13,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     NamedComponent named,
     string name,
     string description) :
-    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
-    INotificationHandler<Test>
+    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [ObservableProperty]
     private string? description = description;
@@ -28,9 +27,4 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     [ObservableProperty]
     private bool selected;
     public IContentTemplate Template { get; set; } = template;
-
-    public Task Handle(Test args, CancellationToken cancellationToken = default)
-    {
-        return Task.CompletedTask;
-    }
 }

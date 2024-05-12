@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public class ContainerCollectionInitializer(IEnumerable<IConfigurationDescriptor<ContainerConfiguration>> configurations,
+public class ContainerInitializer(IEnumerable<IConfigurationDescriptor<ContainerConfiguration>> configurations,
     IComponentFactory componentFactory, 
     IContainerHostCollection vaults) : IInitializer
 {

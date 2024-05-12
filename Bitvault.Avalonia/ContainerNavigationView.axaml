@@ -33,7 +33,6 @@
                         <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Context="Main" Route="Container" />
                 <ChangePropertyAction
                     PropertyName="SelectsOnInvoked"
                     TargetObject="{Binding #NavigationViewItem}"

@@ -1,47 +1,34 @@
-﻿using Toolkit.Foundation;
+﻿using Bitvault.Data;
+using Microsoft.EntityFrameworkCore;
+using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class ContainerViewModelHandler(IServiceFactory factory,
+public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbContextFactory,
+    IServiceFactory factory,
     IPublisher publisher) :
     INotificationHandler<Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration>>
 {
     public async Task Handle(Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration> args,
         CancellationToken cancellationToken = default)
     {
-        if (args.Options?.Filter is "All")
+        var items = await Task.Run(async () =>
         {
-            for (int i = 0; i < 100; i++)
-            {
-                if (factory.Create<ItemNavigationViewModel>("Name " + i, "Description " + 1) is ItemNavigationViewModel viewModel)
-                {
-                    await publisher.Publish(new Create<ItemNavigationViewModel>(viewModel),
-                        nameof(ContainerViewModel), cancellationToken);
-                }
-            }
-        }
+            using ContainerDbContext context = dbContextFactory.CreateDbContext();
+            return await context.Set<Data.Item>().Select(x => new 
+            { 
+                x.Name,
+                x.State 
+            }).Where(x => x.State != 3).ToListAsync();
 
-        if (args.Options?.Filter is "Starred")
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                if (factory.Create<ItemNavigationViewModel>("Name " + i, "Description " + 1) is ItemNavigationViewModel viewModel)
-                {
-                    await publisher.Publish(new Create<ItemNavigationViewModel>(viewModel),
-                        nameof(ContainerViewModel), cancellationToken);
-                }
-            }
-        }
+        }, cancellationToken);
 
-        if (args.Options?.Filter is "Archive")
+        foreach (var item in items)
         {
-            for (int i = 0; i < 1000; i++)
+            if (factory.Create<ItemNavigationViewModel>(item.Name, "Description " + 1) is ItemNavigationViewModel viewModel)
             {
-                if (factory.Create<ItemNavigationViewModel>("Name " + i, "Description " + 1) is ItemNavigationViewModel viewModel)
-                {
-                    await publisher.Publish(new Create<ItemNavigationViewModel>(viewModel),
-                        nameof(ContainerViewModel), cancellationToken);
-                }
+                await publisher.Publish(new Create<ItemNavigationViewModel>(viewModel),
+                    nameof(ContainerViewModel), cancellationToken);
             }
         }
     }

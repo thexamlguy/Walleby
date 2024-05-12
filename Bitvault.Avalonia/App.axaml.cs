@@ -51,7 +51,7 @@ public partial class App : Application
                         services.TryAddSingleton<IContainer<SecurityKey>, Container<SecurityKey>>();
                         services.TryAddSingleton<IContainer<ContainerConnection>, Container<ContainerConnection>>();
 
-                        services.AddDbContextFactory<VaultDbContext>((provider, args) =>
+                        services.AddDbContextFactory<ContainerDbContext>((provider, args) =>
                         {
                             if (provider.GetRequiredService<IContainer<ContainerConnection>>() 
                                 is IContainer<ContainerConnection> connection)
@@ -87,6 +87,8 @@ public partial class App : Application
                         services.AddTemplate<DismissItemActionViewModel, DismissItemActionView>();
 
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
+
+                        services.AddHandler<ItemConfigurationHandler>();
                     });
                 })!);
 
@@ -94,7 +96,7 @@ public partial class App : Application
                 services.AddHandler<CreateContainerHandler>();
 
                 services.AddSingleton<IContainerHostCollection, ContainerHostCollection>();
-                services.AddInitializer<ContainerCollectionInitializer>();
+                services.AddInitializer<ContainerInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
                 services.AddHandler<MainViewModelHandler>();

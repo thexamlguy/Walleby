@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Bitvault.Data;
 
-public record Content
+public record Item
 {
     [Key]
     public int Id { get; set; }
@@ -12,11 +12,9 @@ public record Content
 
     public string? Description { get; set; }
 
-    public int State { get; set; }
+    public int State { get; set; } = 0;
 
     public ICollection<Tag>? Tags { get; }
-
-    public Category? Category { get; }
 
     public ICollection<Document>? Documents { get; }
 }

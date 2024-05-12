@@ -1,26 +1,23 @@
-﻿using Bitvault.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Bitvault.Data;
 
-public class VaultDbContext(DbContextOptions<VaultDbContext> options) : 
+public class ContainerDbContext(DbContextOptions<ContainerDbContext> options) : 
     DbContext(options)
 {
-    public DbSet<Category> Categories { get; set; }
-
     public DbSet<Document> Documents { get; set; }
 
-    public DbSet<Content> Items { get; set; }
+    public DbSet<Item> Items { get; set; }
 
     public DbSet<Tag> Tags { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Content>()
+        modelBuilder.Entity<Item>()
             .HasMany(x => x.Tags)
             .WithOne();
 
-        modelBuilder.Entity<Content>()
+        modelBuilder.Entity<Item>()
             .HasMany(x => x.Documents)
             .WithOne();
     }
