@@ -9,7 +9,6 @@ using Toolkit.Foundation;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using HotAvalonia;
 using Bitvault.Data;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Bitvault.Avalonia;
@@ -43,7 +42,9 @@ public partial class App : Application
                 {
                     args.AddServices(services =>
                     {
-                        services.AddTransient<IComparer<Item>>(provider => Comparer<Item>.Create((x, z) => x.Name!.CompareTo(z.Name)));
+                        services.AddTransient<IComparer<Item>>(provider => Comparer<Item>.Create((x, z) => 
+                            x.Name!.CompareTo(z.Name) == 0 ? 1 : x.Name!.CompareTo(z.Name)));
+
                         services.AddCache<Item>();
 
                         services.AddTransient<IKeyGenerator, KeyGenerator>();
