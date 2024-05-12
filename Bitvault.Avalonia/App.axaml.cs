@@ -23,7 +23,7 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         IHost? host = DefaultHostBuilder.Create()
-            .AddConfiguration<VaultConfiguration>(args => args.Name = "Personal",
+            .AddConfiguration<ContainerConfiguration>(args => args.Name = "Personal",
                    "Vault:*")
             .ConfigureServices((context, services) =>
             {
@@ -35,7 +35,7 @@ public partial class App : Application
                     services.AddTemplate<MainWindowViewModel, MainWindow>("MainWindow");
                 }
 
-                services.AddTransient<IVaultComponent> (provider => Component.Create<VaultComponent>(provider, args =>
+                services.AddTransient<IContainerComponent> (provider => Component.Create<ContainerComponent>(provider, args =>
                 {
                     args.AddServices(services =>
                     {
@@ -46,55 +46,55 @@ public partial class App : Application
                         services.AddTransient<IPasswordHasher, PasswordHasher>();
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
 
-                        services.AddTransient<IVaultKeyFactory, VaultKeyFactory>();
-                        services.AddTransient<IVaultStorage, VaultStorage>();
-                        services.TryAddSingleton<IContainer<VaultKey>, Container<VaultKey>>();
-                        services.TryAddSingleton<IContainer<VaultStorageConnection>, Container<VaultStorageConnection>>();
+                        services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
+                        services.AddTransient<IContainer, ContainerFactory>();
+                        services.TryAddSingleton<IContainer<SecurityKey>, Container<SecurityKey>>();
+                        services.TryAddSingleton<IContainer<ContaienrConnection>, Container<ContaienrConnection>>();
 
                         services.AddDbContextFactory<VaultDbContext>((provider, args) =>
                         {
-                            if (provider.GetRequiredService<IContainer<VaultStorageConnection>>() 
-                                is IContainer<VaultStorageConnection> connection)
+                            if (provider.GetRequiredService<IContainer<ContaienrConnection>>() 
+                                is IContainer<ContaienrConnection> connection)
                             {
                                 args.UseSqlite($"{connection.Value}");
                             }
                         });
 
-                        services.AddHandler<OpenVaultHandler>();
+                        services.AddHandler<OpenContainerHandler>();
 
-                        services.AddTemplate<VaultNavigationViewModel, VaultNavigationView>();
+                        services.AddTemplate<ContainerNavigationViewModel, ContainerNavigationView>();
                         services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
                         services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();
                         services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
                         services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
 
-                        services.AddTemplate<OpenVaultViewModel, OpenView>("OpenVault");
+                        services.AddTemplate<OpenContainerViewModel, OpenView>("OpenContainer");
 
-                        services.AddTemplate<VaultViewModel, VaultView>("Vault");
-                        services.AddHandler<VaultViewModelHandler>();
+                        services.AddTemplate<ContainerViewModel, ContainerView>("Container");
+                        services.AddHandler<ContainerViewModelHandler>();
 
-                        services.AddTemplate<VaultSearchHeaderViewModel, VaultSearchHeaderView>("VaultSearchHeader");
-                        services.AddTemplate<VaultHeaderViewModel, VaultHeaderView>("VaultHeader");
-                        services.AddTemplate<AddVaultContentActionViewModel, AddVaultContentActionView>();
+                        services.AddTemplate<SearchHeaderViewModel, SearchHeaderView>("SearchHeader");
+                        services.AddTemplate<ContainerHeaderViewModel, ContainerHeaderView>("ContainerHeader");
+                        services.AddTemplate<AddItemActionViewModel, AddItemActionView>();
 
-                        services.AddTemplate<VaultContentNavigationViewModel, VaultContentNavigationView>();
-                        services.AddTemplate<VaultContentViewModel, VaultContentView>("VaultContent");
+                        services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
+                        services.AddTemplate<ItemViewModel, ItemView>("AddItem");
 
-                        services.AddTemplate<AddVaultContentViewModel, AddVaultContentView>("AddVaultContent");
-                        services.AddTemplate<AddVaultContentCommandHeaderViewModel, AddVaultContentCommandHeaderView>("AddVaultContentCommandHeader");
+                        services.AddTemplate<AddItemViewModel, AddItemView>("AddAddItem");
+                        services.AddTemplate<AddItemCommandHeaderViewModel, AddItemCommandHeaderView>("AddVaultContentCommandHeader");
 
-                        services.AddTemplate<ConfirmVaultContentActionViewModel, ConfirmVaultContentActionView>();
-                        services.AddTemplate<DismissVaultContentActionViewModel, DismissVaultContentActionView>();
+                        services.AddTemplate<ConfirmItemActionViewModel, ConfirmVaultContentActionView>();
+                        services.AddTemplate<DismissItemActionViewModel, DismissItemActionView>();
 
-                        services.AddTemplate<VaultContentHeaderViewModel, VaultContentHeaderView>();
+                        services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
                     });
                 })!);
 
-                services.AddTransient<IVaultComponentFactory,  VaultComponentFactory>();
-                services.AddHandler<CreateVaultHandler>();
+                services.AddTransient<IContainerComponentFactory,  ContainerComponentFactory>();
+                services.AddHandler<CreateContainerHandler>();
 
-                services.AddSingleton<IVaultHostCollection, VaultHostCollection>();
-                services.AddInitializer<VaultCollectionInitializer>();
+                services.AddSingleton<IContainerHostCollection, ContainerHostCollection>();
+                services.AddInitializer<ContainerCollectionInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
                 services.AddHandler<MainViewModelHandler>();
@@ -104,8 +104,8 @@ public partial class App : Application
                 services.AddTemplate<ManageNavigationViewModel, ManageNavigationView>();
                 services.AddTemplate<ManageViewModel, ManageView>("Manage");
 
-                services.AddTemplate<CreateVaultNavigationViewModel, CreateVaultNavigationView>();
-                services.AddTemplate<CreateVaultViewModel, CreateVaultView>("CreateVault");
+                services.AddTemplate<CreateContainerNavigationViewModel, CreateContainerNavigationView>();
+                services.AddTemplate<CreateContainerViewModel, CreateContainerView>("CreateContainer");
             })
         .Build();
 

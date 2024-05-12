@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class MainViewModelHandler(IPublisher publisher,
-    IVaultHostCollection vaults) :
+    IContainerHostCollection vaults) :
     INotificationHandler<Enumerate<IMainNavigationViewModel>>
 {
     public async Task Handle(Enumerate<IMainNavigationViewModel> args,
@@ -12,11 +12,11 @@ public class MainViewModelHandler(IPublisher publisher,
     {
         foreach (IComponentHost vault in vaults)
         {
-            if (vault.Services.GetRequiredService<VaultConfiguration>() is VaultConfiguration configuration)
+            if (vault.Services.GetRequiredService<ContainerConfiguration>() is ContainerConfiguration configuration)
             {
                 if (vault.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
                 {
-                    if (factory.Create<VaultNavigationViewModel>(configuration.Name) is VaultNavigationViewModel viewModel)
+                    if (factory.Create<ContainerNavigationViewModel>(configuration.Name) is ContainerNavigationViewModel viewModel)
                     {
                         await publisher.Publish(new Create<IMainNavigationViewModel>(viewModel),
                             nameof(MainViewModel), cancellationToken);

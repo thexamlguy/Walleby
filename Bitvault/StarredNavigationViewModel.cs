@@ -8,4 +8,4 @@ public partial class StarredNavigationViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer,
-    string name) : FilterVaultNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, name);
+    string name) : FilterContainerNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, name);

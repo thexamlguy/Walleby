@@ -14,7 +14,7 @@
                         <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Context="Main" Route="Vault">
+                <NavigateAction Context="Main" Route="Container">
                     <NavigateAction.ParameterBindings>
                         <ParameterBinding Key="Filter" Value="{Binding Filter}" />
                     </NavigateAction.ParameterBindings>

@@ -40,14 +40,26 @@
 	  <ProjectReference Include="..\Toolkit\Toolkit.UI.Controls.Avalonia\Toolkit.UI.Controls.Avalonia.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Update="AddVaultContentActionView.axaml.cs">
-	    <DependentUpon>AddVaultContentActionView.axaml</DependentUpon>
+	  <Compile Update="AddItemActionView.axaml.cs">
+	    <DependentUpon>AddItemActionView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="AddVaultContentCommandHeaderView.axaml.cs">
-	    <DependentUpon>AddVaultContentCommandHeaderView.axaml</DependentUpon>
+	  <Compile Update="AddItemCommandHeaderView.axaml.cs">
+	    <DependentUpon>AddItemCommandHeaderView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="VaultContentHeaderView.axaml.cs">
-	    <DependentUpon>VaultContentHeaderView.axaml</DependentUpon>
+	  <Compile Update="AddItemView.axaml.cs">
+	    <DependentUpon>AddItemView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="CreateContainerNavigationView.axaml.cs">
+	    <DependentUpon>CreateContainerNavigationView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="CreateContainerView.axaml.cs">
+	    <DependentUpon>CreateContainerView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="DismissItemActionView.axaml.cs">
+	    <DependentUpon>DismissItemActionView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ItemHeaderView.axaml.cs">
+	    <DependentUpon>ItemHeaderView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="OpenView.axaml.cs">
 	    <DependentUpon>OpenView.axaml</DependentUpon>
@@ -55,11 +67,23 @@
 	  <Compile Update="ManageNavigationView.axaml.cs">
 	    <DependentUpon>ManageNavigationView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="VaultHeaderView.axaml.cs">
-	    <DependentUpon>VaultHeaderView.axaml</DependentUpon>
+	  <Compile Update="ContainerHeaderView.axaml.cs">
+	    <DependentUpon>ContainerHeaderView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="VaultNavigationView.axaml.cs">
-	    <DependentUpon>VaultNavigationView.axaml</DependentUpon>
+	  <Compile Update="ItemNavigationView.axaml.cs">
+	    <DependentUpon>ItemNavigationView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ItemView.axaml.cs">
+	    <DependentUpon>ItemView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ContainerNavigationView.axaml.cs">
+	    <DependentUpon>ContainerNavigationView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="SearchHeaderView.axaml.cs">
+	    <DependentUpon>SearchHeaderView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ContainerView.axaml.cs">
+	    <DependentUpon>ContainerView.axaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 </Project>
