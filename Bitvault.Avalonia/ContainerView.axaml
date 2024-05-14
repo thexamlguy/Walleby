@@ -22,10 +22,11 @@
             Margin="2,-1,0,0"
             ItemTemplate="{ReflectionBinding Template}"
             ItemsSource="{Binding}"
-            SelectionMode="AlwaysSelected">
+            SelectedIndex="{Binding SelectedIndex}"
+            SelectionMode="Single">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
-                    <Setter Property="IsSelected" Value="{ReflectionBinding Selected}" />
+                    <Setter Property="IsSelected" Value="{ReflectionBinding Selected, Mode=TwoWay}" />
                 </Style>
             </ListBox.Styles>
         </ListBox>
