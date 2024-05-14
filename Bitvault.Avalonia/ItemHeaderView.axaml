@@ -11,7 +11,15 @@
             DisplayName="{Binding Value}" />
         <TextBox
             MaxWidth="360"
+            IsVisible="{Binding !Immutable}"
             Text="{Binding Value}"
+            TextAlignment="Center"
             Watermark="Enter name" />
+        <SelectableTextBlock
+            MaxWidth="360"
+            IsVisible="{Binding Immutable}"
+            SelectionBrush="Red"
+            Text="{Binding Value}"
+            TextAlignment="Center" />
     </StackPanel>
 </UserControl>

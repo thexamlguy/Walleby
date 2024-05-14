@@ -38,5 +38,5 @@ public partial class FilterContainerNavigationViewModel : ObservableViewModel,
             Task.FromResult(Activated = true);
 
     [RelayCommand]
-    public async Task Invoke() => await Publisher.Publish(Request.As(new Filter<string>(Filter)));
+    public async Task Invoke() => await Publisher.Publish(Request.As(new Filter<string>(Filter)), nameof(ContainerViewModel));
 }

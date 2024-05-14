@@ -14,7 +14,9 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     int id,
     string name,
     string description) :
-    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
+    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
+    INotificationHandler<ArchiveEventArgs<Item>>,
+    IRemovable
 {
     [ObservableProperty]
     private string? description = description;
@@ -31,4 +33,11 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     [ObservableProperty]
     private bool selected;
     public IContentTemplate Template { get; set; } = template;
+
+    public Task Handle(ArchiveEventArgs<Item> args, 
+        CancellationToken cancellationToken = default)
+    {
+        Dispose();
+        return Task.CompletedTask;
+    }
 }

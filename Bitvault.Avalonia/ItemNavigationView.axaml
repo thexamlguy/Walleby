@@ -12,6 +12,7 @@
                 Scope="self" />
             <NavigateAction Context="{Binding Named, StringFormat='{}{0}:Content'}" Route="Item">
                 <NavigateAction.ParameterBindings>
+                    <ParameterBinding Key="Immutable" Value="{x:True}" />
                     <ParameterBinding Key="Id" Value="{Binding Id}" />
                     <ParameterBinding Key="Name" Value="{Binding Name}" />
                 </NavigateAction.ParameterBindings>

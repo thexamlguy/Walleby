@@ -21,7 +21,9 @@
             Grid.Column="0"
             Margin="2,-1,0,0"
             ItemTemplate="{ReflectionBinding Template}"
-            ItemsSource="{Binding}">
+            ItemsSource="{Binding}"
+            SelectedIndex="{Binding SelectedIndex}"
+            SelectionMode="AlwaysSelected">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
                     <Setter Property="IsSelected" Value="{ReflectionBinding Selected}" />

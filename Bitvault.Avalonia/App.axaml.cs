@@ -83,7 +83,7 @@ public partial class App : Application
 
                         services.AddTemplate<SearchHeaderViewModel, SearchHeaderView>("SearchHeader");
                         services.AddTemplate<ContainerHeaderViewModel, ContainerHeaderView>("ContainerHeader");
-                        services.AddTemplate<AddItemActionViewModel, AddItemActionView>();
+                        services.AddTemplate<CreateItemActionViewModel, CreateItemActionView>();
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
@@ -92,6 +92,9 @@ public partial class App : Application
 
                         services.AddTemplate<ConfirmItemActionViewModel, ConfirmItemActionView>();
                         services.AddTemplate<DismissItemActionViewModel, DismissItemActionView>();
+                        services.AddTemplate<ArchiveItemActionViewModel, ArchiveItemActionView>();
+                        services.AddTemplate<EditItemActionViewModel, EditItemActionView>();
+                        services.AddTemplate<DeleteItemActionViewModel, DeleteItemActionView>();
 
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
 

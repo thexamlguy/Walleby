@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class EditItemActionViewModel(IServiceProvider provider,
+public partial class ArchiveItemActionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
@@ -11,6 +11,5 @@ public partial class EditItemActionViewModel(IServiceProvider provider,
     IDisposer disposer) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [RelayCommand]
-    public async Task Invoke() => await Publisher.Publish(Edit.As<Item>());
+    public async Task Invoke() => await Publisher.Publish(Archive.As<Item>());
 }
-

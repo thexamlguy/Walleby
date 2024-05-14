@@ -14,6 +14,9 @@ public partial class ItemCommandHeaderViewModel : ObservableCollectionViewModel
     {
         Add<ConfirmItemActionViewModel>();
         Add<DismissItemActionViewModel>();
+        Add<EditItemActionViewModel>();
+        Add<DeleteItemActionViewModel>();
+        Add<ArchiveItemActionViewModel>();
 
         Template = template;
     }

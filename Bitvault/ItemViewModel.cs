@@ -13,6 +13,9 @@ public partial class ItemViewModel :
     [ObservableProperty]
     private string named;
 
+    [ObservableProperty]
+    private bool immutable;
+
     public ItemViewModel(IServiceProvider provider, 
         IServiceFactory factory, 
         IMediator mediator,
@@ -21,14 +24,16 @@ public partial class ItemViewModel :
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
+        bool immutable = true,
         int? id = null,
         string? name = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Named = $"{named}";
         Id = id;
+        Immutable = immutable;
 
-        Add<ItemHeaderViewModel>(name ?? "");
+        Add<ItemHeaderViewModel>(immutable, name ?? "");
     }
 
     public IContentTemplate Template { get; set; }
