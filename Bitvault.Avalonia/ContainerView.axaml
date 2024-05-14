@@ -22,7 +22,6 @@
             Margin="2,-1,0,0"
             ItemTemplate="{ReflectionBinding Template}"
             ItemsSource="{Binding}"
-            SelectedIndex="{Binding SelectedIndex}"
             SelectionMode="AlwaysSelected">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">

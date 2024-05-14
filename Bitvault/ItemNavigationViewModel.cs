@@ -13,7 +13,8 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     NamedComponent named,
     int id,
     string name,
-    string description) :
+    string description,
+    bool selected) :
     ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<ArchiveEventArgs<Item>>,
     IRemovable
@@ -31,7 +32,8 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     private string named = $"{named}";
 
     [ObservableProperty]
-    private bool selected;
+    private bool selected = selected;
+
     public IContentTemplate Template { get; set; } = template;
 
     public Task Handle(ArchiveEventArgs<Item> args, 

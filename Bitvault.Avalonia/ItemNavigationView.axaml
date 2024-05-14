@@ -3,8 +3,29 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
-    x:DataType="vm:ItemNavigationViewModel">
+    x:DataType="vm:ItemNavigationViewModel"
+    IsSelected="{Binding Selected}">
     <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Loaded">
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateAction
+                    Context="{Binding Named, StringFormat='{}{0}:ContentHeader'}"
+                    Route="ItemCommandHeader"
+                    Scope="self" />
+                <NavigateAction Context="{Binding Named, StringFormat='{}{0}:Content'}" Route="Item">
+                    <NavigateAction.ParameterBindings>
+                        <ParameterBinding Key="Immutable" Value="{x:True}" />
+                        <ParameterBinding Key="Id" Value="{Binding Id}" />
+                        <ParameterBinding Key="Name" Value="{Binding Name}" />
+                    </NavigateAction.ParameterBindings>
+                </NavigateAction>            
+            </ConditionAction>
+        </EventTriggerBehavior>
         <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
             <NavigateAction
                 Context="{Binding Named, StringFormat='{}{0}:ContentHeader'}"

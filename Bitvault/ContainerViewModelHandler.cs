@@ -47,16 +47,19 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
 
             }, cancellationToken);
 
+            bool selected = true;
             foreach (var item in items)
             {
                 IServiceScope serviceScope = serviceProvider.CreateScope();
                 IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
 
-                if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description " + 1) is ItemNavigationViewModel viewModel)
+                if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description " + 1, selected) is ItemNavigationViewModel viewModel)
                 {
                     cache.Add(new Item { Id = item.Id, Name = item.Name });
                     await publisher.Publish(Create.As(viewModel), nameof(ContainerViewModel), cancellationToken);
                 }
+
+                selected = false;
             }
         }
     }
