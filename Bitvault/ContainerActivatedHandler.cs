@@ -8,8 +8,7 @@ public class ContainerActivatedHandler(IContainerHostCollection containers,
     IPublisher publisher) : 
     INotificationHandler<ActivatedEventArgs<IComponentHost>>
 {
-    public async Task Handle(ActivatedEventArgs<IComponentHost> args,
-        CancellationToken cancellationToken = default)
+    public Task Handle(ActivatedEventArgs<IComponentHost> args)
     {
         if (args.Value is IComponentHost container)
         {
@@ -24,11 +23,13 @@ public class ContainerActivatedHandler(IContainerHostCollection containers,
                 {
                     if (serviceFactory.Create<ContainerNavigationViewModel>(configuration.Name) is ContainerNavigationViewModel viewModel)
                     {
-                        await publisher.Publish(new InsertEventArgs<IMainNavigationViewModel>(index, viewModel),
-                            nameof(MainViewModel), cancellationToken);
+                        publisher.Publish(new InsertEventArgs<IMainNavigationViewModel>(index, viewModel),
+                            nameof(MainViewModel));
                     }
                 }
             }
         }
+
+        return Task.CompletedTask;
     }
 }

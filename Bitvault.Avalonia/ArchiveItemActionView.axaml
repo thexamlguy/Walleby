@@ -10,6 +10,7 @@
         VerticalAlignment="Center"
         Command="{Binding InvokeCommand}"
         Foreground="{DynamicResource IconForegroundBrush}"
+        HotKey="Delete"
         ToolTip.Tip="Archive">
         <TextBlock
             VerticalAlignment="Center"

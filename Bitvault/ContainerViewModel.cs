@@ -26,24 +26,25 @@ public partial class ContainerViewModel(IServiceProvider provider,
 
     public override async Task OnActivated()
     {
-        await Publisher.Publish(Activated.As<Container>());
+        Publisher.Publish(Activated.As<Container>());
         await base.OnActivated();
     }
 
     public override async Task OnDeactivated()
     {
-        await Publisher.Publish(Deactivated.As<Container>());
+        Publisher.Publish(Deactivated.As<Container>());
         await base.OnDeactivated();
     }
 
-    public async Task Handle(RequestEventArgs<Filter<string>> args,
-        CancellationToken cancellationToken = default)
+    public Task Handle(RequestEventArgs<Filter<string>> args)
     {
         if (args.Value is Filter<string> filter)
         {
             Filter = filter.Value;
-            await Enumerate();
+            Enumerate();
         }
+
+        return Task.CompletedTask;
     }
 
     protected override IEnumerate PrepareEnumeration(object? key) =>

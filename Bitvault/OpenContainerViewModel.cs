@@ -22,7 +22,7 @@ public partial class OpenContainerViewModel(IServiceProvider provider,
         {
             if (await Mediator.Handle<ActivateEventArgs<Container>, bool>(Activate.As(new Container(Password))))
             {
-                await Publisher.Publish(Opened.As<Container>());
+                Publisher.Publish(Opened.As<Container>());
             }
         }
     }

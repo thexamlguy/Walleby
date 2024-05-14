@@ -33,7 +33,7 @@ public class CreateContainerHandler(IContainerFactory componentFactory,
                         configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");
                         host.Start();
 
-                        await publisher.Publish(Activated.As(host), cancellationToken);
+                        publisher.Publish(Activated.As(host), cancellationToken);
                         return true;
                     }
                 }

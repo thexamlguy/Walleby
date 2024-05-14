@@ -38,7 +38,7 @@ public partial class ItemViewModel :
 
     public IContentTemplate Template { get; set; }
 
-    public async Task Handle(ConfirmEventArgs<Item> args, CancellationToken cancellationToken = default)
+    public async Task Handle(ConfirmEventArgs<Item> args)
     {
         ItemConfiguration configuration = new();
         foreach (IItemViewModel item in this)
@@ -46,6 +46,6 @@ public partial class ItemViewModel :
             item.Invoke(configuration);
         }
 
-         await Mediator.Handle<CreateEventArgs<ItemConfiguration>, bool>(Create.As(configuration), cancellationToken);
+         await Mediator.Handle<CreateEventArgs<ItemConfiguration>, bool>(Create.As(configuration));
     }
 }

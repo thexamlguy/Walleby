@@ -12,5 +12,5 @@ public partial class ConfirmItemActionViewModel(IServiceProvider provider,
 {
 
     [RelayCommand]
-    public async Task Invoke() => await Publisher.Publish(Confirm.As<Item>());
+    public void Invoke() => Publisher.Publish(Confirm.As<Item>());
 }

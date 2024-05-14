@@ -41,8 +41,7 @@ public partial class ContainerNavigationViewModel :
 
     public IContentTemplate Template { get; set; }
 
-    public Task Handle(OpenedEventArgs<Container> args,
-        CancellationToken cancellationToken = default)
+    public Task Handle(OpenedEventArgs<Container> args)
     {
         Add<AllNavigationViewModel>("All");
         Add<StarredNavigationViewModel>("Starred");
@@ -53,8 +52,7 @@ public partial class ContainerNavigationViewModel :
         return Task.CompletedTask;
     }
 
-    public Task Handle(ClosedEventArgs<Container> args,
-        CancellationToken cancellationToken = default)
+    public Task Handle(ClosedEventArgs<Container> args)
     {
         Opened = true;
         Clear();
@@ -62,11 +60,9 @@ public partial class ContainerNavigationViewModel :
         return Task.CompletedTask;
     }
 
-    public Task Handle(DeactivatedEventArgs<Container> args,
-        CancellationToken cancellationToken = default) =>
+    public Task Handle(DeactivatedEventArgs<Container> args) =>
             Task.FromResult(Activated = false);
 
-    public Task Handle(ActivatedEventArgs<Container> args,
-        CancellationToken cancellationToken = default) =>
+    public Task Handle(ActivatedEventArgs<Container> args) =>
             Task.FromResult(Activated = true);
 }

@@ -36,8 +36,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     public IContentTemplate Template { get; set; } = template;
 
-    public Task Handle(ArchiveEventArgs<Item> args, 
-        CancellationToken cancellationToken = default)
+    public Task Handle(ArchiveEventArgs<Item> args)
     {
         Dispose();
         return Task.CompletedTask;

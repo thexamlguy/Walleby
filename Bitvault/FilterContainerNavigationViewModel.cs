@@ -29,14 +29,12 @@ public partial class FilterContainerNavigationViewModel : ObservableViewModel,
         Filter = filter;
     }
 
-    public Task Handle(DeactivatedEventArgs<Container> args,
-        CancellationToken cancellationToken = default) =>
+    public Task Handle(DeactivatedEventArgs<Container> args) =>
             Task.FromResult(Activated = false);
 
-    public Task Handle(ActivatedEventArgs<Container> args,
-        CancellationToken cancellationToken = default) =>
+    public Task Handle(ActivatedEventArgs<Container> args) =>
             Task.FromResult(Activated = true);
 
     [RelayCommand]
-    public async Task Invoke() => await Publisher.Publish(Request.As(new Filter<string>(Filter)), nameof(ContainerViewModel));
+    public void Invoke() => Publisher.Publish(Request.As(new Filter<string>(Filter)), nameof(ContainerViewModel));
 }

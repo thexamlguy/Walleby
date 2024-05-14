@@ -11,6 +11,6 @@ public partial class EditItemActionViewModel(IServiceProvider provider,
     IDisposer disposer) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [RelayCommand]
-    public async Task Invoke() => await Publisher.Publish(Edit.As<Item>());
+    public void Invoke() => Publisher.Publish(Edit.As<Item>());
 }
 

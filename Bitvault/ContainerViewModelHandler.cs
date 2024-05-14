@@ -12,8 +12,7 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
     IPublisher publisher) :
     INotificationHandler<Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration>>
 {
-    public async Task Handle(Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration> args,
-        CancellationToken cancellationToken = default)
+    public async Task Handle(Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration> args)
     {
         if (args.Options is ContainerViewModelConfiguration configuration)
         {
@@ -36,7 +35,7 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
                 predicate = predicate.And(x => x.State == 3);
             }
 
-            var items = await Task.Run(async () =>
+            var results = await Task.Run(async () =>
             {
                 using ContainerDbContext context = dbContextFactory.CreateDbContext();
                 return await context.Set<ItemEntry>().Where(predicate).Select(x => new
@@ -44,19 +43,21 @@ public class ContainerViewModelHandler(IDbContextFactory<ContainerDbContext> dbC
                     x.Id,
                     x.Name
                 }).OrderBy(x => x.Name).ToListAsync();
-
-            }, cancellationToken);
+            });
 
             bool selected = true;
-            foreach (var item in items)
+            foreach (var result in results)
             {
                 IServiceScope serviceScope = serviceProvider.CreateScope();
                 IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
+                IValueStore<Item> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item>>();
 
-                if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description " + 1, selected) is ItemNavigationViewModel viewModel)
+                if (serviceFactory.Create<ItemNavigationViewModel>(result.Id, result.Name, "Description " + 1, selected) is ItemNavigationViewModel viewModel)
                 {
-                    cache.Add(new Item { Id = item.Id, Name = item.Name });
-                    await publisher.Publish(Create.As(viewModel), nameof(ContainerViewModel), cancellationToken);
+                    Item item = new() { Id = result.Id, Name = result.Name };
+                    valueStore.Set(item);
+
+                    publisher.Publish(Create.As(viewModel), nameof(ContainerViewModel));
                 }
 
                 selected = false;

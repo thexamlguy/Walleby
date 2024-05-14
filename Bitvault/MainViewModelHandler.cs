@@ -7,8 +7,7 @@ public class MainViewModelHandler(IPublisher publisher,
     IContainerHostCollection containers) :
     INotificationHandler<EnumerateEventArgs<IMainNavigationViewModel>>
 {
-    public async Task Handle(EnumerateEventArgs<IMainNavigationViewModel> args,
-        CancellationToken cancellationToken = default)
+    public Task Handle(EnumerateEventArgs<IMainNavigationViewModel> args)
     {
         foreach (IComponentHost container in containers.OrderBy(x => x.GetConfiguration<ContainerConfiguration>() 
             is ContainerConfiguration configuration ? configuration.Name : null))
@@ -19,11 +18,13 @@ public class MainViewModelHandler(IPublisher publisher,
                 {
                     if (factory.Create<ContainerNavigationViewModel>(configuration.Name) is ContainerNavigationViewModel viewModel)
                     {
-                        await publisher.Publish(new CreateEventArgs<IMainNavigationViewModel>(viewModel),
-                            nameof(MainViewModel), cancellationToken);
+                        publisher.Publish(new CreateEventArgs<IMainNavigationViewModel>(viewModel),
+                            nameof(MainViewModel));
                     }
                 }
             }
         }
+
+        return Task.CompletedTask;
     }
 }

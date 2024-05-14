@@ -11,5 +11,5 @@ public partial class ArchiveItemActionViewModel(IServiceProvider provider,
     IDisposer disposer) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [RelayCommand]
-    public async Task Invoke() => await Publisher.Publish(Archive.As<Item>());
+    public void Invoke() => Publisher.Publish(Archive.As<Item>());
 }

@@ -20,8 +20,7 @@ public partial class ContainerHeaderViewModel : ObservableCollectionViewModel<st
 
     public IContentTemplate Template { get; set; }
 
-    public Task Handle(RequestEventArgs<Filter<string>> args,
-        CancellationToken cancellationToken = default)
+    public Task Handle(RequestEventArgs<Filter<string>> args)
     {
         if (args.Value is Filter<string> filter)
         {

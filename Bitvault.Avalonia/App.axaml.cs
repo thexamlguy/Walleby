@@ -98,8 +98,12 @@ public partial class App : Application
 
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
 
+
                         services.AddHandler<CreateItemHandler>(ServiceLifetime.Singleton);
                         services.AddHandler<ItemActivatedHandler>();
+
+                        services.AddScoped<IValueStore<Item>, ValueStore<Item>>();
+                        services.AddHandler<ArchiveItemHandler>(ServiceLifetime.Scoped);
                     });
                 })!);
 

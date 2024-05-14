@@ -9,8 +9,7 @@ public class ItemActivatedHandler(IServiceProvider serviceProvider,
     IPublisher publisher) :
     INotificationHandler<ActivatedEventArgs<Item>>
 {
-    public async Task Handle(ActivatedEventArgs<Item> args,
-        CancellationToken cancellationToken = default)
+    public Task Handle(ActivatedEventArgs<Item> args)
     {
         if (args.Value is Item item)
         {
@@ -20,10 +19,12 @@ public class ItemActivatedHandler(IServiceProvider serviceProvider,
             cache.Add(item);
             int index = cache.IndexOf(item);
 
-            if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description " + 1) is ItemNavigationViewModel viewModel)
+            if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description " + 1, true) is ItemNavigationViewModel viewModel)
             {
-                await publisher.Publish(Insert.As(index, viewModel), nameof(ContainerViewModel), cancellationToken);
+                publisher.Publish(Insert.As(index, viewModel), nameof(ContainerViewModel));
             }
         }
+
+        return Task.CompletedTask;
     }
 }
