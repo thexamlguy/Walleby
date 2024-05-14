@@ -6,6 +6,6 @@ public partial class AllNavigationViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
-    ISubscriber subscriber,
+    ISubscription subscriber,
     IDisposer disposer,
     string filter) : FilterContainerNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, filter);

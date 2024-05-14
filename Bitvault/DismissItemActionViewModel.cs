@@ -6,5 +6,5 @@ public partial class DismissItemActionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
-    ISubscriber subscriber,
+    ISubscription subscriber,
     IDisposer disposer) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer);

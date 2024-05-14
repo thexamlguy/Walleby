@@ -30,7 +30,7 @@ public partial class ContainerNavigationViewModel :
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscriber subscriber,
+        ISubscription subscriber,
         IDisposer disposer,
         IContentTemplate template,
         string name) : base(provider, factory, mediator, publisher, subscriber, disposer)

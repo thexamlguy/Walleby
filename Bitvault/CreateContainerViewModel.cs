@@ -8,7 +8,7 @@ public partial class CreateContainerViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IPublisher publisher,
     IMediator mediator,
-    ISubscriber subscriber,
+    ISubscription subscriber,
     IDisposer disposer) :
     ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
     IPrimaryConfirmation

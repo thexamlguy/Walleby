@@ -22,7 +22,7 @@ public partial class FilterContainerNavigationViewModel : ObservableViewModel,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscriber subscriber,
+        ISubscription subscriber,
         IDisposer disposer,
         string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {

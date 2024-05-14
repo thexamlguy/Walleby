@@ -9,7 +9,7 @@ public partial class ContainerHeaderViewModel : ObservableCollectionViewModel<st
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscriber subscriber,
+        ISubscription subscriber,
         IDisposer disposer,
         IContentTemplate template) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {

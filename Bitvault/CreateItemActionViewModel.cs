@@ -7,7 +7,7 @@ public partial class CreateItemActionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
-    ISubscriber subscriber,
+    ISubscription subscriber,
     IDisposer disposer,
     NamedComponent named) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
 {

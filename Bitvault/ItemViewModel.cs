@@ -20,7 +20,7 @@ public partial class ItemViewModel :
         IServiceFactory factory, 
         IMediator mediator,
         IPublisher publisher, 
-        ISubscriber subscriber, 
+        ISubscription subscriber, 
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
@@ -45,7 +45,7 @@ public partial class ItemViewModel :
         {
             item.Invoke(configuration);
         }
-
-         await Mediator.Handle<CreateEventArgs<ItemConfiguration>, bool>(Create.As(configuration));
+        
+        await Mediator.Handle<CreateEventArgs<ItemConfiguration>, bool>(Create.As(configuration));
     }
 }
