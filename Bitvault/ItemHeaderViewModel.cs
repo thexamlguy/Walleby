@@ -11,10 +11,17 @@ public partial class ItemHeaderViewModel(IServiceProvider provider,
     IDisposer disposer,
     bool immutable,
     string? value = null) : ObservableViewModel<string, string>(provider, factory, mediator, publisher, subscriber, disposer, value),
-    IItemViewModel
+    IHandler<ConfirmEventArgs<Item>, bool>
+
 {
     [ObservableProperty]
     private bool immutable = immutable;
+
+    public Task<bool> Handle(ConfirmEventArgs<Item> args, 
+        CancellationToken cancellationToken)
+    {
+        return Task.FromResult(true);
+    }
 
     public void Invoke(ItemConfiguration args) => 
         args.Name = Value;

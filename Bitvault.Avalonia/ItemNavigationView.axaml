@@ -6,7 +6,7 @@
     x:DataType="vm:ItemNavigationViewModel"
     IsSelected="{Binding Selected}">
     <Interaction.Behaviors>
-        <EventTriggerBehavior EventName="Loaded">
+        <!--<EventTriggerBehavior EventName="Loaded">
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
@@ -25,7 +25,7 @@
                     </NavigateAction.ParameterBindings>
                 </NavigateAction>            
             </ConditionAction>
-        </EventTriggerBehavior>
+        </EventTriggerBehavior>-->
         <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
             <NavigateAction
                 Context="{Binding Named, StringFormat='{}{0}:ContentHeader'}"

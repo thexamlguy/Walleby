@@ -98,12 +98,13 @@ public partial class App : Application
 
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
 
+                        services.AddScoped<IValueStore<Item>, ValueStore<Item>>();
 
-                        services.AddHandler<CreateItemHandler>(ServiceLifetime.Singleton);
+                        services.AddHandler<ConfirmItemHandler>(ServiceLifetime.Singleton);
+                        services.AddHandler<ArchiveItemHandler>(ServiceLifetime.Scoped);
+
                         services.AddHandler<ItemActivatedHandler>();
 
-                        services.AddScoped<IValueStore<Item>, ValueStore<Item>>();
-                        services.AddHandler<ArchiveItemHandler>(ServiceLifetime.Scoped);
                     });
                 })!);
 

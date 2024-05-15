@@ -4,8 +4,7 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public partial class ItemViewModel : 
-    ObservableCollectionViewModel<IItemViewModel>,
-    INotificationHandler<ConfirmEventArgs<Item>>
+    ObservableCollectionViewModel<IDisposable>
 {
     [ObservableProperty]
     private int? id;
@@ -37,15 +36,4 @@ public partial class ItemViewModel :
     }
 
     public IContentTemplate Template { get; set; }
-
-    public async Task Handle(ConfirmEventArgs<Item> args)
-    {
-        ItemConfiguration configuration = new();
-        foreach (IItemViewModel item in this)
-        {
-            item.Invoke(configuration);
-        }
-        
-        await Mediator.Handle<CreateEventArgs<ItemConfiguration>, bool>(Create.As(configuration));
-    }
 }
