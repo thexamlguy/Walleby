@@ -100,7 +100,7 @@ public partial class App : Application
 
                         services.AddScoped<IValueStore<Item>, ValueStore<Item>>();
 
-                        services.AddHandler<ConfirmItemHandler>(ServiceLifetime.Singleton);
+                        services.AddHandler<ConfirmItemHandler>(ServiceLifetime.Scoped);
                         services.AddHandler<ArchiveItemHandler>(ServiceLifetime.Scoped);
 
                         services.AddHandler<ItemActivatedHandler>();

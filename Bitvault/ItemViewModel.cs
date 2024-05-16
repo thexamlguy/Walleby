@@ -10,9 +10,6 @@ public partial class ItemViewModel :
     private int? id;
 
     [ObservableProperty]
-    private string named;
-
-    [ObservableProperty]
     private bool immutable;
 
     public ItemViewModel(IServiceProvider provider, 
@@ -22,13 +19,12 @@ public partial class ItemViewModel :
         ISubscription subscriber, 
         IDisposer disposer,
         IContentTemplate template,
-        NamedComponent named,
+        IValueStore<Item> foom,
         bool immutable = true,
         int? id = null,
         string? name = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
-        Named = $"{named}";
         Id = id;
         Immutable = immutable;
 

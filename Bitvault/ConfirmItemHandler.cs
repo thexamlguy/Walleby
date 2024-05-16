@@ -46,6 +46,6 @@ public class ConfirmItemHandler(IMediator mediator,
 
     public async Task Handle(ConfirmEventArgs<Item> args)
     {
-        await mediator.Handle<ConfirmEventArgs<Item>, bool>(args);
+        ItemHeaderConfiguration? headerConfiguration = await mediator.Handle<ConfirmEventArgs<Item>, ItemHeaderConfiguration>(args);
     }
 }
