@@ -8,7 +8,7 @@
         <Button MinWidth="132" Content="Create vault">
             <Interaction.Behaviors>
                 <EventTriggerBehavior EventName="Click">
-                    <NavigateAction Route="CreateContainer" />
+                    <NavigateAction Region="self" Route="CreateContainer" />
                 </EventTriggerBehavior>
             </Interaction.Behaviors>
         </Button>

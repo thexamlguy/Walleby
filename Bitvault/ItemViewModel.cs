@@ -19,7 +19,6 @@ public partial class ItemViewModel :
         ISubscription subscriber, 
         IDisposer disposer,
         IContentTemplate template,
-        IValueStore<Item> foom,
         bool immutable = true,
         int? id = null,
         string? name = null) : base(provider, factory, mediator, publisher, subscriber, disposer)

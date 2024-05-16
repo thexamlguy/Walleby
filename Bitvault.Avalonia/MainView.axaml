@@ -16,7 +16,7 @@
             <Interaction.Behaviors>
                 <EventTriggerBehavior EventName="Loaded">
                     <NavigateRegionAction Name="Main">
-                        <NavigateAction Context="Main" Route="Container" />
+                        <NavigateAction Region="Main" Route="Container" />
                     </NavigateRegionAction>
                 </EventTriggerBehavior>
             </Interaction.Behaviors>

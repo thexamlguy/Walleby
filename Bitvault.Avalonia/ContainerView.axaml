@@ -11,9 +11,9 @@
             Height="40"
             Margin="4,4,0,0">
             <Interaction.Behaviors>
-                <EventTriggerBehavior EventName="Loaded">
-                    <NavigateAction Context="{Binding $self}" Route="ContainerHeader" />
-                </EventTriggerBehavior>
+                <AttachedBehaviour>
+                    <NavigateAction Region="{Binding $self}" Route="ContainerHeader" />
+                </AttachedBehaviour>
             </Interaction.Behaviors>
         </ContentControl>
         <ListBox

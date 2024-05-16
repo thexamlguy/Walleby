@@ -19,7 +19,7 @@
                         <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Context="Main" Route="OpenContainer" />
+                <NavigateAction Region="Main" Route="OpenContainer" />
                 <ChangePropertyAction
                     PropertyName="SelectsOnInvoked"
                     TargetObject="{Binding #NavigationViewItem}"
@@ -47,7 +47,7 @@
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Context="Main" Route="OpenContainer" />
+                <NavigateAction Region="Main" Route="OpenContainer" />
             </ConditionAction>
             <ConditionAction>
                 <ConditionAction.Condition>
@@ -56,7 +56,7 @@
                         <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Context="Main" Route="Container" />
+                <NavigateAction Region="Main" Route="Container" />
                 <InvokeNavigationViewItemAction />
             </ConditionAction>
         </AttachedEventTriggerBehaviour>

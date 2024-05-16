@@ -5,7 +5,7 @@
     Content="Manage Vaults">
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Tapped">
-            <NavigateAction Context="Main" Route="Manage" />
+            <NavigateAction Region="Main" Route="Manage" />
         </EventTriggerBehavior>
     </Interaction.Behaviors>
 </NavigationViewItem>

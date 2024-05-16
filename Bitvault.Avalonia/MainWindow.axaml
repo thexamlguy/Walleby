@@ -11,7 +11,7 @@
         <Interaction.Behaviors>
             <AttachedBehaviour>
                 <NavigateRegionAction Name="Window">
-                    <NavigateAction Context="Window" Route="Main" />
+                    <NavigateAction Region="Window" Route="Main" />
                 </NavigateRegionAction>
             </AttachedBehaviour>
         </Interaction.Behaviors>

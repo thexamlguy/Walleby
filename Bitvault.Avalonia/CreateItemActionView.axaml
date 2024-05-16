@@ -16,11 +16,11 @@
         <Interaction.Behaviors>
             <EventTriggerBehavior EventName="Click">
                 <NavigateAction
-                    Context="{Binding Named, StringFormat='{}{0}:ContentHeader'}"
+                    Region="{Binding Named, StringFormat='{}{0}:ContentHeader'}"
                     Route="ItemCommandHeader"
                     Scope="self" />
                 <NavigateAction
-                    Context="{Binding Named, StringFormat='{}{0}:Content'}"
+                    Region="{Binding Named, StringFormat='{}{0}:Content'}"
                     Route="Item"
                     Scope="self">
                     <NavigateAction.ParameterBindings>
