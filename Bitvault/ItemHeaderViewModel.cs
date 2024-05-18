@@ -10,7 +10,7 @@ public partial class ItemHeaderViewModel(IServiceProvider provider,
     ISubscription subscriber,
     IDisposer disposer,
     bool immutable,
-    string? value = null) : ObservableViewModel<string, string>(provider, factory, mediator, publisher, subscriber, disposer, value),
+    string? value = null) : Observable<string, string>(provider, factory, mediator, publisher, subscriber, disposer, value),
     IHandler<ValidationEventArgs<Item>, bool>,
     IHandler<ConfirmEventArgs<Item>, ItemHeaderConfiguration>
 {

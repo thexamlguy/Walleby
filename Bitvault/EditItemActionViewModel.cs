@@ -8,9 +8,8 @@ public partial class EditItemActionViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscription subscriber,
-    IDisposer disposer) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
+    IDisposer disposer) : Observable(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [RelayCommand]
     public void Invoke() => Publisher.Publish(Edit.As<Item>());
 }
-

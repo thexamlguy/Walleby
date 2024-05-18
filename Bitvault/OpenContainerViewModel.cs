@@ -10,7 +10,7 @@ public partial class OpenContainerViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer) :
-    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
+    Observable(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [ObservableProperty]
     private string? password;
@@ -20,9 +20,9 @@ public partial class OpenContainerViewModel(IServiceProvider provider,
     {
         if (Password is { Length: > 0 })
         {
-            if (await Mediator.Handle<ActivateEventArgs<Container>, bool>(Activate.As(new Container(Password))))
+            if (await Mediator.Handle<ActivateEventArgs<ContainerToken>, bool>(Activate.As(new ContainerToken(Password))))
             {
-                Publisher.Publish(Opened.As<Container>());
+                Publisher.Publish(Opened.As<ContainerToken>());
             }
         }
     }

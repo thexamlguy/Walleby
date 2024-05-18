@@ -2,7 +2,8 @@
 
 namespace Bitvault;
 
-public record ContainerConfiguration : ComponentConfiguration
+public record ContainerConfiguration :
+    ComponentConfiguration
 {
     public string? Name { get; set; }
 

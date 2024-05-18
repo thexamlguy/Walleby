@@ -8,5 +8,5 @@ public partial class ManageNavigationViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer) :
-    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
+    Observable(provider, factory, mediator, publisher, subscriber, disposer),
     IMainNavigationViewModel;

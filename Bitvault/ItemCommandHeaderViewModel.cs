@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public partial class ItemCommandHeaderViewModel : ObservableCollectionViewModel
+public partial class ItemCommandHeaderViewModel : ObservableCollection
 {
     public ItemCommandHeaderViewModel(IServiceProvider provider, 
         IServiceFactory factory,

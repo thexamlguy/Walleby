@@ -66,7 +66,9 @@ public partial class App : Application
                             {
                                 args.UseSqlite($"{connection.Value}");
                             }
-                        });
+                        }); 
+
+                        services.AddHandler<QueryContainerHandler>(ServiceLifetime.Singleton);
 
                         services.AddHandler<OpenContainerHandler>();
 
@@ -78,10 +80,12 @@ public partial class App : Application
 
                         services.AddTemplate<OpenContainerViewModel, OpenView>("OpenContainer");
 
-                        services.AddTemplate<ContainerViewModel, ContainerView>("Container");
-                        services.AddHandler<ContainerViewModelHandler>();
+                        services.AddScoped<ContainerViewModelConfiguration>();
 
-                        services.AddTemplate<SearchHeaderViewModel, SearchHeaderView>("SearchHeader");
+                        services.AddTemplate<ContainerViewModel, ContainerView>("Container");
+                        services.AddHandler<EnumerateContainerViewModelHandler>();
+
+                        services.AddTemplate<SearchContainerActionViewModel, SearchContainerActionView>();
                         services.AddTemplate<ContainerHeaderViewModel, ContainerHeaderView>("ContainerHeader");
                         services.AddTemplate<CreateItemActionViewModel, CreateItemActionView>();
 

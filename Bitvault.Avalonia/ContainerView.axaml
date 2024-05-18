@@ -5,17 +5,20 @@
     xmlns:vm="using:Bitvault"
     x:DataType="vm:ContainerViewModel">
     <Grid ColumnDefinitions="320,Auto,*" RowDefinitions="Auto,*">
-        <ContentControl
+        <Grid
+            x:Name="Title"
             Grid.Row="0"
-            Grid.Column="0"
-            Height="40"
-            Margin="4,4,0,0">
-            <Interaction.Behaviors>
-                <AttachedBehaviour>
-                    <NavigateAction Region="{Binding $self}" Route="ContainerHeader" />
-                </AttachedBehaviour>
-            </Interaction.Behaviors>
-        </ContentControl>
+            Grid.ColumnSpan="3"
+            Height="44"
+            ColumnDefinitions="*, Auto">
+            <ContentControl Grid.Column="0" VerticalAlignment="Center">
+                <Interaction.Behaviors>
+                    <AttachedBehaviour>
+                        <NavigateAction Region="{Binding $self}" Route="ContainerHeader" />
+                    </AttachedBehaviour>
+                </Interaction.Behaviors>
+            </ContentControl>
+        </Grid>
         <ListBox
             Grid.Row="1"
             Grid.Column="0"

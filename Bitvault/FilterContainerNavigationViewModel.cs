@@ -4,10 +4,10 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class FilterContainerNavigationViewModel : ObservableViewModel,
+public partial class FilterContainerNavigationViewModel : Observable,
     IContainerNavigationViewModel,
-    INotificationHandler<ActivatedEventArgs<Container>>,
-    INotificationHandler<DeactivatedEventArgs<Container>>
+    INotificationHandler<ActivatedEventArgs<ContainerToken>>,
+    INotificationHandler<DeactivatedEventArgs<ContainerToken>>
 {
     [ObservableProperty]
     private bool activated;
@@ -29,12 +29,13 @@ public partial class FilterContainerNavigationViewModel : ObservableViewModel,
         Filter = filter;
     }
 
-    public Task Handle(DeactivatedEventArgs<Container> args) =>
-            Task.FromResult(Activated = false);
+    public Task Handle(DeactivatedEventArgs<ContainerToken> args) =>
+        Task.FromResult(Activated = false);
 
-    public Task Handle(ActivatedEventArgs<Container> args) =>
-            Task.FromResult(Activated = true);
+    public Task Handle(ActivatedEventArgs<ContainerToken> args) =>
+        Task.FromResult(Activated = true);
 
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Request.As(new Filter<string>(Filter)), nameof(ContainerViewModel));
+    public void Invoke() => Publisher.Publish(Notify.As(new Filter(Filter)), 
+        nameof(ContainerViewModel));
 }

@@ -1,8 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
+public class ItemCommandCollection : ObservableCollection
+{
+    public void Add<TItem>(IDisposable diposer)
+    {
+
+    }
+}
 
 [Enumerate(nameof(ContainerViewModel))]
 public partial class ContainerViewModel(IServiceProvider provider,
@@ -13,12 +22,10 @@ public partial class ContainerViewModel(IServiceProvider provider,
     IDisposer disposer,
     IContentTemplate template,
     NamedComponent named,
-    string? filter = null) : ObservableCollectionViewModel<ItemNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
-    INotificationHandler<RequestEventArgs<Filter<string>>>
+    ContainerViewModelConfiguration configuration) : Toolkit.Foundation.ObservableCollection<ItemNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
+    INotificationHandler<NotifyEventArgs<Filter>>,
+    INotificationHandler<NotifyEventArgs<Search>>
 {
-    [ObservableProperty]
-    private string? filter = filter;
-
     [ObservableProperty]
     private string named = $"{named}";
 
@@ -26,21 +33,31 @@ public partial class ContainerViewModel(IServiceProvider provider,
 
     public override async Task OnActivated()
     {
-        Publisher.Publish(Activated.As<Container>());
+        Publisher.Publish(Activated.As<ContainerToken>());
         await base.OnActivated();
     }
 
     public override async Task OnDeactivated()
     {
-        Publisher.Publish(Deactivated.As<Container>());
+        Publisher.Publish(Deactivated.As<ContainerToken>());
         await base.OnDeactivated();
     }
 
-    public Task Handle(RequestEventArgs<Filter<string>> args)
+    public Task Handle(NotifyEventArgs<Filter> args)
     {
-        if (args.Value is Filter<string> filter)
+        if (args.Value is Filter filter)
         {
-            Filter = filter.Value;
+            configuration = configuration with { Filter = filter.Value };
+            Enumerate();
+        }
+
+        return Task.CompletedTask;
+    }
+    public Task Handle(NotifyEventArgs<Search> args)
+    {
+        if (args.Value is Search search)
+        {
+            configuration = configuration with { Query = search.Value };
             Enumerate();
         }
 
@@ -48,5 +65,5 @@ public partial class ContainerViewModel(IServiceProvider provider,
     }
 
     protected override IEnumerate PrepareEnumeration(object? key) =>
-        EnumerateEventArgs<ItemNavigationViewModel>.With(new ContainerViewModelConfiguration { Filter = Filter }) with { Key = key };
+        EnumerateEventArgs<ItemNavigationViewModel>.With(configuration) with { Key = key };
 }

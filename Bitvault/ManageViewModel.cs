@@ -3,7 +3,7 @@
 namespace Bitvault;
 
 public partial class ManageViewModel :
-    ObservableCollectionViewModel,
+    ObservableCollection,
     IMainNavigationViewModel
 {
     public ManageViewModel(IServiceProvider provider,

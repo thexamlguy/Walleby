@@ -5,7 +5,7 @@ namespace Bitvault;
 
 [Enumerate(nameof(MainViewModel))]
 public partial class MainViewModel :
-    ObservableCollectionViewModel<IMainNavigationViewModel>
+    ObservableCollection<IMainNavigationViewModel>
 {
     [ObservableProperty]
     private FooterViewModel footer;

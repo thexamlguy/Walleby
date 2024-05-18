@@ -79,9 +79,6 @@
 	  <Compile Update="ContainerNavigationView.axaml.cs">
 	    <DependentUpon>ContainerNavigationView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="SearchHeaderView.axaml.cs">
-	    <DependentUpon>SearchHeaderView.axaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="ContainerView.axaml.cs">
 	    <DependentUpon>ContainerView.axaml</DependentUpon>
 	  </Compile>

@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public partial class IconViewModel : ObservableViewModel
+public partial class IconViewModel : Observable
 {
     public IconViewModel(IServiceProvider provider,
         IServiceFactory factory,

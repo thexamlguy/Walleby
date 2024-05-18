@@ -2,8 +2,8 @@
 
 namespace Bitvault;
 
-public partial class ContainerHeaderViewModel : ObservableCollectionViewModel<string, IDisposable>,
-    INotificationHandler<RequestEventArgs<Filter<string>>>
+public partial class ContainerHeaderViewModel : 
+    ObservableCollection
 {
     public ContainerHeaderViewModel(IServiceProvider provider, 
         IServiceFactory factory,
@@ -15,18 +15,20 @@ public partial class ContainerHeaderViewModel : ObservableCollectionViewModel<st
     {
         Template = template;
 
-        Add<CreateItemActionViewModel>(scope: true);
+        Add<SearchContainerActionViewModel>();
+
+        //Add<CreateItemActionViewModel>(scope: true);
     }
 
     public IContentTemplate Template { get; set; }
 
-    public Task Handle(RequestEventArgs<Filter<string>> args)
-    {
-        if (args.Value is Filter<string> filter)
-        {
-            Value = filter.Value;
-        }
+    //public Task Handle(RequestEventArgs<Filter<string>> args)
+    //{
+    //    if (args.Value is Filter<string> filter)
+    //    {
+    //        Value = filter.Value;
+    //    }
 
-        return Task.CompletedTask;
-    }
+    //    return Task.CompletedTask;
+    //}
 }

@@ -8,7 +8,7 @@ public partial class ConfirmItemActionViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscription subscriber,
-    IDisposer disposer) : ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer)
+    IDisposer disposer) : Observable(provider, factory, mediator, publisher, subscriber, disposer)
 {
 
     [RelayCommand]

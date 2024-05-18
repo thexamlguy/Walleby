@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public partial class NoteViewModel : ObservableViewModel
+public partial class NoteViewModel : Observable
 {
     public NoteViewModel(IServiceProvider provider,
         IServiceFactory factory,

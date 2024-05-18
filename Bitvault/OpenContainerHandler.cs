@@ -6,12 +6,12 @@ namespace Bitvault;
 public class OpenContainerHandler(ContainerConfiguration configuration,
     ISecurityKeyFactory keyVaultFactory,
     IContainerStorageFactory vaultStorage) :
-    IHandler<ActivateEventArgs<Container>, bool>
+    IHandler<ActivateEventArgs<ContainerToken>, bool>
 {
-    public async Task<bool> Handle(ActivateEventArgs<Container> args,
+    public async Task<bool> Handle(ActivateEventArgs<ContainerToken> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is Container container && configuration.Name is { Length: > 0 } name && container.Password is { Length: > 0 } password)
+        if (args.Value is ContainerToken container && configuration.Name is { Length: > 0 } name && container.Password is { Length: > 0 } password)
         {
             if (configuration.Key?.Split(':') is { Length: >= 2 } keyPart)
             {

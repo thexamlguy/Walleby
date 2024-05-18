@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public partial class ItemViewModel : 
-    ObservableCollectionViewModel<IDisposable>
+    ObservableCollection<IDisposable>
 {
     [ObservableProperty]
     private int? id;

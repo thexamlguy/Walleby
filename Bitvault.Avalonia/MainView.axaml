@@ -14,11 +14,11 @@
         </NavigationView.Resources>
         <Frame>
             <Interaction.Behaviors>
-                <EventTriggerBehavior EventName="Loaded">
+                <AttachedBehaviour>
                     <NavigateRegionAction Name="Main">
                         <NavigateAction Region="Main" Route="Container" />
                     </NavigateRegionAction>
-                </EventTriggerBehavior>
+                </AttachedBehaviour>
             </Interaction.Behaviors>
         </Frame>
     </NavigationView>

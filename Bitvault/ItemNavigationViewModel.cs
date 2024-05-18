@@ -15,7 +15,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     string name,
     string description,
     bool selected) :
-    ObservableViewModel(provider, factory, mediator, publisher, subscriber, disposer),
+    Observable(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<ArchiveEventArgs<Item>>,
     ISelectable,
     IRemovable

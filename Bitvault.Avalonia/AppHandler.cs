@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using System.Threading;
 using System.Threading.Tasks;
 using Toolkit.Foundation;
 

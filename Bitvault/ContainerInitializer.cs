@@ -10,12 +10,13 @@ public class ContainerInitializer(IEnumerable<IConfigurationDescriptor<Container
     {
         foreach (IConfigurationDescriptor<ContainerConfiguration> configuration in configurations)
         {       
-            if (componentFactory.Create<IContainerComponent, ContainerConfiguration>(configuration.Section, configuration.Value) is IComponentHost host)
+            if (componentFactory.Create<IContainerComponent,
+                ContainerConfiguration>(configuration.Section, configuration.Value) 
+                is IComponentHost host)
             {
                 vaults.Add(host);
                 await host.StartAsync();
             }
-
         }
     }
 }
