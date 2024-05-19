@@ -83,7 +83,7 @@ public partial class App : Application
                         services.AddScoped<ContainerViewModelConfiguration>();
 
                         services.AddTemplate<ContainerViewModel, ContainerView>("Container");
-                        services.AddHandler<EnumerateContainerViewModelHandler>();
+                        services.AddHandler<AggerateContainerViewModelHandler>();
 
                         services.AddTemplate<SearchContainerActionViewModel, SearchContainerActionView>();
                         services.AddTemplate<ContainerHeaderViewModel, ContainerHeaderView>("ContainerHeader");
@@ -119,7 +119,7 @@ public partial class App : Application
                 services.AddInitializer<ContainerInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
-                services.AddHandler<MainViewModelHandler>();
+                services.AddHandler<AggerateMainViewModelHandler>();
 
                 services.AddTransient<FooterViewModel>();
 

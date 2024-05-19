@@ -14,13 +14,7 @@
             <NavigateAction
                 Region="{Binding Named, StringFormat='{}{0}:Content'}"
                 Route="Item"
-                Scope="self">
-                <NavigateAction.ParameterBindings>
-                    <ParameterBinding Key="Immutable" Value="{x:True}" />
-                    <ParameterBinding Key="Id" Value="{Binding Id}" />
-                    <ParameterBinding Key="Name" Value="{Binding Name}" />
-                </NavigateAction.ParameterBindings>
-            </NavigateAction>
+                Scope="self" />
         </DataTriggerBehavior>
     </Interaction.Behaviors>
     <Grid Background="Transparent" ColumnDefinitions="Auto,*">

@@ -47,12 +47,8 @@
             BorderThickness="1,1,0,0"
             CornerRadius="8 0 0 0">
             <Grid RowDefinitions="Auto, *">
-                <Border
-                    Grid.Row="0"
-                    Padding="4"
-                    BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}"
-                    BorderThickness="0,0,0,1">
-                    <ContentControl x:Name="ContentHeader">
+                <Border Grid.Row="0" Padding="4">
+                    <ContentControl>
                         <Interaction.Behaviors>
                             <AttachedBehaviour>
                                 <NavigateRegionAction Name="{Binding Named, StringFormat='{}{0}:ContentHeader'}" />

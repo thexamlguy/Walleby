@@ -1,17 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class ItemCommandCollection : ObservableCollection
-{
-    public void Add<TItem>(IDisposable diposer)
-    {
-
-    }
-}
 
 [Enumerate(nameof(ContainerViewModel))]
 public partial class ContainerViewModel(IServiceProvider provider,
@@ -48,7 +39,7 @@ public partial class ContainerViewModel(IServiceProvider provider,
         if (args.Value is Filter filter)
         {
             configuration = configuration with { Filter = filter.Value };
-            Enumerate();
+            Aggerate();
         }
 
         return Task.CompletedTask;
@@ -58,12 +49,12 @@ public partial class ContainerViewModel(IServiceProvider provider,
         if (args.Value is Search search)
         {
             configuration = configuration with { Query = search.Value };
-            Enumerate();
+            Aggerate();
         }
 
         return Task.CompletedTask;
     }
 
-    protected override IEnumerate PrepareEnumeration(object? key) =>
-        EnumerateEventArgs<ItemNavigationViewModel>.With(configuration) with { Key = key };
+    protected override IAggerate OnAggerate(object? key) =>
+        AggerateEventArgs<ItemNavigationViewModel>.With(configuration) with { Key = key };
 }

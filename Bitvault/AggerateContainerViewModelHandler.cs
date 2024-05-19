@@ -3,13 +3,14 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class EnumerateContainerViewModelHandler(IMediator mediator,
+public class AggerateContainerViewModelHandler(IMediator mediator,
     IServiceProvider serviceProvider,
     ICache<Item> cache,
     IPublisher publisher) :
-    INotificationHandler<Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration>>
+    INotificationHandler<Aggerate<ItemNavigationViewModel, ContainerViewModelConfiguration>>
 {
-    public async Task Handle(Enumerate<ItemNavigationViewModel, ContainerViewModelConfiguration> args)
+    public async Task Handle(Aggerate<ItemNavigationViewModel, 
+        ContainerViewModelConfiguration> args)
     {
         if (args.Options is ContainerViewModelConfiguration configuration)
         {

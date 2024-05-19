@@ -3,11 +3,11 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class MainViewModelHandler(IPublisher publisher,
+public class AggerateMainViewModelHandler(IPublisher publisher,
     IContainerHostCollection containers) :
-    INotificationHandler<EnumerateEventArgs<IMainNavigationViewModel>>
+    INotificationHandler<AggerateEventArgs<IMainNavigationViewModel>>
 {
-    public Task Handle(EnumerateEventArgs<IMainNavigationViewModel> args)
+    public Task Handle(AggerateEventArgs<IMainNavigationViewModel> args)
     {
         foreach (IComponentHost container in containers.OrderBy(x => x.GetConfiguration<ContainerConfiguration>() 
             is ContainerConfiguration configuration ? configuration.Name : null))
@@ -18,7 +18,7 @@ public class MainViewModelHandler(IPublisher publisher,
                 {
                     if (factory.Create<ContainerNavigationViewModel>(configuration.Name) is ContainerNavigationViewModel viewModel)
                     {
-                        publisher.Publish(new CreateEventArgs<IMainNavigationViewModel>(viewModel),
+                        publisher.Publish(Create.As<IMainNavigationViewModel>(viewModel),
                             nameof(MainViewModel));
                     }
                 }
