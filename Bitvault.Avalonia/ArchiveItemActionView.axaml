@@ -13,6 +13,7 @@
         HotKey="Delete"
         ToolTip.Tip="Archive">
         <TextBlock
+            Margin="0,3,0,0"
             VerticalAlignment="Center"
             FontFamily="{DynamicResource FluentThemeFontFamily}"
             FontSize="16"

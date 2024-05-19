@@ -7,9 +7,9 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
     IServiceProvider serviceProvider,
     ICache<Item> cache,
     IPublisher publisher) :
-    INotificationHandler<Aggerate<ItemNavigationViewModel, ContainerViewModelConfiguration>>
+    INotificationHandler<AggerateEventArgs<ItemNavigationViewModel, ContainerViewModelConfiguration>>
 {
-    public async Task Handle(Aggerate<ItemNavigationViewModel, 
+    public async Task Handle(AggerateEventArgs<ItemNavigationViewModel, 
         ContainerViewModelConfiguration> args)
     {
         if (args.Options is ContainerViewModelConfiguration configuration)

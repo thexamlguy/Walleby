@@ -12,6 +12,7 @@
         Foreground="{DynamicResource IconForegroundBrush}"
         ToolTip.Tip="Edit">
         <TextBlock
+            Margin="0,3,0,0"
             VerticalAlignment="Center"
             FontFamily="{DynamicResource FluentThemeFontFamily}"
             FontSize="16"

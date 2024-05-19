@@ -17,7 +17,6 @@ public partial class ItemCommandHeaderViewModel(IServiceProvider provider,
     public Task Handle(NotifyEventArgs<CommandCollection> args)
     {
         Clear();
-
         if (args.Value is CommandCollection commandCollection)
         {
             foreach (IDisposable command in commandCollection)

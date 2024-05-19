@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Enumerate(nameof(MainViewModel))]
+[Aggerate(nameof(MainViewModel))]
 public partial class MainViewModel :
     ObservableCollection<IMainNavigationViewModel>
 {

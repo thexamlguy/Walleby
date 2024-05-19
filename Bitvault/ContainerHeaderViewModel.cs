@@ -15,20 +15,9 @@ public partial class ContainerHeaderViewModel :
     {
         Template = template;
 
-        Add<SearchContainerActionViewModel>();
-
-        //Add<CreateItemActionViewModel>(scope: true);
+        Add<CreateItemActionViewModel>(0);
+        Add<SearchContainerActionViewModel>(2);
     }
 
     public IContentTemplate Template { get; set; }
-
-    //public Task Handle(RequestEventArgs<Filter<string>> args)
-    //{
-    //    if (args.Value is Filter<string> filter)
-    //    {
-    //        Value = filter.Value;
-    //    }
-
-    //    return Task.CompletedTask;
-    //}
 }

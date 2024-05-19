@@ -24,6 +24,7 @@
         MaxWidth="500"
         CornerRadius="16"
         Text="{Binding Value}"
+        TextBlock.TextAlignment="Center"
         Watermark="Search">
         <Interaction.Behaviors>
             <KeyBindingTriggerBehaviour Gesture="Enter">

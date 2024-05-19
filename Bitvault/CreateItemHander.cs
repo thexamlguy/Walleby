@@ -6,9 +6,9 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class CreateItemHander(IDbContextFactory<ContainerDbContext> dbContextFactory) : 
-    IHandler<CreateEventArgs<ItemConfiguration>, (bool, int)>
+    IHandler<CreateEventArgs<ItemConfiguration>, (bool, int, string?)>
 {
-    public async Task<(bool, int)> Handle(CreateEventArgs<ItemConfiguration> args,
+    public async Task<(bool, int, string?)> Handle(CreateEventArgs<ItemConfiguration> args,
         CancellationToken cancellationToken)
     {
         if (args.Value is ItemConfiguration configuration)
@@ -27,7 +27,7 @@ public class CreateItemHander(IDbContextFactory<ContainerDbContext> dbContextFac
 
                 if (result is not null)
                 {
-                    return (false, -1);
+                    return (true, result.Entity.Id, result.Entity.Name);
                 }
             }
             catch
@@ -36,6 +36,6 @@ public class CreateItemHander(IDbContextFactory<ContainerDbContext> dbContextFac
             }
         }
 
-        return (false, -1);
+        return (false, -1, "");
     }
 }

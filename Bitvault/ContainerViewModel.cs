@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 
-[Enumerate(nameof(ContainerViewModel))]
+[Aggerate(nameof(ContainerViewModel))]
 public partial class ContainerViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
@@ -13,7 +13,7 @@ public partial class ContainerViewModel(IServiceProvider provider,
     IDisposer disposer,
     IContentTemplate template,
     NamedComponent named,
-    ContainerViewModelConfiguration configuration) : Toolkit.Foundation.ObservableCollection<ItemNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
+    ContainerViewModelConfiguration configuration) : ObservableCollection<ItemNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<NotifyEventArgs<Filter>>,
     INotificationHandler<NotifyEventArgs<Search>>
 {
@@ -39,7 +39,7 @@ public partial class ContainerViewModel(IServiceProvider provider,
         if (args.Value is Filter filter)
         {
             configuration = configuration with { Filter = filter.Value };
-            Aggerate();
+            BeginAggregation();
         }
 
         return Task.CompletedTask;
@@ -49,12 +49,12 @@ public partial class ContainerViewModel(IServiceProvider provider,
         if (args.Value is Search search)
         {
             configuration = configuration with { Query = search.Value };
-            Aggerate();
+            BeginAggregation();
         }
 
         return Task.CompletedTask;
     }
 
-    protected override IAggerate OnAggerate(object? key) =>
-        AggerateEventArgs<ItemNavigationViewModel>.With(configuration) with { Key = key };
+    protected override IAggerate OnPrepareAggregation(object? key) =>
+        Aggerate.With<ItemNavigationViewModel, ContainerViewModelConfiguration>(configuration) with { Key = key };
 }

@@ -19,6 +19,7 @@
                 Route="Item"
                 Scope="self">
                 <NavigateAction.ParameterBindings>
+                    <ParameterBinding Key="Immutable" Value="{x:True}" />
                     <ParameterBinding Key="Archived" Value="{Binding Archived}" />
                     <ParameterBinding Key="Favourite" Value="{Binding Favourite}" />
                 </NavigateAction.ParameterBindings>

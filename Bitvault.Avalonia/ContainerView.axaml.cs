@@ -14,7 +14,7 @@ public partial class ContainerView : UserControl
 
         if (VisualRoot is AppWindow appWindow)
         {
-            Title.ColumnDefinitions[1].Width = new GridLength(appWindow.TitleBar.RightInset, GridUnitType.Pixel);
+            Container.ColumnDefinitions[3].Width = new GridLength(appWindow.TitleBar.RightInset, GridUnitType.Pixel);
         }
     }
 }

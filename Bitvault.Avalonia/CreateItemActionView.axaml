@@ -5,16 +5,33 @@
     xmlns:vm="using:Bitvault"
     x:DataType="vm:CreateItemActionViewModel">
     <Button
-        Grid.Column="1"
-        Width="{StaticResource ButtonWidth}"
-        Height="{StaticResource ButtonHeight}"
-        VerticalAlignment="Center"
-        Content="&#xE710;"
+        Height="32"
+        MinWidth="144"
+        HorizontalContentAlignment="Center"
+        Classes="accent"
+        CornerRadius="16"
         FontFamily="{DynamicResource SymbolThemeFontFamily}"
-        FontSize="16"
-        ToolTip.Tip="Add item">
+        ToolTip.Tip="New Item">
+        <Grid ColumnDefinitions="Auto,8,*">
+            <TextBlock
+                Grid.Column="0"
+                Margin="-6,3,0,0"
+                FontFamily="{DynamicResource FluentThemeFontFamily}"
+                FontSize="16"
+                Foreground="{DynamicResource IconForegroundBrush}"
+                Text="&#xE00B;" />
+            <TextBlock
+                Grid.Column="2"
+                Margin="0,2,0,0"
+                Foreground="{DynamicResource IconForegroundBrush}"
+                Text="New Item" />
+        </Grid>
         <Interaction.Behaviors>
             <EventTriggerBehavior EventName="Click">
+                <NavigateAction
+                    Region="{Binding Named, StringFormat='{}{0}:ContentHeader'}"
+                    Route="ItemCommandHeader"
+                    Scope="self" />
                 <NavigateAction
                     Region="{Binding Named, StringFormat='{}{0}:Content'}"
                     Route="Item"

@@ -68,7 +68,8 @@ public partial class App : Application
                             }
                         }); 
 
-                        services.AddHandler<QueryContainerHandler>(ServiceLifetime.Singleton);
+                        services.AddHandler<QueryContainerHandler>();
+                        services.AddHandler<CreateItemHander>();
 
                         services.AddHandler<OpenContainerHandler>();
 
@@ -91,6 +92,7 @@ public partial class App : Application
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
+                        services.AddHandler<AggerateItemViewModelHandler>();
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
@@ -111,6 +113,8 @@ public partial class App : Application
                         services.AddHandler<UnarchiveItemHandler>(ServiceLifetime.Scoped);
                         services.AddHandler<FavouriteItemHandler>(ServiceLifetime.Scoped);
                         services.AddHandler<UnfavouriteItemHandler>(ServiceLifetime.Scoped);
+
+                        services.AddHandler<ItemActivatedHandler>(ServiceLifetime.Singleton);
                     });
                 })!);
 

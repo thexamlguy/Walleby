@@ -2,15 +2,21 @@
 
 namespace Bitvault;
 
-public class ConfirmItemHandler(IMediator mediator) :
+public class ConfirmItemHandler(IMediator mediator,
+    IPublisher publisher) :
     INotificationHandler<ConfirmEventArgs<Item>>
 {
     public async Task Handle(ConfirmEventArgs<Item> args)
     {
-        (bool result, int index) result = await mediator.Handle<CreateEventArgs<ItemConfiguration>,
-            (bool, int)>(new CreateEventArgs<ItemConfiguration>(new ItemConfiguration()));
-
         ItemHeaderConfiguration? configuration = await mediator.Handle<ConfirmEventArgs<Item>,
             ItemHeaderConfiguration>(args);
+
+        (bool Success, int Id, string Name) result = await mediator.Handle<CreateEventArgs<ItemConfiguration>,
+            (bool, int, string)>(new CreateEventArgs<ItemConfiguration>(new ItemConfiguration { Name = configuration?.Name }));
+
+        if (result.Success)
+        {
+            publisher.Publish(Activated.As(new Item { Id = result.Id, Name = result.Name }));
+        }
     }
 }

@@ -12,7 +12,8 @@ public partial class ItemHeaderViewModel(IServiceProvider provider,
     bool immutable,
     string? value = null) : Observable<string, string>(provider, factory, mediator, publisher, subscriber, disposer, value),
     IHandler<ValidationEventArgs<Item>, bool>,
-    IHandler<ConfirmEventArgs<Item>, ItemHeaderConfiguration>
+    IHandler<ConfirmEventArgs<Item>, ItemHeaderConfiguration>,
+    IItemEntryViewModel
 {
     [ObservableProperty]
     private bool immutable = immutable;
@@ -20,7 +21,6 @@ public partial class ItemHeaderViewModel(IServiceProvider provider,
     public Task<bool> Handle(ValidationEventArgs<Item> args, 
         CancellationToken cancellationToken)
     {
-        // we need to work on the local validation layer
         return Task.FromResult(true);
     }
 

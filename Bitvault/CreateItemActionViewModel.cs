@@ -9,8 +9,11 @@ public partial class CreateItemActionViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    NamedComponent named) : Observable(provider, factory, mediator, publisher, subscriber, disposer)
+    NamedComponent named,
+    int index) : Observable(provider, factory, mediator, publisher, subscriber, disposer)
 {
+    [ObservableProperty]
+    private int index = index;
 
     [ObservableProperty]
     private string named = $"{named}";

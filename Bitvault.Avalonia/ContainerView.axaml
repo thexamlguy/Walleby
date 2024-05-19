@@ -4,14 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
     x:DataType="vm:ContainerViewModel">
-    <Grid ColumnDefinitions="320,Auto,*" RowDefinitions="Auto,*">
+    <Grid
+        x:Name="Container"
+        ColumnDefinitions="320,Auto,*,Auto"
+        Grid.IsSharedSizeScope="True"
+        RowDefinitions="Auto,*">
         <Grid
-            x:Name="Title"
             Grid.Row="0"
             Grid.ColumnSpan="3"
             Height="44"
-            ColumnDefinitions="*, Auto">
-            <ContentControl Grid.Column="0" VerticalAlignment="Center">
+            Margin="8,0,0,0">
+            <ContentControl VerticalAlignment="Center">
                 <Interaction.Behaviors>
                     <AttachedBehaviour>
                         <NavigateAction Region="{Binding $self}" Route="ContainerHeader" />
@@ -42,6 +45,7 @@
         <Border
             Grid.Row="1"
             Grid.Column="2"
+            Grid.ColumnSpan="2"
             Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
             BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
             BorderThickness="1,1,0,0"
