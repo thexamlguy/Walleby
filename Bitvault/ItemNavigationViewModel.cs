@@ -15,10 +15,13 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     string name,
     string description,
     bool selected,
+    bool favourite,
     bool archived) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<ArchiveEventArgs<Item>>,
     INotificationHandler<UnarchiveEventArgs<Item>>,
+    INotificationHandler<FavouriteEventArgs<Item>>,
+    INotificationHandler<UnfavouriteEventArgs<Item>>,
     ISelectable,
     IRemovable
 {
@@ -27,6 +30,9 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     [ObservableProperty]
     private string? description = description;
+
+    [ObservableProperty]
+    private bool favourite = favourite;
 
     [ObservableProperty]
     private int id = id;
@@ -42,15 +48,15 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     public IContentTemplate Template { get; set; } = template;
 
-    public Task Handle(ArchiveEventArgs<Item> args)
-    {
-        Dispose();
-        return Task.CompletedTask;
-    }
+    public Task Handle(ArchiveEventArgs<Item> args) => 
+        Task.Run(Dispose);
 
-    public Task Handle(UnarchiveEventArgs<Item> args)
-    {
-        Dispose();
-        return Task.CompletedTask;
-    }
+    public Task Handle(UnarchiveEventArgs<Item> args) => 
+        Task.Run(Dispose);
+
+    public Task Handle(FavouriteEventArgs<Item> args) => 
+        Task.FromResult(Favourite = true);
+
+    public Task Handle(UnfavouriteEventArgs<Item> args) =>
+        Task.FromResult(Favourite = false);
 }

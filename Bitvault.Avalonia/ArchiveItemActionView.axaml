@@ -17,6 +17,6 @@
             FontFamily="{DynamicResource FluentThemeFontFamily}"
             FontSize="16"
             Foreground="{DynamicResource IconForegroundBrush}"
-            Text="&#xE066;" />
+            Text="&#xE073;" />
     </Button>
 </UserControl>

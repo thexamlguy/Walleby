@@ -5,6 +5,9 @@
     xmlns:vm="using:Bitvault"
     x:DataType="vm:ItemNavigationViewModel"
     IsSelected="{Binding Selected}">
+    <ListBoxItem.Resources>
+        <SolidColorBrush x:Key="StarredIconForegroundBrush" Color="#FFEDB120" />
+    </ListBoxItem.Resources>
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
             <NavigateAction
@@ -17,6 +20,7 @@
                 Scope="self">
                 <NavigateAction.ParameterBindings>
                     <ParameterBinding Key="Archived" Value="{Binding Archived}" />
+                    <ParameterBinding Key="Favourite" Value="{Binding Favourite}" />
                 </NavigateAction.ParameterBindings>
             </NavigateAction>
         </DataTriggerBehavior>
@@ -25,8 +29,17 @@
         <PersonPicture
             Grid.Column="0"
             Height="34"
-            Margin="0"
             DisplayName="{Binding Name}" />
+        <TextBlock
+            Grid.Column="0"
+            Margin="0,0,-2,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            FontFamily="{DynamicResource FluentThemeFontFamily}"
+            FontSize="16"
+            Foreground="{DynamicResource StarredIconForegroundBrush}"
+            IsVisible="{Binding Favourite}"
+            Text="&#xEF60;" />
         <StackPanel Grid.Column="1" Margin="12,12,6,12">
             <TextBlock FontWeight="SemiBold" Text="{Binding Name}" />
             <TextBlock Opacity="0.7" Text="{Binding Name}" />

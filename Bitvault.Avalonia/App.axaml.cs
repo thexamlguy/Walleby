@@ -94,6 +94,7 @@ public partial class App : Application
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
+                        services.AddTemplate<FavouriteItemActionViewModel, FavouriteItemActionView>();
                         services.AddTemplate<ConfirmItemActionViewModel, ConfirmItemActionView>();
                         services.AddTemplate<DismissItemActionViewModel, DismissItemActionView>();
                         services.AddTemplate<ArchiveItemActionViewModel, ArchiveItemActionView>();
@@ -108,7 +109,8 @@ public partial class App : Application
                         services.AddHandler<ConfirmItemHandler>(ServiceLifetime.Scoped);
                         services.AddHandler<ArchiveItemHandler>(ServiceLifetime.Scoped);
                         services.AddHandler<UnarchiveItemHandler>(ServiceLifetime.Scoped);
-
+                        services.AddHandler<FavouriteItemHandler>(ServiceLifetime.Scoped);
+                        services.AddHandler<UnfavouriteItemHandler>(ServiceLifetime.Scoped);
                     });
                 })!);
 

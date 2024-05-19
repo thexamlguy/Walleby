@@ -18,6 +18,7 @@ public partial class ItemViewModel :
         ISubscription subscriber, 
         IDisposer disposer,
         IContentTemplate template,
+        bool favourite = false,
         bool archived = false) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
@@ -27,6 +28,7 @@ public partial class ItemViewModel :
         {
             Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
             {
+                Factory.Create<FavouriteItemActionViewModel>(favourite),
                 Factory.Create<EditItemActionViewModel>(),
                 Factory.Create<ArchiveItemActionViewModel>(),
             })));

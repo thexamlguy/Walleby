@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class ArchiveItemActionViewModel(IServiceProvider provider,
+public partial class UnfavouriteItemActionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
@@ -12,5 +12,6 @@ public partial class ArchiveItemActionViewModel(IServiceProvider provider,
     IRemovable
 {
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Archive.As<Item>());
+    public void Invoke() => Publisher.Publish(Unfavourite.As<Item>());
 }
+

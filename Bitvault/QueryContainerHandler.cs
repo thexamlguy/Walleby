@@ -6,12 +6,12 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class QueryContainerHandler(IDbContextFactory<ContainerDbContext> dbContextFactory) :
-    IHandler<RequestEventArgs<QueryContainerConfiguration>, IReadOnlyCollection<(int Id, string? Name)>>
+    IHandler<RequestEventArgs<QueryContainerConfiguration>, IReadOnlyCollection<(int Id, string? Name, bool Favourite, bool Archived)>>
 {
-    public async Task<IReadOnlyCollection<(int Id, string? Name)>> Handle(RequestEventArgs<QueryContainerConfiguration> args, 
+    public async Task<IReadOnlyCollection<(int Id, string? Name, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryContainerConfiguration> args, 
         CancellationToken cancellationToken)
     {
-        List<(int Id, string? Name)> items = [];
+        List<(int Id, string? Name, bool Favourite, bool Archived)> items = [];
 
         if (args.Value is  QueryContainerConfiguration queryConfiguration)
         {
@@ -44,13 +44,15 @@ public class QueryContainerHandler(IDbContextFactory<ContainerDbContext> dbConte
                 return await context.Set<ItemEntry>().Where(predicate).Select(x => new
                 {
                     x.Id,
-                    x.Name
+                    x.Name,
+                    Favourite = x.State == 1,
+                    Archived = x.State == 2
                 }).OrderBy(x => x.Name).ToListAsync();
             });
 
             foreach (var result in results)
             {
-                items.Add(new(result.Id, result.Name));
+                items.Add(new(result.Id, result.Name, result.Favourite, result.Archived));
             }
         }
 

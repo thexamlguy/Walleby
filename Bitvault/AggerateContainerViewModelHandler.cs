@@ -18,19 +18,19 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
             bool selected = true;
 
             if (await mediator.Handle<RequestEventArgs<QueryContainerConfiguration>,
-                IReadOnlyCollection<(int Id, string? Name)>>(Request.As(new QueryContainerConfiguration 
+                IReadOnlyCollection<(int Id, string? Name, bool Favourite, bool Archived)>>(Request.As(new QueryContainerConfiguration 
                 { 
                     Filter = configuration.Filter,
                     Query = configuration.Query 
-                })) is IReadOnlyCollection<(int Id, string? Name)> results)
+                })) is IReadOnlyCollection<(int Id, string? Name, bool Favourite, bool Archived)> results)
             {
-                foreach ((int Id, string? Name) in results)
+                foreach ((int Id, string? Name, bool Favourite, bool Archived) in results)
                 {
                     IServiceScope serviceScope = serviceProvider.CreateScope();
                     IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
                     IValueStore<Item> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item>>();
 
-                    if (serviceFactory.Create<ItemNavigationViewModel>(Id, Name, "Description", selected, configuration.Filter == "Archive") is ItemNavigationViewModel viewModel)
+                    if (serviceFactory.Create<ItemNavigationViewModel>(Id, Name, "Description", selected, Favourite, Archived) is ItemNavigationViewModel viewModel)
                     {
                         Item item = new() { Id = Id, Name = Name };
                         valueStore.Set(item);
