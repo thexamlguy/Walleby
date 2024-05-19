@@ -20,17 +20,17 @@ public class QueryContainerHandler(IDbContextFactory<ContainerDbContext> dbConte
 
             if (queryConfiguration.Filter == "All")
             {
-                predicate = predicate.And(x => x.State != 3);
+                predicate = predicate.And(x => x.State != 2);
             }
 
             if (queryConfiguration.Filter == "Starred")
             {
-                predicate = predicate.And(x => x.State != 3 && x.State == 2);
+                predicate = predicate.And(x => x.State != 2 && x.State == 1);
             }
 
             if (queryConfiguration.Filter == "Archive")
             {
-                predicate = predicate.And(x => x.State == 3);
+                predicate = predicate.And(x => x.State == 2);
             }
 
             if (queryConfiguration.Query is { Length: > 0} query)

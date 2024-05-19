@@ -1,18 +1,21 @@
 <UserControl
     x:Class="Bitvault.Avalonia.DismissItemActionView"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:DismissItemActionViewModel">
     <Button
         Width="{StaticResource ButtonWidth}"
         Height="{StaticResource ButtonHeight}"
         VerticalAlignment="Center"
+        Command="{Binding InvokeCommand}"
         Foreground="{DynamicResource IconForegroundBrush}"
         ToolTip.Tip="Cancel">
         <TextBlock
             VerticalAlignment="Center"
-            FontFamily="{DynamicResource SymbolThemeFontFamily}"
+            FontFamily="{DynamicResource FluentThemeFontFamily}"
             FontSize="16"
             Foreground="{DynamicResource IconForegroundBrush}"
-            Text="&#xF805E;" />
+            Text="&#xF36A;" />
     </Button>
 </UserControl>

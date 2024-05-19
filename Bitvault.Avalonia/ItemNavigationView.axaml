@@ -14,7 +14,11 @@
             <NavigateAction
                 Region="{Binding Named, StringFormat='{}{0}:Content'}"
                 Route="Item"
-                Scope="self" />
+                Scope="self">
+                <NavigateAction.ParameterBindings>
+                    <ParameterBinding Key="Archived" Value="{Binding Archived}" />
+                </NavigateAction.ParameterBindings>
+            </NavigateAction>
         </DataTriggerBehavior>
     </Interaction.Behaviors>
     <Grid Background="Transparent" ColumnDefinitions="Auto,*">

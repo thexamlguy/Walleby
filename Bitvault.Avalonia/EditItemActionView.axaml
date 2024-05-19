@@ -13,9 +13,9 @@
         ToolTip.Tip="Edit">
         <TextBlock
             VerticalAlignment="Center"
-            FontFamily="{DynamicResource SymbolThemeFontFamily}"
+            FontFamily="{DynamicResource FluentThemeFontFamily}"
             FontSize="16"
             Foreground="{DynamicResource IconForegroundBrush}"
-            Text="&#xE104;" />
+            Text="&#xE5B3;" />
     </Button>
 </UserControl>

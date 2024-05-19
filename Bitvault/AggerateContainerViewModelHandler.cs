@@ -30,7 +30,7 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
                     IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
                     IValueStore<Item> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item>>();
 
-                    if (serviceFactory.Create<ItemNavigationViewModel>(Id, Name, "Description " + 1, selected) is ItemNavigationViewModel viewModel)
+                    if (serviceFactory.Create<ItemNavigationViewModel>(Id, Name, "Description", selected, configuration.Filter == "Archive") is ItemNavigationViewModel viewModel)
                     {
                         Item item = new() { Id = Id, Name = Name };
                         valueStore.Set(item);

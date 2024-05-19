@@ -97,6 +97,7 @@ public partial class App : Application
                         services.AddTemplate<ConfirmItemActionViewModel, ConfirmItemActionView>();
                         services.AddTemplate<DismissItemActionViewModel, DismissItemActionView>();
                         services.AddTemplate<ArchiveItemActionViewModel, ArchiveItemActionView>();
+                        services.AddTemplate<UnarchiveItemActionViewModel, UnarchiveItemActionView>();
                         services.AddTemplate<EditItemActionViewModel, EditItemActionView>();
                         services.AddTemplate<DeleteItemActionViewModel, DeleteItemActionView>();
 
@@ -106,8 +107,7 @@ public partial class App : Application
 
                         services.AddHandler<ConfirmItemHandler>(ServiceLifetime.Scoped);
                         services.AddHandler<ArchiveItemHandler>(ServiceLifetime.Scoped);
-
-                        services.AddHandler<ItemActivatedHandler>();
+                        services.AddHandler<UnarchiveItemHandler>(ServiceLifetime.Scoped);
 
                     });
                 })!);

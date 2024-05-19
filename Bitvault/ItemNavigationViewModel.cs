@@ -14,12 +14,17 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     int id,
     string name,
     string description,
-    bool selected) :
+    bool selected,
+    bool archived) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<ArchiveEventArgs<Item>>,
+    INotificationHandler<UnarchiveEventArgs<Item>>,
     ISelectable,
     IRemovable
 {
+    [ObservableProperty]
+    private bool archived = archived;
+
     [ObservableProperty]
     private string? description = description;
 
@@ -38,6 +43,12 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     public IContentTemplate Template { get; set; } = template;
 
     public Task Handle(ArchiveEventArgs<Item> args)
+    {
+        Dispose();
+        return Task.CompletedTask;
+    }
+
+    public Task Handle(UnarchiveEventArgs<Item> args)
     {
         Dispose();
         return Task.CompletedTask;

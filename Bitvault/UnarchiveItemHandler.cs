@@ -4,11 +4,11 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class ArchiveItemHandler(IValueStore<Item> valueStore,
+public class UnarchiveItemHandler(IValueStore<Item> valueStore,
     IDbContextFactory<ContainerDbContext> dbContextFactory) :
-    INotificationHandler<ArchiveEventArgs<Item>>
+    INotificationHandler<UnarchiveEventArgs<Item>>
 {
-    public async Task Handle(ArchiveEventArgs<Item> args)
+    public async Task Handle(UnarchiveEventArgs<Item> args)
     {
         try
         {
@@ -20,7 +20,7 @@ public class ArchiveItemHandler(IValueStore<Item> valueStore,
 
                     if (await context.FindAsync<ItemEntry>(item.Id) is ItemEntry result)
                     {
-                        result.State = 2;
+                        result.State = 0;
                         await context.SaveChangesAsync();
                     }
                 });
