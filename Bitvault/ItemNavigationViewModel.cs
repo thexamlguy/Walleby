@@ -22,6 +22,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     INotificationHandler<UnarchiveEventArgs<Item>>,
     INotificationHandler<FavouriteEventArgs<Item>>,
     INotificationHandler<UnfavouriteEventArgs<Item>>,
+    INotificationHandler<NotifyEventArgs<ItemHeaderConfiguration>>,
     ISelectable,
     IRemovable
 {
@@ -59,4 +60,13 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     public Task Handle(UnfavouriteEventArgs<Item> args) =>
         Task.FromResult(Favourite = false);
+    public Task Handle(NotifyEventArgs<ItemHeaderConfiguration> args)
+    {
+        if (args.Value is ItemHeaderConfiguration configuration)
+        {
+            Name = configuration.Name;
+        }
+
+        return Task.CompletedTask;
+    }
 }

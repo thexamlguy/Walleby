@@ -18,22 +18,17 @@ public class ModifiedItemHandler(IServiceProvider serviceProvider,
             if (cachedItem is not null)
             {
                 IServiceScope serviceScope = serviceProvider.CreateScope();
-                IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
                 IValueStore<Item> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item>>();
 
-                if (serviceFactory.Create<ItemNavigationViewModel>(newItem.Id, newItem.Name, "Description", true)
-                    is ItemNavigationViewModel viewModel)
-                {
-                    int oldIndex = cache.IndexOf(cachedItem);
-                    cache.Remove(cachedItem);
+                int oldIndex = cache.IndexOf(cachedItem);
+                cache.Remove(cachedItem);
 
-                    cache.Add(newItem);
+                cache.Add(newItem);
 
-                    int newIndex = cache.IndexOf(newItem);
-                    valueStore.Set(newItem);
+                int newIndex = cache.IndexOf(newItem);
+                valueStore.Set(newItem);
 
-                    publisher.Publish(RemoveAndInsertAt.As(oldIndex, newIndex, viewModel), nameof(ContainerViewModel));
-                }
+                publisher.Publish(MoveTo.As<ItemNavigationViewModel>(oldIndex, newIndex), nameof(ContainerViewModel));
             }
         }
 
