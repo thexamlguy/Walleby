@@ -15,18 +15,13 @@ public class QueryItemHandler(IDbContextFactory<ContainerDbContext> dbContextFac
     }
 }
 
-public record QueryItemConfiguration
-{
-    public int Id { get; set; }
-}
-
 public class QueryContainerHandler(IDbContextFactory<ContainerDbContext> dbContextFactory) :
     IHandler<RequestEventArgs<QueryContainerConfiguration>, IReadOnlyCollection<(int Id, string? Name, bool Favourite, bool Archived)>>
 {
-    public async Task<IReadOnlyCollection<(int Id, string? Name, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryContainerConfiguration> args, 
+    public async Task<IReadOnlyCollection<(int Id, string Name, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryContainerConfiguration> args, 
         CancellationToken cancellationToken)
     {
-        List<(int Id, string? Name, bool Favourite, bool Archived)> items = [];
+        List<(int Id, string Name, bool Favourite, bool Archived)> items = [];
 
         if (args.Value is  QueryContainerConfiguration queryConfiguration)
         {

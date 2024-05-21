@@ -29,13 +29,9 @@
         <Interaction.Behaviors>
             <EventTriggerBehavior EventName="Click">
                 <NavigateAction
-                    Region="{Binding Named, StringFormat='{}{0}:ContentHeader'}"
-                    Route="ItemCommandHeader"
-                    Scope="self" />
-                <NavigateAction
                     Region="{Binding Named, StringFormat='{}{0}:Content'}"
                     Route="Item"
-                    Scope="self">
+                    Scope="new">
                     <NavigateAction.ParameterBindings>
                         <ParameterBinding Key="Immutable" Value="{x:False}" />
                     </NavigateAction.ParameterBindings>

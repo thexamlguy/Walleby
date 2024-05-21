@@ -2,4 +2,6 @@
 
 namespace Bitvault;
 
-public interface IContainerNavigationViewModel : ISelectable;
+public interface IContainerNavigationViewModel : 
+    ISelectable, 
+    IDisposable;

@@ -5,36 +5,41 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class EditItemHander(IDbContextFactory<ContainerDbContext> dbContextFactory) :
-    IHandler<EditEventArgs<(int, ItemConfiguration)>, bool>
+    IHandler<EditEventArgs<(int, ItemConfiguration)>, (bool, int, string?)>
 {
-    public async Task<bool> Handle(EditEventArgs<(int, ItemConfiguration)> args,
+    public async Task<(bool, int, string?)> Handle(EditEventArgs<(int, ItemConfiguration)> args,
         CancellationToken cancellationToken)
     {
-        //if (args.Value is ItemConfiguration configuration)
-        //{
-        //    try
-        //    {
-        //        using ContainerDbContext context = dbContextFactory.CreateDbContext();
-        //        EntityEntry<ItemEntry>? result = null;
+        if (args.Value is (int id, ItemConfiguration configuration))
+        {
+            try
+            {
+                using ContainerDbContext context = dbContextFactory.CreateDbContext();
+                ItemEntry? result = null;
 
-        //        await Task.Run(async () =>
-        //        {
-        //            result = await context.AddAsync(new ItemEntry { Name = configuration.Name }, cancellationToken);
-        //            await context.SaveChangesAsync(cancellationToken);
+                await Task.Run(async () =>
+                {
+                    result = await context.Set<ItemEntry>().FindAsync(id);
 
-        //        }, cancellationToken);
+                    if (result is not null)
+                    {
+                        result.Name = configuration.Name;
+                        await context.SaveChangesAsync(cancellationToken);
+                    }    
 
-        //        if (result is not null)
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    catch
-        //    {
+                }, cancellationToken);
 
-        //    }
-        //}
+                if (result is not null)
+                {
+                    return (true, result.Id, result.Name);
+                }
+            }
+            catch
+            {
 
-        return false;
+            }
+        }
+
+        return (false, -1, "");
     }
 }

@@ -18,21 +18,31 @@ public partial class ItemViewModel :
     [ObservableProperty]
     private bool immutable;
 
-    public ItemViewModel(IServiceProvider provider, 
+    [ObservableProperty]
+    private string named;
+
+    [ObservableProperty]
+    private string name;
+
+    public ItemViewModel(IServiceProvider provider,
         IServiceFactory factory, 
         IMediator mediator,
         IPublisher publisher, 
         ISubscription subscriber, 
         IDisposer disposer,
         IContentTemplate template,
+        NamedComponent named,
+        string name = "",
         bool immutable = true,
         bool favourite = false,
         bool archived = false) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
+        Named = $"{named}"; 
         Template = template;
         Immutable = immutable;
         Favourite = favourite;
         Archived = archived;
+        Name = name;
     }
 
     public IContentTemplate Template { get; set; }

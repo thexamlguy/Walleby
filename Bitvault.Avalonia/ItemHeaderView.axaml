@@ -12,7 +12,7 @@
         <TextBox
             MaxWidth="360"
             IsVisible="{Binding !Immutable}"
-            Text="{Binding Value}"
+            Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
             TextAlignment="Center"
             Watermark="Enter name" />
         <SelectableTextBlock

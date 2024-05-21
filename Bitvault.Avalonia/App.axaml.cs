@@ -42,8 +42,7 @@ public partial class App : Application
                 {
                     args.AddServices(services =>
                     {
-                        services.AddTransient<IComparer<Item>>(provider => Comparer<Item>.Create((x, z) => 
-                            x.Name!.CompareTo(z.Name) == 0 ? 1 : x.Name!.CompareTo(z.Name)));
+                        services.AddTransient<IComparer<Item>>(provider => Comparer<Item>.Create((x, z) => x.Name.CompareTo(z.Name)));
 
                         services.AddCache<Item>();
 
@@ -69,7 +68,8 @@ public partial class App : Application
                         }); 
 
                         services.AddHandler<QueryContainerHandler>();
-                        services.AddHandler<CreateItemHander>();
+                        services.AddHandler<CreateItemHandler>();
+                        services.AddHandler<EditItemHander>();
 
                         services.AddHandler<OpenContainerHandler>();
 
@@ -108,13 +108,14 @@ public partial class App : Application
 
                         services.AddScoped<IValueStore<Item>, ValueStore<Item>>();
 
-                        services.AddHandler<ConfirmItemHandler>(ServiceLifetime.Scoped);
-                        services.AddHandler<ArchiveItemHandler>(ServiceLifetime.Scoped);
-                        services.AddHandler<UnarchiveItemHandler>(ServiceLifetime.Scoped);
-                        services.AddHandler<FavouriteItemHandler>(ServiceLifetime.Scoped);
-                        services.AddHandler<UnfavouriteItemHandler>(ServiceLifetime.Scoped);
+                        services.AddHandler<ConfirmItemHandler>();
+                        services.AddHandler<ArchiveItemHandler>();
+                        services.AddHandler<UnarchiveItemHandler>();
+                        services.AddHandler<FavouriteItemHandler>();
+                        services.AddHandler<UnfavouriteItemHandler>();
 
-                        services.AddHandler<ItemActivatedHandler>(ServiceLifetime.Singleton);
+                        services.AddHandler<CreatedItemHandler>(ServiceLifetime.Singleton);
+                        services.AddHandler<ModifiedItemHandler>(ServiceLifetime.Singleton);
                     });
                 })!);
 

@@ -1,3 +1,3 @@
 ﻿namespace Bitvault;
 
-public interface IMainNavigationViewModel;
+public interface IMainNavigationViewModel : IDisposable;

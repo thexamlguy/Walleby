@@ -1,9 +1,11 @@
-﻿namespace Bitvault;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Bitvault;
 
 public record Item
 {
     public int Id { get; init; }
 
-    public string? Name { get; init; }
+    public string Name { get; init; } = "";
 }
 

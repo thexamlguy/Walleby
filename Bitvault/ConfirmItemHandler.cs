@@ -2,7 +2,8 @@
 
 namespace Bitvault;
 
-public class ConfirmItemHandler(IMediator mediator,
+public class ConfirmItemHandler(IValueStore<Item> valueStore,
+    IMediator mediator,
     IPublisher publisher) :
     INotificationHandler<ConfirmEventArgs<Item>>
 {
@@ -11,12 +12,28 @@ public class ConfirmItemHandler(IMediator mediator,
         ItemHeaderConfiguration? configuration = await mediator.Handle<ConfirmEventArgs<Item>,
             ItemHeaderConfiguration>(args);
 
-        (bool Success, int Id, string Name) result = await mediator.Handle<CreateEventArgs<ItemConfiguration>,
-            (bool, int, string)>(new CreateEventArgs<ItemConfiguration>(new ItemConfiguration { Name = configuration?.Name }));
-
-        if (result.Success)
+        if (valueStore?.Value is Item item)
         {
-            publisher.Publish(Activated.As(new Item { Id = result.Id, Name = result.Name }));
+            (bool Success, int Id, string Name) = await mediator.Handle<EditEventArgs<(int, ItemConfiguration)>,
+                (bool, int, string)>(new EditEventArgs<(int, ItemConfiguration)>((item.Id, new ItemConfiguration { Name = configuration?.Name })));
+
+            if (Success)
+            {
+                Item newItem = new Item { Id = Id, Name = Name };
+                publisher.Publish(Modified.As(item, newItem));
+
+                valueStore.Set(newItem);
+            }
+        }
+        else
+        {
+            (bool Success, int Id, string Name) = await mediator.Handle<CreateEventArgs<ItemConfiguration>,
+                (bool, int, string)>(new CreateEventArgs<ItemConfiguration>(new ItemConfiguration { Name = configuration?.Name }));
+
+            if (Success)
+            {
+                publisher.Publish(Created.As(new Item { Id = Id, Name = Name }));
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class CreateItemHander(IDbContextFactory<ContainerDbContext> dbContextFactory) : 
+public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFactory) : 
     IHandler<CreateEventArgs<ItemConfiguration>, (bool, int, string?)>
 {
     public async Task<(bool, int, string?)> Handle(CreateEventArgs<ItemConfiguration> args,

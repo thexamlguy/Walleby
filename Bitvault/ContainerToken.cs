@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Bitvault;
+﻿namespace Bitvault;
 
 public record ContainerToken
 {
@@ -21,9 +19,7 @@ public record ContainerToken
     }
 
 
-    [MaybeNull]
-    public string Name { get; }
+    public string Name { get; } = "";
 
-    [MaybeNull]
-    public string? Password { get; }
+    public string? Password { get; } = "";
 }
