@@ -26,9 +26,10 @@
             Grid.Row="1"
             Grid.Column="0"
             Margin="2,-1,0,0"
+            AutoScrollToSelectedItem="True"
             ItemTemplate="{ReflectionBinding Template}"
             ItemsSource="{Binding}"
-            SelectedIndex="{Binding SelectedIndex}"
+            SelectedItem="{Binding SelectedItem}"
             SelectionMode="Single">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">

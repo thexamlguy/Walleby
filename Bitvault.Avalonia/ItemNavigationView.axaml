@@ -9,6 +9,26 @@
         <SolidColorBrush x:Key="StarredIconForegroundBrush" Color="#FFEDB120" />
     </ListBoxItem.Resources>
     <Interaction.Behaviors>
+        <AttachedBehaviour>
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateAction
+                    Region="{Binding Named, StringFormat='{}{0}:Content'}"
+                    Route="Item"
+                    Scope="self">
+                    <NavigateAction.ParameterBindings>
+                        <ParameterBinding Key="Name" Value="{Binding Name}" />
+                        <ParameterBinding Key="Immutable" Value="{x:True}" />
+                        <ParameterBinding Key="Archived" Value="{Binding Archived}" />
+                        <ParameterBinding Key="Favourite" Value="{Binding Favourite}" />
+                    </NavigateAction.ParameterBindings>
+                </NavigateAction>
+            </ConditionAction>
+        </AttachedBehaviour>
         <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
             <NavigateAction
                 Region="{Binding Named, StringFormat='{}{0}:Content'}"
