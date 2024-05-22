@@ -13,7 +13,10 @@ public partial class ItemHeaderViewModel(IServiceProvider provider,
     string? value = null) : Observable<string, string>(provider, factory, mediator, publisher, subscriber, disposer, value),
     IHandler<ValidationEventArgs<Item>, bool>,
     IHandler<ConfirmEventArgs<Item>, ItemHeaderConfiguration>,
-    IItemEntryViewModel, IRemovable
+    INotificationHandler<EditEventArgs<Item>>,
+    INotificationHandler<ConfirmEventArgs<Item>>,
+    INotificationHandler<CancelEventArgs<Item>>,
+    IItemEntryViewModel
 {
     [ObservableProperty]
     private bool immutable = immutable;
@@ -24,11 +27,15 @@ public partial class ItemHeaderViewModel(IServiceProvider provider,
         return Task.FromResult(true);
     }
 
-    public override void Dispose()
-    {
-        base.Dispose();
-    }
-
     public Task<ItemHeaderConfiguration> Handle(ConfirmEventArgs<Item> args,
         CancellationToken cancellationToken) => Task.FromResult(new ItemHeaderConfiguration { Name = Value });
+
+    public Task Handle(EditEventArgs<Item> args) => 
+        Task.FromResult(Immutable = false);
+
+    public Task Handle(CancelEventArgs<Item> args) =>
+        Task.FromResult(Immutable = true);
+
+    public Task Handle(ConfirmEventArgs<Item> args) => 
+        Task.FromResult(Immutable = true);
 }

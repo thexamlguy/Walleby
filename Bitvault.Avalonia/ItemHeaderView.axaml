@@ -11,15 +11,33 @@
             DisplayName="{Binding Value}" />
         <TextBox
             MaxWidth="360"
-            IsVisible="{Binding !Immutable}"
+            IsReadOnly="{Binding Immutable, Mode=TwoWay}"
             Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
             TextAlignment="Center"
-            Watermark="Enter name" />
-        <SelectableTextBlock
-            MaxWidth="360"
-            IsVisible="{Binding Immutable}"
-            SelectionBrush="Red"
-            Text="{Binding Value}"
-            TextAlignment="Center" />
+            Watermark="Enter name">
+            <TextBox.Styles>
+                <Style Selector="TextBox[IsReadOnly=True]">
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Style Selector="^:pointerover">
+                        <Setter Property="Foreground" Value="{DynamicResource TextControlForegroundPointerOver}" />
+                        <Style Selector="^ /template/ Border#PART_BorderElement">
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </Style>
+                    <Style Selector="^:focus">
+                        <Setter Property="Foreground" Value="{DynamicResource TextControlForegroundFocused}" />
+                        <Style Selector="^ /template/ TextBlock#PART_Watermark">
+                            <Setter Property="Foreground" Value="{DynamicResource TextControlPlaceholderForegroundFocused}" />
+                        </Style>
+                        <Style Selector="^ /template/ Border#PART_BorderElement">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                        </Style>
+                    </Style>
+                </Style>
+            </TextBox.Styles>
+        </TextBox>
     </StackPanel>
 </UserControl>

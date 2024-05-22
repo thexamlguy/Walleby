@@ -9,10 +9,10 @@ public class AggerateItemViewModelHandler(IMediator mediator,
 {
     public Task Handle(AggerateEventArgs<IItemEntryViewModel> args)
     {
-        if (serviceFactory.Create<ItemHeaderViewModel>(false) is ItemHeaderViewModel viewModel)
-        {
-            publisher.Publish(Create.As<IItemEntryViewModel>(viewModel), nameof(ItemViewModel));
-        }
+        //if (serviceFactory.Create<ItemHeaderViewModel>(false) is ItemHeaderViewModel viewModel)
+        //{
+        //    publisher.Publish(Create.As<IItemEntryViewModel>(viewModel), nameof(ItemViewModel));
+        //}
 
         return Task.CompletedTask;
     }

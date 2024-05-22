@@ -3,10 +3,10 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Aggerate(nameof(ItemViewModel))]
 public partial class ItemViewModel : 
     ObservableCollection<IItemEntryViewModel>,
     INotificationHandler<EditEventArgs<Item>>,
+    INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>
 {
     [ObservableProperty]
@@ -43,6 +43,8 @@ public partial class ItemViewModel :
         Favourite = favourite;
         Archived = archived;
         Name = name;
+
+        Add<ItemHeaderViewModel>(immutable, name);
     }
 
     public IContentTemplate Template { get; set; }
@@ -62,6 +64,18 @@ public partial class ItemViewModel :
     {
         Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
         {
+            Factory.Create<EditItemActionViewModel>(),
+            Factory.Create<ArchiveItemActionViewModel>(),
+        })));
+
+        return Task.CompletedTask;
+    }
+
+    public Task Handle(ConfirmEventArgs<Item> args)
+    {
+        Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
+        {
+            Factory.Create<FavouriteItemActionViewModel>(Favourite),
             Factory.Create<EditItemActionViewModel>(),
             Factory.Create<ArchiveItemActionViewModel>(),
         })));
