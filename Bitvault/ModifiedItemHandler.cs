@@ -4,7 +4,6 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class ModifiedItemHandler(IServiceProvider serviceProvider,
-    ICache<Item> cache,
     IPublisher publisher) :
     INotificationHandler<ModifiedEventArgs<Item>>
 {
@@ -13,6 +12,7 @@ public class ModifiedItemHandler(IServiceProvider serviceProvider,
         Item oldItem = args.OldView;
         Item newItem = args.NewValue;
 
+        ICache<Item> cache = serviceProvider.GetRequiredService<ICache<Item>>();
         if (cache.TryGetValue(oldItem, out Item? cachedItem))
         {
             if (cachedItem is not null)

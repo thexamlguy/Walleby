@@ -14,36 +14,33 @@ public class ConfirmItemHandler(IValueStore<Item> valueStore,
 
         if (configuration is not null)
         {
-            bool success = false;
+            publisher.Publish(Notify.As(configuration));
+
             if (valueStore?.Value is Item item)
             {
-                (bool Success, int Id, string Name) = await mediator.Handle<EditEventArgs<(int, ItemConfiguration)>,
-                    (bool, int, string)>(new EditEventArgs<(int, ItemConfiguration)>((item.Id, new ItemConfiguration { Name = configuration.Name })));
+                Guid id = item.Id;
+                string? name = configuration.Name;
 
-                if (Success)
-                {
-                    Item newItem = new() { Id = Id, Name = Name };
-                    publisher.Publish(Modified.As(item, newItem));
+                Item newItem = new() { Id = id, Name = name };
+                publisher.Publish(Modified.As(item, newItem));
 
-                    valueStore.Set(newItem);
-                    success = true;
-                }
+                valueStore.Set(newItem);
+                
+                await mediator.Handle<EditEventArgs<(Guid, ItemConfiguration)>, bool>(new EditEventArgs<(Guid, 
+                    ItemConfiguration)>((item.Id, new ItemConfiguration { Name = name })));
             }
             else
             {
-                (bool Success, int Id, string Name) = await mediator.Handle<CreateEventArgs<ItemConfiguration>,
-                    (bool, int, string)>(new CreateEventArgs<ItemConfiguration>(new ItemConfiguration { Name = configuration.Name }));
+                Guid id = Guid.NewGuid();
+                string? name = configuration.Name;
+
+                bool Success = await mediator.Handle<CreateEventArgs<(Guid, 
+                    ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, ItemConfiguration)>((id, new ItemConfiguration { Name = name })));
 
                 if (Success)
                 {
-                    publisher.Publish(Created.As(new Item { Id = Id, Name = Name }));
-                    success = true;
+                    publisher.Publish(Created.As(new Item { Id = id, Name = name }));
                 }
-            }
-
-            if (success)
-            {
-                publisher.Publish(Notify.As(configuration));
             }
         }
     }

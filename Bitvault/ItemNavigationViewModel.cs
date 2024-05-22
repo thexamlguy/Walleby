@@ -11,7 +11,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     IDisposer disposer,
     IContentTemplate template,
     NamedComponent named,
-    int id,
+    Guid id,
     string? name = "",
     string? description = "",
     bool selected = false,
@@ -36,7 +36,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     private bool favourite = favourite;
 
     [ObservableProperty]
-    private int id = id;
+    private Guid id = id;
 
     [ObservableProperty]
     private string? name = name;

@@ -5,23 +5,13 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class QueryItemHandler(IDbContextFactory<ContainerDbContext> dbContextFactory) :
-    IHandler<RequestEventArgs<QueryItemConfiguration>, (int Id, string? Name)>
-{
-    public Task<(int Id, string? Name)> Handle(RequestEventArgs<QueryItemConfiguration> args, 
-        CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-}
-
 public class QueryContainerHandler(IDbContextFactory<ContainerDbContext> dbContextFactory) :
-    IHandler<RequestEventArgs<QueryContainerConfiguration>, IReadOnlyCollection<(int Id, string? Name, bool Favourite, bool Archived)>>
+    IHandler<RequestEventArgs<QueryContainerConfiguration>, IReadOnlyCollection<(Guid Id, string? Name, bool Favourite, bool Archived)>>
 {
-    public async Task<IReadOnlyCollection<(int Id, string Name, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryContainerConfiguration> args, 
+    public async Task<IReadOnlyCollection<(Guid Id, string? Name, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryContainerConfiguration> args, 
         CancellationToken cancellationToken)
     {
-        List<(int Id, string Name, bool Favourite, bool Archived)> items = [];
+        List<(Guid Id, string Name, bool Favourite, bool Archived)> items = [];
 
         if (args.Value is  QueryContainerConfiguration queryConfiguration)
         {

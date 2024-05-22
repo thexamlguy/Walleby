@@ -5,15 +5,17 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class EditItemHander(IDbContextFactory<ContainerDbContext> dbContextFactory) :
-    IHandler<EditEventArgs<(int, ItemConfiguration)>, (bool, int, string?)>
+    IHandler<EditEventArgs<(Guid, ItemConfiguration)>, bool>
 {
-    public async Task<(bool, int, string?)> Handle(EditEventArgs<(int, ItemConfiguration)> args,
+    public async Task<bool> Handle(EditEventArgs<(Guid, ItemConfiguration)> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is (int id, ItemConfiguration configuration))
+        if (args.Value is (Guid id, ItemConfiguration configuration))
         {
             try
             {
+                string? name = configuration.Name;
+
                 using ContainerDbContext context = dbContextFactory.CreateDbContext();
                 ItemEntry? result = null;
 
@@ -23,7 +25,7 @@ public class EditItemHander(IDbContextFactory<ContainerDbContext> dbContextFacto
 
                     if (result is not null)
                     {
-                        result.Name = configuration.Name;
+                        result.Name = name;
                         await context.SaveChangesAsync(cancellationToken);
                     }    
 
@@ -31,7 +33,7 @@ public class EditItemHander(IDbContextFactory<ContainerDbContext> dbContextFacto
 
                 if (result is not null)
                 {
-                    return (true, result.Id, result.Name);
+                    return true;
                 }
             }
             catch
@@ -40,6 +42,6 @@ public class EditItemHander(IDbContextFactory<ContainerDbContext> dbContextFacto
             }
         }
 
-        return (false, -1, "");
+        return false;
     }
 }

@@ -6,28 +6,30 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFactory) : 
-    IHandler<CreateEventArgs<ItemConfiguration>, (bool, int, string?)>
+    IHandler<CreateEventArgs<(Guid, ItemConfiguration)>, bool>
 {
-    public async Task<(bool, int, string?)> Handle(CreateEventArgs<ItemConfiguration> args,
+    public async Task<bool> Handle(CreateEventArgs<(Guid, ItemConfiguration)> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is ItemConfiguration configuration)
+        if (args.Value is (Guid id, ItemConfiguration configuration))
         {
             try
             {
+                string? name = configuration.Name;
+
                 using ContainerDbContext context = dbContextFactory.CreateDbContext();
                 EntityEntry<ItemEntry>? result = null;
 
                 await Task.Run(async () =>
                 {
-                    result = await context.AddAsync(new ItemEntry { Name = configuration.Name }, cancellationToken);
+                    result = await context.AddAsync(new ItemEntry { Id = id, Name = name }, cancellationToken);
                     await context.SaveChangesAsync(cancellationToken);
 
                 }, cancellationToken);
 
                 if (result is not null)
                 {
-                    return (true, result.Entity.Id, result.Entity.Name);
+                    return true;
                 }
             }
             catch
@@ -36,6 +38,6 @@ public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFa
             }
         }
 
-        return (false, -1, "");
+        return false;
     }
 }

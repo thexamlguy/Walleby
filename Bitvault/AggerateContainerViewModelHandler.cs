@@ -18,13 +18,13 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
             bool selected = true;
 
             if (await mediator.Handle<RequestEventArgs<QueryContainerConfiguration>,
-                IReadOnlyCollection<(int Id, string Name, bool Favourite, bool Archived)>>(Request.As(new QueryContainerConfiguration 
+                IReadOnlyCollection<(Guid Id, string Name, bool Favourite, bool Archived)>>(Request.As(new QueryContainerConfiguration 
                 { 
                     Filter = configuration.Filter,
                     Query = configuration.Query 
-                })) is IReadOnlyCollection<(int Id, string Name, bool Favourite, bool Archived)> results)
+                })) is IReadOnlyCollection<(Guid Id, string Name, bool Favourite, bool Archived)> results)
             {
-                foreach ((int Id, string Name, bool Favourite, bool Archived) in results)
+                foreach ((Guid Id, string Name, bool Favourite, bool Archived) in results)
                 {
                     IServiceScope serviceScope = serviceProvider.CreateScope();
                     IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
@@ -43,5 +43,7 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
                 }
             }
         }
+
+        var d = cache;
     }
 }
