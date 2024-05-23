@@ -43,7 +43,5 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
                 }
             }
         }
-
-        var d = cache;
     }
 }

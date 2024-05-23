@@ -11,7 +11,7 @@ public class QueryContainerHandler(IDbContextFactory<ContainerDbContext> dbConte
     public async Task<IReadOnlyCollection<(Guid Id, string? Name, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryContainerConfiguration> args, 
         CancellationToken cancellationToken)
     {
-        List<(Guid Id, string Name, bool Favourite, bool Archived)> items = [];
+        List<(Guid Id, string? Name, bool Favourite, bool Archived)> items = [];
 
         if (args.Value is  QueryContainerConfiguration queryConfiguration)
         {
@@ -41,16 +41,18 @@ public class QueryContainerHandler(IDbContextFactory<ContainerDbContext> dbConte
             var results = await Task.Run(async () =>
             {
                 using ContainerDbContext context = dbContextFactory.CreateDbContext();
-                return await context.Set<ItemEntry>().Where(predicate).Select(x => new
-                {
-                    x.Id,
-                    x.Name,
-                    Favourite = x.State == 1,
-                    Archived = x.State == 2
-                }).OrderBy(x => x.Name).ToListAsync();
+                return await context.Set<ItemEntry>()
+                    .Where(predicate)
+                    .Select(x => new
+                    {
+                        x.Id,
+                        x.Name,
+                        Favourite = x.State == 1,
+                        Archived = x.State == 2
+                    }).ToListAsync();
             });
 
-            foreach (var result in results)
+            foreach (var result in results.OrderBy(x => x.Name, StringComparer.OrdinalIgnoreCase))
             {
                 items.Add(new(result.Id, result.Name, result.Favourite, result.Archived));
             }
