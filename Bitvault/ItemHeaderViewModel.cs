@@ -1,16 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Xml.Linq;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class ItemHeaderViewModel(IServiceProvider provider,
-    IServiceFactory factory,
-    IMediator mediator,
-    IPublisher publisher,
-    ISubscription subscriber,
-    IDisposer disposer,
-    bool immutable,
-    string? value = null) : Observable<string, string>(provider, factory, mediator, publisher, subscriber, disposer, value),
+public partial class ItemHeaderViewModel : Observable<string, string>,
     IHandler<ValidationEventArgs<Item>, bool>,
     IHandler<ConfirmEventArgs<Item>, ItemHeaderConfiguration>,
     INotificationHandler<EditEventArgs<Item>>,
@@ -19,7 +13,22 @@ public partial class ItemHeaderViewModel(IServiceProvider provider,
     IItemEntryViewModel
 {
     [ObservableProperty]
-    private bool immutable = immutable;
+    private bool immutable;
+
+    public ItemHeaderViewModel(IServiceProvider provider,
+    IServiceFactory factory,
+    IMediator mediator,
+    IPublisher publisher,
+    ISubscription subscriber,
+    IDisposer disposer,
+    bool immutable,
+    string? value = null) : base(provider, factory, mediator, publisher, subscriber, disposer, value)
+    {
+        Immutable = immutable;
+        Value = value;
+
+        Track(nameof(Value), () => Value, newValue => Value = newValue);
+    }
 
     public Task<bool> Handle(ValidationEventArgs<Item> args, 
         CancellationToken cancellationToken)
@@ -33,9 +42,19 @@ public partial class ItemHeaderViewModel(IServiceProvider provider,
     public Task Handle(EditEventArgs<Item> args) => 
         Task.FromResult(Immutable = false);
 
-    public Task Handle(CancelEventArgs<Item> args) =>
-        Task.FromResult(Immutable = true);
+    public Task Handle(CancelEventArgs<Item> args)
+    {
+        Revert();
+        Immutable = true;
 
-    public Task Handle(ConfirmEventArgs<Item> args) => 
-        Task.FromResult(Immutable = true);
+        return Task.CompletedTask;
+    }
+
+    public Task Handle(ConfirmEventArgs<Item> args)
+    {
+        Commit();
+        Immutable = true;
+
+        return Task.CompletedTask;
+    }
 }
