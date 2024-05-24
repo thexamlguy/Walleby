@@ -15,9 +15,7 @@ public record ContainerToken
 
     public ContainerToken()
     {
-
     }
-
 
     public string Name { get; } = "";
 

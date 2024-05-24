@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class ItemViewModel : 
+public partial class ItemViewModel :
     ObservableCollection<IItemEntryViewModel>,
     INotificationHandler<EditEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
@@ -25,10 +25,10 @@ public partial class ItemViewModel :
     private string name;
 
     public ItemViewModel(IServiceProvider provider,
-        IServiceFactory factory, 
+        IServiceFactory factory,
         IMediator mediator,
-        IPublisher publisher, 
-        ISubscription subscriber, 
+        IPublisher publisher,
+        ISubscription subscriber,
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
@@ -37,7 +37,7 @@ public partial class ItemViewModel :
         bool favourite = false,
         bool archived = false) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
-        Named = $"{named}"; 
+        Named = $"{named}";
         Template = template;
         Immutable = immutable;
         Favourite = favourite;

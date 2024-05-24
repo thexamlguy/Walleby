@@ -19,4 +19,3 @@ public partial class SearchContainerActionViewModel(IServiceProvider provider,
     public void Invoke() => Publisher.Publish(Notify.As(new Search(Value)),
         nameof(ContainerViewModel));
 }
-

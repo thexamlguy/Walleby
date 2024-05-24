@@ -28,7 +28,6 @@ public class FavouriteItemHandler(IValueStore<Item> valueStore,
         }
         catch
         {
-
         }
     }
 }

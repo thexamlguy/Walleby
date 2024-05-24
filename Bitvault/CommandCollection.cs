@@ -7,6 +7,5 @@ public class CommandCollection :
 {
     public CommandCollection(IList<IDisposable> list) : base(list)
     {
-
     }
 }

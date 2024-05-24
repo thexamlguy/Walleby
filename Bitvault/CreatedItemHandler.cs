@@ -1,11 +1,10 @@
-﻿using FluentAvalonia.Core;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
 public class CreatedItemHandler(IServiceProvider serviceProvider,
-    ICache< Item> cache,
+    ICache<Item> cache,
     IPublisher publisher) :
     INotificationHandler<CreatedEventArgs<Item>>
 {
@@ -17,7 +16,7 @@ public class CreatedItemHandler(IServiceProvider serviceProvider,
             IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
             IValueStore<Item> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item>>();
 
-            if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description", true) 
+            if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description", true)
                 is ItemNavigationViewModel viewModel)
             {
                 cache.Add(item);

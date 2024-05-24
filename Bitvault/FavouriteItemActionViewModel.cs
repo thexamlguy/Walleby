@@ -27,4 +27,3 @@ public partial class FavouriteItemActionViewModel(IServiceProvider provider,
         }
     }
 }
-

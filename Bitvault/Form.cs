@@ -2,5 +2,5 @@
 
 public record Form
 {
-    public ICollection<FormEntry>? Entries { get; set;}
+    public ICollection<FormEntry>? Entries { get; set; }
 }

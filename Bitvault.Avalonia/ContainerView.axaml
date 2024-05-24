@@ -29,7 +29,7 @@
             AutoScrollToSelectedItem="True"
             ItemTemplate="{ReflectionBinding Template}"
             ItemsSource="{Binding}"
-            SelectedItem="{Binding SelectedItem}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             SelectionMode="Single">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
@@ -52,7 +52,10 @@
             BorderThickness="1,1,0,0"
             CornerRadius="8 0 0 0">
             <Grid RowDefinitions="Auto, *">
-                <Border Grid.Row="0" Padding="4" Height="44">
+                <Border
+                    Grid.Row="0"
+                    Height="44"
+                    Padding="4">
                     <ContentControl>
                         <Interaction.Behaviors>
                             <AttachedBehaviour>

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
     x:DataType="vm:ItemNavigationViewModel"
-    IsSelected="{Binding Selected}">
+    IsSelected="{Binding Selected, Mode=TwoWay}">
     <ListBoxItem.Resources>
         <SolidColorBrush x:Key="StarredIconForegroundBrush" Color="#FFEDB120" />
     </ListBoxItem.Resources>

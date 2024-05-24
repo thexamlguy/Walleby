@@ -8,14 +8,14 @@ namespace Bitvault;
 public class QueryContainerHandler(IDbContextFactory<ContainerDbContext> dbContextFactory) :
     IHandler<RequestEventArgs<QueryContainerConfiguration>, IReadOnlyCollection<(Guid Id, string? Name, bool Favourite, bool Archived)>>
 {
-    public async Task<IReadOnlyCollection<(Guid Id, string? Name, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryContainerConfiguration> args, 
+    public async Task<IReadOnlyCollection<(Guid Id, string? Name, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryContainerConfiguration> args,
         CancellationToken cancellationToken)
     {
         List<(Guid Id, string? Name, bool Favourite, bool Archived)> items = [];
 
-        if (args.Value is  QueryContainerConfiguration queryConfiguration)
+        if (args.Value is QueryContainerConfiguration queryConfiguration)
         {
-            ExpressionStarter<ItemEntry> predicate = 
+            ExpressionStarter<ItemEntry> predicate =
                 PredicateBuilder.New<ItemEntry>(true);
 
             if (queryConfiguration.Filter == "All")
@@ -33,7 +33,7 @@ public class QueryContainerHandler(IDbContextFactory<ContainerDbContext> dbConte
                 predicate = predicate.And(x => x.State == 2);
             }
 
-            if (queryConfiguration.Query is { Length: > 0} query)
+            if (queryConfiguration.Query is { Length: > 0 } query)
             {
                 predicate = predicate.And(x => EF.Functions.Like(x.Name, $"%{query}%"));
             }

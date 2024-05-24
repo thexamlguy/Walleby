@@ -2,7 +2,7 @@
 
 namespace Bitvault.Data;
 
-public class ContainerDbContext(DbContextOptions<ContainerDbContext> options) : 
+public class ContainerDbContext(DbContextOptions<ContainerDbContext> options) :
     DbContext(options)
 {
     public DbSet<BlobEntry> Blobs { get; set; }

@@ -3,7 +3,6 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-
 [Aggerate(nameof(ContainerViewModel))]
 public partial class ContainerViewModel(IServiceProvider provider,
     IServiceFactory factory,
@@ -44,6 +43,7 @@ public partial class ContainerViewModel(IServiceProvider provider,
 
         return Task.CompletedTask;
     }
+
     public Task Handle(NotifyEventArgs<Search> args)
     {
         if (args.Value is Search search)

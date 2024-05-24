@@ -9,7 +9,7 @@ public class AggerateMainViewModelHandler(IPublisher publisher,
 {
     public Task Handle(AggerateEventArgs<IMainNavigationViewModel> args)
     {
-        foreach (IComponentHost container in containers.OrderBy(x => x.GetConfiguration<ContainerConfiguration>() 
+        foreach (IComponentHost container in containers.OrderBy(x => x.GetConfiguration<ContainerConfiguration>()
             is ContainerConfiguration configuration ? configuration.Name : null))
         {
             if (container.Services.GetRequiredService<ContainerConfiguration>() is ContainerConfiguration configuration)

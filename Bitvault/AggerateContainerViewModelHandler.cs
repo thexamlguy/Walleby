@@ -9,7 +9,7 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
     IPublisher publisher) :
     INotificationHandler<AggerateEventArgs<ItemNavigationViewModel, ContainerViewModelConfiguration>>
 {
-    public async Task Handle(AggerateEventArgs<ItemNavigationViewModel, 
+    public async Task Handle(AggerateEventArgs<ItemNavigationViewModel,
         ContainerViewModelConfiguration> args)
     {
         if (args.Options is ContainerViewModelConfiguration configuration)
@@ -18,10 +18,10 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
             bool selected = true;
 
             if (await mediator.Handle<RequestEventArgs<QueryContainerConfiguration>,
-                IReadOnlyCollection<(Guid Id, string Name, bool Favourite, bool Archived)>>(Request.As(new QueryContainerConfiguration 
-                { 
+                IReadOnlyCollection<(Guid Id, string Name, bool Favourite, bool Archived)>>(Request.As(new QueryContainerConfiguration
+                {
                     Filter = configuration.Filter,
-                    Query = configuration.Query 
+                    Query = configuration.Query
                 })) is IReadOnlyCollection<(Guid Id, string Name, bool Favourite, bool Archived)> results)
             {
                 foreach ((Guid Id, string Name, bool Favourite, bool Archived) in results)

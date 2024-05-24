@@ -27,8 +27,7 @@ public class EditItemHander(IDbContextFactory<ContainerDbContext> dbContextFacto
                     {
                         result.Name = name;
                         await context.SaveChangesAsync(cancellationToken);
-                    }    
-
+                    }
                 }, cancellationToken);
 
                 if (result is not null)
@@ -38,7 +37,6 @@ public class EditItemHander(IDbContextFactory<ContainerDbContext> dbContextFacto
             }
             catch
             {
-
             }
         }
 

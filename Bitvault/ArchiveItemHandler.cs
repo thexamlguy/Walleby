@@ -28,7 +28,6 @@ public class ArchiveItemHandler(IValueStore<Item> valueStore,
         }
         catch
         {
-
         }
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Bitvault;
 
-public partial class ContainerHeaderViewModel : 
+public partial class ContainerHeaderViewModel :
     ObservableCollection
 {
-    public ContainerHeaderViewModel(IServiceProvider provider, 
+    public ContainerHeaderViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,

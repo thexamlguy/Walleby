@@ -11,7 +11,7 @@ public class ContainerStorageFactory(IValueStore<ContainerConnection> connection
     IServiceProvider provider) :
     IContainerStorageFactory
 {
-    public async Task<bool> Create(string name, 
+    public async Task<bool> Create(string name,
         SecurityKey key)
     {
         connection.Set(new ContainerConnection($"Data Source={Path.Combine(environment.ContentRootPath, name)}" +
@@ -28,7 +28,6 @@ public class ContainerStorageFactory(IValueStore<ContainerConnection> connection
                 await context.Database.CloseConnectionAsync().ConfigureAwait(false);
 
                 context.Database.SetConnectionString(null);
-
             }).ConfigureAwait(false);
         }
         catch

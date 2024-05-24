@@ -25,8 +25,8 @@ public class ConfirmItemHandler(IValueStore<Item> valueStore,
                 publisher.Publish(Modified.As(item, newItem));
 
                 valueStore.Set(newItem);
-                
-                await mediator.Handle<EditEventArgs<(Guid, ItemConfiguration)>, bool>(new EditEventArgs<(Guid, 
+
+                await mediator.Handle<EditEventArgs<(Guid, ItemConfiguration)>, bool>(new EditEventArgs<(Guid,
                     ItemConfiguration)>((item.Id, new ItemConfiguration { Name = name })));
             }
             else
@@ -34,7 +34,7 @@ public class ConfirmItemHandler(IValueStore<Item> valueStore,
                 Guid id = Guid.NewGuid();
                 string? name = configuration.Name;
 
-                bool Success = await mediator.Handle<CreateEventArgs<(Guid, 
+                bool Success = await mediator.Handle<CreateEventArgs<(Guid,
                     ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, ItemConfiguration)>((id, new ItemConfiguration { Name = name })));
 
                 if (Success)

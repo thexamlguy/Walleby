@@ -1,7 +1,6 @@
 ﻿namespace Bitvault;
 
-public interface IItemEntryViewModel : 
+public interface IItemEntryViewModel :
     IDisposable
 {
-
 }

@@ -18,7 +18,7 @@ public class OpenContainerHandler(ContainerConfiguration configuration,
                 byte[]? salt = Convert.FromBase64String(keyPart[0]);
                 byte[]? encryptedKey = Convert.FromBase64String(keyPart[1]);
 
-                if ( keyVaultFactory.Create(Encoding.UTF8.GetBytes(password), encryptedKey, salt) is SecurityKey key)
+                if (keyVaultFactory.Create(Encoding.UTF8.GetBytes(password), encryptedKey, salt) is SecurityKey key)
                 {
                     if (await vaultStorage.Create(name, key))
                     {

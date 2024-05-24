@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class ContainerActivatedHandler(IContainerHostCollection containers,
-    IPublisher publisher) : 
+    IPublisher publisher) :
     INotificationHandler<ActivatedEventArgs<IComponentHost>>
 {
     public Task Handle(ActivatedEventArgs<IComponentHost> args)
@@ -12,7 +12,7 @@ public class ContainerActivatedHandler(IContainerHostCollection containers,
         if (args.Value is IComponentHost container)
         {
             List<IComponentHost> sortedContainers = [.. containers, container];
-            sortedContainers = [.. sortedContainers.OrderBy(x => x.GetConfiguration< ContainerConfiguration>() is ContainerConfiguration configuration ? configuration.Name : null)];
+            sortedContainers = [.. sortedContainers.OrderBy(x => x.GetConfiguration<ContainerConfiguration>() is ContainerConfiguration configuration ? configuration.Name : null)];
 
             int index = sortedContainers.IndexOf(container);
 

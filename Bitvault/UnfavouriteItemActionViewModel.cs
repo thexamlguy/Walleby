@@ -14,4 +14,3 @@ public partial class UnfavouriteItemActionViewModel(IServiceProvider provider,
     [RelayCommand]
     public void Invoke() => Publisher.Publish(Unfavourite.As<Item>());
 }
-

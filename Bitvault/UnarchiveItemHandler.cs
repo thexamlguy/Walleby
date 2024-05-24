@@ -28,7 +28,6 @@ public class UnarchiveItemHandler(IValueStore<Item> valueStore,
         }
         catch
         {
-
         }
     }
 }

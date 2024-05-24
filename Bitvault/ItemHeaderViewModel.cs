@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Xml.Linq;
 using Toolkit.Foundation;
 
 namespace Bitvault;
@@ -30,7 +29,7 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
         Track(nameof(Value), () => Value, newValue => Value = newValue);
     }
 
-    public Task<bool> Handle(ValidationEventArgs<Item> args, 
+    public Task<bool> Handle(ValidationEventArgs<Item> args,
         CancellationToken cancellationToken)
     {
         return Task.FromResult(true);
@@ -39,7 +38,7 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
     public Task<ItemHeaderConfiguration> Handle(ConfirmEventArgs<Item> args,
         CancellationToken cancellationToken) => Task.FromResult(new ItemHeaderConfiguration { Name = Value });
 
-    public Task Handle(EditEventArgs<Item> args) => 
+    public Task Handle(EditEventArgs<Item> args) =>
         Task.FromResult(Immutable = false);
 
     public Task Handle(CancelEventArgs<Item> args)

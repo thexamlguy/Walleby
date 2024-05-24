@@ -5,7 +5,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFactory) : 
+public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFactory) :
     IHandler<CreateEventArgs<(Guid, ItemConfiguration)>, bool>
 {
     public async Task<bool> Handle(CreateEventArgs<(Guid, ItemConfiguration)> args,
@@ -24,7 +24,6 @@ public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFa
                 {
                     result = await context.AddAsync(new ItemEntry { Id = id, Name = name }, cancellationToken);
                     await context.SaveChangesAsync(cancellationToken);
-
                 }, cancellationToken);
 
                 if (result is not null)
@@ -34,7 +33,6 @@ public class CreateItemHandler(IDbContextFactory<ContainerDbContext> dbContextFa
             }
             catch
             {
-
             }
         }
 

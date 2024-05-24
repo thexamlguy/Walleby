@@ -1,16 +1,16 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Bitvault.Data;
+using HotAvalonia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
 using Toolkit.Avalonia;
 using Toolkit.Foundation;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using HotAvalonia;
-using Bitvault.Data;
-using System.Collections.Generic;
-using System;
 
 namespace Bitvault.Avalonia;
 
@@ -39,7 +39,7 @@ public partial class App : Application
 
                 services.AddHandler<ContainerActivatedHandler>();
 
-                services.AddTransient<IContainerComponent> (provider => Component.Create<ContainerComponent>(provider, args =>
+                services.AddTransient<IContainerComponent>(provider => Component.Create<ContainerComponent>(provider, args =>
                 {
                     args.AddServices(services =>
                     {
@@ -62,12 +62,12 @@ public partial class App : Application
 
                         services.AddDbContextFactory<ContainerDbContext>((provider, args) =>
                         {
-                            if (provider.GetRequiredService<IValueStore<ContainerConnection>>() 
+                            if (provider.GetRequiredService<IValueStore<ContainerConnection>>()
                                 is IValueStore<ContainerConnection> connection)
                             {
                                 args.UseSqlite($"{connection.Value}");
                             }
-                        }); 
+                        });
 
                         services.AddHandler<QueryContainerHandler>();
                         services.AddHandler<CreateItemHandler>();
@@ -121,7 +121,7 @@ public partial class App : Application
                     });
                 })!);
 
-                services.AddTransient<IContainerFactory,  ContainerFactory>();
+                services.AddTransient<IContainerFactory, ContainerFactory>();
                 services.AddHandler<CreateContainerHandler>();
 
                 services.AddSingleton<IContainerHostCollection, ContainerHostCollection>();

@@ -11,6 +11,5 @@ public partial class PasswordViewModel : Observable
         ISubscription subscriber,
         IDisposer disposer) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
-
     }
 }

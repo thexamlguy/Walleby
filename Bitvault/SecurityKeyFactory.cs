@@ -5,7 +5,7 @@ namespace Bitvault;
 public class SecurityKeyFactory(IKeyGenerator generator,
     IKeyDeriver deriver,
     IEncryptor encryptor,
-    IDecryptor decryptor) : 
+    IDecryptor decryptor) :
     ISecurityKeyFactory
 {
     public SecurityKey? Create(byte[] phrase,
@@ -31,4 +31,3 @@ public class SecurityKeyFactory(IKeyGenerator generator,
         return new SecurityKey(salt, encryptedKey, decryptedKey);
     }
 }
-

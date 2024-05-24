@@ -8,7 +8,7 @@ public partial class ItemCommandHeaderViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    IContentTemplate template) : 
+    IContentTemplate template) :
     ObservableCollection(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<NotifyEventArgs<CommandCollection>>
 {

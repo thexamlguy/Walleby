@@ -49,17 +49,18 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     public IContentTemplate Template { get; set; } = template;
 
-    public Task Handle(ArchiveEventArgs<Item> args) => 
+    public Task Handle(ArchiveEventArgs<Item> args) =>
         Task.Run(Dispose);
 
-    public Task Handle(UnarchiveEventArgs<Item> args) => 
+    public Task Handle(UnarchiveEventArgs<Item> args) =>
         Task.Run(Dispose);
 
-    public Task Handle(FavouriteEventArgs<Item> args) => 
+    public Task Handle(FavouriteEventArgs<Item> args) =>
         Task.FromResult(Favourite = true);
 
     public Task Handle(UnfavouriteEventArgs<Item> args) =>
         Task.FromResult(Favourite = false);
+
     public Task Handle(NotifyEventArgs<ItemHeaderConfiguration> args)
     {
         if (args.Value is ItemHeaderConfiguration configuration)

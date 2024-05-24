@@ -11,6 +11,5 @@ public partial class NoteViewModel : Observable
         ISubscription subscriber,
         IDisposer disposer) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
-
     }
 }
