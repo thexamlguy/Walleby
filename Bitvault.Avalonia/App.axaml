@@ -5,21 +5,5 @@
     xmlns:ui="using:FluentAvalonia.UI.Controls">
     <Application.Styles>
         <ThemeResources PreferSystemTheme="True" PreferUserAccentColor="True" />
-        <Style Selector="ui|SettingsExpanderItem">
-            <Style Selector="^ /template/ Expander#Expander">
-                <Setter Property="IsVisible" Value="False" />
-            </Style>
-            <Style Selector="^:footerBottom /template/ ContentPresenter#FooterPresenter">
-                <Setter Property="HorizontalAlignment" Value="Stretch" />
-            </Style>
-        </Style>
-        <Style Selector="ui|SettingsExpander /template/ Expander#Expander ToggleButton">
-            <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
-        </Style>
     </Application.Styles>
-    <Application.Resources>
-        <FontFamily x:Key="SymbolFontFamily">avares://HyperX.Launcher.Avalonia/Assets/SegoeIcons.ttf#Segoe Fluent Icons</FontFamily>
-        <x:Double x:Key="SettingsExpanderItemAdaptiveWidthTrigger">0</x:Double>
-        <Thickness x:Key="SettingsExpanderItemBottomFooterMargin">0,8,0,0</Thickness>
-    </Application.Resources>
 </Application>

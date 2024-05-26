@@ -45,6 +45,7 @@ public partial class ItemViewModel :
         Name = name;
 
         Add<ItemHeaderViewModel>(immutable, name);
+        Add<ItemContentViewModel>(immutable);
     }
 
     public IContentTemplate Template { get; set; }

@@ -108,6 +108,8 @@ public partial class App : Application
                         services.AddTemplate<DeleteItemActionViewModel, DeleteItemActionView>();
 
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
+                        services.AddTemplate<ItemContentViewModel, ItemContentView>();
+                        services.AddTemplate<AddItemContentNavigationViewModel, AddItemContentNavigationView>();
 
                         services.AddScoped<IValueStore<Item>, ValueStore<Item>>();
 

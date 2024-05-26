@@ -13,6 +13,12 @@
         </AttachedBehaviour>
     </Interaction.Behaviors>
     <ScrollViewer Padding="12,12,12,0">
-        <ItemsControl ItemTemplate="{ReflectionBinding Template}" ItemsSource="{Binding}" />
+        <ItemsControl ItemTemplate="{ReflectionBinding Template}" ItemsSource="{Binding}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Spacing="24" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </ScrollViewer>
 </UserControl>
