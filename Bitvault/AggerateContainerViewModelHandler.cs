@@ -15,6 +15,7 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
         if (args.Options is ContainerViewModelConfiguration configuration)
         {
             cache.Clear();
+            var dd = cache;
             bool selected = true;
 
             if (await mediator.Handle<RequestEventArgs<QueryContainerConfiguration>,
