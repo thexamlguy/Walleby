@@ -4,10 +4,10 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class EditItemHander(IDbContextFactory<ContainerDbContext> dbContextFactory) :
-    IHandler<EditEventArgs<(Guid, ItemConfiguration)>, bool>
+public class UpdateItemHander(IDbContextFactory<ContainerDbContext> dbContextFactory) :
+    IHandler<UpdateEventArgs<(Guid, ItemConfiguration)>, bool>
 {
-    public async Task<bool> Handle(EditEventArgs<(Guid, ItemConfiguration)> args,
+    public async Task<bool> Handle(UpdateEventArgs<(Guid, ItemConfiguration)> args,
         CancellationToken cancellationToken)
     {
         if (args.Value is (Guid id, ItemConfiguration configuration))
@@ -15,14 +15,12 @@ public class EditItemHander(IDbContextFactory<ContainerDbContext> dbContextFacto
             try
             {
                 string? name = configuration.Name;
-
                 using ContainerDbContext context = dbContextFactory.CreateDbContext();
                 ItemEntry? result = null;
 
                 await Task.Run(async () =>
                 {
                     result = await context.Set<ItemEntry>().FindAsync(id);
-
                     if (result is not null)
                     {
                         result.Name = name;

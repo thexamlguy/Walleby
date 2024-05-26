@@ -5,7 +5,7 @@ namespace Bitvault;
 
 public partial class ItemViewModel :
     ObservableCollection<IItemEntryViewModel>,
-    INotificationHandler<EditEventArgs<Item>>,
+    INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>
 {
@@ -49,7 +49,7 @@ public partial class ItemViewModel :
 
     public IContentTemplate Template { get; set; }
 
-    public Task Handle(EditEventArgs<Item> args)
+    public Task Handle(UpdateEventArgs<Item> args)
     {
         Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
         {

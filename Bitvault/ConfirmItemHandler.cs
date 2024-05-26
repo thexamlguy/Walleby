@@ -26,7 +26,7 @@ public class ConfirmItemHandler(IValueStore<Item> valueStore,
 
                 valueStore.Set(newItem);
 
-                await mediator.Handle<EditEventArgs<(Guid, ItemConfiguration)>, bool>(new EditEventArgs<(Guid,
+                await mediator.Handle<UpdateEventArgs<(Guid, ItemConfiguration)>, bool>(new UpdateEventArgs<(Guid,
                     ItemConfiguration)>((item.Id, new ItemConfiguration { Name = name })));
             }
             else

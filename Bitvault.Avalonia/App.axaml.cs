@@ -71,7 +71,8 @@ public partial class App : Application
 
                         services.AddHandler<QueryContainerHandler>();
                         services.AddHandler<CreateItemHandler>();
-                        services.AddHandler<EditItemHander>();
+                        services.AddHandler<UpdateItemHander>();
+                        services.AddHandler<UpdateItemStateHandler>();
 
                         services.AddHandler<OpenContainerHandler>();
 

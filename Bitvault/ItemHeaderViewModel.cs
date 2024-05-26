@@ -6,7 +6,7 @@ namespace Bitvault;
 public partial class ItemHeaderViewModel : Observable<string, string>,
     IHandler<ValidationEventArgs<Item>, bool>,
     IHandler<ConfirmEventArgs<Item>, ItemHeaderConfiguration>,
-    INotificationHandler<EditEventArgs<Item>>,
+    INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>,
     IItemEntryViewModel
@@ -38,7 +38,7 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
     public Task<ItemHeaderConfiguration> Handle(ConfirmEventArgs<Item> args,
         CancellationToken cancellationToken) => Task.FromResult(new ItemHeaderConfiguration { Name = Value });
 
-    public Task Handle(EditEventArgs<Item> args) =>
+    public Task Handle(UpdateEventArgs<Item> args) =>
         Task.FromResult(Immutable = false);
 
     public Task Handle(CancelEventArgs<Item> args)

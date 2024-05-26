@@ -1,11 +1,10 @@
-﻿using Bitvault.Data;
-using Microsoft.EntityFrameworkCore;
-using Toolkit.Foundation;
+﻿using Toolkit.Foundation;
 
 namespace Bitvault;
 
 public class ArchiveItemHandler(IValueStore<Item> valueStore,
-    IDbContextFactory<ContainerDbContext> dbContextFactory) :
+    ICache<Item> cache,
+    IMediator mediator) :
     INotificationHandler<ArchiveEventArgs<Item>>
 {
     public async Task Handle(ArchiveEventArgs<Item> args)
@@ -14,20 +13,18 @@ public class ArchiveItemHandler(IValueStore<Item> valueStore,
         {
             if (valueStore.Value is Item item)
             {
-                await Task.Run(async () =>
+                if (cache.Contains(item))
                 {
-                    using ContainerDbContext context = await dbContextFactory.CreateDbContextAsync();
+                    await mediator.Handle<UpdateEventArgs<(Guid, int)>,
+                        bool>(new UpdateEventArgs<(Guid, int)>((item.Id, 2)));
 
-                    if (await context.FindAsync<ItemEntry>(item.Id) is ItemEntry result)
-                    {
-                        result.State = 2;
-                        await context.SaveChangesAsync();
-                    }
-                });
-            }
+                    cache.Remove(item);
+                }
+            } 
         }
         catch
         {
+
         }
     }
 }
