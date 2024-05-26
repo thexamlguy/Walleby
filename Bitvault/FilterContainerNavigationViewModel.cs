@@ -6,8 +6,8 @@ namespace Bitvault;
 
 public partial class FilterContainerNavigationViewModel : Observable,
     IContainerNavigationViewModel,
-    INotificationHandler<ActivatedEventArgs<ContainerToken>>,
-    INotificationHandler<DeactivatedEventArgs<ContainerToken>>
+    INotificationHandler<ActivatedEventArgs<Container>>,
+    INotificationHandler<DeactivatedEventArgs<Container>>
 {
     [ObservableProperty]
     private bool activated;
@@ -29,10 +29,10 @@ public partial class FilterContainerNavigationViewModel : Observable,
         Filter = filter;
     }
 
-    public Task Handle(DeactivatedEventArgs<ContainerToken> args) =>
+    public Task Handle(DeactivatedEventArgs<Container> args) =>
         Task.FromResult(Activated = false);
 
-    public Task Handle(ActivatedEventArgs<ContainerToken> args) =>
+    public Task Handle(ActivatedEventArgs<Container> args) =>
         Task.FromResult(Activated = true);
 
     [RelayCommand]

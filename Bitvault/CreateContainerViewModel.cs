@@ -22,5 +22,5 @@ public partial class CreateContainerViewModel(IServiceProvider provider,
     private string password;
 
     public async Task<bool> Confirm() =>
-        await Mediator.Handle<CreateEventArgs<ContainerToken>, bool>(Create.As(new ContainerToken(Name, Password)));
+        await Mediator.Handle<CreateEventArgs<Container>, bool>(Create.As(new Container(Name, Password)));
 }

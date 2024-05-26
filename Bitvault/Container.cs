@@ -1,19 +1,19 @@
 ﻿namespace Bitvault;
 
-public record ContainerToken
+public record Container
 {
-    public ContainerToken(string name, string password)
+    public Container(string name, string password)
     {
         Name = name;
         Password = password;
     }
 
-    public ContainerToken(string password)
+    public Container(string password)
     {
         Password = password;
     }
 
-    public ContainerToken()
+    public Container()
     {
     }
 

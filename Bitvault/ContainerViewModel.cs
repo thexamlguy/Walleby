@@ -4,34 +4,33 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 [Aggerate(nameof(ContainerViewModel))]
-public partial class ContainerViewModel(IServiceProvider provider,
-    IServiceFactory factory,
-    IMediator mediator,
-    IPublisher publisher,
-    ISubscription subscriber,
-    IDisposer disposer,
-    IContentTemplate template,
-    NamedComponent named,
-    ContainerViewModelConfiguration configuration) : ObservableCollection<ItemNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
+public partial class ContainerViewModel : ObservableCollection<ItemNavigationViewModel>,
     INotificationHandler<NotifyEventArgs<Filter>>,
     INotificationHandler<NotifyEventArgs<Search>>
 {
     [ObservableProperty]
-    private string named = $"{named}";
+    private string named;
 
-    public IContentTemplate Template { get; set; } = template;
-
-    public override async Task OnActivated()
+    public ContainerViewModel(IServiceProvider provider,
+        IServiceFactory factory,
+        IMediator mediator,
+        IPublisher publisher,
+        ISubscription subscriber,
+        IDisposer disposer,
+        IContentTemplate template,
+        ContainerViewModelConfiguration configuration,
+        NamedComponent named,
+        string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
-        Publisher.Publish(Activated.As<ContainerToken>());
-        await base.OnActivated();
+        Template = template;
+        Named = $"{named}";
+
+        this.configuration = configuration with { Filter = filter };
     }
 
-    public override async Task OnDeactivated()
-    {
-        Publisher.Publish(Deactivated.As<ContainerToken>());
-        await base.OnDeactivated();
-    }
+    private ContainerViewModelConfiguration configuration;
+
+    public IContentTemplate Template { get; set; }
 
     public Task Handle(NotifyEventArgs<Filter> args)
     {
@@ -55,6 +54,17 @@ public partial class ContainerViewModel(IServiceProvider provider,
         return Task.CompletedTask;
     }
 
+    public override async Task OnActivated()
+    {
+        Publisher.Publish(Activated.As<Container>());
+        await base.OnActivated();
+    }
+
+    public override async Task OnDeactivated()
+    {
+        Publisher.Publish(Deactivated.As<Container>());
+        await base.OnDeactivated();
+    }
     protected override IAggerate OnPrepareAggregation(object? key) =>
         Aggerate.With<ItemNavigationViewModel, ContainerViewModelConfiguration>(configuration) with { Key = key };
 }

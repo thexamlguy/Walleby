@@ -6,10 +6,10 @@ namespace Bitvault;
 public partial class ContainerNavigationViewModel :
     ObservableCollection<IContainerNavigationViewModel>,
     IMainNavigationViewModel,
-    INotificationHandler<OpenedEventArgs<ContainerToken>>,
-    INotificationHandler<ClosedEventArgs<ContainerToken>>,
-    INotificationHandler<ActivatedEventArgs<ContainerToken>>,
-    INotificationHandler<DeactivatedEventArgs<ContainerToken>>
+    INotificationHandler<OpenedEventArgs<Container>>,
+    INotificationHandler<ClosedEventArgs<Container>>,
+    INotificationHandler<ActivatedEventArgs<Container>>,
+    INotificationHandler<DeactivatedEventArgs<Container>>
 {
     [ObservableProperty]
     private bool activated;
@@ -41,7 +41,7 @@ public partial class ContainerNavigationViewModel :
 
     public IContentTemplate Template { get; set; }
 
-    public Task Handle(OpenedEventArgs<ContainerToken> args)
+    public Task Handle(OpenedEventArgs<Container> args)
     {
         Add<AllNavigationViewModel>("All");
         Add<StarredNavigationViewModel>("Starred");
@@ -52,7 +52,7 @@ public partial class ContainerNavigationViewModel :
         return Task.CompletedTask;
     }
 
-    public Task Handle(ClosedEventArgs<ContainerToken> args)
+    public Task Handle(ClosedEventArgs<Container> args)
     {
         Opened = true;
         Clear();
@@ -60,9 +60,9 @@ public partial class ContainerNavigationViewModel :
         return Task.CompletedTask;
     }
 
-    public Task Handle(DeactivatedEventArgs<ContainerToken> args) =>
+    public Task Handle(DeactivatedEventArgs<Container> args) =>
         Task.FromResult(Activated = false);
 
-    public Task Handle(ActivatedEventArgs<ContainerToken> args) =>
+    public Task Handle(ActivatedEventArgs<Container> args) =>
         Task.FromResult(Activated = true);
 }

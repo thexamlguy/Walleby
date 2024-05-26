@@ -20,9 +20,9 @@ public partial class OpenContainerViewModel(IServiceProvider provider,
     {
         if (Password is { Length: > 0 })
         {
-            if (await Mediator.Handle<ActivateEventArgs<ContainerToken>, bool>(Activate.As(new ContainerToken(Password))))
+            if (await Mediator.Handle<ActivateEventArgs<Container>, bool>(Activate.As(new Container(Password))))
             {
-                Publisher.Publish(Opened.As<ContainerToken>());
+                Publisher.Publish(Opened.As<Container>());
             }
         }
     }
