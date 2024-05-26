@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="Bitvault.Avalonia.AddItemContentNavigationView"
+    x:Class="Bitvault.Avalonia.AddItemNavigationView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SettingsExpander Header="Add item" IsClickEnabled="True" />

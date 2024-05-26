@@ -40,8 +40,14 @@
 	  <ProjectReference Include="..\Toolkit\Toolkit.UI.Controls.Avalonia\Toolkit.UI.Controls.Avalonia.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Update="AddItemContentNavigationViewModel.axaml.cs">
-	    <DependentUpon>AddItemContentNavigationViewModel.axaml</DependentUpon>
+	  <Compile Update="AddItemNavigationView.axaml.cs">
+	    <DependentUpon>AddItemNavigationView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ContainerCategoryCollectionView.axaml.cs">
+	    <DependentUpon>ContainerCategoryCollectionView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ContainerItemCollectionView.axaml.cs">
+	    <DependentUpon>ContainerItemCollectionView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="CreateItemActionView.axaml.cs">
 	    <DependentUpon>CreateItemActionView.axaml</DependentUpon>

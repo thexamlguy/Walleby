@@ -87,11 +87,15 @@ public partial class App : Application
                         services.AddScoped<ContainerViewModelConfiguration>();
 
                         services.AddTemplate<ContainerViewModel, ContainerView>("Container");
-                        services.AddHandler<AggerateContainerViewModelHandler>();
+                        services.AddTemplate<ContainerItemCollectionViewModel, ContainerItemCollectionView>("ContentItemCollection");
 
                         services.AddTemplate<SearchContainerActionViewModel, SearchContainerActionView>();
                         services.AddTemplate<ContainerHeaderViewModel, ContainerHeaderView>("ContainerHeader");
+
                         services.AddTemplate<CreateItemActionViewModel, CreateItemActionView>();
+                        services.AddTemplate<ContainerCategoryCollectionViewModel, ContainerCategoryCollectionView>("ContainerItemCategoryCollection");
+
+                        services.AddHandler<AggerateContainerItemViewModelHandler>();
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
@@ -109,7 +113,7 @@ public partial class App : Application
 
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
                         services.AddTemplate<ItemContentViewModel, ItemContentView>();
-                        services.AddTemplate<AddItemContentNavigationViewModel, AddItemContentNavigationView>();
+                        services.AddTemplate<AddItemNavigationViewModel, AddItemNavigationView>();
 
                         services.AddScoped<IValueStore<Item>, ValueStore<Item>>();
 

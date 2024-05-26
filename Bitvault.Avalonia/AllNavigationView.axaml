@@ -15,9 +15,7 @@
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Main" Route="Container">
-                    <NavigateAction.ParameterBindings>
-                        <ParameterBinding Key="Filter" Value="{Binding Filter}" />
-                    </NavigateAction.ParameterBindings>
+                    <Parameter Key="Filter" Value="{Binding Filter}" />
                 </NavigateAction>
             </ConditionAction>
             <ConditionAction>
@@ -26,7 +24,10 @@
                         <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <InvokeCommandAction Command="{Binding InvokeCommand}" />
+                <NavigateAction Region="Left" Route="ContentItemCollection">
+                    <Parameter Key="Filter" Value="{Binding Filter}" />
+                    <Parameter Key="Transition" Value="FromRight" />
+                </NavigateAction>
             </ConditionAction>
         </DataTriggerBehavior>
     </Interaction.Behaviors>

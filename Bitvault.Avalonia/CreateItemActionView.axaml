@@ -28,14 +28,9 @@
         </Grid>
         <Interaction.Behaviors>
             <EventTriggerBehavior EventName="Click">
-                <NavigateAction
-                    Region="{Binding Named, StringFormat='{}{0}:Content'}"
-                    Route="Item"
-                    Scope="new">
-                    <NavigateAction.ParameterBindings>
-                        <ParameterBinding Key="Immutable" Value="{x:False}" />
-                    </NavigateAction.ParameterBindings>
-                </NavigateAction>
+                <NavigateAction Region="Left" Route="ContainerItemCategoryCollection">
+					<Parameter Key="Transition" Value="FromRight" />
+				</NavigateAction>
             </EventTriggerBehavior>
         </Interaction.Behaviors>
     </Button>

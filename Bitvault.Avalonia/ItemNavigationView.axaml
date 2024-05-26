@@ -20,12 +20,10 @@
                     Region="{Binding Named, StringFormat='{}{0}:Content'}"
                     Route="Item"
                     Scope="self">
-                    <NavigateAction.ParameterBindings>
-                        <ParameterBinding Key="Name" Value="{Binding Name}" />
-                        <ParameterBinding Key="Immutable" Value="{x:True}" />
-                        <ParameterBinding Key="Archived" Value="{Binding Archived}" />
-                        <ParameterBinding Key="Favourite" Value="{Binding Favourite}" />
-                    </NavigateAction.ParameterBindings>
+                    <Parameter Key="Name" Value="{Binding Name}" />
+                    <Parameter Key="Immutable" Value="{x:True}" />
+                    <Parameter Key="Archived" Value="{Binding Archived}" />
+                    <Parameter Key="Favourite" Value="{Binding Favourite}" />
                 </NavigateAction>
             </ConditionAction>
         </AttachedBehaviour>
@@ -34,12 +32,10 @@
                 Region="{Binding Named, StringFormat='{}{0}:Content'}"
                 Route="Item"
                 Scope="self">
-                <NavigateAction.ParameterBindings>
-                    <ParameterBinding Key="Name" Value="{Binding Name}" />
-                    <ParameterBinding Key="Immutable" Value="{x:True}" />
-                    <ParameterBinding Key="Archived" Value="{Binding Archived}" />
-                    <ParameterBinding Key="Favourite" Value="{Binding Favourite}" />
-                </NavigateAction.ParameterBindings>
+				<Parameter Key="Name" Value="{Binding Name}" />
+				<Parameter Key="Immutable" Value="{x:True}" />
+				<Parameter Key="Archived" Value="{Binding Archived}" />
+				<Parameter Key="Favourite" Value="{Binding Favourite}" />
             </NavigateAction>
         </DataTriggerBehavior>
     </Interaction.Behaviors>

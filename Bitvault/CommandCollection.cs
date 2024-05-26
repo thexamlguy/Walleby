@@ -2,10 +2,7 @@
 
 namespace Bitvault;
 
-public class CommandCollection :
-    ReadOnlyCollection<IDisposable>
+public class CommandCollection(IList<IDisposable> list) :
+    ReadOnlyCollection<IDisposable>(list)
 {
-    public CommandCollection(IList<IDisposable> list) : base(list)
-    {
-    }
 }

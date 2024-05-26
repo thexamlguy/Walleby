@@ -3,11 +3,12 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class AggerateContainerViewModelHandler(IMediator mediator,
+public class AggerateContainerItemViewModelHandler(IMediator mediator,
     IServiceProvider serviceProvider,
     ICache<Item> cache,
     IPublisher publisher) :
-    INotificationHandler<AggerateEventArgs<ItemNavigationViewModel, ContainerViewModelConfiguration>>
+    INotificationHandler<AggerateEventArgs<ItemNavigationViewModel, 
+        ContainerViewModelConfiguration>>
 {
     public async Task Handle(AggerateEventArgs<ItemNavigationViewModel,
         ContainerViewModelConfiguration> args)
@@ -15,7 +16,6 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
         if (args.Options is ContainerViewModelConfiguration configuration)
         {
             cache.Clear();
-            var dd = cache;
             bool selected = true;
 
             if (await mediator.Handle<RequestEventArgs<QueryContainerConfiguration>,
@@ -37,7 +37,7 @@ public class AggerateContainerViewModelHandler(IMediator mediator,
                         valueStore.Set(item);
 
                         cache.Add(item);
-                        publisher.Publish(Create.As(viewModel), nameof(ContainerViewModel));
+                        publisher.Publish(Create.As(viewModel), nameof(ContainerItemCollectionViewModel));
                     }
 
                     selected = false;

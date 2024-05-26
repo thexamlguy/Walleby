@@ -1,0 +1,20 @@
+<UserControl
+    x:Class="Bitvault.Avalonia.ContainerCategoryCollectionView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:ContainerCategoryCollectionViewModel">
+    <ListBox
+        Margin="2,-1,0,0"
+        AutoScrollToSelectedItem="True"
+        ItemTemplate="{ReflectionBinding Template}"
+        ItemsSource="{Binding}"
+        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+        SelectionMode="Single">
+        <ListBox.Styles>
+            <Style Selector="ListBoxItem">
+                <Setter Property="IsSelected" Value="{ReflectionBinding Selected, Mode=TwoWay}" />
+            </Style>
+        </ListBox.Styles>
+    </ListBox>
+</UserControl>

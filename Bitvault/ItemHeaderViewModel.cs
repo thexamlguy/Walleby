@@ -15,13 +15,13 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
     private bool immutable;
 
     public ItemHeaderViewModel(IServiceProvider provider,
-    IServiceFactory factory,
-    IMediator mediator,
-    IPublisher publisher,
-    ISubscription subscriber,
-    IDisposer disposer,
-    bool immutable,
-    string? value = null) : base(provider, factory, mediator, publisher, subscriber, disposer, value)
+        IServiceFactory factory,
+        IMediator mediator,
+        IPublisher publisher,
+        ISubscription subscriber,
+        IDisposer disposer,
+        bool immutable,
+        string? value = null) : base(provider, factory, mediator, publisher, subscriber, disposer, value)
     {
         Immutable = immutable;
         Value = value;

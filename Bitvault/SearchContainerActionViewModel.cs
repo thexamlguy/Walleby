@@ -17,5 +17,5 @@ public partial class SearchContainerActionViewModel(IServiceProvider provider,
 
     [RelayCommand]
     public void Invoke() => Publisher.Publish(Notify.As(new Search(Value)),
-        nameof(ContainerViewModel));
+        nameof(ContainerItemCollectionViewModel));
 }

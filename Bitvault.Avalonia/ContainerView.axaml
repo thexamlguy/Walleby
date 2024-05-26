@@ -22,21 +22,17 @@
                 </Interaction.Behaviors>
             </ContentControl>
         </Grid>
-        <ListBox
-            Grid.Row="1"
-            Grid.Column="0"
-            Margin="2,-1,0,0"
-            AutoScrollToSelectedItem="True"
-            ItemTemplate="{ReflectionBinding Template}"
-            ItemsSource="{Binding}"
-            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-            SelectionMode="Single">
-            <ListBox.Styles>
-                <Style Selector="ListBoxItem">
-                    <Setter Property="IsSelected" Value="{ReflectionBinding Selected, Mode=TwoWay}" />
-                </Style>
-            </ListBox.Styles>
-        </ListBox>
+        <Frame Grid.Row="1" Grid.Column="0">
+            <Interaction.Behaviors>
+                <AttachedBehaviour>
+                    <NavigateRegionAction Name="Left">
+                        <NavigateAction Region="Left" Route="ContentItemCollection">
+                            <Parameter Key="Filter" Value="{Binding Filter}" />
+                        </NavigateAction>
+                    </NavigateRegionAction>
+                </AttachedBehaviour>
+            </Interaction.Behaviors>
+        </Frame>
         <GridSplitter
             Grid.Row="1"
             Grid.Column="1"
@@ -64,7 +60,7 @@
                         </Interaction.Behaviors>
                     </ContentControl>
                 </Border>
-                <ContentControl x:Name="Content" Grid.Row="1">
+                <ContentControl Grid.Row="1">
                     <Interaction.Behaviors>
                         <AttachedBehaviour>
                             <NavigateRegionAction Name="{Binding Named, StringFormat='{}{0}:Content'}" />

@@ -18,7 +18,7 @@ public partial class ItemContentViewModel :
 
         if (!immutable)
         {
-            Insert<AddItemContentNavigationViewModel>();
+            Insert<AddItemNavigationViewModel>();
         }
     }
 
