@@ -2,8 +2,10 @@
 
 namespace Bitvault;
 
+[Aggerate(nameof(ItemContentViewModel))]
 public partial class ItemContentViewModel :
     ObservableCollection<IItemEntryViewModel>,
+
     IItemEntryViewModel
 {
     public ItemContentViewModel(IServiceProvider provider,
@@ -15,11 +17,6 @@ public partial class ItemContentViewModel :
         bool immutable = true) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
-
-        if (!immutable)
-        {
-            Insert<AddItemNavigationViewModel>();
-        }
     }
 
     public IContentTemplate Template { get; set; }

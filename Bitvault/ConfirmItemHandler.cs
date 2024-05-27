@@ -2,32 +2,33 @@
 
 namespace Bitvault;
 
-public class ConfirmItemHandler(IValueStore<Item> valueStore,
+public class ConfirmItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
     IMediator mediator,
     IPublisher publisher) :
-    INotificationHandler<ConfirmEventArgs<Item>>
+    INotificationHandler<ConfirmEventArgs<Item<(Guid, string)>>>
 {
-    public async Task Handle(ConfirmEventArgs<Item> args)
+    public async Task Handle(ConfirmEventArgs<Item<(Guid, string)>> args)
     {
-        ItemHeaderConfiguration? configuration = await mediator.Handle<ConfirmEventArgs<Item>,
+        ItemHeaderConfiguration? configuration = await mediator.Handle<ConfirmEventArgs<Item<(Guid, string)>>,
             ItemHeaderConfiguration>(args);
 
         if (configuration is not null)
         {
             publisher.Publish(Notify.As(configuration));
 
-            if (valueStore?.Value is Item item)
+            if (valueStore?.Value is Item<(Guid, string)> item)
             {
-                Guid id = item.Id;
+                (Guid id, string _) = item.Value;
+
                 string? name = configuration.Name;
 
-                Item newItem = new() { Id = id, Name = name };
+                Item<(Guid, string)> newItem = new((id, name));
                 publisher.Publish(Modified.As(item, newItem));
 
                 valueStore.Set(newItem);
 
                 await mediator.Handle<UpdateEventArgs<(Guid, ItemConfiguration)>, bool>(new UpdateEventArgs<(Guid,
-                    ItemConfiguration)>((item.Id, new ItemConfiguration { Name = name })));
+                    ItemConfiguration)>((id, new ItemConfiguration { Name = name })));
             }
             else
             {
@@ -39,7 +40,7 @@ public class ConfirmItemHandler(IValueStore<Item> valueStore,
 
                 if (Success)
                 {
-                    publisher.Publish(Created.As(new Item { Id = id, Name = name }));
+                    publisher.Publish(Created.As(new Item<(Guid, string)>((id, name))));
                 }
             }
         }

@@ -1,8 +1,5 @@
 ﻿namespace Bitvault;
 
-public record Item
-{
-    public Guid Id { get; init; }
+public record Item<TValue>(TValue Value);
 
-    public string? Name { get; init; } = "";
-}
+public record Item;

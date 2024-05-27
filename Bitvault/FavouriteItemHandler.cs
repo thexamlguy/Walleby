@@ -2,18 +2,18 @@
 
 namespace Bitvault;
 
-public class FavouriteItemHandler(IValueStore<Item> valueStore,
+public class FavouriteItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
     IMediator mediator) :
-    INotificationHandler<FavouriteEventArgs<Item>>
+    INotificationHandler<FavouriteEventArgs<Item<(Guid, string)>>>
 {
-    public async Task Handle(FavouriteEventArgs<Item> args)
+    public async Task Handle(FavouriteEventArgs<Item<(Guid, string)>> args)
     {
         try
         {
-            if (valueStore.Value is Item item)
+            if (valueStore.Value is Item<(Guid, string)> item)
             {
-                await mediator.Handle<UpdateEventArgs<(Guid, int)>, bool>(new UpdateEventArgs<(Guid,
-                    int)>((item.Id, 1)));
+                (Guid id, string name) = item.Value;
+                await mediator.Handle<UpdateEventArgs<(Guid, int)>, bool>(new UpdateEventArgs<(Guid, int)>((id, 1)));
             }
         }
         catch

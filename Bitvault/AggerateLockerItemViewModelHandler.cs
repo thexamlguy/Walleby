@@ -5,7 +5,7 @@ namespace Bitvault;
 
 public class AggerateLockerItemViewModelHandler(IMediator mediator,
     IServiceProvider serviceProvider,
-    ICache<Item> cache,
+    ICache<Item<(Guid, string)>> cache,
     IPublisher publisher) :
     INotificationHandler<AggerateEventArgs<ItemNavigationViewModel, 
         LockerViewModelConfiguration>>
@@ -29,11 +29,12 @@ public class AggerateLockerItemViewModelHandler(IMediator mediator,
                 {
                     IServiceScope serviceScope = serviceProvider.CreateScope();
                     IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
-                    IValueStore<Item> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item>>();
+                    IValueStore<Item<(Guid, string)>> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item<(Guid, string)>>>();
 
                     if (serviceFactory.Create<ItemNavigationViewModel>(Id, Name, "Description", selected, Favourite, Archived) is ItemNavigationViewModel viewModel)
                     {
-                        Item item = new() { Id = Id, Name = Name };
+                        Item<(Guid, string)> item = new((Id, Name));
+
                         valueStore.Set(item);
 
                         cache.Add(item);

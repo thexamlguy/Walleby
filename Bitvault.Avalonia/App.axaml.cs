@@ -54,10 +54,10 @@ public partial class App : Application
                 {
                     args.AddServices(services =>
                     {
-                        services.AddTransient<IComparer<Item>>(provider => Comparer<Item>.Create((x, z) =>
-                            StringComparer.CurrentCultureIgnoreCase.Compare(x.Name, z.Name)));
+                        services.AddTransient<IComparer<Item<(Guid, string)>>>(provider => Comparer<Item<(Guid, string)>>.Create((x, z) =>
+                            StringComparer.CurrentCultureIgnoreCase.Compare(x.Value.Item2, z.Value.Item2)));
 
-                        services.AddCache<Item>();
+                        services.AddCache<Item<(Guid, string)>>();
 
                         services.AddTransient(_ =>
                             provider.GetRequiredService<IProxyService<IEnumerable<ItemConfiguration>>>());
@@ -133,7 +133,7 @@ public partial class App : Application
                         services.AddTemplate<ItemContentViewModel, ItemContentView>();
                         services.AddTemplate<AddItemNavigationViewModel, AddItemNavigationView>();
 
-                        services.AddScoped<IValueStore<Item>, ValueStore<Item>>();
+                        services.AddScoped<IValueStore<Item<(Guid, string)>>, ValueStore<Item<(Guid, string)>>>();
 
                         services.AddHandler<ConfirmItemHandler>();
                         services.AddHandler<ArchiveItemHandler>();

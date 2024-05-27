@@ -36,7 +36,7 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
     }
 
     public Task<ItemHeaderConfiguration> Handle(ConfirmEventArgs<Item> args,
-        CancellationToken cancellationToken) => Task.FromResult(new ItemHeaderConfiguration { Name = Value });
+        CancellationToken cancellationToken) => Task.FromResult(new ItemHeaderConfiguration { Name = Value! });
 
     public Task Handle(UpdateEventArgs<Item> args) =>
         Task.FromResult(Immutable = false);

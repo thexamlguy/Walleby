@@ -4,19 +4,21 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class CreatedItemHandler(IServiceProvider serviceProvider,
-    ICache<Item> cache,
+    ICache<Item<(Guid, string)>> cache,
     IPublisher publisher) :
-    INotificationHandler<CreatedEventArgs<Item>>
+    INotificationHandler<CreatedEventArgs<Item<(Guid, string)>>>
 {
-    public Task Handle(CreatedEventArgs<Item> args)
+    public Task Handle(CreatedEventArgs<Item<(Guid, string)>> args)
     {
-        if (args.Value is Item item)
+        if (args.Value is Item<(Guid, string)> item)
         {
+            (Guid id, string name) = item.Value;
+
             IServiceScope serviceScope = serviceProvider.CreateScope();
             IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
-            IValueStore<Item> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item>>();
+            IValueStore<Item<(Guid, string)>> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item<(Guid, string)>>>();
 
-            if (serviceFactory.Create<ItemNavigationViewModel>(item.Id, item.Name, "Description", true)
+            if (serviceFactory.Create<ItemNavigationViewModel>(id, name, "Description", true)
                 is ItemNavigationViewModel viewModel)
             {
                 cache.Add(item);
