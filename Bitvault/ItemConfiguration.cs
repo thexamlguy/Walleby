@@ -6,6 +6,74 @@ public record ItemConfiguration
 
     public IList<ItemSectionConfiguration>? Sections { get; set; }
 
+
+    
+
+    public static ItemConfiguration Identity => new()
+    {
+        Name = "Identity",
+        Sections = new List<ItemSectionConfiguration>
+        {
+
+        }
+    };
+
+    public static ItemConfiguration BankAccount => new()
+    {
+        Name = "Bank Account",
+        Sections = new List<ItemSectionConfiguration>
+        {
+
+        }
+    };
+
+    public static ItemConfiguration Note => new()
+    {
+        Name = "Note",
+        Sections = new List<ItemSectionConfiguration>
+        {
+
+        }
+    };
+
+
+    public static ItemConfiguration Document => new()
+    {
+        Name = "Document",
+        Sections = new List<ItemSectionConfiguration>
+        {
+
+        }
+    };
+
+    public static ItemConfiguration DrivingLicence => new()
+    {
+        Name = "Driving Licence",
+        Sections = new List<ItemSectionConfiguration>
+        {
+
+        }
+    };
+
+    
+    public static ItemConfiguration Login => new()
+    {
+        Name = "Login",
+        Sections = new List<ItemSectionConfiguration>
+        {
+
+        }
+    };
+
+    public static ItemConfiguration Password => new()
+    {
+        Name = "Password",
+        Sections = new List<ItemSectionConfiguration>
+        {
+
+        }
+    };
+
     public static ItemConfiguration CreditCard => new()
     {
         Name = "Credit Card",

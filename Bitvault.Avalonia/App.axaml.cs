@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using Toolkit.Avalonia;
 using Toolkit.Foundation;
 
@@ -28,14 +27,14 @@ public partial class App : Application
         IHost? host = DefaultHostBuilder.Create()
             .AddConfiguration<LockerConfiguration>("Locker:*")
             .AddConfiguration<ItemConfiguration>("Item:*")
-            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Bank Account", "Item:Bank Account")
+            .AddConfiguration("Item:Bank Account", ItemConfiguration.BankAccount)
             .AddConfiguration("Item:Credit Card", ItemConfiguration.CreditCard)
-            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Document", "Item:Document")
-            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Driving Licence", "Item:Driving Licence")
-            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Identity", "Item:Identity")
-            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Login", "Item:Login")
-            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Note", "Item:Note")
-            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Password", "Item:Password")
+            .AddConfiguration("Item:Document", ItemConfiguration.Document)
+            .AddConfiguration<ItemConfiguration>("Item:Driving Licence", ItemConfiguration.DrivingLicence)
+            .AddConfiguration<ItemConfiguration>("Item:Identity", ItemConfiguration.Identity)
+            .AddConfiguration<ItemConfiguration>("Item:Login", ItemConfiguration.Login)
+            .AddConfiguration<ItemConfiguration>("Item:Note", ItemConfiguration.Note)
+            .AddConfiguration<ItemConfiguration>("Item:Password", ItemConfiguration.Password)
             .ConfigureServices((context, services) =>
             {
                 services.AddAvalonia();
