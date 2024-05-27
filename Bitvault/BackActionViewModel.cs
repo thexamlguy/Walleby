@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class SearchLockerActionViewModel(IServiceProvider provider,
+public partial class BackActionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
@@ -12,7 +12,7 @@ public partial class SearchLockerActionViewModel(IServiceProvider provider,
     IDisposer disposer) : Observable<string>(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [ObservableProperty]
-    private int index = 2;
+    private int index = 0;
 
     [RelayCommand]
     public void Invoke() => Publisher.Publish(Notify.As(new Search(Value)),

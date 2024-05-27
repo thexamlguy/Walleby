@@ -105,10 +105,11 @@ public partial class App : Application
                         services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ContentItemCollection");
                         services.AddHandler<AggerateLockerItemViewModelHandler>();
 
-                        services.AddTemplate<SearchLockerActionViewModel, SearchLockerActionView>();
                         services.AddTemplate<LockerHeaderViewModel, LockerHeaderView>("LockerHeader");
-
+                        services.AddTemplate<BackActionViewModel, BackActionView>();
                         services.AddTemplate<CreateItemActionViewModel, CreateItemActionView>();
+                        services.AddTemplate<SearchLockerActionViewModel, SearchLockerActionView>();
+
                         services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("LockerItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
                        
@@ -116,6 +117,7 @@ public partial class App : Application
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
+
                         services.AddHandler<AggerateItemViewModelHandler>();
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");

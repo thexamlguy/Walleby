@@ -4,4 +4,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
     x:DataType="vm:ItemCategoryNavigationViewModel"
-    Content="{Binding Name}" />
+    Content="{Binding Name}"
+    IsSelected="{Binding Selected, Mode=TwoWay}">
+    <Interaction.Behaviors>
+        <AttachedBehaviour>
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateAction
+                    Region="{Binding Named, StringFormat='{}{0}:Content'}"
+                    Route="Item"
+                    Scope="self">
+                    <Parameter Key="Immutable" Value="{x:False}" />
+                </NavigateAction>
+            </ConditionAction>
+        </AttachedBehaviour>
+        <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
+            <NavigateAction
+                Region="{Binding Named, StringFormat='{}{0}:Content'}"
+                Route="Item"
+                Scope="self">
+                <Parameter Key="Immutable" Value="{x:False}" />
+            </NavigateAction>
+        </DataTriggerBehavior>
+    </Interaction.Behaviors>
+</ListBoxItem>

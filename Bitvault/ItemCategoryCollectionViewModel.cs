@@ -19,7 +19,7 @@ public partial class ItemCategoryCollectionViewModel(IServiceProvider provider,
     {
         Publisher.Publish(Notify.As(Factory.Create<LockerCommandHeaderCollection>(new List<IDisposable>
         {
-
+            Factory.Create<BackActionViewModel>(),
         })));
 
         return base.OnActivated();

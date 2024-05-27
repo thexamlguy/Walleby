@@ -30,6 +30,7 @@
             <EventTriggerBehavior EventName="Click">
                 <NavigateAction Region="Left" Route="LockerItemCategoryCollection">
                     <Parameter Key="Transition" Value="FromRight" />
+                    <Parameter Key="NavigationStackEnabled" Value="{x:True}" />
                 </NavigateAction>
             </EventTriggerBehavior>
         </Interaction.Behaviors>

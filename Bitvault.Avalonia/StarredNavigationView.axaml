@@ -27,6 +27,7 @@
                 <NavigateAction Region="Left" Route="ContentItemCollection">
                     <Parameter Key="Filter" Value="{Binding Filter}" />
                     <Parameter Key="Transition" Value="FromRight" />
+                    <Parameter Key="NavigationStackEnabled" Value="{x:True}" />
                 </NavigateAction>
             </ConditionAction>
         </DataTriggerBehavior>

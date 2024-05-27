@@ -9,9 +9,20 @@ public partial class ItemCategoryNavigationViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    string name) :
-    Observable(provider, factory, mediator, publisher, subscriber, disposer)
+    NamedComponent named,
+    string name,
+    bool selected = false) :
+    Observable(provider, factory, mediator, publisher, subscriber, disposer),
+    ISelectable,
+    IRemovable
 {
     [ObservableProperty]
     private string name = name;
+
+    [ObservableProperty]
+    private string named = $"{named}";
+
+    [ObservableProperty]
+    private bool selected = selected;
+
 }

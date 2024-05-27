@@ -6,7 +6,8 @@ namespace Bitvault;
 public partial class ItemCollectionViewModel :
     ObservableCollection<ItemNavigationViewModel>,
     INotificationHandler<NotifyEventArgs<Filter>>,
-    INotificationHandler<NotifyEventArgs<Search>>
+    INotificationHandler<NotifyEventArgs<Search>>,
+    IBackStack
 {
     private LockerViewModelConfiguration configuration;
 
