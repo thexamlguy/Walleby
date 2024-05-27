@@ -26,6 +26,7 @@
                 </ConditionAction.Condition>
                 <NavigateAction Region="Left" Route="ContentItemCollection">
                     <Parameter Key="Filter" Value="{Binding Filter}" />
+                    <Parameter Key="Transition" Value="FromRight" />
                 </NavigateAction>
             </ConditionAction>
         </DataTriggerBehavior>

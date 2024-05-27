@@ -43,11 +43,14 @@
 	  <Compile Update="AddItemNavigationView.axaml.cs">
 	    <DependentUpon>AddItemNavigationView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ContainerCategoryCollectionView.axaml.cs">
-	    <DependentUpon>ContainerCategoryCollectionView.axaml</DependentUpon>
+	  <Compile Update="ItemCategoryNavigationView.axaml.cs">
+	    <DependentUpon>ItemCategoryNavigationView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ContainerItemCollectionView.axaml.cs">
-	    <DependentUpon>ContainerItemCollectionView.axaml</DependentUpon>
+	  <Compile Update="ItemCategoryCollectionView.axaml.cs">
+	    <DependentUpon>ItemCategoryCollectionView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ItemCollectionView.axaml.cs">
+	    <DependentUpon>ItemCollectionView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="CreateItemActionView.axaml.cs">
 	    <DependentUpon>CreateItemActionView.axaml</DependentUpon>

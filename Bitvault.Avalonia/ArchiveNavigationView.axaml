@@ -15,8 +15,8 @@
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Main" Route="Container">
-					<Parameter Key="Filter" Value="{Binding Filter}" />
-				</NavigateAction>
+                    <Parameter Key="Filter" Value="{Binding Filter}" />
+                </NavigateAction>
             </ConditionAction>
             <ConditionAction>
                 <ConditionAction.Condition>
@@ -25,8 +25,9 @@
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Left" Route="ContentItemCollection">
-					<Parameter Key="Filter" Value="{Binding Filter}" />
-				</NavigateAction>
+                    <Parameter Key="Filter" Value="{Binding Filter}" />
+                    <Parameter Key="Transition" Value="FromRight" />
+                </NavigateAction>
             </ConditionAction>
         </DataTriggerBehavior>
     </Interaction.Behaviors>

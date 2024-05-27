@@ -37,7 +37,7 @@ public class AggerateContainerItemViewModelHandler(IMediator mediator,
                         valueStore.Set(item);
 
                         cache.Add(item);
-                        publisher.Publish(Create.As(viewModel), nameof(ContainerItemCollectionViewModel));
+                        publisher.Publish(Create.As(viewModel), nameof(ItemCollectionViewModel));
                     }
 
                     selected = false;

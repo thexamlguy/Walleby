@@ -25,8 +25,16 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         IHost? host = DefaultHostBuilder.Create()
-            .AddConfiguration<ContainerConfiguration>(args => args.Name = "Personal",
-                   "Vault:*")
+            .AddConfiguration<ContainerConfiguration>("Locker:*")
+            .AddConfiguration<ItemConfiguration>("Item:*")
+            .AddConfiguration<ItemConfiguration>(args => args.Name = "Bank Account", "Item:Bank Account")
+            .AddConfiguration<ItemConfiguration>(args => args.Name = "Credit Card", "Item:Credit Card")
+            .AddConfiguration<ItemConfiguration>(args => args.Name = "Document", "Item:Document")
+            .AddConfiguration<ItemConfiguration>(args => args.Name = "Driving Licence", "Item:Driving Licence")
+            .AddConfiguration<ItemConfiguration>(args => args.Name = "Identity", "Item:Identity")
+            .AddConfiguration<ItemConfiguration>(args => args.Name = "Login", "Item:Login")
+            .AddConfiguration<ItemConfiguration>(args => args.Name = "Note", "Item:Note")
+            .AddConfiguration<ItemConfiguration>(args => args.Name = "Password", "Item:Password")
             .ConfigureServices((context, services) =>
             {
                 services.AddAvalonia();
@@ -36,6 +44,9 @@ public partial class App : Application
                 {
                     services.AddTemplate<MainWindowViewModel, MainWindow>("MainWindow");
                 }
+
+                services.AddScoped<IProxyService<IEnumerable<ItemConfiguration>>>(provider =>
+                    new ProxyService<IEnumerable<ItemConfiguration>>(provider.GetRequiredService<IEnumerable<ItemConfiguration>>()));
 
                 services.AddHandler<ContainerActivatedHandler>();
 
@@ -47,6 +58,9 @@ public partial class App : Application
                             StringComparer.CurrentCultureIgnoreCase.Compare(x.Name, z.Name)));
 
                         services.AddCache<Item>();
+
+                        services.AddTransient(_ =>
+                            provider.GetRequiredService<IProxyService<IEnumerable<ItemConfiguration>>>());
 
                         services.AddTransient<IKeyGenerator, KeyGenerator>();
                         services.AddTransient<IEncryptor, AesEncryptor>();
@@ -87,15 +101,17 @@ public partial class App : Application
                         services.AddScoped<ContainerViewModelConfiguration>();
 
                         services.AddTemplate<ContainerViewModel, ContainerView>("Container");
-                        services.AddTemplate<ContainerItemCollectionViewModel, ContainerItemCollectionView>("ContentItemCollection");
+                        services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ContentItemCollection");
+                        services.AddHandler<AggerateContainerItemViewModelHandler>();
 
                         services.AddTemplate<SearchContainerActionViewModel, SearchContainerActionView>();
                         services.AddTemplate<ContainerHeaderViewModel, ContainerHeaderView>("ContainerHeader");
 
                         services.AddTemplate<CreateItemActionViewModel, CreateItemActionView>();
-                        services.AddTemplate<ContainerCategoryCollectionViewModel, ContainerCategoryCollectionView>("ContainerItemCategoryCollection");
-
-                        services.AddHandler<AggerateContainerItemViewModelHandler>();
+                        services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ContainerItemCategoryCollection");
+                        services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
+                       
+                        services.AddHandler<AggerateContainerCategoryViewModelHandler>();
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");

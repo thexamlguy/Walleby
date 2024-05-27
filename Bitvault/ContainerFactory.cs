@@ -7,7 +7,7 @@ public class ContainerFactory(IComponentFactory componentFactory) :
 {
     public IComponentHost? Create(string name)
     {
-        if (componentFactory.Create<IContainerComponent, ContainerConfiguration>($"Vault:{name}",
+        if (componentFactory.Create<IContainerComponent, ContainerConfiguration>($"Locker:{name}",
             new ContainerConfiguration { Name = name }) is IComponentHost host)
         {
             return host;

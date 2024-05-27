@@ -4,5 +4,6 @@ namespace Bitvault.Avalonia;
 
 public partial class CreateContainerNavigationView : SettingsExpander
 {
-    public CreateContainerNavigationView() => InitializeComponent();
+    public CreateContainerNavigationView() => 
+        InitializeComponent();
 }

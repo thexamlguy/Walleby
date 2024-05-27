@@ -2,15 +2,15 @@
 
 namespace Bitvault;
 
-[Aggerate(nameof(ContainerItemCollectionViewModel))]
-public partial class ContainerItemCollectionViewModel :
+[Aggerate(nameof(ItemCollectionViewModel))]
+public partial class ItemCollectionViewModel :
     ObservableCollection<ItemNavigationViewModel>,
     INotificationHandler<NotifyEventArgs<Filter>>,
     INotificationHandler<NotifyEventArgs<Search>>
 {
     private ContainerViewModelConfiguration configuration;
 
-    public ContainerItemCollectionViewModel(IServiceProvider provider,
+    public ItemCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,

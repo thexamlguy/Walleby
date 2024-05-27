@@ -2,18 +2,23 @@
 
 namespace Bitvault;
 
-public class AggerateContainerCategoryViewModelHandler(IServiceFactory serviceFactory,
+public class AggerateContainerCategoryViewModelHandler(IProxyService<IEnumerable<ItemConfiguration>> proxyConfigurations,
+    IServiceFactory serviceFactory,
     IPublisher publisher) :
-    INotificationHandler<AggerateEventArgs<ItemNavigationViewModel,
-        ContainerViewModelConfiguration>>
+    INotificationHandler<AggerateEventArgs<ItemCategoryNavigationViewModel>>
 {
-    public Task Handle(AggerateEventArgs<ItemNavigationViewModel,
-    ContainerViewModelConfiguration> args)
+    public Task Handle(AggerateEventArgs<ItemCategoryNavigationViewModel> args)
     {
-        if (serviceFactory.Create<ItemNavigationViewModel>() 
-            is ItemNavigationViewModel viewModel)
+        if (proxyConfigurations.Value is IEnumerable<ItemConfiguration> configurations)
         {
-            publisher.Publish(Create.As(viewModel), nameof(ContainerCategoryCollectionViewModel));
+            foreach (ItemConfiguration configuration in configurations)
+            {
+                if (serviceFactory.Create<ItemCategoryNavigationViewModel>(configuration.Name)
+                    is ItemCategoryNavigationViewModel viewModel)
+                {
+                    publisher.Publish(Create.As(viewModel), nameof(ItemCategoryCollectionViewModel));
+                }
+            }
         }
 
         return Task.CompletedTask;
