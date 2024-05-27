@@ -10,14 +10,15 @@ public partial class ItemCommandHeaderViewModel(IServiceProvider provider,
     IDisposer disposer,
     IContentTemplate template) :
     ObservableCollection(provider, factory, mediator, publisher, subscriber, disposer),
-    INotificationHandler<NotifyEventArgs<CommandCollection>>
+    INotificationHandler<NotifyEventArgs<ItemCommandHeaderCollection>>
 {
     public IContentTemplate Template { get; set; } = template;
 
-    public Task Handle(NotifyEventArgs<CommandCollection> args)
+    public Task Handle(NotifyEventArgs<ItemCommandHeaderCollection> args)
     {
         Clear();
-        if (args.Value is CommandCollection commandCollection)
+
+        if (args.Value is ItemCommandHeaderCollection commandCollection)
         {
             foreach (IDisposable command in commandCollection)
             {

@@ -4,19 +4,19 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class AggerateMainViewModelHandler(IPublisher publisher,
-    IContainerHostCollection containers) :
+    ILockerHostCollection lockers) :
     INotificationHandler<AggerateEventArgs<IMainNavigationViewModel>>
 {
     public Task Handle(AggerateEventArgs<IMainNavigationViewModel> args)
     {
-        foreach (IComponentHost container in containers.OrderBy(x => x.GetConfiguration<ContainerConfiguration>()
-            is ContainerConfiguration configuration ? configuration.Name : null))
+        foreach (IComponentHost locker in lockers.OrderBy(x => x.GetConfiguration<LockerConfiguration>()
+            is LockerConfiguration configuration ? configuration.Name : null))
         {
-            if (container.Services.GetRequiredService<ContainerConfiguration>() is ContainerConfiguration configuration)
+            if (locker.Services.GetRequiredService<LockerConfiguration>() is LockerConfiguration configuration)
             {
-                if (container.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
+                if (locker.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
                 {
-                    if (factory.Create<ContainerNavigationViewModel>(configuration.Name) is ContainerNavigationViewModel viewModel)
+                    if (factory.Create<LockerNavigationViewModel>(configuration.Name) is LockerNavigationViewModel viewModel)
                     {
                         publisher.Publish(Create.As<IMainNavigationViewModel>(viewModel),
                             nameof(MainViewModel));

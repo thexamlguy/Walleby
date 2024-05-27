@@ -8,7 +8,7 @@ public partial class ItemCollectionViewModel :
     INotificationHandler<NotifyEventArgs<Filter>>,
     INotificationHandler<NotifyEventArgs<Search>>
 {
-    private ContainerViewModelConfiguration configuration;
+    private LockerViewModelConfiguration configuration;
 
     public ItemCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
@@ -17,7 +17,7 @@ public partial class ItemCollectionViewModel :
         ISubscription subscriber,
         IDisposer disposer,
         IContentTemplate template,
-        ContainerViewModelConfiguration configuration,
+        LockerViewModelConfiguration configuration,
         string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
@@ -48,7 +48,18 @@ public partial class ItemCollectionViewModel :
         return Task.CompletedTask;
     }
 
-    protected override IAggerate OnPrepareAggregation(object? key) =>
-        Aggerate.With<ItemNavigationViewModel, ContainerViewModelConfiguration>(configuration)
+    public override Task OnActivated()
+    {
+        Publisher.Publish(Notify.As(Factory.Create<LockerCommandHeaderCollection>(new List<IDisposable>
+        {
+            Factory.Create<CreateItemActionViewModel>(),
+            Factory.Create<SearchLockerActionViewModel>(),
+        })));
+
+        return base.OnActivated();
+    }
+
+    protected override IAggerate OnAggerate(object? key) =>
+        Aggerate.With<ItemNavigationViewModel, LockerViewModelConfiguration>(configuration)
             with { Key = key };
 }

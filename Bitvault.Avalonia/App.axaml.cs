@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using Toolkit.Avalonia;
 using Toolkit.Foundation;
 
@@ -25,16 +26,16 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         IHost? host = DefaultHostBuilder.Create()
-            .AddConfiguration<ContainerConfiguration>("Locker:*")
+            .AddConfiguration<LockerConfiguration>("Locker:*")
             .AddConfiguration<ItemConfiguration>("Item:*")
-            .AddConfiguration<ItemConfiguration>(args => args.Name = "Bank Account", "Item:Bank Account")
-            .AddConfiguration<ItemConfiguration>(args => args.Name = "Credit Card", "Item:Credit Card")
-            .AddConfiguration<ItemConfiguration>(args => args.Name = "Document", "Item:Document")
-            .AddConfiguration<ItemConfiguration>(args => args.Name = "Driving Licence", "Item:Driving Licence")
-            .AddConfiguration<ItemConfiguration>(args => args.Name = "Identity", "Item:Identity")
-            .AddConfiguration<ItemConfiguration>(args => args.Name = "Login", "Item:Login")
-            .AddConfiguration<ItemConfiguration>(args => args.Name = "Note", "Item:Note")
-            .AddConfiguration<ItemConfiguration>(args => args.Name = "Password", "Item:Password")
+            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Bank Account", "Item:Bank Account")
+            .AddConfiguration("Item:Credit Card", ItemConfiguration.CreditCard)
+            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Document", "Item:Document")
+            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Driving Licence", "Item:Driving Licence")
+            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Identity", "Item:Identity")
+            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Login", "Item:Login")
+            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Note", "Item:Note")
+            //.AddConfiguration<ItemConfiguration>(args => args.Name = "Password", "Item:Password")
             .ConfigureServices((context, services) =>
             {
                 services.AddAvalonia();
@@ -48,9 +49,9 @@ public partial class App : Application
                 services.AddScoped<IProxyService<IEnumerable<ItemConfiguration>>>(provider =>
                     new ProxyService<IEnumerable<ItemConfiguration>>(provider.GetRequiredService<IEnumerable<ItemConfiguration>>()));
 
-                services.AddHandler<ContainerActivatedHandler>();
+                services.AddHandler<LockerActivatedHandler>();
 
-                services.AddTransient<IContainerComponent>(provider => Component.Create<ContainerComponent>(provider, args =>
+                services.AddTransient<ILockerComponent>(provider => Component.Create<LockerComponent>(provider, args =>
                 {
                     args.AddServices(services =>
                     {
@@ -70,48 +71,48 @@ public partial class App : Application
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
 
                         services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
-                        services.AddTransient<IContainerStorageFactory, ContainerStorageFactory>();
+                        services.AddTransient<ILockerStorageFactory, LockerStorageFactory>();
                         services.TryAddSingleton<IValueStore<SecurityKey>, ValueStore<SecurityKey>>();
-                        services.TryAddSingleton<IValueStore<ContainerConnection>, ValueStore<ContainerConnection>>();
+                        services.TryAddSingleton<IValueStore<LockerConnection>, ValueStore<LockerConnection>>();
 
-                        services.AddDbContextFactory<ContainerDbContext>((provider, args) =>
+                        services.AddDbContextFactory<LockerContext>((provider, args) =>
                         {
-                            if (provider.GetRequiredService<IValueStore<ContainerConnection>>()
-                                is IValueStore<ContainerConnection> connection)
+                            if (provider.GetRequiredService<IValueStore<LockerConnection>>()
+                                is IValueStore<LockerConnection> connection)
                             {
                                 args.UseSqlite($"{connection.Value}");
                             }
                         });
 
-                        services.AddHandler<QueryContainerHandler>();
+                        services.AddHandler<QueryLockerHandler>();
                         services.AddHandler<CreateItemHandler>();
                         services.AddHandler<UpdateItemHander>();
                         services.AddHandler<UpdateItemStateHandler>();
 
-                        services.AddHandler<OpenContainerHandler>();
+                        services.AddHandler<OpenLockerHandler>();
 
-                        services.AddTemplate<ContainerNavigationViewModel, ContainerNavigationView>();
+                        services.AddTemplate<LockerNavigationViewModel, LockerNavigationView>();
                         services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
                         services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();
                         services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
                         services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
 
-                        services.AddTemplate<OpenContainerViewModel, OpenView>("OpenContainer");
+                        services.AddTemplate<OpenLockerViewModel, OpenView>("OpenLocker");
 
-                        services.AddScoped<ContainerViewModelConfiguration>();
+                        services.AddScoped<LockerViewModelConfiguration>();
 
-                        services.AddTemplate<ContainerViewModel, ContainerView>("Container");
+                        services.AddTemplate<LockerViewModel, LockerView>("Locker");
                         services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ContentItemCollection");
-                        services.AddHandler<AggerateContainerItemViewModelHandler>();
+                        services.AddHandler<AggerateLockerItemViewModelHandler>();
 
-                        services.AddTemplate<SearchContainerActionViewModel, SearchContainerActionView>();
-                        services.AddTemplate<ContainerHeaderViewModel, ContainerHeaderView>("ContainerHeader");
+                        services.AddTemplate<SearchLockerActionViewModel, SearchLockerActionView>();
+                        services.AddTemplate<LockerHeaderViewModel, LockerHeaderView>("LockerHeader");
 
                         services.AddTemplate<CreateItemActionViewModel, CreateItemActionView>();
-                        services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ContainerItemCategoryCollection");
+                        services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("LockerItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
                        
-                        services.AddHandler<AggerateContainerCategoryViewModelHandler>();
+                        services.AddHandler<AggerateLockerCategoryViewModelHandler>();
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
@@ -144,11 +145,11 @@ public partial class App : Application
                     });
                 })!);
 
-                services.AddTransient<IContainerFactory, ContainerFactory>();
-                services.AddHandler<CreateContainerHandler>();
+                services.AddTransient<ILockerFactory, LockerFactory>();
+                services.AddHandler<CreateLockerHandler>();
 
-                services.AddSingleton<IContainerHostCollection, ContainerHostCollection>();
-                services.AddInitializer<ContainerInitializer>();
+                services.AddSingleton<ILockerHostCollection, LockerHostCollection>();
+                services.AddInitializer<LockerInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
                 services.AddHandler<AggerateMainViewModelHandler>();
@@ -158,8 +159,8 @@ public partial class App : Application
                 services.AddTemplate<ManageNavigationViewModel, ManageNavigationView>();
                 services.AddTemplate<ManageViewModel, ManageView>("Manage");
 
-                services.AddTemplate<CreateContainerNavigationViewModel, CreateContainerNavigationView>();
-                services.AddTemplate<CreateContainerViewModel, CreateContainerView>("CreateContainer");
+                services.AddTemplate<CreateLockerNavigationViewModel, CreateLockerNavigationView>();
+                services.AddTemplate<CreateLockerViewModel, CreateLockerView>("CreateLocker");
             })
         .Build();
 

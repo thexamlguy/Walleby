@@ -16,7 +16,7 @@
             <Interaction.Behaviors>
                 <AttachedBehaviour>
                     <NavigateRegionAction Name="Main">
-                        <NavigateAction Region="Main" Route="Container" />
+                        <NavigateAction Region="Main" Route="Locker" />
                     </NavigateRegionAction>
                 </AttachedBehaviour>
             </Interaction.Behaviors>

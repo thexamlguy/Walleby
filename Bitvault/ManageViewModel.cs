@@ -16,7 +16,7 @@ public partial class ManageViewModel :
     {
         Template = template;
 
-        Add<CreateContainerNavigationViewModel>();
+        Add<CreateLockerNavigationViewModel>();
     }
 
     public IContentTemplate Template { get; set; }

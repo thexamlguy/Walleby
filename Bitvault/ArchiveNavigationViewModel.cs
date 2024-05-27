@@ -8,4 +8,4 @@ public partial class ArchiveNavigationViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    string name) : FilterContainerNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, name);
+    string name) : FilterLockerNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, name);

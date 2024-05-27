@@ -14,4 +14,14 @@ public partial class ItemCategoryCollectionViewModel(IServiceProvider provider,
 {
     [ObservableProperty]
     private IContentTemplate template = template;
+
+    public override Task OnActivated()
+    {
+        Publisher.Publish(Notify.As(Factory.Create<LockerCommandHeaderCollection>(new List<IDisposable>
+        {
+
+        })));
+
+        return base.OnActivated();
+    }
 }

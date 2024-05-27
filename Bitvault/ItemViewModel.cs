@@ -52,7 +52,7 @@ public partial class ItemViewModel :
 
     public Task Handle(UpdateEventArgs<Item> args)
     {
-        Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
+        Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
         {
             Factory.Create<ConfirmItemActionViewModel>(),
             Factory.Create<DismissItemActionViewModel>(),
@@ -63,7 +63,7 @@ public partial class ItemViewModel :
 
     public Task Handle(CancelEventArgs<Item> args)
     {
-        Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
+        Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
         {
             Factory.Create<EditItemActionViewModel>(),
             Factory.Create<ArchiveItemActionViewModel>(),
@@ -74,7 +74,7 @@ public partial class ItemViewModel :
 
     public Task Handle(ConfirmEventArgs<Item> args)
     {
-        Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
+        Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
         {
             Factory.Create<FavouriteItemActionViewModel>(Favourite),
             Factory.Create<EditItemActionViewModel>(),
@@ -88,7 +88,7 @@ public partial class ItemViewModel :
     {
         if (!Immutable)
         {
-            Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
+            Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
             {
                 Factory.Create<ConfirmItemActionViewModel>(),
                 Factory.Create<DismissItemActionViewModel>(),
@@ -96,14 +96,14 @@ public partial class ItemViewModel :
         }
         else if (Archived)
         {
-            Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
+            Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
             {
                 Factory.Create<UnarchiveItemActionViewModel>(),
             })));
         }
         else
         {
-            Publisher.Publish(Notify.As(Factory.Create<CommandCollection>(new List<IDisposable>
+            Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
             {
                 Factory.Create<FavouriteItemActionViewModel>(Favourite),
                 Factory.Create<EditItemActionViewModel>(),

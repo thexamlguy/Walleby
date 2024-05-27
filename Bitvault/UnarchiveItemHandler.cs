@@ -5,7 +5,7 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class UnarchiveItemHandler(IValueStore<Item> valueStore,
-    IDbContextFactory<ContainerDbContext> dbContextFactory) :
+    IDbContextFactory<LockerContext> dbContextFactory) :
     INotificationHandler<UnarchiveEventArgs<Item>>
 {
     public async Task Handle(UnarchiveEventArgs<Item> args)
@@ -16,7 +16,7 @@ public class UnarchiveItemHandler(IValueStore<Item> valueStore,
             {
                 await Task.Run(async () =>
                 {
-                    using ContainerDbContext context = await dbContextFactory.CreateDbContextAsync();
+                    using LockerContext context = await dbContextFactory.CreateDbContextAsync();
 
                     if (await context.FindAsync<ItemEntry>(item.Id) is ItemEntry result)
                     {
