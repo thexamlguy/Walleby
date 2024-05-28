@@ -5,16 +5,15 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class UpdateItemHander(IDbContextFactory<LockerContext> dbContextFactory) :
-    IHandler<UpdateEventArgs<(Guid, ItemConfiguration)>, bool>
+    IHandler<UpdateEventArgs<(Guid, string, ItemConfiguration)>, bool>
 {
-    public async Task<bool> Handle(UpdateEventArgs<(Guid, ItemConfiguration)> args,
+    public async Task<bool> Handle(UpdateEventArgs<(Guid, string, ItemConfiguration)> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is (Guid id, ItemConfiguration configuration))
+        if (args.Value is (Guid id, string name, ItemConfiguration configuration))
         {
             try
             {
-                string? name = configuration.Name;
                 using LockerContext context = dbContextFactory.CreateDbContext();
                 ItemEntry? result = null;
 

@@ -7,8 +7,7 @@ public class LockerFactory(IComponentFactory componentFactory) :
 {
     public IComponentHost? Create(string name)
     {
-        if (componentFactory.Create<ILockerComponent, LockerConfiguration>($"Locker:{name}",
-            new LockerConfiguration { Name = name }) is IComponentHost host)
+        if (componentFactory.Create<ILockerComponent, LockerConfiguration>($"Locker:{name}", new LockerConfiguration()) is IComponentHost host)
         {
             return host;
         }

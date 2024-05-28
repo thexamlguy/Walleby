@@ -4,9 +4,9 @@ namespace Bitvault;
 
 public class FavouriteItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
     IMediator mediator) :
-    INotificationHandler<FavouriteEventArgs<Item<(Guid, string)>>>
+    INotificationHandler<FavouriteEventArgs<Item>>
 {
-    public async Task Handle(FavouriteEventArgs<Item<(Guid, string)>> args)
+    public async Task Handle(FavouriteEventArgs<Item> args)
     {
         try
         {

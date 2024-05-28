@@ -2,6 +2,7 @@
 using Toolkit.Foundation;
 
 namespace Bitvault;
+
 [Aggerate(nameof(ItemCategoryCollectionViewModel))]
 public partial class ItemCategoryCollectionViewModel(IServiceProvider provider,
     IServiceFactory factory,

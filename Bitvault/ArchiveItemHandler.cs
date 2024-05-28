@@ -5,9 +5,9 @@ namespace Bitvault;
 public class ArchiveItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
     ICache<Item<(Guid, string)>> cache,
     IMediator mediator) :
-    INotificationHandler<ArchiveEventArgs<Item<(Guid, string)>>>
+    INotificationHandler<ArchiveEventArgs<Item>>
 {
-    public async Task Handle(ArchiveEventArgs<Item<(Guid, string)>> args)
+    public async Task Handle(ArchiveEventArgs<Item> args)
     {
         try
         {

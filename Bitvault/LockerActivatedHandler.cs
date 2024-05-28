@@ -12,15 +12,16 @@ public class LockerActivatedHandler(ILockerHostCollection lockers,
         if (args.Value is IComponentHost locker)
         {
             List<IComponentHost> sortedLockers = [.. lockers, locker];
-            sortedLockers = [.. sortedLockers.OrderBy(x => x.GetConfiguration<LockerConfiguration>() is LockerConfiguration configuration ? configuration.Name : null)];
+            sortedLockers = [.. sortedLockers.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<LockerConfiguration>>() is 
+                IConfigurationDescriptor<LockerConfiguration> descriptor ? descriptor.Name : null)];
 
             int index = sortedLockers.IndexOf(locker);
 
-            if (locker.Services.GetRequiredService<LockerConfiguration>() is LockerConfiguration configuration)
+            if (locker.Services.GetRequiredService<ConfigurationDescriptor<LockerConfiguration>>() is ConfigurationDescriptor<LockerConfiguration> descriptor)
             {
                 if (locker.Services.GetRequiredService<IServiceFactory>() is IServiceFactory serviceFactory)
                 {
-                    if (serviceFactory.Create<LockerNavigationViewModel>(configuration.Name) is LockerNavigationViewModel viewModel)
+                    if (serviceFactory.Create<LockerNavigationViewModel>(descriptor.Name) is LockerNavigationViewModel viewModel)
                     {
                         publisher.Publish(new InsertEventArgs<IMainNavigationViewModel>(index, viewModel),
                             nameof(MainViewModel));

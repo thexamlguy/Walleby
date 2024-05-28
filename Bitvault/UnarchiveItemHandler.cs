@@ -6,9 +6,9 @@ namespace Bitvault;
 
 public class UnarchiveItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
     IDbContextFactory<LockerContext> dbContextFactory) :
-    INotificationHandler<UnarchiveEventArgs<Item<(Guid, string)>>>
+    INotificationHandler<UnarchiveEventArgs<Item>>
 {
-    public async Task Handle(UnarchiveEventArgs<Item<(Guid, string)>> args)
+    public async Task Handle(UnarchiveEventArgs<Item> args)
     {
         try
         {

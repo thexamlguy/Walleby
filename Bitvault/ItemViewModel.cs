@@ -8,6 +8,7 @@ public partial class ItemViewModel :
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>
+
 {
     [ObservableProperty]
     private bool archived;

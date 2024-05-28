@@ -5,11 +5,11 @@ namespace Bitvault;
 public class ConfirmItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
     IMediator mediator,
     IPublisher publisher) :
-    INotificationHandler<ConfirmEventArgs<Item<(Guid, string)>>>
+    INotificationHandler<ConfirmEventArgs<Item>>
 {
-    public async Task Handle(ConfirmEventArgs<Item<(Guid, string)>> args)
+    public async Task Handle(ConfirmEventArgs<Item> args)
     {
-        ItemHeaderConfiguration? configuration = await mediator.Handle<ConfirmEventArgs<Item<(Guid, string)>>,
+        ItemHeaderConfiguration? configuration = await mediator.Handle<ConfirmEventArgs<Item>,
             ItemHeaderConfiguration>(args);
 
         if (configuration is not null)
@@ -27,16 +27,16 @@ public class ConfirmItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
 
                 valueStore.Set(newItem);
 
-                await mediator.Handle<UpdateEventArgs<(Guid, ItemConfiguration)>, bool>(new UpdateEventArgs<(Guid,
-                    ItemConfiguration)>((id, new ItemConfiguration { Name = name })));
+                await mediator.Handle<UpdateEventArgs<(Guid, string, ItemConfiguration)>, bool>(new UpdateEventArgs<(Guid, string,
+                    ItemConfiguration)>((id, name, new ItemConfiguration())));
             }
             else
             {
                 Guid id = Guid.NewGuid();
                 string? name = configuration.Name;
 
-                bool Success = await mediator.Handle<CreateEventArgs<(Guid,
-                    ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, ItemConfiguration)>((id, new ItemConfiguration { Name = name })));
+                bool Success = await mediator.Handle<CreateEventArgs<(Guid, string,
+                    ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, string, ItemConfiguration)>((id, name, new ItemConfiguration())));
 
                 if (Success)
                 {

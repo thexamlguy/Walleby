@@ -15,7 +15,7 @@ public class LockerStorageFactory(IValueStore<LockerConnection> connection,
         SecurityKey key)
     {
         connection.Set(new LockerConnection($"Data Source={Path.Combine(environment.ContentRootPath, name)}" +
-            $".vault;Mode=ReadWriteCreate;Pooling=false;Password={Convert.ToBase64String(key.DecryptedKey)}"));
+            $".vault;Mode=ReadWriteCreate;Pooling=true;Password={Convert.ToBase64String(key.DecryptedKey)}"));
 
         IDbContextFactory<LockerContext> dbContextFactory = provider.GetRequiredService<IDbContextFactory<LockerContext>>();
         using LockerContext context = await dbContextFactory.CreateDbContextAsync();

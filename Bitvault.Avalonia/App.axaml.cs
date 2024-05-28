@@ -30,11 +30,11 @@ public partial class App : Application
             .AddConfiguration("Item:Bank Account", ItemConfiguration.BankAccount)
             .AddConfiguration("Item:Credit Card", ItemConfiguration.CreditCard)
             .AddConfiguration("Item:Document", ItemConfiguration.Document)
-            .AddConfiguration<ItemConfiguration>("Item:Driving Licence", ItemConfiguration.DrivingLicence)
-            .AddConfiguration<ItemConfiguration>("Item:Identity", ItemConfiguration.Identity)
-            .AddConfiguration<ItemConfiguration>("Item:Login", ItemConfiguration.Login)
-            .AddConfiguration<ItemConfiguration>("Item:Note", ItemConfiguration.Note)
-            .AddConfiguration<ItemConfiguration>("Item:Password", ItemConfiguration.Password)
+            .AddConfiguration("Item:Driving Licence", ItemConfiguration.DrivingLicence)
+            .AddConfiguration("Item:Identity", ItemConfiguration.Identity)
+            .AddConfiguration("Item:Login", ItemConfiguration.Login)
+            .AddConfiguration("Item:Note", ItemConfiguration.Note)
+            .AddConfiguration("Item:Password", ItemConfiguration.Password)
             .ConfigureServices((context, services) =>
             {
                 services.AddAvalonia();
@@ -44,9 +44,6 @@ public partial class App : Application
                 {
                     services.AddTemplate<MainWindowViewModel, MainWindow>("MainWindow");
                 }
-
-                services.AddScoped<IProxyService<IEnumerable<ItemConfiguration>>>(provider =>
-                    new ProxyService<IEnumerable<ItemConfiguration>>(provider.GetRequiredService<IEnumerable<ItemConfiguration>>()));
 
                 services.AddHandler<LockerActivatedHandler>();
 
@@ -60,7 +57,7 @@ public partial class App : Application
                         services.AddCache<Item<(Guid, string)>>();
 
                         services.AddTransient(_ =>
-                            provider.GetRequiredService<IProxyService<IEnumerable<ItemConfiguration>>>());
+                            provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>());
 
                         services.AddTransient<IKeyGenerator, KeyGenerator>();
                         services.AddTransient<IEncryptor, AesEncryptor>();
@@ -112,12 +109,12 @@ public partial class App : Application
                         services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("LockerItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
                        
-                        services.AddHandler<AggerateLockerCategoryViewModelHandler>();
+                        services.AddHandler<AggerateLockerItemCategoryViewModelHandler>();
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
 
-                        services.AddHandler<AggerateItemViewModelHandler>();
+                        services.AddHandler<AggerateItemContentViewModelHandler>();
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
