@@ -13,7 +13,7 @@
         SelectionMode="Single">
         <ListBox.Styles>
             <Style Selector="ListBoxItem">
-                <Setter Property="IsSelected" Value="{ReflectionBinding Selected, Mode=TwoWay}" />
+                <Setter Property="IsSelected" Value="{ReflectionBinding Selected}" />
             </Style>
         </ListBox.Styles>
     </ListBox>

@@ -36,7 +36,8 @@
                     Region="{Binding Named, StringFormat='{}{0}:Content'}"
                     Route="Item"
                     Scope="self">
-                    <Parameter Key="Immutable" Value="{x:False}" />
+                    <Parameter Key="test" Value="{x:True}" />
+                    <Parameter Key="State" Value="{x:Static vm:ItemState.Write}" />
                 </NavigateAction>
             </EventTriggerBehavior>
         </Interaction.Behaviors>

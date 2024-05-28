@@ -12,7 +12,7 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
     IItemEntryViewModel
 {
     [ObservableProperty]
-    private bool immutable;
+    private ItemState state;
 
     public ItemHeaderViewModel(IServiceProvider provider,
         IServiceFactory factory,
@@ -20,10 +20,10 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
         IPublisher publisher,
         ISubscription subscriber,
         IDisposer disposer,
-        bool immutable,
+        ItemState state,
         string? value = null) : base(provider, factory, mediator, publisher, subscriber, disposer, value)
     {
-        Immutable = immutable;
+        State = state;
         Value = value;
 
         Track(nameof(Value), () => Value, newValue => Value = newValue);
@@ -39,21 +39,21 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
         CancellationToken cancellationToken) => Task.FromResult(new ItemHeaderConfiguration { Name = Value! });
 
     public Task Handle(UpdateEventArgs<Item> args) =>
-        Task.FromResult(Immutable = false);
+        Task.FromResult(State = ItemState.Write);
 
     public Task Handle(CancelEventArgs<Item> args)
     {
         Revert();
-        Immutable = true;
 
+        State = ItemState.Read;
         return Task.CompletedTask;
     }
 
     public Task Handle(ConfirmEventArgs<Item> args)
     {
         Commit();
-        Immutable = true;
 
+        State = ItemState.Read;
         return Task.CompletedTask;
     }
 }

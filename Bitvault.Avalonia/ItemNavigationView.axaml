@@ -3,8 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
-    x:DataType="vm:ItemNavigationViewModel"
-    IsSelected="{Binding Selected, Mode=TwoWay}">
+    x:DataType="vm:ItemNavigationViewModel">
     <ListBoxItem.Resources>
         <SolidColorBrush x:Key="StarredIconForegroundBrush" Color="#FFEDB120" />
     </ListBoxItem.Resources>
@@ -20,8 +19,8 @@
                     Region="{Binding Named, StringFormat='{}{0}:Content'}"
                     Route="Item"
                     Scope="self">
+                    <Parameter Key="State" Value="{x:Static vm:ItemState.Read}" />
                     <Parameter Key="Name" Value="{Binding Name}" />
-                    <Parameter Key="Immutable" Value="{x:True}" />
                     <Parameter Key="Archived" Value="{Binding Archived}" />
                     <Parameter Key="Favourite" Value="{Binding Favourite}" />
                 </NavigateAction>
@@ -32,10 +31,10 @@
                 Region="{Binding Named, StringFormat='{}{0}:Content'}"
                 Route="Item"
                 Scope="self">
-				<Parameter Key="Name" Value="{Binding Name}" />
-				<Parameter Key="Immutable" Value="{x:True}" />
-				<Parameter Key="Archived" Value="{Binding Archived}" />
-				<Parameter Key="Favourite" Value="{Binding Favourite}" />
+                <Parameter Key="Name" Value="{Binding Name}" />
+                <Parameter Key="Immutable" Value="{x:Static vm:ItemState.Read}" />
+                <Parameter Key="Archived" Value="{Binding Archived}" />
+                <Parameter Key="Favourite" Value="{Binding Favourite}" />
             </NavigateAction>
         </DataTriggerBehavior>
     </Interaction.Behaviors>

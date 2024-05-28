@@ -17,7 +17,7 @@ public partial class ItemViewModel :
     private bool favourite;
 
     [ObservableProperty]
-    private bool immutable;
+    private ItemState state;
 
     [ObservableProperty]
     private string named;
@@ -25,6 +25,8 @@ public partial class ItemViewModel :
     [ObservableProperty]
     private string name;
 
+    [ObservableProperty]
+    private bool test;
     public ItemViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
@@ -33,20 +35,22 @@ public partial class ItemViewModel :
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
+        ItemState state = ItemState.Read,
+        bool test = false,
         string name = "",
-        bool immutable = true,
         bool favourite = false,
         bool archived = false) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
+        Test = test;
         Named = $"{named}";
         Template = template;
-        Immutable = immutable;
+        State = state;
         Favourite = favourite;
         Archived = archived;
         Name = name;
 
-        Add<ItemHeaderViewModel>(immutable, name);
-        Add<ItemContentViewModel>(immutable);
+        Add<ItemHeaderViewModel>(state, name);
+        Add<ItemContentViewModel>(state);
     }
 
     public IContentTemplate Template { get; set; }
@@ -59,6 +63,7 @@ public partial class ItemViewModel :
             Factory.Create<DismissItemActionViewModel>(),
         })));
 
+        State = ItemState.Write;
         return Task.CompletedTask;
     }
 
@@ -70,6 +75,7 @@ public partial class ItemViewModel :
             Factory.Create<ArchiveItemActionViewModel>(),
         })));
 
+        State = ItemState.Read;
         return Task.CompletedTask;
     }
 
@@ -82,20 +88,13 @@ public partial class ItemViewModel :
             Factory.Create<ArchiveItemActionViewModel>(),
         })));
 
+        State = ItemState.Read;
         return Task.CompletedTask;
     }
 
     public override Task OnActivated()
     {
-        if (!Immutable)
-        {
-            Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
-            {
-                Factory.Create<ConfirmItemActionViewModel>(),
-                Factory.Create<DismissItemActionViewModel>(),
-            })));
-        }
-        else if (Archived)
+        if (Archived)
         {
             Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
             {
@@ -104,12 +103,23 @@ public partial class ItemViewModel :
         }
         else
         {
-            Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
+            if (State is ItemState.Write)
             {
-                Factory.Create<FavouriteItemActionViewModel>(Favourite),
-                Factory.Create<EditItemActionViewModel>(),
-                Factory.Create<ArchiveItemActionViewModel>(),
-            })));
+                Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
+                {
+                    Factory.Create<ConfirmItemActionViewModel>(),
+                    Factory.Create<DismissItemActionViewModel>(),
+                })));
+            }
+            else
+            {
+                Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
+                {
+                    Factory.Create<FavouriteItemActionViewModel>(Favourite),
+                    Factory.Create<EditItemActionViewModel>(),
+                    Factory.Create<ArchiveItemActionViewModel>(),
+                })));
+            }
         }
 
         return base.OnActivated();

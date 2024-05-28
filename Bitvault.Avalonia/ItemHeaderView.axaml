@@ -11,12 +11,20 @@
             DisplayName="{Binding Value}" />
         <TextBox
             MaxWidth="360"
-            IsReadOnly="{Binding Immutable, Mode=TwoWay}"
-            Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Value}"
             TextAlignment="Center"
             Watermark="Enter name">
+            <Interaction.Behaviors>
+                <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
+                    <AddClassAction ClassName="Read" RemoveIfExists="True" />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
+                    <RemoveClassAction ClassName="Read" />
+                </DataTriggerBehavior>
+            </Interaction.Behaviors>
             <TextBox.Styles>
-                <Style Selector="TextBox[IsReadOnly=True]">
+                <Style Selector="TextBox.Read">
+                    <Setter Property="IsReadOnly" Value="True" />
                     <Setter Property="BorderBrush" Value="Transparent" />
                     <Setter Property="Background" Value="Transparent" />
                     <Style Selector="^:pointerover">
@@ -37,6 +45,7 @@
                         </Style>
                     </Style>
                 </Style>
+                <Style Selector="TextBox.Write" />
             </TextBox.Styles>
         </TextBox>
     </StackPanel>

@@ -11,6 +11,19 @@
                 Route="ItemCommandHeader"
                 Scope="self" />
         </AttachedBehaviour>
+        <DataTriggerBehavior
+            Binding="{Binding State}"
+            ComparisonCondition="Equal"
+            Value="{x:Static vm:ItemState.Read}">
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Test}" RightOperand="True" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateBackAction Region="Left" />
+            </ConditionAction>
+        </DataTriggerBehavior>
     </Interaction.Behaviors>
     <ScrollViewer Padding="12,12,12,0">
         <ItemsControl ItemTemplate="{ReflectionBinding Template}" ItemsSource="{Binding}">

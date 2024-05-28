@@ -28,7 +28,8 @@ public class ModifiedItemHandler(IServiceProvider serviceProvider,
                 int newIndex = cache.IndexOf(newItem);
                 valueStore.Set(newItem);
 
-                publisher.Publish(MoveTo.As<ItemNavigationViewModel>(oldIndex, newIndex), nameof(LockerViewModel));
+                publisher.Publish(MoveTo.As<ItemNavigationViewModel>(oldIndex, newIndex),
+                    nameof(ItemCollectionViewModel));
             }
         }
 

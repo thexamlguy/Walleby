@@ -14,7 +14,7 @@ public partial class ItemContentViewModel :
         ISubscription subscriber,
         IDisposer disposer,
         IContentTemplate template,
-        bool immutable = true) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        ItemState state = ItemState.Read) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
     }

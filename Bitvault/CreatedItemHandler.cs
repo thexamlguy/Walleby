@@ -26,7 +26,8 @@ public class CreatedItemHandler(IServiceProvider serviceProvider,
                 int index = cache.IndexOf(item);
                 valueStore.Set(item);
 
-                publisher.Publish(Insert.As(index, viewModel), nameof(LockerViewModel));
+                publisher.Publish(Insert.As(index, viewModel), 
+                    nameof(ItemCollectionViewModel));
             }
         }
 

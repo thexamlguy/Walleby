@@ -1,4 +1,5 @@
-﻿using Toolkit.Foundation;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Toolkit.Foundation;
 
 namespace Bitvault;
 
@@ -26,6 +27,11 @@ public partial class ItemCollectionViewModel :
     }
 
     public IContentTemplate Template { get; set; }
+
+    public override Task OnDeactivated()
+    {
+        return base.OnDeactivated();
+    }
 
     public Task Handle(NotifyEventArgs<Filter> args)
     {

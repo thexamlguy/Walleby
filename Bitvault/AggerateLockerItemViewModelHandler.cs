@@ -45,5 +45,7 @@ public class AggerateLockerItemViewModelHandler(IMediator mediator,
                 }
             }
         }
+
+        var d = cache;
     }
 }
