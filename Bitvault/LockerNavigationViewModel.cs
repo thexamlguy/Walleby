@@ -9,7 +9,8 @@ public partial class LockerNavigationViewModel :
     INotificationHandler<OpenedEventArgs<Locker>>,
     INotificationHandler<ClosedEventArgs<Locker>>,
     INotificationHandler<ActivatedEventArgs<Locker>>,
-    INotificationHandler<DeactivatedEventArgs<Locker>>
+    INotificationHandler<DeactivatedEventArgs<Locker>>,
+    ISelectable
 {
     [ObservableProperty]
     private bool activated;
@@ -33,10 +34,12 @@ public partial class LockerNavigationViewModel :
         ISubscription subscriber,
         IDisposer disposer,
         IContentTemplate template,
-        string name) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        string name,
+        bool selected) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Name = name;
+        Selected = selected;
     }
 
     public IContentTemplate Template { get; set; }

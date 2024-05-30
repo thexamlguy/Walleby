@@ -26,7 +26,8 @@ public partial class ItemViewModel :
     private string name;
 
     [ObservableProperty]
-    private bool test;
+    private bool fromCategory;
+
     public ItemViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
@@ -36,12 +37,12 @@ public partial class ItemViewModel :
         IContentTemplate template,
         NamedComponent named,
         ItemState state = ItemState.Read,
-        bool test = false,
+        bool fromCategory = false,
         string name = "",
         bool favourite = false,
         bool archived = false) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
-        Test = test;
+        FromCategory = fromCategory;
         Named = $"{named}";
         Template = template;
         State = state;
