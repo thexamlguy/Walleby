@@ -12,7 +12,7 @@
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
-                        <ComparisonCondition LeftOperand="{Binding $parent[ListBoxItem].IsSelected}" RightOperand="True" />
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction
@@ -27,7 +27,7 @@
                 </NavigateAction>
             </ConditionAction>
         </AttachedBehaviour>
-        <DataTriggerBehavior Binding="{Binding $parent[ListBoxItem].IsSelected}" Value="True">
+        <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
             <NavigateAction
                 Region="{Binding Named, StringFormat='{}{0}:Content'}"
                 Route="Item"

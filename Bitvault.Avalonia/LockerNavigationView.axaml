@@ -15,7 +15,7 @@
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
-                        <ComparisonCondition LeftOperand="{Binding $parent[NavigationViewItem].IsSelected}" RightOperand="True" />
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Main" Route="OpenLocker">
@@ -31,7 +31,7 @@
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
-                        <ComparisonCondition LeftOperand="{Binding $parent[NavigationViewItem].IsSelected}" RightOperand="True" />
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <ChangePropertyAction
