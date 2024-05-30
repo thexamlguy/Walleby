@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
     x:DataType="vm:ItemHeaderViewModel">
-    <StackPanel Grid.Column="1" Spacing="18">
+    <StackPanel Grid.Column="1" Spacing="12">
         <PersonPicture
-            Width="96"
-            Height="96"
+            Width="144"
+            Height="144"
             DisplayName="{Binding Value}" />
         <TextBox
             MaxWidth="360"

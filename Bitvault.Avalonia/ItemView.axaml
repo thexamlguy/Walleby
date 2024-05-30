@@ -24,6 +24,18 @@
                 <NavigateBackAction Region="Left" />
             </ConditionAction>
         </DataTriggerBehavior>
+        <DataTriggerBehavior
+            Binding="{Binding SelectedItem}"
+            ComparisonCondition="Equal"
+            Value="{x:Null}">
+            <NavigateAction
+                Region="{Binding Named, StringFormat='{}{0}:Content'}"
+                Route="Item"
+                Scope="self">
+                <Parameter Key="test" Value="{x:True}" />
+                <Parameter Key="State" Value="{x:Static vm:ItemState.Write}" />
+            </NavigateAction>
+        </DataTriggerBehavior>
     </Interaction.Behaviors>
     <ScrollViewer Padding="12,12,12,0">
         <ItemsControl ItemTemplate="{ReflectionBinding Template}" ItemsSource="{Binding}">

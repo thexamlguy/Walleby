@@ -76,8 +76,8 @@
 	  <Compile Update="ItemContentView.axaml.cs">
 	    <DependentUpon>ItemContentView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="OpenView.axaml.cs">
-	    <DependentUpon>OpenView.axaml</DependentUpon>
+	  <Compile Update="OpenLockerView.axaml.cs">
+	    <DependentUpon>OpenLockerView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="ManageNavigationView.axaml.cs">
 	    <DependentUpon>ManageNavigationView.axaml</DependentUpon>

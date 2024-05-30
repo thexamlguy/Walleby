@@ -9,9 +9,13 @@ public partial class OpenLockerViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscription subscriber,
-    IDisposer disposer) :
+    IDisposer disposer,
+    string name) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer)
 {
+    [ObservableProperty]
+    private string? name = name;
+
     [ObservableProperty]
     private string? password;
 

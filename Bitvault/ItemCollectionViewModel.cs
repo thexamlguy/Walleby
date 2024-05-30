@@ -10,6 +10,9 @@ public partial class ItemCollectionViewModel :
     INotificationHandler<NotifyEventArgs<Search>>,
     IBackStack
 {
+    [ObservableProperty]
+    public string? named;
+
     private LockerViewModelConfiguration configuration;
 
     public ItemCollectionViewModel(IServiceProvider provider,
@@ -19,19 +22,17 @@ public partial class ItemCollectionViewModel :
         ISubscription subscriber,
         IDisposer disposer,
         IContentTemplate template,
+        NamedComponent named,
         LockerViewModelConfiguration configuration,
         string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
+        Named = $"{named}";
+
         this.configuration = configuration with { Filter = filter };
     }
 
     public IContentTemplate Template { get; set; }
-
-    public override Task OnDeactivated()
-    {
-        return base.OnDeactivated();
-    }
 
     public Task Handle(NotifyEventArgs<Filter> args)
     {
@@ -66,6 +67,10 @@ public partial class ItemCollectionViewModel :
         return base.OnActivated();
     }
 
+    public override Task OnDeactivated()
+    {
+        return base.OnDeactivated();
+    }
     protected override IAggerate OnAggerate(object? key) =>
         Aggerate.With<ItemNavigationViewModel, LockerViewModelConfiguration>(configuration)
             with { Key = key };

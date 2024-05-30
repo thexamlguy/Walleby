@@ -67,6 +67,11 @@ public partial class ItemViewModel :
         return Task.CompletedTask;
     }
 
+    public override void Dispose()
+    {
+        Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>())));
+        base.Dispose();
+    }
     public Task Handle(CancelEventArgs<Item> args)
     {
         Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>

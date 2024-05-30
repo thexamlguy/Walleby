@@ -93,7 +93,7 @@ public partial class App : Application
                         services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
                         services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
 
-                        services.AddTemplate<OpenLockerViewModel, OpenView>("OpenLocker");
+                        services.AddTemplate<OpenLockerViewModel, OpenLockerView>("OpenLocker");
 
                         services.AddScoped<LockerViewModelConfiguration>();
 
@@ -106,7 +106,7 @@ public partial class App : Application
                         services.AddTemplate<CreateItemActionViewModel, CreateItemActionView>();
                         services.AddTemplate<SearchLockerActionViewModel, SearchLockerActionView>();
 
-                        services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("LockerItemCategoryCollection");
+                        services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
                        
                         services.AddHandler<AggerateLockerItemCategoryViewModelHandler>();
@@ -126,6 +126,7 @@ public partial class App : Application
                         services.AddTemplate<EditItemActionViewModel, EditItemActionView>();
                         services.AddTemplate<DeleteItemActionViewModel, DeleteItemActionView>();
 
+                        services.AddTemplate<EmptyItemCollectionViewModel, EmptyItemCollectionView>("EmptyItemCollection");
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
                         services.AddTemplate<ItemContentViewModel, ItemContentView>();
                         services.AddTemplate<AddItemNavigationViewModel, AddItemNavigationView>();

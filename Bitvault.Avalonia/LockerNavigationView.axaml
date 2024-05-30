@@ -19,7 +19,9 @@
                         <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Region="Main" Route="OpenLocker" />
+                <NavigateAction Region="Main" Route="OpenLocker">
+                    <Parameter Key="Name" Value="{Binding Name}" />
+                </NavigateAction>
                 <ChangePropertyAction
                     PropertyName="SelectsOnInvoked"
                     TargetObject="{Binding #NavigationViewItem}"
@@ -47,7 +49,9 @@
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Region="Main" Route="OpenLocker" />
+                <NavigateAction Region="Main" Route="OpenLocker">
+                    <Parameter Key="Name" Value="{Binding Name}" />
+                </NavigateAction>
             </ConditionAction>
             <ConditionAction>
                 <ConditionAction.Condition>
