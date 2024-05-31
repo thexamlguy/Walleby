@@ -3,7 +3,10 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Aggerate(nameof(ItemCollectionViewModel))]
+[Aggerate(typeof(AggerateEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
+[Notification(typeof(CreateEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
+[Notification(typeof(InsertEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
+[Notification(typeof(MoveToEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
 public partial class ItemCollectionViewModel :
     ObservableCollection<ItemNavigationViewModel>,
     INotificationHandler<NotifyEventArgs<Filter>>,

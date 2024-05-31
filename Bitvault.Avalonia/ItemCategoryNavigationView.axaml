@@ -3,8 +3,25 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
-    x:DataType="vm:ItemCategoryNavigationViewModel"
-    IsSelected="{Binding Selected, Mode=TwoWay}">
+    x:DataType="vm:ItemCategoryNavigationViewModel">
+    <Interaction.Behaviors>
+        <AttachedBehaviour>
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <InvokeCommandAction Command="{Binding InvokeCommand}" />
+            </ConditionAction>
+        </AttachedBehaviour>
+        <DataTriggerBehavior
+            Binding="{Binding Selected}"
+            ComparisonCondition="Equal"
+            Value="True">
+            <InvokeCommandAction Command="{Binding InvokeCommand}" />
+        </DataTriggerBehavior>
+    </Interaction.Behaviors>
     <Grid Background="Transparent" ColumnDefinitions="Auto,*">
         <PersonPicture
             Grid.Column="0"

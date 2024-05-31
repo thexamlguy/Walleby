@@ -3,6 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
+[Notification(typeof(ConfirmEventArgs<Item>), nameof(Create))]
 public partial class ItemViewModel :
     ObservableCollection<IItemEntryViewModel>,
     INotificationHandler<UpdateEventArgs<Item>>,
@@ -42,10 +43,10 @@ public partial class ItemViewModel :
         bool favourite = false,
         bool archived = false) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
-        FromCategory = fromCategory;
-        Named = $"{named}";
         Template = template;
+        Named = $"{named}";
         State = state;
+        FromCategory = fromCategory;
         Favourite = favourite;
         Archived = archived;
         Name = name;
@@ -60,7 +61,7 @@ public partial class ItemViewModel :
     {
         Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
         {
-            Factory.Create<ConfirmItemActionViewModel>(),
+            Factory.Create<ConfirmItemActionViewModel>(ItemState.Write),
             Factory.Create<DismissItemActionViewModel>(),
         })));
 
@@ -70,9 +71,12 @@ public partial class ItemViewModel :
 
     public override void Dispose()
     {
-        Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>())));
+        Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new
+            List<IDisposable>())));
+
         base.Dispose();
     }
+
     public Task Handle(CancelEventArgs<Item> args)
     {
         Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
@@ -109,11 +113,11 @@ public partial class ItemViewModel :
         }
         else
         {
-            if (State is ItemState.Write)
+            if (State is ItemState.Write or ItemState.New)
             {
                 Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
                 {
-                    Factory.Create<ConfirmItemActionViewModel>(),
+                    Factory.Create<ConfirmItemActionViewModel>(State),
                     Factory.Create<DismissItemActionViewModel>(),
                 })));
             }

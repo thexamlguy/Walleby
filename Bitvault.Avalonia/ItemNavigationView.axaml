@@ -19,7 +19,6 @@
                     Region="{Binding Named, StringFormat='{}{0}:Content'}"
                     Route="Item"
                     Scope="self">
-                    <Parameter Key="FromCategory" Value="{x:False}" />
                     <Parameter Key="State" Value="{x:Static vm:ItemState.Read}" />
                     <Parameter Key="Name" Value="{Binding Name}" />
                     <Parameter Key="Favourite" Value="{Binding Favourite}" />
@@ -32,7 +31,6 @@
                 Region="{Binding Named, StringFormat='{}{0}:Content'}"
                 Route="Item"
                 Scope="self">
-                <Parameter Key="FromCategory" Value="{x:False}" />
                 <Parameter Key="Name" Value="{Binding Name}" />
                 <Parameter Key="State" Value="{x:Static vm:ItemState.Read}" />
                 <Parameter Key="Favourite" Value="{Binding Favourite}" />

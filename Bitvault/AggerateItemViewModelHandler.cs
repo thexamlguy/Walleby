@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class AggerateLockerItemViewModelHandler(IMediator mediator,
+public class AggerateItemViewModelHandler(IMediator mediator,
     IServiceProvider serviceProvider,
     ICache<Item<(Guid, string)>> cache,
     IPublisher publisher) :
@@ -45,7 +45,5 @@ public class AggerateLockerItemViewModelHandler(IMediator mediator,
                 }
             }
         }
-
-        var d = cache;
     }
 }

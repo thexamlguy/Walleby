@@ -9,8 +9,12 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>,
+    INotificationHandler<NotifyEventArgs<ItemCategory<string>>>,
     IItemEntryViewModel
 {
+    [ObservableProperty]
+    private string? category;
+
     [ObservableProperty]
     private ItemState state;
 
@@ -54,6 +58,16 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
         Commit();
 
         State = ItemState.Read;
+        return Task.CompletedTask;
+    }
+
+    public Task Handle(NotifyEventArgs<ItemCategory<string>> args)
+    {
+        if (args.Value is ItemCategory<string> category)
+        {
+            Category = category.Value;
+        }
+
         return Task.CompletedTask;
     }
 }

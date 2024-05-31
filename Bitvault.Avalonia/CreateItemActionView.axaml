@@ -37,7 +37,7 @@
                     Route="Item"
                     Scope="self">
                     <Parameter Key="FromCategory" Value="{x:True}" />
-                    <Parameter Key="State" Value="{x:Static vm:ItemState.Write}" />
+                    <Parameter Key="State" Value="{x:Static vm:ItemState.New}" />
                 </NavigateAction>
             </EventTriggerBehavior>
         </Interaction.Behaviors>

@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class ModifiedItemHandler(IServiceProvider serviceProvider,
+public class ItemModifiedHandler(IServiceProvider serviceProvider,
     IPublisher publisher) :
     INotificationHandler<ModifiedEventArgs<Item<(Guid, string)>>>
 {

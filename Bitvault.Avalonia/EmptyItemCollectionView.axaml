@@ -20,7 +20,6 @@
                         Region="{Binding Named, StringFormat='{}{0}:Content'}"
                         Route="Item"
                         Scope="self">
-                        <Parameter Key="FromCategory" Value="{x:True}" />
                         <Parameter Key="State" Value="{x:Static vm:ItemState.Write}" />
                     </NavigateAction>
                 </EventTriggerBehavior>

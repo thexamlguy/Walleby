@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Toolkit.Foundation;
 
 namespace Bitvault;
@@ -21,4 +22,6 @@ public partial class ItemCategoryNavigationViewModel(IServiceProvider provider,
     [ObservableProperty]
     private bool selected = selected;
 
+    [RelayCommand]
+    public void Invoke() => Publisher.Publish(Notify.As(new ItemCategory<string>(Name)));
 }

@@ -6,12 +6,12 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class CreateItemHandler(IDbContextFactory<LockerContext> dbContextFactory) :
-    IHandler<CreateEventArgs<(Guid, string, ItemConfiguration)>, bool>
+    IHandler<CreateEventArgs<(Guid, string, string, ItemConfiguration)>, bool>
 {
-    public async Task<bool> Handle(CreateEventArgs<(Guid, string, ItemConfiguration)> args,
+    public async Task<bool> Handle(CreateEventArgs<(Guid, string, string, ItemConfiguration)> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is (Guid id, string name, ItemConfiguration configuration))
+        if (args.Value is (Guid id, string name, string category, ItemConfiguration configuration))
         {
             try
             {
@@ -20,7 +20,7 @@ public class CreateItemHandler(IDbContextFactory<LockerContext> dbContextFactory
 
                 await Task.Run(async () =>
                 {
-                    result = await context.AddAsync(new ItemEntry { Id = id, Name = name }, cancellationToken);
+                    result = await context.AddAsync(new ItemEntry { Id = id, Name = name, Category = category }, cancellationToken);
                     await context.SaveChangesAsync(cancellationToken);
                 }, cancellationToken);
 

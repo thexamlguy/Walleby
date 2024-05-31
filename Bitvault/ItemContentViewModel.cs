@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-[Aggerate(nameof(ItemContentViewModel))]
+//[Aggerate(nameof(ItemContentViewModel))]
 public partial class ItemContentViewModel :
     ObservableCollection<IItemEntryViewModel>,
     IItemEntryViewModel,
@@ -21,8 +21,14 @@ public partial class ItemContentViewModel :
 
     public IContentTemplate Template { get; set; }
 
+    protected override IAggerate OnAggerate(object? key)
+    {
+        return base.OnAggerate(key);
+    }
+
+
     public Task Handle(NotifyEventArgs<ItemCategory<string>> args)
     {
-        throw new NotImplementedException();
+        return Task.CompletedTask;
     }
 }

@@ -8,8 +8,10 @@ public partial class ConfirmItemActionViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscription subscriber,
-    IDisposer disposer) : Observable(provider, factory, mediator, publisher, subscriber, disposer)
+    IDisposer disposer,
+    ItemState state) : Observable(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Confirm.As<Item>());
+    public void Invoke() => Publisher.Publish(Confirm.As<Item>(), 
+        state is ItemState.New ? nameof(Create) : nameof(Update));
 }

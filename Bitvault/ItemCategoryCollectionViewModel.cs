@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Aggerate(nameof(ItemCategoryCollectionViewModel))]
+[Aggerate(typeof(CreateEventArgs<ItemCategoryNavigationViewModel>), nameof(ItemCategoryCollectionViewModel))]
 public partial class ItemCategoryCollectionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,

@@ -8,6 +8,7 @@
         FooterMenuItemsSource="{Binding Footer}"
         MenuItemTemplate="{Binding Template}"
         MenuItemsSource="{Binding}"
+		IsSettingsVisible="False"
         SelectedItem="{Binding SelectedItem}"
         SelectionFollowsFocus="True">
         <NavigationView.Resources>

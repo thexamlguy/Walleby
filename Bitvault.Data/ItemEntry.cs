@@ -15,6 +15,8 @@ public record ItemEntry
 
     public int State { get; set; } = 0;
 
+    public required string Category { get; set; }
+
     public ICollection<TagEntry>? Tags { get; }
 
     public ICollection<BlobEntry>? Blobs { get; }

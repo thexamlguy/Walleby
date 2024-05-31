@@ -22,19 +22,7 @@
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateBackAction Region="Left" />
-            </ConditionAction>
-        </DataTriggerBehavior>
-        <DataTriggerBehavior
-            Binding="{Binding SelectedItem}"
-            ComparisonCondition="Equal"
-            Value="{x:Null}">
-            <NavigateAction
-                Region="{Binding Named, StringFormat='{}{0}:Content'}"
-                Route="Item"
-                Scope="self">
-                <Parameter Key="FromCategory" Value="{x:True}" />
-                <Parameter Key="State" Value="{x:Static vm:ItemState.Write}" />
-            </NavigateAction>
+            </ConditionAction>        
         </DataTriggerBehavior>
     </Interaction.Behaviors>
     <ScrollViewer Padding="12,12,12,0">

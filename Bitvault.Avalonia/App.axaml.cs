@@ -68,6 +68,7 @@ public partial class App : Application
 
                         services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
                         services.AddTransient<ILockerStorageFactory, LockerStorageFactory>();
+
                         services.TryAddSingleton<IValueStore<SecurityKey>, ValueStore<SecurityKey>>();
                         services.TryAddSingleton<IValueStore<LockerConnection>, ValueStore<LockerConnection>>();
 
@@ -99,7 +100,7 @@ public partial class App : Application
 
                         services.AddTemplate<LockerViewModel, LockerView>("Locker");
                         services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ContentItemCollection");
-                        services.AddHandler<AggerateLockerItemViewModelHandler>();
+                        services.AddHandler<AggerateItemViewModelHandler>();
 
                         services.AddTemplate<LockerHeaderViewModel, LockerHeaderView>("LockerHeader");
                         services.AddTemplate<BackActionViewModel, BackActionView>();
@@ -109,7 +110,7 @@ public partial class App : Application
                         services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
                        
-                        services.AddHandler<AggerateLockerItemCategoryViewModelHandler>();
+                        services.AddHandler<AggerateItemCategoryViewModelHandler>();
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
@@ -133,14 +134,16 @@ public partial class App : Application
 
                         services.AddScoped<IValueStore<Item<(Guid, string)>>, ValueStore<Item<(Guid, string)>>>();
 
-                        services.AddHandler<ConfirmItemHandler>();
+                        services.AddHandler<ConfirmUpdateItemHandler>(nameof(Update));
+                        services.AddHandler<ConfirmCreateItemHandler>(nameof(Create));
+
                         services.AddHandler<ArchiveItemHandler>();
                         services.AddHandler<UnarchiveItemHandler>();
                         services.AddHandler<FavouriteItemHandler>();
                         services.AddHandler<UnfavouriteItemHandler>();
 
-                        services.AddHandler<CreatedItemHandler>(ServiceLifetime.Singleton);
-                        services.AddHandler<ModifiedItemHandler>(ServiceLifetime.Singleton);
+                        services.AddHandler<ItemCreatedHandler>(ServiceLifetime.Singleton);
+                        services.AddHandler<ItemModifiedHandler>(ServiceLifetime.Singleton);
                     });
                 })!);
 

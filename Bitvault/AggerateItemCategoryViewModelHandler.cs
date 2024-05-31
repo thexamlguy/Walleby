@@ -2,19 +2,21 @@
 
 namespace Bitvault;
 
-public class AggerateLockerItemCategoryViewModelHandler(IEnumerable<IConfigurationDescriptor<ItemConfiguration>> descriptors,
+public class AggerateItemCategoryViewModelHandler(IEnumerable<IConfigurationDescriptor<ItemConfiguration>> descriptors,
     IServiceFactory serviceFactory,
     IPublisher publisher) :
     INotificationHandler<AggerateEventArgs<ItemCategoryNavigationViewModel>>
 {
     public Task Handle(AggerateEventArgs<ItemCategoryNavigationViewModel> args)
     {
+        bool selected = true;
         foreach (IConfigurationDescriptor<ItemConfiguration> descriptor in descriptors)
         {
-            if (serviceFactory.Create<ItemCategoryNavigationViewModel>(descriptor.Name)
+            if (serviceFactory.Create<ItemCategoryNavigationViewModel>(descriptor.Name, selected)
                 is ItemCategoryNavigationViewModel viewModel)
             {
                 publisher.Publish(Create.As(viewModel), nameof(ItemCategoryCollectionViewModel));
+                selected = false;
             }
         }
 
