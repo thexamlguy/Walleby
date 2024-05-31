@@ -3,13 +3,13 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Notification(typeof(ConfirmEventArgs<Item>), nameof(Create))]
+[Notification(typeof(ConfirmEventArgs<Item>), nameof(ItemState.New))]
+[Notification(typeof(ConfirmEventArgs<Item>), nameof(ItemState.Write))]
 public partial class ItemViewModel :
     ObservableCollection<IItemEntryViewModel>,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>
-
 {
     [ObservableProperty]
     private bool archived;

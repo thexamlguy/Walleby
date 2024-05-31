@@ -6,13 +6,15 @@ namespace Bitvault;
 public class AggerateItemViewModelHandler(IMediator mediator,
     IServiceProvider serviceProvider,
     ICache<Item<(Guid, string)>> cache,
-    IPublisher publisher) :
-    INotificationHandler<AggerateEventArgs<ItemNavigationViewModel, 
+    IPublisher publisher,
+    LockerViewModelConfiguration dd) :
+    INotificationHandler<AggregateEventArgs<ItemNavigationViewModel, 
         LockerViewModelConfiguration>>
 {
-    public async Task Handle(AggerateEventArgs<ItemNavigationViewModel,
+    public async Task Handle(AggregateEventArgs<ItemNavigationViewModel,
         LockerViewModelConfiguration> args)
     {
+        var ddddd = dd;
         if (args.Options is LockerViewModelConfiguration configuration)
         {
             cache.Clear();

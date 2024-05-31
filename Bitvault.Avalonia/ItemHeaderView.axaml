@@ -8,7 +8,7 @@
         <PersonPicture
             Width="144"
             Height="144"
-            DisplayName="{Binding Value}" />
+            DisplayName="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox
             MaxWidth="360"
             Text="{Binding Value}"

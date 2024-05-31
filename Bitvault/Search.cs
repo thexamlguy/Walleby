@@ -1,3 +1,3 @@
 ﻿namespace Bitvault;
 
-public record Search(string? Value);
+public record Search<TValue>(TValue? Value);

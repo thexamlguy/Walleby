@@ -13,5 +13,5 @@ public partial class ConfirmItemActionViewModel(IServiceProvider provider,
 {
     [RelayCommand]
     public void Invoke() => Publisher.Publish(Confirm.As<Item>(), 
-        state is ItemState.New ? nameof(Create) : nameof(Update));
+        state is ItemState.New ? nameof(ItemState.New) : nameof(ItemState.Write));
 }

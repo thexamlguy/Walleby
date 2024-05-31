@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Toolkit.Foundation;
+using Toolkit.UI.Avalonia;
 
 namespace Bitvault;
 
@@ -48,6 +49,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     private bool selected = selected;
 
     public IContentTemplate Template { get; set; } = template;
+    public bool Attached { get; set; }
 
     public Task Handle(ArchiveEventArgs<Item> args) =>
         Task.Run(Dispose);

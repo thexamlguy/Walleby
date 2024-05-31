@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public class AggerateItemCategoryViewModelHandler(IEnumerable<IConfigurationDescriptor<ItemConfiguration>> descriptors,
+public class AggregateItemCategoryViewModelHandler(IEnumerable<IConfigurationDescriptor<ItemConfiguration>> descriptors,
     IServiceFactory serviceFactory,
     IPublisher publisher) :
     INotificationHandler<AggerateEventArgs<ItemCategoryNavigationViewModel>>

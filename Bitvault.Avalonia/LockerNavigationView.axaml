@@ -9,7 +9,7 @@
     Content="{Binding Name}"
     IsExpanded="{Binding Expanded}"
     MenuItemsSource="{Binding}"
-    NavigationViewItemExtension.IsItemClickEnabled="True"
+    NavigationViewExtension.IsItemInvokedEnabled="True"
     SelectsOnInvoked="True">
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding Opened}" Value="False">
@@ -64,7 +64,7 @@
                 <InvokeNavigationViewItemAction />
             </ConditionAction>
         </AttachedBehaviour>
-        <AttachedEventTriggerBehaviour RoutedEvent="{x:Static NavigationViewItemExtension.ItemClickEvent}">
+        <AttachedEventTriggerBehaviour RoutedEvent="{x:Static NavigationViewExtension.ItemInvokedEvent}">
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">

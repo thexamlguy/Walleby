@@ -15,6 +15,6 @@ public partial class SearchLockerActionViewModel(IServiceProvider provider,
     private int index = 2;
 
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Notify.As(new Search(Value)),
+    public void Invoke() => Publisher.Publish(Notify.As(new Search<string>(Value)),
         nameof(ItemCollectionViewModel));
 }

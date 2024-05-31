@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Toolkit.Foundation;
 
 namespace Bitvault;
@@ -13,8 +12,4 @@ public partial class BackActionViewModel(IServiceProvider provider,
 {
     [ObservableProperty]
     private int index = 0;
-
-    [RelayCommand]
-    public void Invoke() => Publisher.Publish(Notify.As(new Search(Value)),
-        nameof(ItemCollectionViewModel));
 }

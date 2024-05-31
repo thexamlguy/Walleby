@@ -7,10 +7,11 @@ namespace Bitvault;
 [Notification(typeof(CreateEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
 [Notification(typeof(InsertEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
 [Notification(typeof(MoveToEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
+[Notification(typeof(NotifyEventArgs<Search<string>>), nameof(ItemCollectionViewModel))]
 public partial class ItemCollectionViewModel :
     ObservableCollection<ItemNavigationViewModel>,
     INotificationHandler<NotifyEventArgs<Filter>>,
-    INotificationHandler<NotifyEventArgs<Search>>,
+    INotificationHandler<NotifyEventArgs<Search<string>>>,
     IBackStack
 {
     [ObservableProperty]
@@ -42,18 +43,18 @@ public partial class ItemCollectionViewModel :
         if (args.Value is Filter filter)
         {
             configuration = configuration with { Filter = filter.Value };
-            BeginAggregation();
+            Fetch(true);
         }
 
         return Task.CompletedTask;
     }
 
-    public Task Handle(NotifyEventArgs<Search> args)
+    public Task Handle(NotifyEventArgs<Search<string>> args)
     {
-        if (args.Value is Search search)
+        if (args.Value is Search<string> search)
         {
             configuration = configuration with { Query = search.Value };
-            BeginAggregation();
+            Fetch(true);
         }
 
         return Task.CompletedTask;
@@ -70,11 +71,6 @@ public partial class ItemCollectionViewModel :
         return base.OnActivated();
     }
 
-    public override Task OnDeactivated()
-    {
-        return base.OnDeactivated();
-    }
-    protected override IAggerate OnAggerate(object? key) =>
-        Aggerate.With<ItemNavigationViewModel, LockerViewModelConfiguration>(configuration)
-            with { Key = key };
+    protected override AggregateExpression CreateAggregateExpression() =>
+        new(Aggregate.As<ItemNavigationViewModel, LockerViewModelConfiguration>(configuration));
 }

@@ -21,12 +21,6 @@ public partial class ItemContentViewModel :
 
     public IContentTemplate Template { get; set; }
 
-    protected override IAggerate OnAggerate(object? key)
-    {
-        return base.OnAggerate(key);
-    }
-
-
     public Task Handle(NotifyEventArgs<ItemCategory<string>> args)
     {
         return Task.CompletedTask;

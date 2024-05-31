@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class AggerateMainViewModelHandler(IPublisher publisher,
+public class AggregateMainViewModelHandler(IPublisher publisher,
     ILockerHostCollection lockers) :
     INotificationHandler<AggerateEventArgs<IMainNavigationViewModel>>
 {

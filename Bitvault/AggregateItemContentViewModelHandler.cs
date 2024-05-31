@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public class AggerateItemContentViewModelHandler(IValueStore<Item<(Guid, string)>> valueStore,
+public class AggregateItemContentViewModelHandler(IValueStore<Item<(Guid, string)>> valueStore,
     IMediator mediator,
     IServiceFactory serviceFactory,
     IPublisher publisher) :

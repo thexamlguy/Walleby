@@ -110,12 +110,12 @@ public partial class App : Application
                         services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
                        
-                        services.AddHandler<AggerateItemCategoryViewModelHandler>();
+                        services.AddHandler<AggregateItemCategoryViewModelHandler>();
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
 
-                        services.AddHandler<AggerateItemContentViewModelHandler>();
+                        services.AddHandler<AggregateItemContentViewModelHandler>();
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
@@ -134,8 +134,8 @@ public partial class App : Application
 
                         services.AddScoped<IValueStore<Item<(Guid, string)>>, ValueStore<Item<(Guid, string)>>>();
 
-                        services.AddHandler<ConfirmUpdateItemHandler>(nameof(Update));
-                        services.AddHandler<ConfirmCreateItemHandler>(nameof(Create));
+                        services.AddHandler<ConfirmUpdateItemHandler>(nameof(ItemState.Write));
+                        services.AddHandler<ConfirmCreateItemHandler>(nameof(ItemState.New));
 
                         services.AddHandler<ArchiveItemHandler>();
                         services.AddHandler<UnarchiveItemHandler>();
@@ -154,7 +154,7 @@ public partial class App : Application
                 services.AddInitializer<LockerInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
-                services.AddHandler<AggerateMainViewModelHandler>();
+                services.AddHandler<AggregateMainViewModelHandler>();
 
                 services.AddTransient<FooterViewModel>();
 

@@ -26,6 +26,7 @@
         </DataTriggerBehavior>
     </Interaction.Behaviors>
     <ListBox
+        x:Name="foo"
         Margin="2,-1,0,0"
         AutoScrollToSelectedItem="True"
         ItemTemplate="{ReflectionBinding Template}"
