@@ -136,6 +136,13 @@ public partial class App : Application
                         services.AddHandler<AggregateItemContentViewModelHandler>();
                         services.AddHandler<AggregateItemContentFromCategoryViewModelHandler>();
 
+                        services.AddTemplate<ItemSectionViewModel, ItemSectionView>();
+
+                        services.AddTemplate<ItemTextEntryViewModel, ItemTextEntryView>();
+                        services.AddTemplate<ItemPasswordEntryViewModel, ItemPasswordEntryView>();
+                        services.AddTemplate<ItemMaskedTextEntryViewModel, ItemMaskedTextEntryView>();
+                        services.AddTemplate<ItemDropdownEntryViewModel, ItemDropdownEntryView>();
+
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
                         services.AddTemplate<FavouriteItemActionViewModel, FavouriteItemActionView>();
@@ -145,11 +152,6 @@ public partial class App : Application
                         services.AddTemplate<UnarchiveItemActionViewModel, UnarchiveItemActionView>();
                         services.AddTemplate<EditItemActionViewModel, EditItemActionView>();
                         services.AddTemplate<DeleteItemActionViewModel, DeleteItemActionView>();
-
-                        services.AddTemplate<ItemTextEntryViewModel, ItemTextEntryView>();
-                        services.AddTemplate<ItemPasswordEntryViewModel, ItemPasswordEntryView>();
-                        services.AddTemplate<ItemMaskedTextEntryViewModel, ItemMaskedTextEntryView>();
-                        services.AddTemplate<ItemDropdownEntryViewModel, ItemDropdownEntryView>();
 
                         services.AddHandler<ConfirmUpdateItemHandler>(nameof(ItemState.Write));
                         services.AddHandler<ConfirmCreateItemHandler>(nameof(ItemState.New));

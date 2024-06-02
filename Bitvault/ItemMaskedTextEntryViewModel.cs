@@ -7,5 +7,7 @@ public partial class ItemMaskedTextEntryViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscription subscriber,
-    IDisposer disposer) : Observable(provider, factory, mediator, publisher, subscriber, disposer),
+    IDisposer disposer,
+    string? key = default,
+    object? value = default) : Observable<string, object?>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
     IItemEntryViewModel;

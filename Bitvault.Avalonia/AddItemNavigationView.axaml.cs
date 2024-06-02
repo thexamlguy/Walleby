@@ -1,8 +1,10 @@
-using Avalonia.Controls;
+using Toolkit.UI.Controls.Avalonia;
 
 namespace Bitvault.Avalonia;
 
-public partial class AddItemNavigationView : UserControl
+public partial class AddItemNavigationView : 
+    SettingsExpander
 {
-    public AddItemNavigationView() => InitializeComponent();
+    public AddItemNavigationView() => 
+        InitializeComponent();
 }

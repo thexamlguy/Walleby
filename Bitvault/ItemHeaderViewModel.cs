@@ -3,9 +3,11 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class ItemHeaderViewModel : Observable<string, string>,
+[Notification(typeof(ConfirmEventArgs<Item>), nameof(ItemHeader))]
+public partial class ItemHeaderViewModel : 
+    Observable<string, string>,
     IHandler<ValidationEventArgs<Item>, bool>,
-    IHandler<ConfirmEventArgs<Item>, ItemHeaderConfiguration>,
+    IHandler<ConfirmEventArgs<Item>, string?>,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>,
@@ -38,9 +40,6 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
         return Task.FromResult(true);
     }
 
-    public Task<ItemHeaderConfiguration> Handle(ConfirmEventArgs<Item> args,
-        CancellationToken cancellationToken) => Task.FromResult(new ItemHeaderConfiguration { Name = Value! });
-
     public Task Handle(UpdateEventArgs<Item> args) =>
         Task.FromResult(State = ItemState.Write);
 
@@ -69,4 +68,7 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
 
         return Task.CompletedTask;
     }
+
+    public Task<string?> Handle(ConfirmEventArgs<Item> args,
+        CancellationToken cancellationToken) => Task.FromResult(Value);
 }

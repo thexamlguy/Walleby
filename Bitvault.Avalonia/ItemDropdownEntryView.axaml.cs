@@ -1,12 +1,10 @@
-using Avalonia.Controls;
+using Toolkit.UI.Controls.Avalonia;
 
-namespace Bitvault.Avalonia
+namespace Bitvault.Avalonia;
+
+public partial class ItemDropdownEntryView : 
+    SettingsExpander
 {
-    public partial class ItemDropdownEntryView : UserControl
-    {
-        public ItemDropdownEntryView()
-        {
-            InitializeComponent();
-        }
-    }
+    public ItemDropdownEntryView() => 
+        InitializeComponent();
 }

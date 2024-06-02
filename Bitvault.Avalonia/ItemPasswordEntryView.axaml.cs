@@ -1,12 +1,10 @@
-using Avalonia.Controls;
+using Toolkit.UI.Controls.Avalonia;
 
-namespace Bitvault.Avalonia
+namespace Bitvault.Avalonia;
+
+public partial class ItemPasswordEntryView : 
+    SettingsExpander
 {
-    public partial class ItemPasswordEntryView : UserControl
-    {
-        public ItemPasswordEntryView()
-        {
-            InitializeComponent();
-        }
-    }
+    public ItemPasswordEntryView() =>
+        InitializeComponent();
 }

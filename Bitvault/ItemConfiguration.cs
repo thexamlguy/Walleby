@@ -44,13 +44,25 @@ public record ItemConfiguration
 
         }
     };
-
     
     public static ItemConfiguration Login => new()
     {
         Sections = new List<ItemSectionConfiguration>
         {
-
+            new()
+            {
+                Entries = new List<ItemEntryConfiguration>
+                {
+                    new TextEntryConfiguration
+                    {
+                        Label = "Username"
+                    },
+                    new PasswordEntryConfiguration
+                    {
+                        Label = "Password"
+                    }
+                }
+            }
         }
     };
 
@@ -58,7 +70,16 @@ public record ItemConfiguration
     {
         Sections = new List<ItemSectionConfiguration>
         {
-
+            new()
+            {
+                Entries = new List<ItemEntryConfiguration>
+                {                    
+                    new PasswordEntryConfiguration
+                    {
+                        Label = "Password"
+                    }
+                }
+            }
         }
     };
 

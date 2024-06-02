@@ -8,22 +8,16 @@ public class ConfirmCreateItemHandler(IMediator mediator,
 {
     public async Task Handle(ConfirmEventArgs<Item> args)
     {
-        ItemHeaderConfiguration? configuration = await mediator.Handle<ConfirmEventArgs<Item>,
-            ItemHeaderConfiguration>(args);
+        string? name = await mediator.Handle<ConfirmEventArgs<Item>,
+            string?>(args, nameof(ItemHeader));
 
-        if (configuration is not null)
+        if (name is not null)
         {
-            publisher.Publish(Notify.As(configuration));
-
             Guid id = Guid.NewGuid();
-
-            string? name = configuration.Name;
-            string? category = configuration.Name;
-
             publisher.Publish(Created.As(new Item<(Guid, string)>((id, name))));
 
             await mediator.Handle<CreateEventArgs<(Guid, string, string,
-                ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, string, string, ItemConfiguration)>((id, name, category,
+                ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, string, string, ItemConfiguration)>((id, name, "",
                     new ItemConfiguration())));
         }
     }

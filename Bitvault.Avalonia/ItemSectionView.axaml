@@ -1,0 +1,8 @@
+<UserControl
+    x:Class="Bitvault.Avalonia.ItemSectionView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:ItemSectionViewModel">
+    <ItemsControl ItemTemplate="{ReflectionBinding Template}" ItemsSource="{Binding}" />
+</UserControl>

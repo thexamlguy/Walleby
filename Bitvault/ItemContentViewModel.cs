@@ -2,6 +2,7 @@
 
 namespace Bitvault;
 
+[Notification(typeof(CreateEventArgs<ItemSectionViewModel>), nameof(ItemContentViewModel))]
 public partial class ItemContentViewModel(IServiceProvider provider,
     IServiceFactory factory, IMediator mediator,
     IPublisher publisher,
@@ -9,7 +10,7 @@ public partial class ItemContentViewModel(IServiceProvider provider,
     IDisposer disposer,
     IContentTemplate template,
     ItemState state = ItemState.Read) :
-    ObservableCollection<IItemEntryViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
+    ObservableCollection<ItemSectionViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
     IItemEntryViewModel,
     INotificationHandler<NotifyEventArgs<ItemCategory<string>>>
 {

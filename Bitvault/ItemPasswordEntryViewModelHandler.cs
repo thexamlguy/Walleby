@@ -8,7 +8,7 @@ public class ItemPasswordEntryViewModelHandler(IServiceFactory serviceFactory) :
     public Task<IItemEntryViewModel?> Handle(PasswordEntryConfiguration args,
         CancellationToken cancellationToken)
     {
-        if (serviceFactory.Create<ItemPasswordEntryViewModel>() is ItemPasswordEntryViewModel viewModel)
+        if (serviceFactory.Create<ItemPasswordEntryViewModel>(args.Label, args.Value ?? new object()) is ItemPasswordEntryViewModel viewModel)
         {
             return Task.FromResult<IItemEntryViewModel?>(viewModel);
         }
