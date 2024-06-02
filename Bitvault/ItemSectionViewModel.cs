@@ -10,8 +10,11 @@ public partial class ItemSectionViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
+    IContentTemplate template,
     string section) : ObservableCollection<IItemEntryViewModel>(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [ObservableProperty]
     private string section = section;
+
+    public IContentTemplate Template { get; set; } = template;
 }

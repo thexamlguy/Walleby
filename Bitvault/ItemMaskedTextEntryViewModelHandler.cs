@@ -8,7 +8,8 @@ public class ItemMaskedTextEntryViewModelHandler(IServiceFactory serviceFactory)
     public Task<IItemEntryViewModel?> Handle(MaskedTextEntryConfiguration args,
         CancellationToken cancellationToken)
     {
-        if (serviceFactory.Create<ItemMaskedTextEntryViewModel>(args.Label, args.Value ?? new object()) is  ItemMaskedTextEntryViewModel viewModel)
+        if (serviceFactory.Create<ItemMaskedTextEntryViewModel>(args.Label, args.Value ?? new object()) is 
+            ItemMaskedTextEntryViewModel viewModel)
         {
             return Task.FromResult<IItemEntryViewModel?>(viewModel);
         }

@@ -8,6 +8,7 @@ public partial class ItemPasswordEntryViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
+    string type,
     string? key = default,
-    object? value = default) : Observable<string, object?>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
+    object? value = default) : ItemEntryViewModel<string, object?>(provider, factory, mediator, publisher, subscriber, disposer, type, key, value),
     IItemEntryViewModel;
