@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Aggerate(typeof(AggerateEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
+[Notification(typeof(AggerateEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
 [Notification(typeof(CreateEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
 [Notification(typeof(InsertEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
 [Notification(typeof(MoveToEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
@@ -71,6 +71,6 @@ public partial class ItemCollectionViewModel :
         return base.OnActivated();
     }
 
-    protected override AggregateExpression CreateAggregateExpression() =>
+    protected override AggregateExpression BuildAggregateExpression() =>
         new(Aggregate.As<ItemNavigationViewModel, LockerViewModelConfiguration>(configuration));
 }

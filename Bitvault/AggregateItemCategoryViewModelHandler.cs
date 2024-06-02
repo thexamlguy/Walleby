@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public class AggregateItemCategoryViewModelHandler(IEnumerable<IConfigurationDescriptor<ItemConfiguration>> descriptors,
+public class AggregateItemCategoryViewModelHandler(IItemConfigurationCollection configurations,
     IServiceFactory serviceFactory,
     IPublisher publisher) :
     INotificationHandler<AggerateEventArgs<ItemCategoryNavigationViewModel>>
@@ -10,9 +10,9 @@ public class AggregateItemCategoryViewModelHandler(IEnumerable<IConfigurationDes
     public Task Handle(AggerateEventArgs<ItemCategoryNavigationViewModel> args)
     {
         bool selected = true;
-        foreach (IConfigurationDescriptor<ItemConfiguration> descriptor in descriptors)
+        foreach (KeyValuePair<string, Func<ItemConfiguration>> configuration in configurations)
         {
-            if (serviceFactory.Create<ItemCategoryNavigationViewModel>(descriptor.Name, selected)
+            if (serviceFactory.Create<ItemCategoryNavigationViewModel>(configuration.Key, selected)
                 is ItemCategoryNavigationViewModel viewModel)
             {
                 publisher.Publish(Create.As(viewModel), nameof(ItemCategoryCollectionViewModel));

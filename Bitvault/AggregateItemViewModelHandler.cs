@@ -8,32 +8,31 @@ public class AggerateItemViewModelHandler(IMediator mediator,
     ICache<Item<(Guid, string)>> cache,
     IPublisher publisher,
     LockerViewModelConfiguration dd) :
-    INotificationHandler<AggregateEventArgs<ItemNavigationViewModel, 
+    INotificationHandler<AggerateEventArgs<ItemNavigationViewModel, 
         LockerViewModelConfiguration>>
 {
-    public async Task Handle(AggregateEventArgs<ItemNavigationViewModel,
+    public async Task Handle(AggerateEventArgs<ItemNavigationViewModel,
         LockerViewModelConfiguration> args)
     {
-        var ddddd = dd;
-        if (args.Options is LockerViewModelConfiguration configuration)
+        if (args.Value is LockerViewModelConfiguration configuration)
         {
             cache.Clear();
             bool selected = true;
 
             if (await mediator.Handle<RequestEventArgs<QueryLockerConfiguration>,
-                IReadOnlyCollection<(Guid Id, string Name, bool Favourite, bool Archived)>>(Request.As(new QueryLockerConfiguration
+                IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>>(Request.As(new QueryLockerConfiguration
                 {
                     Filter = configuration.Filter,
                     Query = configuration.Query
-                })) is IReadOnlyCollection<(Guid Id, string Name, bool Favourite, bool Archived)> results)
+                })) is IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)> results)
             {
-                foreach ((Guid Id, string Name, bool Favourite, bool Archived) in results)
+                foreach ((Guid Id, string Name, string Category, bool Favourite, bool Archived) in results)
                 {
                     IServiceScope serviceScope = serviceProvider.CreateScope();
                     IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
                     IValueStore<Item<(Guid, string)>> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item<(Guid, string)>>>();
 
-                    if (serviceFactory.Create<ItemNavigationViewModel>(Id, Name, "Description", selected, Favourite, Archived) is ItemNavigationViewModel viewModel)
+                    if (serviceFactory.Create<ItemNavigationViewModel>(Id, Name, "Description", Category, selected, Favourite, Archived) is ItemNavigationViewModel viewModel)
                     {
                         Item<(Guid, string)> item = new((Id, Name));
 

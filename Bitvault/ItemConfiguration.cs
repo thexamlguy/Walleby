@@ -2,7 +2,7 @@
 
 public record ItemConfiguration
 {
-    public IList<ItemSectionConfiguration>? Sections { get; set; }
+    public IList<ItemSectionConfiguration> Sections { get; set; } = new List<ItemSectionConfiguration>();
 
     public static ItemConfiguration Identity => new()
     {

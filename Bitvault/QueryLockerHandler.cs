@@ -6,12 +6,12 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class QueryLockerHandler(IDbContextFactory<LockerContext> dbContextFactory) :
-    IHandler<RequestEventArgs<QueryLockerConfiguration>, IReadOnlyCollection<(Guid Id, string? Name, bool Favourite, bool Archived)>>
+    IHandler<RequestEventArgs<QueryLockerConfiguration>, IReadOnlyCollection<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)>>
 {
-    public async Task<IReadOnlyCollection<(Guid Id, string? Name, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryLockerConfiguration> args,
+    public async Task<IReadOnlyCollection<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryLockerConfiguration> args,
         CancellationToken cancellationToken)
     {
-        List<(Guid Id, string? Name, bool Favourite, bool Archived)> items = [];
+        List<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)> items = [];
 
         if (args.Value is QueryLockerConfiguration queryConfiguration)
         {
@@ -47,6 +47,7 @@ public class QueryLockerHandler(IDbContextFactory<LockerContext> dbContextFactor
                     {
                         x.Id,
                         x.Name,
+                        x.Category,
                         Favourite = x.State == 1,
                         Archived = x.State == 2
                     }).ToListAsync();
@@ -54,7 +55,7 @@ public class QueryLockerHandler(IDbContextFactory<LockerContext> dbContextFactor
 
             foreach (var result in results.OrderBy(x => x.Name, StringComparer.OrdinalIgnoreCase))
             {
-                items.Add(new(result.Id, result.Name, result.Favourite, result.Archived));
+                items.Add(new(result.Id, result.Name, result.Category, result.Favourite, result.Archived));
             }
         }
 

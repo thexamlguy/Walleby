@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Toolkit.Avalonia;
 using Toolkit.Foundation;
 
@@ -69,6 +70,15 @@ public partial class App : Application
                         services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
                         services.AddTransient<ILockerStorageFactory, LockerStorageFactory>();
 
+                        services.AddTransient<IItemConfigurationCollection, ItemConfigurationCollection>(provider =>
+                        {
+                            IEnumerable<IConfigurationDescriptor<ItemConfiguration>> items = 
+                                provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>() ?? 
+                                Enumerable.Empty<IConfigurationDescriptor<ItemConfiguration>>();
+
+                            return new ItemConfigurationCollection(items.ToDictionary(x => x.Name, x => (Func<ItemConfiguration>)(() => x.Value)));
+                        });
+
                         services.TryAddSingleton<IValueStore<SecurityKey>, ValueStore<SecurityKey>>();
                         services.TryAddSingleton<IValueStore<LockerConnection>, ValueStore<LockerConnection>>();
 
@@ -100,6 +110,7 @@ public partial class App : Application
 
                         services.AddTemplate<LockerViewModel, LockerView>("Locker");
                         services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ContentItemCollection");
+
                         services.AddHandler<AggerateItemViewModelHandler>();
 
                         services.AddTemplate<LockerHeaderViewModel, LockerHeaderView>("LockerHeader");
@@ -112,10 +123,18 @@ public partial class App : Application
                        
                         services.AddHandler<AggregateItemCategoryViewModelHandler>();
 
+                        services.AddScoped<IValueStore<Item<(Guid, string)>>, ValueStore<Item<(Guid, string)>>>();
+
+                        services.AddTemplate<AddItemNavigationViewModel, AddItemNavigationView>();
+
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
+                        services.AddTemplate<EmptyItemCollectionViewModel, EmptyItemCollectionView>("EmptyItemCollection");
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
+                        services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
+                        services.AddTemplate<ItemContentViewModel, ItemContentView>();
 
                         services.AddHandler<AggregateItemContentViewModelHandler>();
+                        services.AddHandler<AggregateItemContentFromCategoryViewModelHandler>();
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
@@ -127,12 +146,10 @@ public partial class App : Application
                         services.AddTemplate<EditItemActionViewModel, EditItemActionView>();
                         services.AddTemplate<DeleteItemActionViewModel, DeleteItemActionView>();
 
-                        services.AddTemplate<EmptyItemCollectionViewModel, EmptyItemCollectionView>("EmptyItemCollection");
-                        services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
-                        services.AddTemplate<ItemContentViewModel, ItemContentView>();
-                        services.AddTemplate<AddItemNavigationViewModel, AddItemNavigationView>();
-
-                        services.AddScoped<IValueStore<Item<(Guid, string)>>, ValueStore<Item<(Guid, string)>>>();
+                        services.AddTemplate<ItemTextEntryViewModel, ItemTextEntryView>();
+                        services.AddTemplate<ItemPasswordEntryViewModel, ItemPasswordEntryView>();
+                        services.AddTemplate<ItemMaskedTextEntryViewModel, ItemMaskedTextEntryView>();
+                        services.AddTemplate<ItemDropdownEntryViewModel, ItemDropdownEntryView>();
 
                         services.AddHandler<ConfirmUpdateItemHandler>(nameof(ItemState.Write));
                         services.AddHandler<ConfirmCreateItemHandler>(nameof(ItemState.New));
@@ -141,6 +158,11 @@ public partial class App : Application
                         services.AddHandler<UnarchiveItemHandler>();
                         services.AddHandler<FavouriteItemHandler>();
                         services.AddHandler<UnfavouriteItemHandler>();
+
+                        services.AddHandler<ItemTextEntryViewModelHandler>(nameof(TextEntryConfiguration));
+                        services.AddHandler<ItemPasswordEntryViewModelHandler>(nameof(PasswordEntryConfiguration));
+                        services.AddHandler<ItemMaskedTextEntryViewModelHandler>(nameof(MaskedTextEntryConfiguration));
+                        services.AddHandler<ItemDropdownEntryViewModelHandler>(nameof(DropdownEntryConfiguration));
 
                         services.AddHandler<ItemCreatedHandler>(ServiceLifetime.Singleton);
                         services.AddHandler<ItemModifiedHandler>(ServiceLifetime.Singleton);

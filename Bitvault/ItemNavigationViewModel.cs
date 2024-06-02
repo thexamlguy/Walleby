@@ -13,8 +13,9 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     IContentTemplate template,
     NamedComponent named,
     Guid id,
-    string? name = "",
-    string? description = "",
+    string name = "",
+    string description = "",
+    string category = "",
     bool selected = false,
     bool favourite = false,
     bool archived = false) :
@@ -29,6 +30,9 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 {
     [ObservableProperty]
     private bool archived = archived;
+
+    [ObservableProperty]
+    private string? category = category;
 
     [ObservableProperty]
     private string? description = description;
@@ -48,8 +52,8 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     [ObservableProperty]
     private bool selected = selected;
 
-    public IContentTemplate Template { get; set; } = template;
     public bool Attached { get; set; }
+    public IContentTemplate Template { get; set; } = template;
 
     public Task Handle(ArchiveEventArgs<Item> args) =>
         Task.Run(Dispose);

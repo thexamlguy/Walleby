@@ -3,24 +3,12 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
-    x:DataType="vm:ItemCategoryNavigationViewModel">
+    x:DataType="vm:ItemCategoryNavigationViewModel"
+    ListBoxExtension.IsItemInvokedEnabled="True">
     <Interaction.Behaviors>
-        <AttachedBehaviour>
-            <ConditionAction>
-                <ConditionAction.Condition>
-                    <ConditionalExpression ForwardChaining="And">
-                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
-                    </ConditionalExpression>
-                </ConditionAction.Condition>
-                <InvokeCommandAction Command="{Binding InvokeCommand}" />
-            </ConditionAction>
-        </AttachedBehaviour>
-        <DataTriggerBehavior
-            Binding="{Binding Selected}"
-            ComparisonCondition="Equal"
-            Value="True">
+        <AttachedEventTriggerBehaviour RoutedEvent="{x:Static ListBoxExtension.ItemInvokedEvent}">
             <InvokeCommandAction Command="{Binding InvokeCommand}" />
-        </DataTriggerBehavior>
+        </AttachedEventTriggerBehaviour>
     </Interaction.Behaviors>
     <Grid Background="Transparent" ColumnDefinitions="Auto,*">
         <PersonPicture

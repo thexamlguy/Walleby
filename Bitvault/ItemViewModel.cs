@@ -6,7 +6,7 @@ namespace Bitvault;
 [Notification(typeof(ConfirmEventArgs<Item>), nameof(ItemState.New))]
 [Notification(typeof(ConfirmEventArgs<Item>), nameof(ItemState.Write))]
 public partial class ItemViewModel :
-    ObservableCollection<IItemEntryViewModel>,
+    ObservableCollection,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>

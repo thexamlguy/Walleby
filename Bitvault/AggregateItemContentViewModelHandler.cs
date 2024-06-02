@@ -2,16 +2,14 @@
 
 namespace Bitvault;
 
-public class AggregateItemContentViewModelHandler(IValueStore<Item<(Guid, string)>> valueStore,
-    IMediator mediator,
+public class AggregateItemContentViewModelHandler(IMediator mediator,
     IServiceFactory serviceFactory,
     IPublisher publisher) :
     INotificationHandler<AggerateEventArgs<IItemEntryViewModel>>
 {
     public Task Handle(AggerateEventArgs<IItemEntryViewModel> args)
     {
-        var d = valueStore;
-        //if (serviceFactory.Create<ItemHeaderViewModel>(false) is ItemHeaderViewModel viewModel)
+        //wModel>(false) is ItemHeaderViewModel viewModel)
         //{
         //    publisher.Publish(Create.As<IItemEntryViewModel>(viewModel), nameof(ItemViewModel));
         //}

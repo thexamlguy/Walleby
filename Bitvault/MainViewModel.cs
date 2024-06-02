@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Aggerate(typeof(CreateEventArgs<IMainNavigationViewModel>), nameof(MainViewModel))]
+[Notification(typeof(CreateEventArgs<IMainNavigationViewModel>), nameof(MainViewModel))]
 public partial class MainViewModel :
     ObservableCollection<IMainNavigationViewModel>
 {

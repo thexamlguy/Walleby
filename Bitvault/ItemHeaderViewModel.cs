@@ -9,8 +9,7 @@ public partial class ItemHeaderViewModel : Observable<string, string>,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>,
-    INotificationHandler<NotifyEventArgs<ItemCategory<string>>>,
-    IItemEntryViewModel
+    INotificationHandler<NotifyEventArgs<ItemCategory<string>>>
 {
     [ObservableProperty]
     private string? category;
