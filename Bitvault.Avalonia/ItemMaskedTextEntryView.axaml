@@ -6,6 +6,6 @@
     x:DataType="vm:ItemMaskedTextEntryViewModel"
     Header="{Binding Key}">
     <SettingsExpander.Footer>
-        <TextBox MinWidth="264" />
+        <TextBox MinWidth="264" Text="{Binding Value}" />
     </SettingsExpander.Footer>
 </SettingsExpander>

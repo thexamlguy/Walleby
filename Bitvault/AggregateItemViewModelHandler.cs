@@ -30,13 +30,13 @@ public class AggerateItemViewModelHandler(IMediator mediator,
                 {
                     IServiceScope serviceScope = serviceProvider.CreateScope();
                     IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
-                    IValueStore<Item<(Guid, string)>> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item<(Guid, string)>>>();
+                    IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider.GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
                     if (serviceFactory.Create<ItemNavigationViewModel>(Id, Name, "Description", Category, selected, Favourite, Archived) is ItemNavigationViewModel viewModel)
                     {
                         Item<(Guid, string)> item = new((Id, Name));
 
-                        valueStore.Set(item);
+                        decoratorService.Set(item);
 
                         cache.Add(item);
                         publisher.Publish(Create.As(viewModel), nameof(ItemCollectionViewModel));

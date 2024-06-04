@@ -79,13 +79,13 @@ public partial class App : Application
                             return new ItemConfigurationCollection(items.ToDictionary(x => x.Name, x => (Func<ItemConfiguration>)(() => x.Value)));
                         });
 
-                        services.TryAddSingleton<IValueStore<SecurityKey>, ValueStore<SecurityKey>>();
-                        services.TryAddSingleton<IValueStore<LockerConnection>, ValueStore<LockerConnection>>();
+                        services.TryAddSingleton<IDecoratorService<SecurityKey>, DecoratorService<SecurityKey>>();
+                        services.TryAddSingleton<IDecoratorService<LockerConnection>, DecoratorService<LockerConnection>>();
 
                         services.AddDbContextFactory<LockerContext>((provider, args) =>
                         {
-                            if (provider.GetRequiredService<IValueStore<LockerConnection>>()
-                                is IValueStore<LockerConnection> connection)
+                            if (provider.GetRequiredService<IDecoratorService<LockerConnection>>()
+                                is IDecoratorService<LockerConnection> connection)
                             {
                                 args.UseSqlite($"{connection.Value}");
                             }
@@ -111,6 +111,11 @@ public partial class App : Application
                         services.AddTemplate<LockerViewModel, LockerView>("Locker");
                         services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ContentItemCollection");
 
+                        services.AddSingleton<IDecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>, 
+                            DecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>>();
+
+                        services.AddSingleton(provider => provider.GetRequiredService<IDecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>>().Value!);
+
                         services.AddHandler<AggerateItemViewModelHandler>();
 
                         services.AddTemplate<LockerHeaderViewModel, LockerHeaderView>("LockerHeader");
@@ -123,7 +128,7 @@ public partial class App : Application
                        
                         services.AddHandler<AggregateItemCategoryViewModelHandler>();
 
-                        services.AddScoped<IValueStore<Item<(Guid, string)>>, ValueStore<Item<(Guid, string)>>>();
+                        services.AddScoped<IDecoratorService<Item<(Guid, string)>>, DecoratorService<Item<(Guid, string)>>>();
 
                         services.AddTemplate<AddItemNavigationViewModel, AddItemNavigationView>();
 
@@ -142,6 +147,12 @@ public partial class App : Application
                         services.AddTemplate<ItemPasswordEntryViewModel, ItemPasswordEntryView>();
                         services.AddTemplate<ItemMaskedTextEntryViewModel, ItemMaskedTextEntryView>();
                         services.AddTemplate<ItemDropdownEntryViewModel, ItemDropdownEntryView>();
+
+                        services.AddScoped<IDecoratorService<ICollectionSynchronization<IItemEntryViewModel>>,
+                            DecoratorService<ICollectionSynchronization<IItemEntryViewModel>>>();
+
+                        services.AddScoped(provider => provider.GetRequiredService<IDecoratorService<ICollectionSynchronization<IItemEntryViewModel>>>().Value!);
+
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 

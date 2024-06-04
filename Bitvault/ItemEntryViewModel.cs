@@ -1,24 +1,27 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Toolkit.Foundation;
+﻿using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class ItemEntryViewModel<TKey, TValue> :
-    Observable<TKey, TValue>
+public partial class ItemEntryViewModel<TKey, TValue>(IServiceProvider provider,
+    IServiceFactory factory,
+    IMediator mediator,
+    IPublisher publisher,
+    ISubscription subscriber,
+    IDisposer disposer,
+    ICollectionSynchronization<IItemEntryViewModel> synchronization,
+    ItemEntryConfiguration configuration,
+    TKey? key = default,
+    TValue? value = default) :
+    Observable<TKey, TValue>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
+    IHandler<ConfirmEventArgs<ItemContentEntry>, ItemEntryConfiguration>,
+    IItemEntryViewModel,
+    IIndexable
 {
-    public ItemEntryViewModel(IServiceProvider provider, 
-        IServiceFactory factory,
-        IMediator mediator, 
-        IPublisher publisher, 
-        ISubscription subscriber,
-        IDisposer disposer,
-        string type,
-        TKey? key = default,
-        TValue? value = default) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
-    {
-        Type = type;
-    }
+    public int Index => synchronization.IndexOf(this);
 
-    [ObservableProperty]
-    private string type;
+    public Task<ItemEntryConfiguration> Handle(ConfirmEventArgs<ItemContentEntry> args,
+        CancellationToken cancellationToken)
+    {
+        return Task.FromResult(configuration with { Value = Value });
+    }
 }

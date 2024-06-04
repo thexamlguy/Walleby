@@ -22,6 +22,7 @@ public class CreateItemHandler(IDbContextFactory<LockerContext> dbContextFactory
                 {
                     result = await context.AddAsync(new ItemEntry { Id = id, Name = name, Category = category }, cancellationToken);
                     await context.SaveChangesAsync(cancellationToken);
+
                 }, cancellationToken);
 
                 if (result is not null)

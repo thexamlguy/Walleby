@@ -18,7 +18,8 @@ public partial class ItemCollectionViewModel :
 
     private LockerViewModelConfiguration configuration;
 
-    public ItemCollectionViewModel(IServiceProvider provider,
+    public ItemCollectionViewModel(ICollectionSynchronizer synchronizer, 
+        IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
@@ -27,7 +28,7 @@ public partial class ItemCollectionViewModel :
         IContentTemplate template,
         NamedComponent named,
         LockerViewModelConfiguration configuration,
-        string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        string? filter = null) : base(synchronizer, provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Named = $"{named}";

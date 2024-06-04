@@ -18,7 +18,7 @@ public class CreateLockerHandler(ILockerFactory componentFactory,
             if (componentFactory.Create(name) is IComponentHost host)
             {
                 ISecurityKeyFactory keyVaultFactory = host.Services.GetRequiredService<ISecurityKeyFactory>();
-                IValueStore<SecurityKey> secureKeyStore = host.Services.GetRequiredService<IValueStore<SecurityKey>>();
+                IDecoratorService<SecurityKey> secureKeyStore = host.Services.GetRequiredService<IDecoratorService<SecurityKey>>();
                 ILockerStorageFactory lockerStorageFactory = host.Services.GetRequiredService<ILockerStorageFactory>();
 
                 if (keyVaultFactory.Create(Encoding.UTF8.GetBytes(password)) is SecurityKey key)

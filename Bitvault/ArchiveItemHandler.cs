@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public class ArchiveItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
+public class ArchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decoratorService,
     ICache<Item<(Guid, string)>> cache,
     IMediator mediator) :
     INotificationHandler<ArchiveEventArgs<Item>>
@@ -11,7 +11,7 @@ public class ArchiveItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
     {
         try
         {
-            if (valueStore.Value is Item<(Guid, string)> item)
+            if (decoratorService.Value is Item<(Guid, string)> item)
             {
                 if (cache.Contains(item))
                 {

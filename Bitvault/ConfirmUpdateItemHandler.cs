@@ -2,24 +2,24 @@
 
 namespace Bitvault;
 
-public class ConfirmUpdateItemHandler(IValueStore<Item<(Guid, string)>> store,
+public class ConfirmUpdateItemHandler(IDecoratorService<Item<(Guid, string)>> store,
     IMediator mediator,
     IPublisher publisher) :
     INotificationHandler<ConfirmEventArgs<Item>>
 {
     public async Task Handle(ConfirmEventArgs<Item> args)
     {
-        ItemHeaderConfiguration? configuration = await mediator.Handle<ConfirmEventArgs<Item>,
-            ItemHeaderConfiguration>(args);
+        string? name = await mediator.Handle<ConfirmEventArgs<ItemHeader>,
+            string>(Confirm.As<ItemHeader>());
 
-        if (configuration is not null)
+        if (name is not null)
         {
-            publisher.Publish(Notify.As(configuration));
 
+
+            publisher.Publish(Notify.As(new ItemHeader<string>(name)));
             if (store?.Value is Item<(Guid, string)> item)
             {
                 (Guid id, string _) = item.Value;
-                string? name = configuration.Name;
 
                 Item<(Guid, string)> newItem = new((id, name));
                 publisher.Publish(Modified.As(item, newItem));

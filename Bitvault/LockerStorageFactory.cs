@@ -6,7 +6,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class LockerStorageFactory(IValueStore<LockerConnection> connection,
+public class LockerStorageFactory(IDecoratorService<LockerConnection> connection,
     IHostEnvironment environment,
     IServiceProvider provider) :
     ILockerStorageFactory

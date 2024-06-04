@@ -3,14 +3,13 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Notification(typeof(ConfirmEventArgs<Item>), nameof(ItemHeader))]
 public partial class ItemHeaderViewModel : 
     Observable<string, string>,
-    IHandler<ValidationEventArgs<Item>, bool>,
-    IHandler<ConfirmEventArgs<Item>, string?>,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>,
+    IHandler<ValidationEventArgs<ItemHeader>, bool>,
+    IHandler<ConfirmEventArgs<ItemHeader>, string?>,
     INotificationHandler<NotifyEventArgs<ItemCategory<string>>>
 {
     [ObservableProperty]
@@ -34,7 +33,7 @@ public partial class ItemHeaderViewModel :
         Track(nameof(Value), () => Value, newValue => Value = newValue);
     }
 
-    public Task<bool> Handle(ValidationEventArgs<Item> args,
+    public Task<bool> Handle(ValidationEventArgs<ItemHeader> args,
         CancellationToken cancellationToken)
     {
         return Task.FromResult(true);
@@ -69,6 +68,6 @@ public partial class ItemHeaderViewModel :
         return Task.CompletedTask;
     }
 
-    public Task<string?> Handle(ConfirmEventArgs<Item> args,
+    public Task<string?> Handle(ConfirmEventArgs<ItemHeader> args,
         CancellationToken cancellationToken) => Task.FromResult(Value);
 }

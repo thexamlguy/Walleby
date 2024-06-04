@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Toolkit.Foundation;
-using Toolkit.UI.Avalonia;
 
 namespace Bitvault;
 
@@ -11,6 +10,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     ISubscription subscriber,
     IDisposer disposer,
     IContentTemplate template,
+    ICollectionSynchronization<ItemNavigationViewModel> synchronization,
     NamedComponent named,
     Guid id,
     string name = "",
@@ -24,8 +24,9 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     INotificationHandler<UnarchiveEventArgs<Item>>,
     INotificationHandler<FavouriteEventArgs<Item>>,
     INotificationHandler<UnfavouriteEventArgs<Item>>,
-    INotificationHandler<NotifyEventArgs<ItemHeaderConfiguration>>,
+    INotificationHandler<NotifyEventArgs<ItemHeader<string>>>,
     ISelectable,
+    IIndexable,
     IRemovable
 {
     [ObservableProperty]
@@ -52,7 +53,8 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     [ObservableProperty]
     private bool selected = selected;
 
-    public bool Attached { get; set; }
+    public int Index => synchronization.IndexOf(this);
+
     public IContentTemplate Template { get; set; } = template;
 
     public Task Handle(ArchiveEventArgs<Item> args) =>
@@ -67,11 +69,11 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     public Task Handle(UnfavouriteEventArgs<Item> args) =>
         Task.FromResult(Favourite = false);
 
-    public Task Handle(NotifyEventArgs<ItemHeaderConfiguration> args)
+    public Task Handle(NotifyEventArgs<ItemHeader<string>> args)
     {
-        if (args.Value is ItemHeaderConfiguration configuration)
+        if (args.Value is ItemHeader<string> header)
         {
-            Name = configuration.Name;
+            Name = header.Value;
         }
 
         return Task.CompletedTask;

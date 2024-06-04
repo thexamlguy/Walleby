@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
 using Toolkit.Foundation;
 
 namespace Bitvault;
@@ -10,14 +11,15 @@ public partial class MainViewModel :
     [ObservableProperty]
     private FooterViewModel footer;
 
-    public MainViewModel(IServiceProvider provider,
+    public MainViewModel(ICollectionSynchronizer synchronizer, 
+        IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
         ISubscription subscriber,
         IDisposer disposer,
         IContentTemplate template,
-        FooterViewModel footer) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        FooterViewModel footer) : base(synchronizer, provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Footer = footer;

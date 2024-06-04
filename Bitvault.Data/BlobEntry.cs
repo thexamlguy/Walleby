@@ -8,8 +8,10 @@ public record BlobEntry
 {
     public byte[]? Data { get; set; }
 
-    public DocumentType Type { get; set; }
+    public int Type { get; set; }
 
     [Key]
     public int Id { get; set; }
+
+    public DateTimeOffset DateTime { get; set; }
 }

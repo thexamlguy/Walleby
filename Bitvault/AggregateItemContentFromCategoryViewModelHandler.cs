@@ -16,19 +16,19 @@ public class AggregateItemContentFromCategoryViewModelHandler(IItemConfiguration
             {
                 if (factory.Invoke() is ItemConfiguration configuration)
                 {
-                    int index = 0;
-
-                    foreach (ItemSectionConfiguration section in configuration.Sections)
+                    foreach (ItemSectionConfiguration configurationSection in configuration.Sections)
                     {
-                        if (serviceFactory.Create<ItemSectionViewModel>($"{nameof(ItemSection)}{index}") is ItemSectionViewModel sectionViewModel)
+                        string section = $"{nameof(ItemSection)}:{Guid.NewGuid}";
+                        if (serviceFactory.Create<ItemSectionViewModel>(section) 
+                            is ItemSectionViewModel sectionViewModel)
                         {
                             publisher.Publish(Create.As(sectionViewModel), nameof(ItemContentViewModel));
-                            foreach (ItemEntryConfiguration entryConfiguration in section.Entries)
+                            foreach (ItemEntryConfiguration entryConfiguration in configurationSection.Entries)
                             {
                                 if (await mediator.Handle<ItemEntryConfiguration, IItemEntryViewModel?>(entryConfiguration,
                                     entryConfiguration.GetType().Name) is IItemEntryViewModel entryViewModel)
                                 {
-                                    publisher.Publish(Create.As(entryViewModel), $"{nameof(ItemSection)}{index}");
+                                    publisher.Publish(Create.As(entryViewModel), section);
                                 }
                             }
                         }

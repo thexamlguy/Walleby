@@ -8,7 +8,7 @@ public partial class ItemPasswordEntryViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    string type,
+    ICollectionSynchronization<IItemEntryViewModel> synchronization,
+    ItemEntryConfiguration configuration,
     string? key = default,
-    object? value = default) : ItemEntryViewModel<string, object?>(provider, factory, mediator, publisher, subscriber, disposer, type, key, value),
-    IItemEntryViewModel;
+    string? value = default) : ItemEntryViewModel<string, string?>(provider, factory, mediator, publisher, subscriber, disposer, synchronization, configuration, key, value);

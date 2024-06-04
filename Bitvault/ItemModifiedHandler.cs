@@ -18,7 +18,7 @@ public class ItemModifiedHandler(IServiceProvider serviceProvider,
             if (cachedItem is not null)
             {
                 IServiceScope serviceScope = serviceProvider.CreateScope();
-                IValueStore<Item<(Guid, string)>> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item<(Guid, string)>>>();
+                IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider.GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
                 int oldIndex = cache.IndexOf(cachedItem);
                 cache.Remove(cachedItem);
@@ -26,7 +26,7 @@ public class ItemModifiedHandler(IServiceProvider serviceProvider,
                 cache.Add(newItem);
 
                 int newIndex = cache.IndexOf(newItem);
-                valueStore.Set(newItem);
+                decoratorService.Set(newItem);
 
                 publisher.Publish(MoveTo.As<ItemNavigationViewModel>(oldIndex, newIndex),
                     nameof(ItemCollectionViewModel));

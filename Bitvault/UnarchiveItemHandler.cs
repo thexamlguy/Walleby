@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class UnarchiveItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
+public class UnarchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decoratorService,
     IDbContextFactory<LockerContext> dbContextFactory) :
     INotificationHandler<UnarchiveEventArgs<Item>>
 {
@@ -12,7 +12,7 @@ public class UnarchiveItemHandler(IValueStore<Item<(Guid, string)>> valueStore,
     {
         try
         {
-            if (valueStore.Value is Item<(Guid, string)> item)
+            if (decoratorService.Value is Item<(Guid, string)> item)
             {
                 (Guid id, string name) = item.Value;
                 await Task.Run(async () =>

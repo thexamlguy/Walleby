@@ -16,7 +16,7 @@ public class ItemCreatedHandler(IServiceProvider serviceProvider,
 
             IServiceScope serviceScope = serviceProvider.CreateScope();
             IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
-            IValueStore<Item<(Guid, string)>> valueStore = serviceScope.ServiceProvider.GetRequiredService<IValueStore<Item<(Guid, string)>>>();
+            IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider.GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
             if (serviceFactory.Create<ItemNavigationViewModel>(id, name, "Description", true)
                 is ItemNavigationViewModel viewModel)
@@ -24,7 +24,7 @@ public class ItemCreatedHandler(IServiceProvider serviceProvider,
                 cache.Add(item);
 
                 int index = cache.IndexOf(item);
-                valueStore.Set(item);
+                decoratorService.Set(item);
 
                 publisher.Publish(Insert.As(index, viewModel), 
                     nameof(ItemCollectionViewModel));

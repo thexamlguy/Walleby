@@ -29,7 +29,8 @@ public partial class ItemViewModel :
     [ObservableProperty]
     private bool fromCategory;
 
-    public ItemViewModel(IServiceProvider provider,
+    public ItemViewModel(ICollectionSynchronizer synchronizer, 
+        IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
@@ -41,7 +42,7 @@ public partial class ItemViewModel :
         bool fromCategory = false,
         string name = "",
         bool favourite = false,
-        bool archived = false) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        bool archived = false) : base(synchronizer,provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Named = $"{named}";
