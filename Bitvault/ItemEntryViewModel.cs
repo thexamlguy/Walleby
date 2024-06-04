@@ -1,4 +1,5 @@
-﻿using Toolkit.Foundation;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Toolkit.Foundation;
 
 namespace Bitvault;
 
@@ -13,15 +14,16 @@ public partial class ItemEntryViewModel<TKey, TValue>(IServiceProvider provider,
     TKey? key = default,
     TValue? value = default) :
     Observable<TKey, TValue>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
-    IHandler<ConfirmEventArgs<ItemContentEntry>, ItemEntryConfiguration>,
+    IHandler<ConfirmEventArgs<ItemContentEntry>, (int, ItemEntryConfiguration)>,
     IItemEntryViewModel,
     IIndexable
 {
     public int Index => synchronization.IndexOf(this);
 
-    public Task<ItemEntryConfiguration> Handle(ConfirmEventArgs<ItemContentEntry> args,
+    public Task<(int, ItemEntryConfiguration)> Handle(ConfirmEventArgs<ItemContentEntry> args,
         CancellationToken cancellationToken)
     {
-        return Task.FromResult(configuration with { Value = Value });
+        var doo = Provider.GetRequiredService<ICollectionSynchronization<IItemEntryViewModel>>();
+        return Task.FromResult((Index, configuration with { Value = Value }));
     }
 }

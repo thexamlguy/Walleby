@@ -13,8 +13,8 @@ public class ConfirmCreateItemHandler(IMediator mediator,
 
         if (name is not null)
         {
-            IList<ItemEntryConfiguration?> entries = await mediator.HandleMany<ConfirmEventArgs<ItemContentEntry>, 
-                ItemEntryConfiguration>(Confirm.As<ItemContentEntry>());
+            IList<(int, ItemEntryConfiguration)> entries = await mediator.HandleMany<ConfirmEventArgs<ItemContentEntry>, 
+                (int, ItemEntryConfiguration)>(Confirm.As<ItemContentEntry>());
 
             Guid id = Guid.NewGuid();
             publisher.Publish(Created.As(new Item<(Guid, string)>((id, name))));

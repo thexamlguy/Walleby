@@ -113,8 +113,7 @@ public partial class App : Application
 
                         services.AddSingleton<IDecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>, 
                             DecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>>();
-
-                        services.AddSingleton(provider => provider.GetRequiredService<IDecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>>().Value!);
+                        services.AddTransient(provider => provider.GetRequiredService<IDecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>>().Value!);
 
                         services.AddHandler<AggerateItemViewModelHandler>();
 
@@ -148,11 +147,9 @@ public partial class App : Application
                         services.AddTemplate<ItemMaskedTextEntryViewModel, ItemMaskedTextEntryView>();
                         services.AddTemplate<ItemDropdownEntryViewModel, ItemDropdownEntryView>();
 
-                        services.AddScoped<IDecoratorService<ICollectionSynchronization<IItemEntryViewModel>>,
+                        services.AddSingleton<IDecoratorService<ICollectionSynchronization<IItemEntryViewModel>>,
                             DecoratorService<ICollectionSynchronization<IItemEntryViewModel>>>();
-
-                        services.AddScoped(provider => provider.GetRequiredService<IDecoratorService<ICollectionSynchronization<IItemEntryViewModel>>>().Value!);
-
+                        services.AddTransient(provider => provider.GetRequiredService<IDecoratorService<ICollectionSynchronization<IItemEntryViewModel>>>().Value!);
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
