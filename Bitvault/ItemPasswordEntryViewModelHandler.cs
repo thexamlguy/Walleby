@@ -3,15 +3,18 @@
 namespace Bitvault;
 
 public class ItemPasswordEntryViewModelHandler(IServiceFactory serviceFactory) :
-    IHandler<PasswordEntryConfiguration, IItemEntryViewModel?>
+    IHandler<CreateEventArgs<PasswordEntryConfiguration>, IItemEntryViewModel?>
 {
-    public Task<IItemEntryViewModel?> Handle(PasswordEntryConfiguration args,
+    public Task<IItemEntryViewModel?> Handle(CreateEventArgs<PasswordEntryConfiguration> args,
         CancellationToken cancellationToken)
     {
-        if (serviceFactory.Create<ItemPasswordEntryViewModel>(args, args.Label, args.Value ?? "") 
-            is ItemPasswordEntryViewModel viewModel)
+        if (args.Value is PasswordEntryConfiguration configuration)
         {
-            return Task.FromResult<IItemEntryViewModel?>(viewModel);
+            if (serviceFactory.Create<ItemPasswordEntryViewModel>([.. args.Parameters, configuration, configuration.Label, configuration.Value ?? ""])
+                is ItemPasswordEntryViewModel viewModel)
+            {
+                return Task.FromResult<IItemEntryViewModel?>(viewModel);
+            }
         }
 
         return Task.FromResult<IItemEntryViewModel?>(default);

@@ -111,11 +111,7 @@ public partial class App : Application
                         services.AddTemplate<LockerViewModel, LockerView>("Locker");
                         services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ContentItemCollection");
 
-                        services.AddSingleton<IDecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>, 
-                            DecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>>();
-                        services.AddTransient(provider => provider.GetRequiredService<IDecoratorService<ICollectionSynchronization<ItemNavigationViewModel>>>().Value!);
-
-                        services.AddHandler<AggerateItemViewModelHandler>();
+                        services.AddHandler<SynchronizeItemViewModelHandler>();
 
                         services.AddTemplate<LockerHeaderViewModel, LockerHeaderView>("LockerHeader");
                         services.AddTemplate<BackActionViewModel, BackActionView>();
@@ -125,7 +121,7 @@ public partial class App : Application
                         services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
                        
-                        services.AddHandler<AggregateItemCategoryViewModelHandler>();
+                        services.AddHandler<SynchronizeItemCategoryViewModelHandler>();
 
                         services.AddScoped<IDecoratorService<Item<(Guid, string)>>, DecoratorService<Item<(Guid, string)>>>();
 
@@ -137,8 +133,8 @@ public partial class App : Application
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
                         services.AddTemplate<ItemContentViewModel, ItemContentView>();
 
-                        services.AddHandler<AggregateItemContentViewModelHandler>();
-                        services.AddHandler<AggregateItemContentFromCategoryViewModelHandler>();
+                        services.AddHandler<SynchronizeItemContentViewModelHandler>();
+                        services.AddHandler<SynchronizeItemContentFromCategoryViewModelHandler>();
 
                         services.AddTemplate<ItemSectionViewModel, ItemSectionView>();
 
@@ -146,10 +142,6 @@ public partial class App : Application
                         services.AddTemplate<ItemPasswordEntryViewModel, ItemPasswordEntryView>();
                         services.AddTemplate<ItemMaskedTextEntryViewModel, ItemMaskedTextEntryView>();
                         services.AddTemplate<ItemDropdownEntryViewModel, ItemDropdownEntryView>();
-
-                        services.AddSingleton<IDecoratorService<ICollectionSynchronization<IItemEntryViewModel>>,
-                            DecoratorService<ICollectionSynchronization<IItemEntryViewModel>>>();
-                        services.AddTransient(provider => provider.GetRequiredService<IDecoratorService<ICollectionSynchronization<IItemEntryViewModel>>>().Value!);
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
@@ -186,7 +178,7 @@ public partial class App : Application
                 services.AddInitializer<LockerInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
-                services.AddHandler<AggregateMainViewModelHandler>();
+                services.AddHandler<SynchronizeMainViewModelHandler>();
 
                 services.AddTransient<FooterViewModel>();
 

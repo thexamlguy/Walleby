@@ -2,12 +2,12 @@
 
 namespace Bitvault;
 
-public class AggregateItemCategoryViewModelHandler(IItemConfigurationCollection configurations,
+public class SynchronizeItemCategoryViewModelHandler(IItemConfigurationCollection configurations,
     IServiceFactory serviceFactory,
     IPublisher publisher) :
-    INotificationHandler<AggerateEventArgs<ItemCategoryNavigationViewModel>>
+    INotificationHandler<SynchronizeEventArgs<ItemCategoryNavigationViewModel>>
 {
-    public Task Handle(AggerateEventArgs<ItemCategoryNavigationViewModel> args)
+    public Task Handle(SynchronizeEventArgs<ItemCategoryNavigationViewModel> args)
     {
         bool selected = true;
         foreach (KeyValuePair<string, Func<ItemConfiguration>> configuration in configurations)

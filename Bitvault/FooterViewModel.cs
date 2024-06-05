@@ -5,13 +5,12 @@ namespace Bitvault;
 public partial class FooterViewModel :
     ObservableCollection<IMainNavigationViewModel>
 {
-    public FooterViewModel(ICollectionSynchronizer synchronizer,
-        IServiceProvider provider,
+    public FooterViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
         ISubscription subscriber,
-        IDisposer disposer) : base(synchronizer, provider, factory, mediator, publisher, subscriber, disposer)
+        IDisposer disposer) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Add<ManageNavigationViewModel>();
     }

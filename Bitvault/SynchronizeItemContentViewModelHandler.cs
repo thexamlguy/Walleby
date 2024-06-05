@@ -2,12 +2,12 @@
 
 namespace Bitvault;
 
-public class AggregateItemContentViewModelHandler(IMediator mediator,
+public class SynchronizeItemContentViewModelHandler(IMediator mediator,
     IServiceFactory serviceFactory,
     IPublisher publisher) :
-    INotificationHandler<AggerateEventArgs<IItemEntryViewModel>>
+    INotificationHandler<SynchronizeEventArgs<IItemEntryViewModel>>
 {
-    public Task Handle(AggerateEventArgs<IItemEntryViewModel> args)
+    public Task Handle(SynchronizeEventArgs<IItemEntryViewModel> args)
     {
         //wModel>(false) is ItemHeaderViewModel viewModel)
         //{

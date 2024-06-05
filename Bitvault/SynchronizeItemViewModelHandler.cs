@@ -3,15 +3,13 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class AggerateItemViewModelHandler(IMediator mediator,
+public class SynchronizeItemViewModelHandler(IMediator mediator,
     IServiceProvider serviceProvider,
     ICache<Item<(Guid, string)>> cache,
-    IPublisher publisher,
-    LockerViewModelConfiguration dd) :
-    INotificationHandler<AggerateEventArgs<ItemNavigationViewModel, 
-        LockerViewModelConfiguration>>
+    IPublisher publisher) :
+    INotificationHandler<SynchronizeEventArgs<ItemNavigationViewModel, LockerViewModelConfiguration>>
 {
-    public async Task Handle(AggerateEventArgs<ItemNavigationViewModel,
+    public async Task Handle(SynchronizeEventArgs<ItemNavigationViewModel,
         LockerViewModelConfiguration> args)
     {
         if (args.Value is LockerViewModelConfiguration configuration)

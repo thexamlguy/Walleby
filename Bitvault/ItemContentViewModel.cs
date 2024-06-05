@@ -3,15 +3,14 @@
 namespace Bitvault;
 
 [Notification(typeof(CreateEventArgs<ItemSectionViewModel>), nameof(ItemContentViewModel))]
-public partial class ItemContentViewModel(ICollectionSynchronizer synchronizer, 
-    IServiceProvider provider,
+public partial class ItemContentViewModel(IServiceProvider provider,
     IServiceFactory factory, IMediator mediator,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
     IContentTemplate template,
     ItemState state = ItemState.Read) :
-    ObservableCollection<ItemSectionViewModel>(synchronizer, provider, factory, mediator, publisher, subscriber, disposer),
+    ObservableCollection<ItemSectionViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
     IItemEntryViewModel,
     INotificationHandler<NotifyEventArgs<ItemCategory<string>>>
 {
@@ -23,7 +22,8 @@ public partial class ItemContentViewModel(ICollectionSynchronizer synchronizer,
         {
             if (category.Value is string value)
             {
-                Fetch(() => new AggregateExpression(new AggerateEventArgs<IItemEntryViewModel, string>(value)), true);
+                Fetch(() => new SynchronizeExpression(new SynchronizeEventArgs<IItemEntryViewModel, 
+                    (string, ISynchronizationCollection<ItemSectionViewModel>)>((value, this))), true);
             }
         }
 

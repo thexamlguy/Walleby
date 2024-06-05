@@ -13,6 +13,9 @@ public class ConfirmCreateItemHandler(IMediator mediator,
 
         if (name is not null)
         {
+            IList<(int, string)> sections = await mediator.HandleMany<ConfirmEventArgs<ItemSection>,
+                (int, string)>(Confirm.As<ItemSection>());
+
             IList<(int, ItemEntryConfiguration)> entries = await mediator.HandleMany<ConfirmEventArgs<ItemContentEntry>, 
                 (int, ItemEntryConfiguration)>(Confirm.As<ItemContentEntry>());
 

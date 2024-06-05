@@ -4,15 +4,14 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 [Notification(typeof(CreateEventArgs<ItemCategoryNavigationViewModel>), nameof(ItemCategoryCollectionViewModel))]
-public partial class ItemCategoryCollectionViewModel(ICollectionSynchronizer synchronizer, 
-    IServiceProvider provider,
+public partial class ItemCategoryCollectionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
     IContentTemplate template) :
-    ObservableCollection<ItemCategoryNavigationViewModel>(synchronizer, provider, factory, mediator, publisher, subscriber, disposer)
+    ObservableCollection<ItemCategoryNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [ObservableProperty]
     private IContentTemplate template = template;

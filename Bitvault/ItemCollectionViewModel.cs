@@ -18,8 +18,7 @@ public partial class ItemCollectionViewModel :
 
     private LockerViewModelConfiguration configuration;
 
-    public ItemCollectionViewModel(ICollectionSynchronizer synchronizer, 
-        IServiceProvider provider,
+    public ItemCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
@@ -28,7 +27,7 @@ public partial class ItemCollectionViewModel :
         IContentTemplate template,
         NamedComponent named,
         LockerViewModelConfiguration configuration,
-        string? filter = null) : base(synchronizer, provider, factory, mediator, publisher, subscriber, disposer)
+        string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Named = $"{named}";
@@ -71,6 +70,6 @@ public partial class ItemCollectionViewModel :
         return base.OnActivated();
     }
 
-    protected override AggregateExpression BuildAggregateExpression() =>
-        new(Aggregate.As<ItemNavigationViewModel, LockerViewModelConfiguration>(configuration));
+    protected override SynchronizeExpression BuildAggregateExpression() =>
+        new(Synchronize.As<ItemNavigationViewModel, LockerViewModelConfiguration>(configuration));
 }

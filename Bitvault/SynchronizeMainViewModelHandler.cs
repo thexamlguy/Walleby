@@ -3,21 +3,23 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class AggregateMainViewModelHandler(IPublisher publisher,
+public class SynchronizeMainViewModelHandler(IPublisher publisher,
     ILockerHostCollection lockers) :
-    INotificationHandler<AggerateEventArgs<IMainNavigationViewModel>>
+    INotificationHandler<SynchronizeEventArgs<IMainNavigationViewModel>>
 {
-    public Task Handle(AggerateEventArgs<IMainNavigationViewModel> args)
+    public Task Handle(SynchronizeEventArgs<IMainNavigationViewModel> args)
     {
         bool selected = true;
         foreach (IComponentHost locker in lockers.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<LockerConfiguration>>()
             is IConfigurationDescriptor<LockerConfiguration> descriptor ? descriptor.Name : null))
         {
-            if (locker.Services.GetRequiredService<IConfigurationDescriptor<LockerConfiguration>>() is IConfigurationDescriptor<LockerConfiguration> descriptor)
+            if (locker.Services.GetRequiredService<IConfigurationDescriptor<LockerConfiguration>>() 
+                is IConfigurationDescriptor<LockerConfiguration> descriptor)
             {
                 if (locker.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
                 {
-                    if (factory.Create<LockerNavigationViewModel>(descriptor.Name, selected) is LockerNavigationViewModel viewModel)
+                    if (factory.Create<LockerNavigationViewModel>(descriptor.Name, selected) 
+                        is LockerNavigationViewModel viewModel)
                     {
                         publisher.Publish(Create.As<IMainNavigationViewModel>(viewModel),
                             nameof(MainViewModel));

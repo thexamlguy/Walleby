@@ -11,15 +11,14 @@ public partial class MainViewModel :
     [ObservableProperty]
     private FooterViewModel footer;
 
-    public MainViewModel(ICollectionSynchronizer synchronizer, 
-        IServiceProvider provider,
+    public MainViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
         ISubscription subscriber,
         IDisposer disposer,
         IContentTemplate template,
-        FooterViewModel footer) : base(synchronizer, provider, factory, mediator, publisher, subscriber, disposer)
+        FooterViewModel footer) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Footer = footer;

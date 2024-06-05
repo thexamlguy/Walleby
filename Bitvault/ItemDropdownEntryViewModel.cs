@@ -8,7 +8,7 @@ public partial class ItemDropdownEntryViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    ICollectionSynchronization<IItemEntryViewModel> synchronization,
+    ISynchronizationCollection<IItemEntryViewModel> synchronization,
     ItemEntryConfiguration configuration,
     string? key = default,
     string? value = default) : ItemEntryViewModel<string, string?>(provider, factory, mediator, publisher, subscriber, disposer, synchronization, configuration, key, value);

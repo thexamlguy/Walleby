@@ -27,8 +27,7 @@ public partial class LockerNavigationViewModel :
     [ObservableProperty]
     private bool selected;
 
-    public LockerNavigationViewModel(ICollectionSynchronizer synchronizer, 
-        IServiceProvider provider,
+    public LockerNavigationViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
@@ -36,7 +35,7 @@ public partial class LockerNavigationViewModel :
         IDisposer disposer,
         IContentTemplate template,
         string name,
-        bool selected) : base(synchronizer,provider, factory, mediator, publisher, subscriber, disposer)
+        bool selected) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Name = name;

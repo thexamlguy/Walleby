@@ -10,7 +10,6 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     ISubscription subscriber,
     IDisposer disposer,
     IContentTemplate template,
-    ICollectionSynchronization<ItemNavigationViewModel> synchronization,
     NamedComponent named,
     Guid id,
     string name = "",
@@ -26,7 +25,6 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     INotificationHandler<UnfavouriteEventArgs<Item>>,
     INotificationHandler<NotifyEventArgs<ItemHeader<string>>>,
     ISelectable,
-    IIndexable,
     IRemovable
 {
     [ObservableProperty]
@@ -52,8 +50,6 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     [ObservableProperty]
     private bool selected = selected;
-
-    public int Index => synchronization.IndexOf(this);
 
     public IContentTemplate Template { get; set; } = template;
 

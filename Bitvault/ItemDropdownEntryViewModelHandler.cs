@@ -2,16 +2,19 @@
 
 namespace Bitvault;
 
-public class ItemDropdownEntryViewModelHandler(IServiceFactory serviceFactory) : 
-    IHandler<DropdownEntryConfiguration, IItemEntryViewModel?>
+public class ItemDropdownEntryViewModelHandler(IServiceFactory serviceFactory) :
+    IHandler<CreateEventArgs<DropdownEntryConfiguration>, IItemEntryViewModel?>
 {
-    public Task<IItemEntryViewModel?> Handle(DropdownEntryConfiguration args, 
+    public Task<IItemEntryViewModel?> Handle(CreateEventArgs<DropdownEntryConfiguration> args,
         CancellationToken cancellationToken)
     {
-        if (serviceFactory.Create<ItemDropdownEntryViewModel>(args, args.Label, args.Value ?? "")
-            is ItemDropdownEntryViewModel viewModel)
+        if (args.Value is DropdownEntryConfiguration configuration)
         {
-            return Task.FromResult<IItemEntryViewModel?>(viewModel);
+            if (serviceFactory.Create<ItemDropdownEntryViewModel>([.. args.Parameters, configuration, configuration.Label, configuration.Value ?? ""])
+                is ItemDropdownEntryViewModel viewModel)
+            {
+                return Task.FromResult<IItemEntryViewModel?>(viewModel);
+            }
         }
 
         return Task.FromResult<IItemEntryViewModel?>(default);

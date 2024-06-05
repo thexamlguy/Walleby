@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Toolkit.Foundation;
+﻿using Toolkit.Foundation;
 
 namespace Bitvault;
 
@@ -9,7 +8,7 @@ public partial class ItemEntryViewModel<TKey, TValue>(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    ICollectionSynchronization<IItemEntryViewModel> synchronization,
+    ISynchronizationCollection<IItemEntryViewModel> synchronization,
     ItemEntryConfiguration configuration,
     TKey? key = default,
     TValue? value = default) :
@@ -21,9 +20,5 @@ public partial class ItemEntryViewModel<TKey, TValue>(IServiceProvider provider,
     public int Index => synchronization.IndexOf(this);
 
     public Task<(int, ItemEntryConfiguration)> Handle(ConfirmEventArgs<ItemContentEntry> args,
-        CancellationToken cancellationToken)
-    {
-        var doo = Provider.GetRequiredService<ICollectionSynchronization<IItemEntryViewModel>>();
-        return Task.FromResult((Index, configuration with { Value = Value }));
-    }
+        CancellationToken cancellationToken) => Task.FromResult((Index, configuration with { Value = Value }));
 }

@@ -2,15 +2,14 @@
 
 namespace Bitvault;
 
-public partial class LockerHeaderViewModel(ICollectionSynchronizer synchronizer, 
-    IServiceProvider provider,
+public partial class LockerHeaderViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
     IContentTemplate template) :
-    ObservableCollection(synchronizer, provider, factory, mediator, publisher, subscriber, disposer),
+    ObservableCollection(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<NotifyEventArgs<LockerCommandHeaderCollection>>
 {
     public IContentTemplate Template { get; set; } = template;
