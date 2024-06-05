@@ -129,6 +129,9 @@ public partial class App : Application
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<EmptyItemCollectionViewModel, EmptyItemCollectionView>("EmptyItemCollection");
+
+                        services.AddScoped<IDecoratorService<ItemConfiguration>, DecoratorService<ItemConfiguration>>();
+
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
                         services.AddTemplate<ItemContentViewModel, ItemContentView>();

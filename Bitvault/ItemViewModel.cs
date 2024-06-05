@@ -3,12 +3,10 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Notification(typeof(ConfirmEventArgs<Item>), nameof(ItemState.New))]
-[Notification(typeof(ConfirmEventArgs<Item>), nameof(ItemState.Write))]
 public partial class ItemViewModel :
     ObservableCollection,
-    INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
+    INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>
 {
     [ObservableProperty]
@@ -51,8 +49,8 @@ public partial class ItemViewModel :
         Archived = archived;
         Name = name;
 
-        Add<ItemHeaderViewModel>(state, name);
-        Add<ItemContentViewModel>(state);
+        Add<ItemHeaderViewModel>(name, state);
+        Add<ItemContentViewModel>();
     }
 
     public IContentTemplate Template { get; set; }
@@ -61,7 +59,7 @@ public partial class ItemViewModel :
     {
         Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
         {
-            Factory.Create<ConfirmItemActionViewModel>(ItemState.Write),
+            Factory.Create<ConfirmItemActionViewModel>(),
             Factory.Create<DismissItemActionViewModel>(),
         })));
 
@@ -97,6 +95,9 @@ public partial class ItemViewModel :
             Factory.Create<EditItemActionViewModel>(),
             Factory.Create<ArchiveItemActionViewModel>(),
         })));
+        
+        Publisher.Publish(Confirm.As<Item>(),
+            State is ItemState.New ? nameof(ItemState.New) : nameof(ItemState.Write));
 
         State = ItemState.Read;
         return Task.CompletedTask;

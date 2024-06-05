@@ -8,7 +8,6 @@ public partial class ItemMaskedTextEntryViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    ISynchronizationCollection<IItemEntryViewModel> synchronization,
     ItemEntryConfiguration configuration,
     string? key = default,
-    string? value = default) : ItemEntryViewModel<string, string?>(provider, factory, mediator, publisher, subscriber, disposer, synchronization, configuration, key, value);
+    object? value = default) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, configuration, key, value);

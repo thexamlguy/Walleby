@@ -24,6 +24,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     INotificationHandler<FavouriteEventArgs<Item>>,
     INotificationHandler<UnfavouriteEventArgs<Item>>,
     INotificationHandler<NotifyEventArgs<ItemHeader<string>>>,
+    IKeyed<Guid>,
     ISelectable,
     IRemovable
 {

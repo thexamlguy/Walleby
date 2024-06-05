@@ -10,7 +10,7 @@ public class ItemPasswordEntryViewModelHandler(IServiceFactory serviceFactory) :
     {
         if (args.Value is PasswordEntryConfiguration configuration)
         {
-            if (serviceFactory.Create<ItemPasswordEntryViewModel>([.. args.Parameters, configuration, configuration.Label, configuration.Value ?? ""])
+            if (serviceFactory.Create<ItemPasswordEntryViewModel>(configuration, configuration.Label, configuration.Value ?? "")
                 is ItemPasswordEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);

@@ -4,36 +4,40 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class SynchronizeItemContentFromCategoryViewModelHandler(IItemConfigurationCollection configurations,
+    IDecoratorService<ItemConfiguration> decoratorItemConfiguration,
     IServiceFactory serviceFactory,
     IMediator mediator,
     IPublisher publisher) :
-    INotificationHandler<SynchronizeEventArgs<IItemEntryViewModel,
-        (string, ISynchronizationCollection<ItemSectionViewModel>)>>
+    INotificationHandler<SynchronizeEventArgs<IItemEntryViewModel, string>>
 {
-    public async Task Handle(SynchronizeEventArgs<IItemEntryViewModel, (string, ISynchronizationCollection<ItemSectionViewModel>)> args)
+    public async Task Handle(SynchronizeEventArgs<IItemEntryViewModel, string> args)
     {
-        (string category, ISynchronizationCollection<ItemSectionViewModel> synchronization) = args.Value;
-        if (configurations.TryGetValue(category, out Func<ItemConfiguration>? factory))
+        if (args.Value is string category)
         {
-            if (factory.Invoke() is ItemConfiguration configuration)
+            if (configurations.TryGetValue(category, out Func<ItemConfiguration>? configurationFactory))
             {
-                foreach (ItemSectionConfiguration configurationSection in configuration.Sections)
+                if (configurationFactory.Invoke() is ItemConfiguration configuration)
                 {
-                    string section = $"{nameof(ItemSection)}:{Guid.NewGuid()}";
-                    if (serviceFactory.Create<ItemSectionViewModel>(synchronization, section)
-                        is ItemSectionViewModel sectionViewModel)
+                    decoratorItemConfiguration.Set(configuration);
+                    foreach (ItemSectionConfiguration configurationSection in configuration.Sections)
                     {
-                        publisher.Publish(Create.As(sectionViewModel), nameof(ItemContentViewModel));
-                        foreach (IItemEntryConfiguration entryConfiguration in configurationSection.Entries)
+                        string id = $"{nameof(ItemSection)}:{Guid.NewGuid()}";
+                        if (serviceFactory.Create<ItemSectionViewModel>(id)
+                            is ItemSectionViewModel sectionViewModel)
                         {
-                            Type messageType = typeof(CreateEventArgs<>).MakeGenericType(entryConfiguration.GetType());
-                            ConstructorInfo? constructor = messageType.GetConstructor([entryConfiguration.GetType(), typeof(object[])]);
-
-                            if (constructor?.Invoke(new object[] { entryConfiguration, new object[] { sectionViewModel } }) is object message)
+                            publisher.Publish(Create.As(sectionViewModel), nameof(ItemContentViewModel));
+                            foreach (IItemEntryConfiguration entryConfiguration in configurationSection.Entries)
                             {
-                                if (await mediator.Handle<object, IItemEntryViewModel?>(message, entryConfiguration.GetType().Name) is IItemEntryViewModel entryViewModel)
+                                Type messageType = typeof(CreateEventArgs<>).MakeGenericType(entryConfiguration.GetType());
+                                ConstructorInfo? constructor = messageType.GetConstructor([entryConfiguration.GetType(), typeof(object[])]);
+
+                                if (constructor?.Invoke(new object[] { entryConfiguration, new object[] { sectionViewModel } }) is object message)
                                 {
-                                    publisher.Publish(Create.As(entryViewModel), section);
+                                    if (await mediator.Handle<object, IItemEntryViewModel?>(message,
+                                        entryConfiguration.GetType().Name) is IItemEntryViewModel entryViewModel)
+                                    {
+                                        publisher.Publish(Create.As(entryViewModel), id);
+                                    }
                                 }
                             }
                         }
@@ -41,6 +45,5 @@ public class SynchronizeItemContentFromCategoryViewModelHandler(IItemConfigurati
                 }
             }
         }
-
     }
 }

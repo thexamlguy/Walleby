@@ -1,9 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Toolkit.Foundation;
+﻿using Toolkit.Foundation;
 
 namespace Bitvault;
 
-[Notification(typeof(CreateEventArgs<IItemEntryViewModel>), nameof(Section))]
+[Notification(typeof(CreateEventArgs<IItemEntryViewModel>), nameof(Id))]
 public partial class ItemSectionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
@@ -11,18 +10,10 @@ public partial class ItemSectionViewModel(IServiceProvider provider,
     ISubscription subscriber,
     IDisposer disposer,
     IContentTemplate template,
-    ISynchronizationCollection<ItemSectionViewModel> synchronization,
-    string section) : ObservableCollection<IItemEntryViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
-    IHandler<ConfirmEventArgs<ItemSection>, (int, string)>,
-    IIndexable
+    string id) : ObservableCollection<IItemEntryViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
+    IKeyed<string>
 {
-    [ObservableProperty]
-    private string section = section;
+    public string Id => id;
 
     public IContentTemplate Template { get; set; } = template;
-
-    public int Index => synchronization.IndexOf(this);
-
-    public Task<(int, string)> Handle(ConfirmEventArgs<ItemSection> args,
-        CancellationToken cancellationToken) => Task.FromResult((0, Section));
 }

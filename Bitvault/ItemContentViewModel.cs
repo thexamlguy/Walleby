@@ -8,8 +8,7 @@ public partial class ItemContentViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    IContentTemplate template,
-    ItemState state = ItemState.Read) :
+    IContentTemplate template) :
     ObservableCollection<ItemSectionViewModel>(provider, factory, mediator, publisher, subscriber, disposer),
     IItemEntryViewModel,
     INotificationHandler<NotifyEventArgs<ItemCategory<string>>>
@@ -22,8 +21,7 @@ public partial class ItemContentViewModel(IServiceProvider provider,
         {
             if (category.Value is string value)
             {
-                Fetch(() => new SynchronizeExpression(new SynchronizeEventArgs<IItemEntryViewModel, 
-                    (string, ISynchronizationCollection<ItemSectionViewModel>)>((value, this))), true);
+                Fetch(() => new SynchronizeExpression(new SynchronizeEventArgs<IItemEntryViewModel, string>(value)), true);
             }
         }
 

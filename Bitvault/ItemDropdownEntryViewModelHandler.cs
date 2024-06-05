@@ -10,7 +10,7 @@ public class ItemDropdownEntryViewModelHandler(IServiceFactory serviceFactory) :
     {
         if (args.Value is DropdownEntryConfiguration configuration)
         {
-            if (serviceFactory.Create<ItemDropdownEntryViewModel>([.. args.Parameters, configuration, configuration.Label, configuration.Value ?? ""])
+            if (serviceFactory.Create<ItemDropdownEntryViewModel>(configuration, configuration.Label, configuration.Value ?? "")
                 is ItemDropdownEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);
