@@ -31,7 +31,7 @@ public class SynchronizeItemContentFromCategoryViewModelHandler(IItemConfigurati
                                 Type messageType = typeof(CreateEventArgs<>).MakeGenericType(entryConfiguration.GetType());
                                 ConstructorInfo? constructor = messageType.GetConstructor([entryConfiguration.GetType(), typeof(object[])]);
 
-                                if (constructor?.Invoke(new object[] { entryConfiguration, new object[] { sectionViewModel } }) is object message)
+                                if (constructor?.Invoke(new object[] { entryConfiguration, new object[] { ItemState.New } }) is object message)
                                 {
                                     if (await mediator.Handle<object, IItemEntryViewModel?>(message,
                                         entryConfiguration.GetType().Name) is IItemEntryViewModel entryViewModel)

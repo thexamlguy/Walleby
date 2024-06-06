@@ -19,6 +19,7 @@
                 <Parameter Key="Name" Value="{Binding Name}" />
                 <Parameter Key="Favourite" Value="{Binding Favourite}" />
                 <Parameter Key="Archived" Value="{Binding Archived}" />
+                <Parameter Key="NavigationStackEnabled" Value="{x:False}" />
             </NavigateAction>
         </AttachedEventTriggerBehaviour>
     </Interaction.Behaviors>

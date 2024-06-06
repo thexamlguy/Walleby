@@ -5,7 +5,7 @@ namespace Bitvault.Avalonia
     public partial class ItemMaskedTextEntryView :
         SettingsExpander
     {
-        public ItemMaskedTextEntryView() =>
+        public ItemMaskedTextEntryView() => 
             InitializeComponent();
     }
 }

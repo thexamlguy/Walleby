@@ -6,12 +6,16 @@
     x:DataType="vm:ItemTextEntryViewModel"
     Header="{Binding Key}">
     <SettingsExpander.Footer>
-        <TextBox HorizontalAlignment="Right" Text="{Binding Value}">
+        <TextBox Text="{Binding Value}">
             <Interaction.Behaviors>
                 <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
                     <AddClassAction ClassName="Read" RemoveIfExists="True" />
                     <RemoveClassAction ClassName="Write" />
                 </DataTriggerBehavior>
+				<DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
+					<AddClassAction ClassName="Write" RemoveIfExists="True" />
+					<RemoveClassAction ClassName="Read" />
+				</DataTriggerBehavior>
                 <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
                     <AddClassAction ClassName="Write" RemoveIfExists="True" />
                     <RemoveClassAction ClassName="Read" />

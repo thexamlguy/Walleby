@@ -98,18 +98,25 @@ public record ItemConfiguration
                     new DropdownEntryConfiguration
                     {
                         Label = "Type",
+                        Values = ["American Express", "Discover", "Maestro", "Mastercard", "Visa"],
                     },
                     new MaskedTextEntryConfiguration
                     {
-                        Label = "Card number"
+                        Label = "Card number",
+                        Pattern = "0000-0000-0000-0000",
+                        Value = "____-____-____-____",
                     },
                     new MaskedTextEntryConfiguration
                     {
-                        Label = "Expiry date"
+                        Label = "Expiry date",
+                        Pattern = "00/00",
+                        Value = "__/__",
                     },
                     new MaskedTextEntryConfiguration
                     {
-                        Label = "Card verification code"
+                        Label = "Card verification code",
+                        Pattern = "000",
+                        Value = "___",
                     },
                 }
             }

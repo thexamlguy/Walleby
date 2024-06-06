@@ -9,6 +9,7 @@ public partial class ItemEntryViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
+    ItemState state,
     ItemEntryConfiguration configuration,
     string? key = default,
     object? value = default) :
@@ -19,7 +20,7 @@ public partial class ItemEntryViewModel(IServiceProvider provider,
     INotificationHandler<CancelEventArgs<Item>>
 {
     [ObservableProperty]
-    private ItemState state = ItemState.Read;
+    private ItemState state = state;
 
     protected override void OnValueChanged() => 
         configuration.Value = Value;

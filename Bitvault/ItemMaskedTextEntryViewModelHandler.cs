@@ -10,7 +10,7 @@ public class ItemMaskedTextEntryViewModelHandler(IServiceFactory serviceFactory)
     {
         if (args.Value is MaskedTextEntryConfiguration configuration)
         {
-            if (serviceFactory.Create<ItemMaskedTextEntryViewModel>(configuration, configuration.Label, configuration.Value ?? "")
+            if (serviceFactory.Create<ItemMaskedTextEntryViewModel>([.. args.Parameters, configuration, configuration.Pattern, configuration.Label, configuration.Value])
                 is ItemMaskedTextEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);
