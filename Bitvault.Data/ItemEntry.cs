@@ -17,7 +17,7 @@ public record ItemEntry
 
     public required string Category { get; set; }
 
-    public ICollection<TagEntry>? Tags { get; }
+    public ICollection<TagEntry> Tags { get; set; } = new List<TagEntry>();
 
-    public ICollection<BlobEntry>? Blobs { get; }
+    public ICollection<BlobEntry> Blobs { get; set;  } = new List<BlobEntry>();
 }

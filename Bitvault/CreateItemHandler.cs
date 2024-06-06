@@ -1,6 +1,8 @@
 ﻿using Bitvault.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Text;
+using System.Text.Json;
 using Toolkit.Foundation;
 
 namespace Bitvault;
@@ -15,15 +17,24 @@ public class CreateItemHandler(IDbContextFactory<LockerContext> dbContextFactory
         {
             try
             {
-                using LockerContext context = dbContextFactory.CreateDbContext();
-                EntityEntry<ItemEntry>? result = null;
-
-                await Task.Run(async () =>
+                string content = JsonSerializer.Serialize(configuration);
+                ItemEntry itemEntry = new()
                 {
-                    result = await context.AddAsync(new ItemEntry { Id = id, Name = name, Category = category }, cancellationToken);
-                    await context.SaveChangesAsync(cancellationToken);
+                    Id = id,
+                    Name = name,
+                    Category = category
+                };
 
-                }, cancellationToken);
+                itemEntry.Blobs.Add(new()
+                {
+                    Data = Encoding.UTF8.GetBytes(content),
+                    DateTime = DateTime.Now,
+                    Type = 0,
+                });
+
+                using LockerContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+                EntityEntry<ItemEntry>? result = await context.AddAsync(itemEntry, cancellationToken);
+                await context.SaveChangesAsync(cancellationToken);
 
                 if (result is not null)
                 {

@@ -11,7 +11,7 @@ public class ArchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decorato
     {
         try
         {
-            if (decoratorService.Value is Item<(Guid, string)> item)
+            if (decoratorService.Service is Item<(Guid, string)> item)
             {
                 if (cache.Contains(item))
                 {

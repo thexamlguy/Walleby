@@ -17,12 +17,11 @@ public class SynchronizeItemViewModelHandler(IMediator mediator,
             cache.Clear();
             bool selected = true;
 
-            if (await mediator.Handle<RequestEventArgs<QueryLockerConfiguration>,
-                IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>>(Request.As(new QueryLockerConfiguration
-                {
-                    Filter = configuration.Filter,
-                    Query = configuration.Query
-                })) is IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)> results)
+            IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>? results = 
+                await mediator.Handle<QueryEventArgs<Locker<(string?, string?)>>,
+                    IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>>(Query.As(new Locker<(string?, string?)>((configuration.Filter, configuration.Query))));
+
+            if (results is not null)
             {
                 foreach ((Guid Id, string Name, string Category, bool Favourite, bool Archived) in results)
                 {

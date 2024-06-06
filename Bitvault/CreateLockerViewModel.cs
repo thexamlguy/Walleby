@@ -22,5 +22,5 @@ public partial class CreateLockerViewModel(IServiceProvider provider,
     private string password;
 
     public async Task<bool> Confirm() =>
-        await Mediator.Handle<CreateEventArgs<Locker>, bool>(Create.As(new Locker(Name, Password)));
+        await Mediator.Handle<CreateEventArgs<Locker<(string, string)>>, bool>(Create.As(new Locker<(string, string)>((Name, Password))));
 }

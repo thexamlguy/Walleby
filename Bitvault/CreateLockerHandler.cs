@@ -7,36 +7,41 @@ namespace Bitvault;
 
 public class CreateLockerHandler(ILockerFactory componentFactory,
     IPublisher publisher) :
-    IHandler<CreateEventArgs<Locker>, bool>
+    IHandler<CreateEventArgs<Locker<(string, string)>>, bool>
 {
-    public async Task<bool> Handle(CreateEventArgs<Locker> args,
+    public async Task<bool> Handle(CreateEventArgs<Locker<(string, string)>> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is Locker locker && locker.Name is { Length: > 0 } name &&
-            locker.Password is { Length: > 0 } password)
+        if (args.Value is Locker <(string, string)> locker)
         {
-            if (componentFactory.Create(name) is IComponentHost host)
+            if (locker.Value is (string name, string password) && 
+                name is { Length: > 0 } &&
+                password is { Length: > 0 })
             {
-                ISecurityKeyFactory keyVaultFactory = host.Services.GetRequiredService<ISecurityKeyFactory>();
-                IDecoratorService<SecurityKey> secureKeyStore = host.Services.GetRequiredService<IDecoratorService<SecurityKey>>();
-                ILockerStorageFactory lockerStorageFactory = host.Services.GetRequiredService<ILockerStorageFactory>();
-
-                if (keyVaultFactory.Create(Encoding.UTF8.GetBytes(password)) is SecurityKey key)
+                if (componentFactory.Create(name) is IComponentHost host)
                 {
-                    secureKeyStore.Set(key);
+                    ISecurityKeyFactory keyVaultFactory = host.Services.GetRequiredService<ISecurityKeyFactory>();
+                    IDecoratorService<SecurityKey> secureKeyStore = host.Services.GetRequiredService<IDecoratorService<SecurityKey>>();
+                    ILockerStorageFactory lockerStorageFactory = host.Services.GetRequiredService<ILockerStorageFactory>();
 
-                    if (await lockerStorageFactory.Create(name, key))
+                    if (keyVaultFactory.Create(Encoding.UTF8.GetBytes(password)) is SecurityKey key)
                     {
-                        IWritableConfiguration<LockerConfiguration> configuration =
-                            host.Services.GetRequiredService<IWritableConfiguration<LockerConfiguration>>();
+                        secureKeyStore.Set(key);
 
-                        configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");
-                        host.Start();
+                        if (await lockerStorageFactory.Create(name, key))
+                        {
+                            IWritableConfiguration<LockerConfiguration> configuration =
+                                host.Services.GetRequiredService<IWritableConfiguration<LockerConfiguration>>();
 
-                        publisher.Publish(Activated.As(host), cancellationToken);
-                        return true;
+                            configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");
+                            host.Start();
+
+                            publisher.Publish(Activated.As(host), cancellationToken);
+                            return true;
+                        }
                     }
                 }
+
             }
         }
 

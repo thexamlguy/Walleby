@@ -1,31 +1,39 @@
 ﻿using Bitvault.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text;
 using Toolkit.Foundation;
 
 namespace Bitvault;
 
 public class UpdateItemHander(IDbContextFactory<LockerContext> dbContextFactory) :
-    IHandler<UpdateEventArgs<(Guid, string, ItemConfiguration)>, bool>
+    IHandler<UpdateEventArgs<Item<(Guid, string, ItemConfiguration)>>, bool>
 {
-    public async Task<bool> Handle(UpdateEventArgs<(Guid, string, ItemConfiguration)> args,
+    public async Task<bool> Handle(UpdateEventArgs<Item<(Guid, string, ItemConfiguration)>> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is (Guid id, string name, ItemConfiguration configuration))
+        if (args.Value is Item<(Guid, string, ItemConfiguration)> item)
         {
+            (Guid id, string name, ItemConfiguration configuration) = item.Value;
+
             try
             {
-                using LockerContext context = dbContextFactory.CreateDbContext();
-                ItemEntry? result = null;
+                using LockerContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+                ItemEntry? result = result = await context.Set<ItemEntry>().FindAsync([id], cancellationToken);
 
-                await Task.Run(async () =>
+                if (result is not null)
                 {
-                    result = await context.Set<ItemEntry>().FindAsync(id);
-                    if (result is not null)
+                    string content = JsonSerializer.Serialize(configuration);
+                    result.Blobs.Add(new()
                     {
-                        result.Name = name;
-                        await context.SaveChangesAsync(cancellationToken);
-                    }
-                }, cancellationToken);
+                        Data = Encoding.UTF8.GetBytes(content),
+                        DateTime = DateTime.Now,
+                        Type = 0,
+                    });
+
+                    result.Name = name;
+                    await context.SaveChangesAsync(cancellationToken);
+                }
 
                 if (result is not null)
                 {

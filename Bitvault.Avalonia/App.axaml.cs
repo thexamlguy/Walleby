@@ -87,11 +87,12 @@ public partial class App : Application
                             if (provider.GetRequiredService<IDecoratorService<LockerConnection>>()
                                 is IDecoratorService<LockerConnection> connection)
                             {
-                                args.UseSqlite($"{connection.Value}");
+                                args.UseSqlite($"{connection.Service}");
                             }
                         });
 
                         services.AddHandler<QueryLockerHandler>();
+                        services.AddHandler<RequestItemHandler>();
                         services.AddHandler<CreateItemHandler>();
                         services.AddHandler<UpdateItemHander>();
                         services.AddHandler<UpdateItemStateHandler>();

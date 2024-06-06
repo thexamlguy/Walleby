@@ -24,7 +24,7 @@ public partial class OpenLockerViewModel(IServiceProvider provider,
     {
         if (Password is { Length: > 0 })
         {
-            if (await Mediator.Handle<ActivateEventArgs<Locker>, bool>(Activate.As(new Locker(Password))))
+            if (await Mediator.Handle<ActivateEventArgs<Locker<string>>, bool>(Activate.As(new Locker<string>(Password))))
             {
                 Publisher.Publish(Opened.As<Locker>());
             }

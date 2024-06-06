@@ -6,52 +6,50 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class QueryLockerHandler(IDbContextFactory<LockerContext> dbContextFactory) :
-    IHandler<RequestEventArgs<QueryLockerConfiguration>, IReadOnlyCollection<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)>>
+    IHandler<QueryEventArgs<Locker<(string, string)>>, IReadOnlyCollection<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)>>
 {
-    public async Task<IReadOnlyCollection<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)>> Handle(RequestEventArgs<QueryLockerConfiguration> args,
-        CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)>> 
+        Handle(QueryEventArgs<Locker<(string, string)>> args,CancellationToken cancellationToken)
     {
         List<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)> items = [];
-
-        if (args.Value is QueryLockerConfiguration queryConfiguration)
+        if (args.Value is Locker<(string, string)> locker)
         {
+            (string filter, string text) = locker.Value;
+
             ExpressionStarter<ItemEntry> predicate =
                 PredicateBuilder.New<ItemEntry>(true);
 
-            if (queryConfiguration.Filter == "All")
+            if (filter == "All")
             {
                 predicate = predicate.And(x => x.State != 2);
             }
 
-            if (queryConfiguration.Filter == "Starred")
+            if (filter == "Starred")
             {
                 predicate = predicate.And(x => x.State != 2 && x.State == 1);
             }
 
-            if (queryConfiguration.Filter == "Archive")
+            if (filter == "Archive")
             {
                 predicate = predicate.And(x => x.State == 2);
             }
 
-            if (queryConfiguration.Query is { Length: > 0 } query)
+            if (text is { Length: > 0 })
             {
-                predicate = predicate.And(x => EF.Functions.Like(x.Name, $"%{query}%"));
+                predicate = predicate.And(x => EF.Functions.Like(x.Name, $"%{text}%"));
             }
 
-            var results = await Task.Run(async () =>
-            {
-                using LockerContext context = dbContextFactory.CreateDbContext();
-                return await context.Set<ItemEntry>()
-                    .Where(predicate)
-                    .Select(x => new
-                    {
-                        x.Id,
-                        x.Name,
-                        x.Category,
-                        Favourite = x.State == 1,
-                        Archived = x.State == 2
-                    }).ToListAsync();
-            });
+            using LockerContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+            var results = await context.Set<ItemEntry>()
+                .Where(predicate)
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Name,
+                    x.Category,
+                    Favourite = x.State == 1,
+                    Archived = x.State == 2
+                }).ToListAsync(cancellationToken: cancellationToken);
 
             foreach (var result in results.OrderBy(x => x.Name, StringComparer.OrdinalIgnoreCase))
             {

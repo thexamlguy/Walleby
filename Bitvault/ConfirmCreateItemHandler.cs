@@ -3,13 +3,13 @@
 namespace Bitvault;
 
 public class ConfirmCreateItemHandler(IMediator mediator,
-    IDecoratorService<ItemConfiguration> decoratorItemConfiguration,
+    IDecoratorService<ItemConfiguration> itemConfigurationDecorator,
     IPublisher publisher) :
     INotificationHandler<ConfirmEventArgs<Item>>
 {
     public async Task Handle(ConfirmEventArgs<Item> args)
     {
-        if (decoratorItemConfiguration.Value is ItemConfiguration configuration)
+        if (itemConfigurationDecorator.Service is ItemConfiguration configuration)
         {
             string? name = await mediator.Handle<ConfirmEventArgs<ItemHeader>, string>(Confirm.As<ItemHeader>());
             if (name is not null)

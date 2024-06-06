@@ -13,5 +13,5 @@ public record BlobEntry
     [Key]
     public int Id { get; set; }
 
-    public DateTimeOffset DateTime { get; set; }
+    public DateTime DateTime { get; set; }
 }

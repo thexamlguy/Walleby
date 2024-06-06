@@ -10,7 +10,7 @@ public class FavouriteItemHandler(IDecoratorService<Item<(Guid, string)>> decora
     {
         try
         {
-            if (decoratorService.Value is Item<(Guid, string)> item)
+            if (decoratorService.Service is Item<(Guid, string)> item)
             {
                 (Guid id, string name) = item.Value;
                 await mediator.Handle<UpdateEventArgs<(Guid, int)>, bool>(new UpdateEventArgs<(Guid, int)>((id, 1)));

@@ -9,7 +9,7 @@ public class UnfavouriteItemHandler(IDecoratorService<Item<(Guid, string)>> deco
     {
         try
         {
-            if (decoratorService.Value is Item<(Guid, string)> item)
+            if (decoratorService.Service is Item<(Guid, string)> item)
             {
                 (Guid id, string name) = item.Value;
                 await mediator.Handle<UpdateEventArgs<(Guid, int)>, bool>(new UpdateEventArgs<(Guid, int)>((id, 0)));

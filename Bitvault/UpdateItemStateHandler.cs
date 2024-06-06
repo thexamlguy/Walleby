@@ -14,7 +14,7 @@ public class UpdateItemStateHandler(IDbContextFactory<LockerContext> dbContextFa
         {
             await Task.Run(async () =>
             {
-                using LockerContext context = await dbContextFactory.CreateDbContextAsync();
+                using LockerContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
                 if (await context.FindAsync<ItemEntry>(id) is ItemEntry result)
                 {
                     result.State = state;

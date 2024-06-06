@@ -118,7 +118,7 @@ public partial class ItemViewModel :
             {
                 Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
                 {
-                    Factory.Create<ConfirmItemActionViewModel>(State),
+                    Factory.Create<ConfirmItemActionViewModel>(),
                     Factory.Create<DismissItemActionViewModel>(),
                 })));
             }
