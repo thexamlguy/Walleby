@@ -2,20 +2,21 @@
 
 namespace Bitvault;
 
-public interface IItemEntryConfiguration
-{
-    string? Label { get; set; }
-
-    object? Value { get; set; }
-}
-
 [JsonDerivedType(typeof(DropdownEntryConfiguration), typeDiscriminator: "Dropdown")]
 [JsonDerivedType(typeof(MaskedTextEntryConfiguration), typeDiscriminator: "MaskedText")]
 [JsonDerivedType(typeof(NoteEntryConfiguration), typeDiscriminator: "Note")]
 [JsonDerivedType(typeof(NumberEntryConfiguration), typeDiscriminator: "Number")]
 [JsonDerivedType(typeof(PasswordEntryConfiguration), typeDiscriminator: "Password")]
 [JsonDerivedType(typeof(TextEntryConfiguration), typeDiscriminator: "Text")]
-public record ItemEntryConfiguration : IItemEntryConfiguration
+[JsonDerivedType(typeof(ImageEntryConfiguration), typeDiscriminator: "Image")]
+[JsonDerivedType(typeof(AttachmentEntryConfiguration), typeDiscriminator: "Attachment")]
+[JsonDerivedType(typeof(MultilineTextEntryConfiguration), typeDiscriminator: "MultilineText")]
+[JsonDerivedType(typeof(CurrencyEntryConfiguration), typeDiscriminator: "Currency")]
+[JsonDerivedType(typeof(DateEntryConfiguration), typeDiscriminator: "Date")]
+[JsonDerivedType(typeof(HyperlinkEntryConfiguration), typeDiscriminator: "Hyperlink")]
+[JsonDerivedType(typeof(PinEntryConfiguration), typeDiscriminator: "Pin")]
+public record ItemEntryConfiguration : 
+    IItemEntryConfiguration
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Label { get; set; }

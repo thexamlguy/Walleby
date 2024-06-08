@@ -36,6 +36,18 @@ public partial class App : Application
             .AddConfiguration("Item:Login", ItemConfiguration.Login)
             .AddConfiguration("Item:Note", ItemConfiguration.Note)
             .AddConfiguration("Item:Password", ItemConfiguration.Password)
+            .AddConfiguration("Item:Passport", ItemConfiguration.Passport)
+            .AddConfiguration("Item:Api Credentials", ItemConfiguration.ApiCredentials)
+            .AddConfiguration("Item:Software License", ItemConfiguration.SoftwareLicense)
+            .AddConfiguration("Item:Crypto", ItemConfiguration.CryptoWallet)
+            .AddConfiguration("Item:Database", ItemConfiguration.Database)
+            .AddConfiguration("Item:Membership", ItemConfiguration.Membership)
+            .AddConfiguration("Item:Insurance Documents", ItemConfiguration.InsuranceDocuments)
+            .AddConfiguration("Item:Utility", ItemConfiguration.Utility)
+            .AddConfiguration("Item:Server", ItemConfiguration.Server)
+            .AddConfiguration("Item:Education Record", ItemConfiguration.EducationRecord)
+            .AddConfiguration("Item:Travel Documents", ItemConfiguration.TravelDocuments)
+
             .ConfigureServices((context, services) =>
             {
                 services.AddAvalonia();
