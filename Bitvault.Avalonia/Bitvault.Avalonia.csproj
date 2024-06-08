@@ -67,11 +67,23 @@
 	  <Compile Update="DismissItemActionView.axaml.cs">
 	    <DependentUpon>DismissItemActionView.axaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="DropdownEntryView.axaml.cs">
+	    <DependentUpon>DropdownEntryView.axaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="ItemHeaderView.axaml.cs">
 	    <DependentUpon>ItemHeaderView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="ItemContentView.axaml.cs">
 	    <DependentUpon>ItemContentView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="TextEntryView.axaml.cs">
+	    <DependentUpon>TextEntryView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="PasswordEntryView.axaml.cs">
+	    <DependentUpon>PasswordEntryView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="MaskedTextEntryView.axaml.cs">
+	    <DependentUpon>MaskedTextEntryView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="OpenLockerView.axaml.cs">
 	    <DependentUpon>OpenLockerView.axaml</DependentUpon>

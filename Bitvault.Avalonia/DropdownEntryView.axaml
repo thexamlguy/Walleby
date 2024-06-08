@@ -1,9 +1,9 @@
 <SettingsExpander
-    x:Class="Bitvault.Avalonia.ItemDropdownEntryView"
+    x:Class="Bitvault.Avalonia.DropdownEntryView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
-    x:DataType="vm:ItemDropdownEntryViewModel"
+    x:DataType="vm:DropdownEntryViewModel"
     Header="{Binding Key}">
     <SettingsExpander.Footer>
         <Grid>

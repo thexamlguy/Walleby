@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public partial class ItemDropdownValueViewModel(IServiceProvider provider,
+public partial class DropdownValueViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,

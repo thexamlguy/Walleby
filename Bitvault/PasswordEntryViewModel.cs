@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public partial class ItemTextEntryViewModel(IServiceProvider provider,
+public partial class PasswordEntryViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,

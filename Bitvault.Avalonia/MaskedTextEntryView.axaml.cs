@@ -2,10 +2,10 @@ using Toolkit.UI.Controls.Avalonia;
 
 namespace Bitvault.Avalonia
 {
-    public partial class ItemMaskedTextEntryView :
+    public partial class MaskedTextEntryView :
         SettingsExpander
     {
-        public ItemMaskedTextEntryView() => 
+        public MaskedTextEntryView() => 
             InitializeComponent();
     }
 }

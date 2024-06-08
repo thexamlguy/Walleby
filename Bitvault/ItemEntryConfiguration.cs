@@ -4,7 +4,6 @@ namespace Bitvault;
 
 [JsonDerivedType(typeof(DropdownEntryConfiguration), typeDiscriminator: "Dropdown")]
 [JsonDerivedType(typeof(MaskedTextEntryConfiguration), typeDiscriminator: "MaskedText")]
-[JsonDerivedType(typeof(NoteEntryConfiguration), typeDiscriminator: "Note")]
 [JsonDerivedType(typeof(NumberEntryConfiguration), typeDiscriminator: "Number")]
 [JsonDerivedType(typeof(PasswordEntryConfiguration), typeDiscriminator: "Password")]
 [JsonDerivedType(typeof(TextEntryConfiguration), typeDiscriminator: "Text")]

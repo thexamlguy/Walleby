@@ -2,9 +2,9 @@ using Toolkit.UI.Controls.Avalonia;
 
 namespace Bitvault.Avalonia;
 
-public partial class ItemDropdownEntryView : 
+public partial class PasswordEntryView : 
     SettingsExpander
 {
-    public ItemDropdownEntryView() => 
+    public PasswordEntryView() =>
         InitializeComponent();
 }

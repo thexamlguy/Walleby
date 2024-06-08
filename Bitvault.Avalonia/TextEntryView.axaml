@@ -1,12 +1,12 @@
 <SettingsExpander
-    x:Class="Bitvault.Avalonia.ItemMaskedTextEntryView"
+    x:Class="Bitvault.Avalonia.TextEntryView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bitvault"
-    x:DataType="vm:ItemMaskedTextEntryViewModel"
+    x:DataType="vm:TextEntryViewModel"
     Header="{Binding Key}">
     <SettingsExpander.Footer>
-        <MaskedTextBox Mask="{Binding Pattern}" Text="{Binding Value}">
+        <TextBox Text="{Binding Value}">
             <TextBox.Styles>
                 <Style Selector="TextBox.Write">
                     <Setter Property="MinWidth" Value="264" />
@@ -59,6 +59,6 @@
                     <RemoveClassAction ClassName="Read" />
                 </DataTriggerBehavior>
             </Interaction.Behaviors>
-        </MaskedTextBox>
+        </TextBox>
     </SettingsExpander.Footer>
 </SettingsExpander>

@@ -157,7 +157,7 @@ public record ItemConfiguration
             {
                 Entries = new List<ItemEntryConfiguration>
                 {
-                    new NumberEntryConfiguration
+                    new MultilineTextEntryConfiguration
                     {
                         Label = "Notes"
                     }
@@ -170,18 +170,23 @@ public record ItemConfiguration
     {
         Sections = new List<ItemSectionConfiguration>
         {
-            new()
+            new ()
             {
                 Entries = new List<ItemEntryConfiguration>
                 {
+                    new TextEntryConfiguration
+                    {
+                        Label = "Description",
+                    },
                     new AttachmentEntryConfiguration
                     {
-                        Label = "Attachments"
+                        Label = "Attachments",
                     }
                 }
             }
         }
     };
+
 
     public static ItemConfiguration DrivingLicence => new()
     {

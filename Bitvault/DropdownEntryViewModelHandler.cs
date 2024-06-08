@@ -2,7 +2,7 @@
 
 namespace Bitvault;
 
-public class ItemDropdownEntryViewModelHandler(IServiceFactory serviceFactory) :
+public class DropdownEntryViewModelHandler(IServiceFactory serviceFactory) :
     IHandler<CreateEventArgs<DropdownEntryConfiguration>, IItemEntryViewModel?>
 {
     public Task<IItemEntryViewModel?> Handle(CreateEventArgs<DropdownEntryConfiguration> args,
@@ -10,19 +10,19 @@ public class ItemDropdownEntryViewModelHandler(IServiceFactory serviceFactory) :
     {
         if (args.Value is DropdownEntryConfiguration configuration)
         {
-            List<ItemDropdownValueViewModel> values = [];
+            List<DropdownValueViewModel> values = [];
             foreach (string item in configuration.Values)
             {
-                values.Add(serviceFactory.Create<ItemDropdownValueViewModel>(item));
+                values.Add(serviceFactory.Create<DropdownValueViewModel>(item));
             }
 
             string? label = configuration.Label;
             object? value = configuration.Value;
 
-            ItemDropdownValueViewModel? selected = values.FirstOrDefault(x => x.Value is not null && x.Value.Equals($"{value}"));
+            DropdownValueViewModel? selected = values.FirstOrDefault(x => x.Value is not null && x.Value.Equals($"{value}"));
 
-            if (serviceFactory.Create<ItemDropdownEntryViewModel>([values, .. args.Parameters, configuration, label, value ?? "", selected])
-                is ItemDropdownEntryViewModel viewModel)
+            if (serviceFactory.Create<DropdownEntryViewModel>([values, .. args.Parameters, configuration, label, value ?? "", selected])
+                is DropdownEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);
             }

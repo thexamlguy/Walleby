@@ -154,10 +154,11 @@ public partial class App : Application
 
                         services.AddTemplate<ItemSectionViewModel, ItemSectionView>();
 
-                        services.AddTemplate<ItemTextEntryViewModel, ItemTextEntryView>();
-                        services.AddTemplate<ItemPasswordEntryViewModel, ItemPasswordEntryView>();
-                        services.AddTemplate<ItemMaskedTextEntryViewModel, ItemMaskedTextEntryView>();
-                        services.AddTemplate<ItemDropdownEntryViewModel, ItemDropdownEntryView>();
+                        services.AddTemplate<TextEntryViewModel, TextEntryView>();
+                        services.AddTemplate<MultilineTextEntryViewModel, MultilineTextEntryView>();
+                        services.AddTemplate<PasswordEntryViewModel, PasswordEntryView>();
+                        services.AddTemplate<MaskedTextEntryViewModel, MaskedTextEntryView>();
+                        services.AddTemplate<DropdownEntryViewModel, DropdownEntryView>();
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
@@ -177,10 +178,11 @@ public partial class App : Application
                         services.AddHandler<FavouriteItemHandler>();
                         services.AddHandler<UnfavouriteItemHandler>();
 
-                        services.AddHandler<ItemTextEntryViewModelHandler>(nameof(TextEntryConfiguration));
-                        services.AddHandler<ItemPasswordEntryViewModelHandler>(nameof(PasswordEntryConfiguration));
-                        services.AddHandler<ItemMaskedTextEntryViewModelHandler>(nameof(MaskedTextEntryConfiguration));
-                        services.AddHandler<ItemDropdownEntryViewModelHandler>(nameof(DropdownEntryConfiguration));
+                        services.AddHandler<TextEntryViewModelHandler>(nameof(TextEntryConfiguration));
+                        services.AddHandler<MultilineTextEntryViewModelHandler>(nameof(MultilineTextEntryConfiguration));
+                        services.AddHandler<PasswordEntryViewModelHandler>(nameof(PasswordEntryConfiguration));
+                        services.AddHandler<MaskedTextEntryViewModelHandler>(nameof(MaskedTextEntryConfiguration));
+                        services.AddHandler<DropdownEntryViewModelHandler>(nameof(DropdownEntryConfiguration));
 
                         services.AddHandler<ItemCreatedHandler>(ServiceLifetime.Singleton);
                         services.AddHandler<ItemModifiedHandler>(ServiceLifetime.Singleton);

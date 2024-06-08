@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public partial class ItemMaskedTextEntryViewModel(IServiceProvider provider,
+public partial class MaskedTextEntryViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
