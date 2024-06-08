@@ -13,7 +13,8 @@ public partial class MaskedTextEntryViewModel(IServiceProvider provider,
     ItemEntryConfiguration configuration,
     string pattern,
     string key,
-    object value) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value)
+    object value,
+    double width) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, width)
 {
     [ObservableProperty]
     private string pattern = pattern;

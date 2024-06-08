@@ -17,11 +17,12 @@ public class DropdownEntryViewModelHandler(IServiceFactory serviceFactory) :
             }
 
             string? label = configuration.Label;
-            object? value = configuration.Value;
+            object? value = configuration.Value ?? "";
+            double? width = configuration.Width;
 
             DropdownValueViewModel? selected = values.FirstOrDefault(x => x.Value is not null && x.Value.Equals($"{value}"));
 
-            if (serviceFactory.Create<DropdownEntryViewModel>([values, .. args.Parameters, configuration, label, value ?? "", selected])
+            if (serviceFactory.Create<DropdownEntryViewModel>([values, .. args.Parameters, configuration, label, value, width, selected])
                 is DropdownEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);

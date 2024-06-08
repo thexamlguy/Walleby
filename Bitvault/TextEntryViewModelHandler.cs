@@ -10,7 +10,11 @@ public class TextEntryViewModelHandler(IServiceFactory serviceFactory) :
     {
         if (args.Value is TextEntryConfiguration configuration)
         {
-            if (serviceFactory.Create<TextEntryViewModel>([.. args.Parameters, configuration, configuration.Label, configuration.Value ?? ""])
+            string? label = configuration.Label;
+            object? value = configuration.Value ?? "";
+            double? width = configuration.Width;
+
+            if (serviceFactory.Create<TextEntryViewModel>([.. args.Parameters, configuration, label, value, width])
                 is TextEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);

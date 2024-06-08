@@ -11,4 +11,5 @@ public partial class TextEntryViewModel(IServiceProvider provider,
     ItemState state,
     ItemEntryConfiguration configuration,
     string key,
-    object value) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value);
+    object value,
+    double width) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, width);

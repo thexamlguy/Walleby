@@ -10,7 +10,11 @@ public class PasswordEntryViewModelHandler(IServiceFactory serviceFactory) :
     {
         if (args.Value is PasswordEntryConfiguration configuration)
         {
-            if (serviceFactory.Create<PasswordEntryViewModel>([.. args.Parameters, configuration, configuration.Label, configuration.Value ?? ""])
+            string? label = configuration.Label;
+            object? value = configuration.Value ?? "";
+            double? width = configuration.Width;
+
+            if (serviceFactory.Create<PasswordEntryViewModel>([.. args.Parameters, configuration, label, value, width])
                 is PasswordEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);

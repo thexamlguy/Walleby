@@ -12,7 +12,8 @@ public partial class ItemEntryViewModel(IServiceProvider provider,
     ItemState state,
     ItemEntryConfiguration configuration,
     string key,
-    object value) :
+    object value,
+    double width) :
     Observable<string, object>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
     IItemEntryViewModel,
     INotificationHandler<UpdateEventArgs<Item>>,
@@ -22,8 +23,8 @@ public partial class ItemEntryViewModel(IServiceProvider provider,
     [ObservableProperty]
     private ItemState state = state;
 
-    protected override void OnValueChanged() => 
-        configuration.Value = Value;
+    [ObservableProperty]
+    private double width = width;
 
     public Task Handle(UpdateEventArgs<Item> args) =>
         Task.FromResult(State = ItemState.Write);
@@ -43,4 +44,7 @@ public partial class ItemEntryViewModel(IServiceProvider provider,
         State = ItemState.Read;
         return Task.CompletedTask;
     }
+
+    protected override void OnValueChanged() =>
+                    configuration.Value = Value;
 }

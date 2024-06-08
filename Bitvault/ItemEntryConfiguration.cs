@@ -22,4 +22,7 @@ public record ItemEntryConfiguration :
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public object? Value { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public double? Width { get; set; } = 296;
 }

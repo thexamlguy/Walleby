@@ -26,11 +26,18 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         ItemState state,
         ItemEntryConfiguration configuration,
         string key,
-        object value) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
+        object value,
+        double width) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
     {
         this.configuration = configuration;
+
         State = state;
+        Width = width;
     }
+
+    [ObservableProperty]
+    private double width;
+
 
     public ItemEntryCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
@@ -42,10 +49,13 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         ItemState state,
         ItemEntryConfiguration configuration,
         string key,
-        object value) : base(provider, factory, mediator, publisher, subscriber, disposer, items, key, value)
+        object value,
+        double width) : base(provider, factory, mediator, publisher, subscriber, disposer, items, key, value)
     {
         this.configuration = configuration;
+
         State = state;
+        Width = width;
     }
 
     protected override void OnValueChanged()

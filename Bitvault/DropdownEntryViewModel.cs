@@ -16,7 +16,8 @@ public partial class DropdownEntryViewModel :
         ItemEntryConfiguration configuration, 
         string key,
         object value,
-        DropdownValueViewModel selectedItem) : base(provider, factory, mediator, publisher, subscriber, disposer, items, state, configuration, key, value)
+        double width,
+        DropdownValueViewModel selectedItem) : base(provider, factory, mediator, publisher, subscriber, disposer, items, state, configuration, key, value, width)
     {
         SelectedItem = selectedItem;
     }
@@ -31,7 +32,8 @@ public partial class DropdownEntryViewModel :
         ItemState state,
         ItemEntryConfiguration configuration,
         string key,
-        object value) : base(provider, factory, mediator, publisher, subscriber, disposer, items, state, configuration, key, value)
+        object value,
+        double width) : base(provider, factory, mediator, publisher, subscriber, disposer, items, state, configuration, key, value, width)
     {
     }
 }

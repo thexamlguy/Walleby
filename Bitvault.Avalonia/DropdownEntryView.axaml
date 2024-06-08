@@ -15,7 +15,7 @@
                 SelectedValueBinding="{ReflectionBinding Value}">
                 <ComboBox.Styles>
                     <Style Selector="ComboBox.Write">
-                        <Setter Property="MinWidth" Value="264" />
+                        <Setter Property="MinWidth" Value="296" />
                         <Setter Property="IsVisible" Value="True" />
                     </Style>
                     <Style Selector="ComboBox.Read">
