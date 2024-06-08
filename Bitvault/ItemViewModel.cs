@@ -49,7 +49,7 @@ public partial class ItemViewModel :
         Archived = archived;
         Name = name;
 
-        Add<ItemHeaderViewModel>(name, state);
+        Add<ItemHeaderViewModel>("", name, state);
         Add<ItemContentViewModel>();
     }
 

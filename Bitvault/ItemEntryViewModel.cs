@@ -11,8 +11,8 @@ public partial class ItemEntryViewModel(IServiceProvider provider,
     IDisposer disposer,
     ItemState state,
     ItemEntryConfiguration configuration,
-    string? key = default,
-    object? value = default) :
+    string key,
+    object value) :
     Observable<string, object>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
     IItemEntryViewModel,
     INotificationHandler<UpdateEventArgs<Item>>,

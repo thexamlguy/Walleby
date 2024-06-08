@@ -6,5 +6,5 @@ public record DropdownEntryConfiguration :
     ItemEntryConfiguration
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string[]? Values { get; set; }
+    public IList<string> Values { get; set; } = new List<string>();
 }

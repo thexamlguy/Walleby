@@ -11,10 +11,10 @@ public partial class ItemMaskedTextEntryViewModel(IServiceProvider provider,
     IDisposer disposer,
     ItemState state,
     ItemEntryConfiguration configuration,
-    string? pattern,
-    string? key = default,
-    object? value = default) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value)
+    string pattern,
+    string key,
+    object value) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value)
 {
     [ObservableProperty]
-    private string? pattern = pattern;
+    private string pattern = pattern;
 }

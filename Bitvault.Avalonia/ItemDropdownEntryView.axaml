@@ -6,6 +6,94 @@
     x:DataType="vm:ItemDropdownEntryViewModel"
     Header="{Binding Key}">
     <SettingsExpander.Footer>
-        <TextBox MinWidth="264" />
+        <Grid>
+            <ComboBox
+                DisplayMemberBinding="{ReflectionBinding Value}"
+                ItemsSource="{Binding}"
+                SelectedItem="{Binding SelectedItem}"
+                SelectedValue="{Binding Value}"
+                SelectedValueBinding="{ReflectionBinding Value}">
+                <ComboBox.Styles>
+                    <Style Selector="ComboBox.Write">
+                        <Setter Property="MinWidth" Value="264" />
+                        <Setter Property="IsVisible" Value="True" />
+                    </Style>
+                    <Style Selector="ComboBox.Read">
+                        <Setter Property="MinWidth" Value="0" />
+                        <Setter Property="IsVisible" Value="False" />
+                    </Style>
+                </ComboBox.Styles>
+                <Interaction.Behaviors>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
+                        <AddClassAction ClassName="Read" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Write" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                </Interaction.Behaviors>
+            </ComboBox>
+            <TextBox Text="{Binding Value}">
+                <TextBox.Styles>
+                    <Style Selector="TextBox.Write">
+                        <Setter Property="IsVisible" Value="False" />
+                    </Style>
+                    <Style Selector="TextBox.Read">
+                        <Setter Property="MinWidth" Value="0" />
+                        <Setter Property="IsReadOnly" Value="True" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="IsVisible" Value="True" />
+                        <Setter Property="Foreground">
+                            <Setter.Value>
+                                <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
+                            </Setter.Value>
+                        </Setter>
+                        <Style Selector="^:pointerover">
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Style Selector="^ /template/ Border#PART_BorderElement">
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="Background" Value="Transparent" />
+                            </Style>
+                        </Style>
+                        <Style Selector="^:focus">
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Style Selector="^ /template/ Border#PART_BorderElement">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                            </Style>
+                        </Style>
+                    </Style>
+                </TextBox.Styles>
+
+                <Interaction.Behaviors>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
+                        <AddClassAction ClassName="Read" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Write" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                </Interaction.Behaviors>
+            </TextBox>
+        </Grid>
     </SettingsExpander.Footer>
 </SettingsExpander>

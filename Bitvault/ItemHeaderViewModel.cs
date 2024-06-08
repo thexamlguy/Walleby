@@ -25,7 +25,8 @@ public partial class ItemHeaderViewModel :
         ISubscription subscriber,
         IDisposer disposer,
         ItemState state,
-        string? value = null) : base(provider, factory, mediator, publisher, subscriber, disposer, value)
+        string key,
+        string value) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
     {
         State = state;
         Value = value;
@@ -68,6 +69,6 @@ public partial class ItemHeaderViewModel :
         return Task.CompletedTask;
     }
 
-    public Task<string?> Handle(ConfirmEventArgs<ItemHeader> args,
+    public Task<string> Handle(ConfirmEventArgs<ItemHeader> args,
         CancellationToken cancellationToken) => Task.FromResult(Value);
 }

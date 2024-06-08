@@ -10,5 +10,5 @@ public partial class ItemTextEntryViewModel(IServiceProvider provider,
     IDisposer disposer,
     ItemState state,
     ItemEntryConfiguration configuration,
-    string? key = default,
-    object? value = default) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value);
+    string key,
+    object value) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value);
