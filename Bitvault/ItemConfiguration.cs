@@ -719,6 +719,7 @@ public record ItemConfiguration
                     {
                         Label = "Type",
                         Values = ["American Express", "Discover", "Maestro", "Mastercard", "Visa"],
+                        Width = 120
                     },
                     new MaskedTextEntryConfiguration
                     {
@@ -731,18 +732,21 @@ public record ItemConfiguration
                         Label = "Expiry Date",
                         Pattern = "00/00",
                         Value = "__/__",
+                        Width = 120
                     },
                     new MaskedTextEntryConfiguration
                     {
                         Label = "Valid From",
                         Pattern = "00/00",
                         Value = "__/__",
+                        Width = 120
                     },
                     new MaskedTextEntryConfiguration
                     {
                         Label = "Card verification code",
                         Pattern = "000",
                         Value = "___",
+                        Width = 120
                     },
                 }
             },

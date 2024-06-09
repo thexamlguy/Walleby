@@ -9,7 +9,7 @@
         <MaskedTextBox Mask="{Binding Pattern}" Text="{Binding Value}">
             <TextBox.Styles>
                 <Style Selector="TextBox.Write">
-                    <Setter Property="MinWidth" Value="296" />
+                    <Setter Property="MinWidth" Value="{Binding Width}" />
                 </Style>
                 <Style Selector="TextBox.Read">
                     <Setter Property="MinWidth" Value="0" />
