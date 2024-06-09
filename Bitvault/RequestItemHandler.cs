@@ -5,7 +5,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class RequestItemHandler(IDbContextFactory<LockerContext> dbContextFactory) : 
+public class RequestItemHandler(IDbContextFactory<WalletContext> dbContextFactory) : 
     IHandler<RequestEventArgs<Item<Guid>>, (Guid, string, string?, string, ItemConfiguration?)>
 {
     public async Task<(Guid, string, string?, string, ItemConfiguration?)> Handle(RequestEventArgs<Item<Guid>> args, 
@@ -15,7 +15,7 @@ public class RequestItemHandler(IDbContextFactory<LockerContext> dbContextFactor
         {
             Guid id = item.Value;
 
-            using LockerContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+            using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
             var result = await context.Set<ItemEntry>()
                 .Where(x => x.Id == id)
                 .Select(x => new

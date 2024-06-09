@@ -19,7 +19,7 @@
             <Interaction.Behaviors>
                 <AttachedBehaviour>
                     <NavigateRegionAction Name="Main">
-                        <NavigateAction Region="Main" Route="Locker" />
+                        <NavigateAction Region="Main" Route="Wallet" />
                     </NavigateRegionAction>
                 </AttachedBehaviour>
             </Interaction.Behaviors>

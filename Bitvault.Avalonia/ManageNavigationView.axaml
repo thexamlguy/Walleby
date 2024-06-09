@@ -2,7 +2,7 @@
     x:Class="Bitvault.Avalonia.ManageNavigationView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Content="Manage Lockers">
+    Content="Manage Wallets">
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Tapped">
             <NavigateAction Region="Main" Route="Manage" />

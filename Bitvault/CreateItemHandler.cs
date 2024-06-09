@@ -7,7 +7,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class CreateItemHandler(IDbContextFactory<LockerContext> dbContextFactory) :
+public class CreateItemHandler(IDbContextFactory<WalletContext> dbContextFactory) :
     IHandler<CreateEventArgs<(Guid, string, string, ItemConfiguration)>, bool>
 {
     public async Task<bool> Handle(CreateEventArgs<(Guid, string, string, ItemConfiguration)> args,
@@ -32,7 +32,7 @@ public class CreateItemHandler(IDbContextFactory<LockerContext> dbContextFactory
                     Type = 0,
                 });
 
-                using LockerContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+                using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
                 EntityEntry<ItemEntry>? result = await context.AddAsync(itemEntry, cancellationToken);
                 await context.SaveChangesAsync(cancellationToken);
 

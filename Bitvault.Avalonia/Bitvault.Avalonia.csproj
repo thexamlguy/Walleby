@@ -58,11 +58,11 @@
 	  <Compile Update="ConfirmItemActionView.axaml.cs">
 	    <DependentUpon>ConfirmItemActionView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="CreateLockerNavigationView.axaml.cs">
-	    <DependentUpon>CreateLockerNavigationView.axaml</DependentUpon>
+	  <Compile Update="CreateWalletNavigationView.axaml.cs">
+	    <DependentUpon>CreateWalletNavigationView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="CreateLockerView.axaml.cs">
-	    <DependentUpon>CreateLockerView.axaml</DependentUpon>
+	  <Compile Update="CreateWalletView.axaml.cs">
+	    <DependentUpon>CreateWalletView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="DismissItemActionView.axaml.cs">
 	    <DependentUpon>DismissItemActionView.axaml</DependentUpon>
@@ -85,14 +85,14 @@
 	  <Compile Update="MaskedTextEntryView.axaml.cs">
 	    <DependentUpon>MaskedTextEntryView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="OpenLockerView.axaml.cs">
-	    <DependentUpon>OpenLockerView.axaml</DependentUpon>
+	  <Compile Update="OpenWalletView.axaml.cs">
+	    <DependentUpon>OpenWalletView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="ManageNavigationView.axaml.cs">
 	    <DependentUpon>ManageNavigationView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="LockerHeaderView.axaml.cs">
-	    <DependentUpon>LockerHeaderView.axaml</DependentUpon>
+	  <Compile Update="WalletHeaderView.axaml.cs">
+	    <DependentUpon>WalletHeaderView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="ItemNavigationView.axaml.cs">
 	    <DependentUpon>ItemNavigationView.axaml</DependentUpon>
@@ -100,14 +100,14 @@
 	  <Compile Update="ItemView.axaml.cs">
 	    <DependentUpon>ItemView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="LockerNavigationView.axaml.cs">
-	    <DependentUpon>LockerNavigationView.axaml</DependentUpon>
+	  <Compile Update="WalletNavigationView.axaml.cs">
+	    <DependentUpon>WalletNavigationView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="LockerView.axaml.cs">
-	    <DependentUpon>LockerView.axaml</DependentUpon>
+	  <Compile Update="WalletView.axaml.cs">
+	    <DependentUpon>WalletView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="SearchLockerActionView.axaml.cs">
-	    <DependentUpon>SearchLockerActionView.axaml</DependentUpon>
+	  <Compile Update="SearchWalletActionView.axaml.cs">
+	    <DependentUpon>SearchWalletActionView.axaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 </Project>

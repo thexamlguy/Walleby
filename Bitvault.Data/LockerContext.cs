@@ -2,7 +2,7 @@
 
 namespace Bitvault.Data;
 
-public class LockerContext(DbContextOptions<LockerContext> options) :
+public class WalletContext(DbContextOptions<WalletContext> options) :
     DbContext(options)
 {
     public DbSet<BlobEntry> Blobs { get; set; }

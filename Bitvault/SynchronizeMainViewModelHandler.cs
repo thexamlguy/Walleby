@@ -4,22 +4,22 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class SynchronizeMainViewModelHandler(IPublisher publisher,
-    ILockerHostCollection lockers) :
+    IWalletHostCollection Wallets) :
     INotificationHandler<SynchronizeEventArgs<IMainNavigationViewModel>>
 {
     public Task Handle(SynchronizeEventArgs<IMainNavigationViewModel> args)
     {
         bool selected = true;
-        foreach (IComponentHost locker in lockers.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<LockerConfiguration>>()
-            is IConfigurationDescriptor<LockerConfiguration> descriptor ? descriptor.Name : null))
+        foreach (IComponentHost Wallet in Wallets.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>()
+            is IConfigurationDescriptor<WalletConfiguration> descriptor ? descriptor.Name : null))
         {
-            if (locker.Services.GetRequiredService<IConfigurationDescriptor<LockerConfiguration>>() 
-                is IConfigurationDescriptor<LockerConfiguration> descriptor)
+            if (Wallet.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() 
+                is IConfigurationDescriptor<WalletConfiguration> descriptor)
             {
-                if (locker.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
+                if (Wallet.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
                 {
-                    if (factory.Create<LockerNavigationViewModel>(descriptor.Name, selected) 
-                        is LockerNavigationViewModel viewModel)
+                    if (factory.Create<WalletNavigationViewModel>(descriptor.Name, selected) 
+                        is WalletNavigationViewModel viewModel)
                     {
                         publisher.Publish(Create.As<IMainNavigationViewModel>(viewModel),
                             nameof(MainViewModel));

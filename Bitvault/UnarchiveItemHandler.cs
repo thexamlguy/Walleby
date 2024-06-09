@@ -6,7 +6,7 @@ using Toolkit.Foundation;
 namespace Bitvault;
 
 public class UnarchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decoratorService,
-    IDbContextFactory<LockerContext> dbContextFactory) :
+    IDbContextFactory<WalletContext> dbContextFactory) :
     INotificationHandler<UnarchiveEventArgs<Item>>
 {
     public async Task Handle(UnarchiveEventArgs<Item> args)
@@ -17,7 +17,7 @@ public class UnarchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decora
             {
                 (Guid id, string name) = item.Value;
 
-                using LockerContext context = await dbContextFactory.CreateDbContextAsync();
+                using WalletContext context = await dbContextFactory.CreateDbContextAsync();
                 if (await context.FindAsync<ItemEntry>(id) is ItemEntry result)
                 {
                     result.State = 0;

@@ -7,19 +7,19 @@ public class SynchronizeItemViewModelHandler(IMediator mediator,
     IServiceProvider serviceProvider,
     ICache<Item<(Guid, string)>> cache,
     IPublisher publisher) :
-    INotificationHandler<SynchronizeEventArgs<ItemNavigationViewModel, LockerViewModelConfiguration>>
+    INotificationHandler<SynchronizeEventArgs<ItemNavigationViewModel, WalletViewModelConfiguration>>
 {
     public async Task Handle(SynchronizeEventArgs<ItemNavigationViewModel,
-        LockerViewModelConfiguration> args)
+        WalletViewModelConfiguration> args)
     {
-        if (args.Value is LockerViewModelConfiguration configuration)
+        if (args.Value is WalletViewModelConfiguration configuration)
         {
             cache.Clear();
             bool selected = true;
 
             IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>? results = 
-                await mediator.Handle<QueryEventArgs<Locker<(string?, string?)>>,
-                    IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>>(Query.As(new Locker<(string?, string?)>((configuration.Filter, configuration.Query))));
+                await mediator.Handle<QueryEventArgs<Wallet<(string?, string?)>>,
+                    IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>>(Query.As(new Wallet<(string?, string?)>((configuration.Filter, configuration.Query))));
 
             if (results is not null)
             {

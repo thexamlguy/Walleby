@@ -16,7 +16,7 @@ public partial class ItemCollectionViewModel :
     [ObservableProperty]
     public string? named;
 
-    private LockerViewModelConfiguration configuration;
+    private WalletViewModelConfiguration configuration;
 
     public ItemCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
@@ -26,7 +26,7 @@ public partial class ItemCollectionViewModel :
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
-        LockerViewModelConfiguration configuration,
+        WalletViewModelConfiguration configuration,
         string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
@@ -61,15 +61,15 @@ public partial class ItemCollectionViewModel :
 
     public override Task OnActivated()
     {
-        Publisher.Publish(Notify.As(Factory.Create<LockerCommandHeaderCollection>(new List<IDisposable>
+        Publisher.Publish(Notify.As(Factory.Create<WalletCommandHeaderCollection>(new List<IDisposable>
         {
             Factory.Create<CreateItemActionViewModel>(),
-            Factory.Create<SearchLockerActionViewModel>(),
+            Factory.Create<SearchWalletActionViewModel>(),
         })));
 
         return base.OnActivated();
     }
 
     protected override SynchronizeExpression BuildAggregateExpression() =>
-        new(Synchronize.As<ItemNavigationViewModel, LockerViewModelConfiguration>(configuration));
+        new(Synchronize.As<ItemNavigationViewModel, WalletViewModelConfiguration>(configuration));
 }

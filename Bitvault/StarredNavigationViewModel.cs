@@ -8,4 +8,4 @@ public partial class StarredNavigationViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    string name) : FilterLockerNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, name);
+    string name) : FilterWalletNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, name);

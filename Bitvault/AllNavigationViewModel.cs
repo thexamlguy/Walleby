@@ -8,4 +8,4 @@ public partial class AllNavigationViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    string filter) : FilterLockerNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, filter);
+    string filter) : FilterWalletNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, filter);

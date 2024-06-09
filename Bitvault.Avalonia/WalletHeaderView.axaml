@@ -1,0 +1,19 @@
+<UserControl
+    x:Class="Bitvault.Avalonia.WalletHeaderView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:WalletHeaderViewModel">
+    <ItemsControl ItemTemplate="{ReflectionBinding Template}" ItemsSource="{Binding}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <Grid ColumnDefinitions="Auto,6,*" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.Styles>
+            <Style Selector="ContentPresenter">
+                <Setter Property="Grid.Column" Value="{ReflectionBinding Index}" />
+            </Style>
+        </ItemsControl.Styles>
+    </ItemsControl>
+</UserControl>

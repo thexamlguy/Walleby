@@ -1,0 +1,16 @@
+<SettingsExpander
+    x:Class="Bitvault.Avalonia.CreateWalletNavigationView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Description="Keep organized by separating your things into vaults."
+    Header="Create a new vault">
+    <SettingsExpander.Footer>
+        <Button MinWidth="132" Content="Create vault">
+            <Interaction.Behaviors>
+                <EventTriggerBehavior EventName="Click">
+                    <NavigateAction Region="self" Route="CreateWallet" />
+                </EventTriggerBehavior>
+            </Interaction.Behaviors>
+        </Button>
+    </SettingsExpander.Footer>
+</SettingsExpander>

@@ -18,7 +18,7 @@ public partial class ItemCategoryCollectionViewModel(IServiceProvider provider,
 
     public override Task OnActivated()
     {
-        Publisher.Publish(Notify.As(Factory.Create<LockerCommandHeaderCollection>(new List<IDisposable>
+        Publisher.Publish(Notify.As(Factory.Create<WalletCommandHeaderCollection>(new List<IDisposable>
         {
             Factory.Create<BackActionViewModel>(),
         })));

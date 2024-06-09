@@ -1,0 +1,32 @@
+<UserControl
+    x:Class="Bitvault.Avalonia.OpenWalletView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Bitvault"
+    x:DataType="vm:OpenWalletViewModel">
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Spacing="12">
+        <PersonPicture
+            Width="144"
+            Height="144"
+            Margin="0,-144,0,0"
+            DisplayName="{Binding Name}" />
+        <TextBlock
+            Text="{Binding Name}"
+            TextAlignment="Center"
+            Theme="{DynamicResource SubtitleTextBlockStyle}" />
+        <TextBox
+            Width="360"
+            Classes="revealPasswordButton"
+            PasswordChar="&#x25CF;"
+            Text="{Binding Password}">
+            <Interaction.Behaviors>
+                <KeyBindingTriggerBehaviour Gesture="Enter">
+                    <InvokeCommandAction Command="{Binding InvokeCommand}" />
+                </KeyBindingTriggerBehaviour>
+            </Interaction.Behaviors>
+        </TextBox>
+    </StackPanel>
+</UserControl>

@@ -26,7 +26,7 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         IHost? host = DefaultHostBuilder.Create()
-            .AddConfiguration<LockerConfiguration>("Locker:*")
+            .AddConfiguration<WalletConfiguration>("Wallet:*")
             .AddConfiguration<ItemConfiguration>("Item:*")
             .AddConfiguration("Item:Bank Account", ItemConfiguration.BankAccount)
             .AddConfiguration("Item:Credit Card", ItemConfiguration.CreditCard)
@@ -58,9 +58,9 @@ public partial class App : Application
                     services.AddTemplate<MainWindowViewModel, MainWindow>("MainWindow");
                 }
 
-                services.AddHandler<LockerActivatedHandler>();
+                services.AddHandler<WalletActivatedHandler>();
 
-                services.AddTransient<ILockerComponent>(provider => Component.Create<LockerComponent>(provider, args =>
+                services.AddTransient<IWalletComponent>(provider => Component.Create<WalletComponent>(provider, args =>
                 {
                     args.AddServices(services =>
                     {
@@ -80,7 +80,7 @@ public partial class App : Application
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
 
                         services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
-                        services.AddTransient<ILockerStorageFactory, LockerStorageFactory>();
+                        services.AddTransient<IWalletStorageFactory, WalletStorageFactory>();
 
                         services.AddTransient<IItemConfigurationCollection, ItemConfigurationCollection>(provider =>
                         {
@@ -92,44 +92,44 @@ public partial class App : Application
                         });
 
                         services.TryAddSingleton<IDecoratorService<SecurityKey>, DecoratorService<SecurityKey>>();
-                        services.TryAddSingleton<IDecoratorService<LockerConnection>, DecoratorService<LockerConnection>>();
+                        services.TryAddSingleton<IDecoratorService<WalletConnection>, DecoratorService<WalletConnection>>();
 
-                        services.AddDbContextFactory<LockerContext>((provider, args) =>
+                        services.AddDbContextFactory<WalletContext>((provider, args) =>
                         {
-                            if (provider.GetRequiredService<IDecoratorService<LockerConnection>>()
-                                is IDecoratorService<LockerConnection> connection)
+                            if (provider.GetRequiredService<IDecoratorService<WalletConnection>>()
+                                is IDecoratorService<WalletConnection> connection)
                             {
                                 args.UseSqlite($"{connection.Service}");
                             }
                         });
 
-                        services.AddHandler<QueryLockerHandler>();
+                        services.AddHandler<QueryWalletHandler>();
                         services.AddHandler<RequestItemHandler>();
                         services.AddHandler<CreateItemHandler>();
                         services.AddHandler<UpdateItemHander>();
                         services.AddHandler<UpdateItemStateHandler>();
 
-                        services.AddHandler<OpenLockerHandler>();
+                        services.AddHandler<OpenWalletHandler>();
 
-                        services.AddTemplate<LockerNavigationViewModel, LockerNavigationView>();
+                        services.AddTemplate<WalletNavigationViewModel, WalletNavigationView>();
                         services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
                         services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();
                         services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
                         services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
 
-                        services.AddTemplate<OpenLockerViewModel, OpenLockerView>("OpenLocker");
+                        services.AddTemplate<OpenWalletViewModel, OpenWalletView>("OpenWallet");
 
-                        services.AddScoped<LockerViewModelConfiguration>();
+                        services.AddScoped<WalletViewModelConfiguration>();
 
-                        services.AddTemplate<LockerViewModel, LockerView>("Locker");
+                        services.AddTemplate<WalletViewModel, WalletView>("Wallet");
                         services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ContentItemCollection");
 
                         services.AddHandler<SynchronizeItemViewModelHandler>();
 
-                        services.AddTemplate<LockerHeaderViewModel, LockerHeaderView>("LockerHeader");
+                        services.AddTemplate<WalletHeaderViewModel, WalletHeaderView>("WalletHeader");
                         services.AddTemplate<BackActionViewModel, BackActionView>();
                         services.AddTemplate<CreateItemActionViewModel, CreateItemActionView>();
-                        services.AddTemplate<SearchLockerActionViewModel, SearchLockerActionView>();
+                        services.AddTemplate<SearchWalletActionViewModel, SearchWalletActionView>();
 
                         services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
@@ -191,11 +191,11 @@ public partial class App : Application
                     });
                 })!);
 
-                services.AddTransient<ILockerFactory, LockerFactory>();
-                services.AddHandler<CreateLockerHandler>();
+                services.AddTransient<IWalletFactory, WalletFactory>();
+                services.AddHandler<CreateWalletHandler>();
 
-                services.AddSingleton<ILockerHostCollection, LockerHostCollection>();
-                services.AddInitializer<LockerInitializer>();
+                services.AddSingleton<IWalletHostCollection, WalletHostCollection>();
+                services.AddInitializer<WalletInitializer>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
                 services.AddHandler<SynchronizeMainViewModelHandler>();
@@ -205,8 +205,8 @@ public partial class App : Application
                 services.AddTemplate<ManageNavigationViewModel, ManageNavigationView>();
                 services.AddTemplate<ManageViewModel, ManageView>("Manage");
 
-                services.AddTemplate<CreateLockerNavigationViewModel, CreateLockerNavigationView>();
-                services.AddTemplate<CreateLockerViewModel, CreateLockerView>("CreateLocker");
+                services.AddTemplate<CreateWalletNavigationViewModel, CreateWalletNavigationView>();
+                services.AddTemplate<CreateWalletViewModel, CreateWalletView>("CreateWallet");
             })
         .Build();
 

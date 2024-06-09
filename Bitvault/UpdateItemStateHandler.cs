@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 
 namespace Bitvault;
 
-public class UpdateItemStateHandler(IDbContextFactory<LockerContext> dbContextFactory) : 
+public class UpdateItemStateHandler(IDbContextFactory<WalletContext> dbContextFactory) : 
     IHandler<UpdateEventArgs<(Guid, int)>, bool>
 {
     public async Task<bool> Handle(UpdateEventArgs<(Guid, int)> args, 
@@ -14,7 +14,7 @@ public class UpdateItemStateHandler(IDbContextFactory<LockerContext> dbContextFa
         {
             await Task.Run(async () =>
             {
-                using LockerContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+                using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
                 if (await context.FindAsync<ItemEntry>(id) is ItemEntry result)
                 {
                     result.State = state;
