@@ -3,7 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Description="Keep organized by separating your things into Wallets."
-    Header="Create a new vault">
+    Header="Create a new Wallet">
     <SettingsExpander.Footer>
         <Button MinWidth="132" Content="Create Wallet">
             <Interaction.Behaviors>

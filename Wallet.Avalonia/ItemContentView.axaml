@@ -4,5 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:DataType="vm:ItemContentViewModel">
-    <ItemsControl ItemTemplate="{ReflectionBinding Template}" ItemsSource="{Binding}" />
+    <ItemsControl
+        Margin="0,0,0,24"
+        ItemTemplate="{ReflectionBinding Template}"
+        ItemsSource="{Binding}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical" Spacing="24" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+    </ItemsControl>
 </UserControl>
