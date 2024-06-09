@@ -37,7 +37,7 @@ public partial class App : Application
             .AddConfiguration("Item:Note", ItemConfiguration.Note)
             .AddConfiguration("Item:Password", ItemConfiguration.Password)
             .AddConfiguration("Item:Passport", ItemConfiguration.Passport)
-            .AddConfiguration("Item:Api Credentials", ItemConfiguration.ApiCredentials)
+            .AddConfiguration("Item:API Credentials", ItemConfiguration.ApiCredentials)
             .AddConfiguration("Item:Software License", ItemConfiguration.SoftwareLicense)
             .AddConfiguration("Item:Crypto", ItemConfiguration.CryptoWallet)
             .AddConfiguration("Item:Database", ItemConfiguration.Database)
@@ -84,8 +84,8 @@ public partial class App : Application
 
                         services.AddTransient<IItemConfigurationCollection, ItemConfigurationCollection>(provider =>
                         {
-                            IEnumerable<IConfigurationDescriptor<ItemConfiguration>> items = 
-                                provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>() ?? 
+                            IEnumerable<IConfigurationDescriptor<ItemConfiguration>> items =
+                                provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>().OrderBy(x => x.Name) ??
                                 Enumerable.Empty<IConfigurationDescriptor<ItemConfiguration>>();
 
                             return new ItemConfigurationCollection(items.ToDictionary(x => x.Name, x => (Func<ItemConfiguration>)(() => x.Value)));
@@ -115,6 +115,7 @@ public partial class App : Application
                         services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
                         services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();
                         services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
+                        services.AddTemplate<CategoryNavigationViewModel, CategoryNavigationView>();
                         services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();
 
                         services.AddTemplate<OpenWalletViewModel, OpenWalletView>("OpenWallet");
@@ -133,7 +134,9 @@ public partial class App : Application
 
                         services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
-                       
+
+                        services.AddHandler<SynchronizeCategoriesNavigationViewModelHandler>();
+
                         services.AddHandler<SynchronizeItemCategoryViewModelHandler>();
 
                         services.AddScoped<IDecoratorService<Item<(Guid, string)>>, DecoratorService<Item<(Guid, string)>>>();

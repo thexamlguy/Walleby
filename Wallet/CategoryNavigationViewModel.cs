@@ -2,7 +2,7 @@
 
 namespace Wallet;
 
-public partial class AllNavigationViewModel(IServiceProvider provider,
+public partial class CategoryNavigationViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,

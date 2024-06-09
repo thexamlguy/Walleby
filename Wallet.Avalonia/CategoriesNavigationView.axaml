@@ -2,4 +2,7 @@
     x:Class="Wallet.Avalonia.CategoriesNavigationView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Content="Categories" />
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:CategoriesNavigationViewModel"
+    Content="Categories"
+    MenuItemsSource="{Binding}" />

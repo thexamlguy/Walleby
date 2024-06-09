@@ -11,6 +11,7 @@ public partial class WalletViewModel :
 
     [ObservableProperty]
     private string filter;
+
     public WalletViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
