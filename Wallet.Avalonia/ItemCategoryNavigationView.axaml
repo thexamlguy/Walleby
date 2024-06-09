@@ -1,0 +1,22 @@
+<ListBoxItem
+    x:Class="Wallet.Avalonia.ItemCategoryNavigationView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:ItemCategoryNavigationViewModel"
+    ListBoxExtension.IsItemInvokedEnabled="True">
+    <Interaction.Behaviors>
+        <AttachedEventTriggerBehaviour RoutedEvent="{x:Static ListBoxExtension.ItemInvokedEvent}">
+            <InvokeCommandAction Command="{Binding InvokeCommand}" />
+        </AttachedEventTriggerBehaviour>
+    </Interaction.Behaviors>
+    <Grid Background="Transparent" ColumnDefinitions="Auto,*">
+        <PersonPicture
+            Grid.Column="0"
+            Height="34"
+            DisplayName="{Binding Name}" />
+        <StackPanel Grid.Column="1" Margin="12,12,6,12">
+            <TextBlock Text="{Binding Name}" />
+        </StackPanel>
+    </Grid>
+</ListBoxItem>

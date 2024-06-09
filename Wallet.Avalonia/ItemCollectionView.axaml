@@ -1,0 +1,36 @@
+<UserControl
+    x:Class="Wallet.Avalonia.ItemCollectionView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:ItemCollectionViewModel">
+    <Interaction.Behaviors>
+        <AttachedBehaviour>
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition
+                            LeftOperand="{Binding Count}"
+                            Operator="LessThanOrEqual"
+                            RightOperand="0" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateAction Region="{Binding Named, StringFormat='{}{0}:Content'}" Route="EmptyItemCollection" />
+            </ConditionAction>
+        </AttachedBehaviour>
+        <DataTriggerBehavior
+            Binding="{Binding Count}"
+            ComparisonCondition="LessThanOrEqual"
+            Value="0">
+            <NavigateAction Region="{Binding Named, StringFormat='{}{0}:Content'}" Route="EmptyItemCollection" />
+        </DataTriggerBehavior>
+    </Interaction.Behaviors>
+    <ListBox
+        x:Name="foo"
+        Margin="2,-1,0,0"
+        AutoScrollToSelectedItem="True"
+        ItemTemplate="{ReflectionBinding Template}"
+        ItemsSource="{Binding}"
+        SelectedItem="{Binding SelectedItem}"
+        SelectionMode="Single" />
+</UserControl>

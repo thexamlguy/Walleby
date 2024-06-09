@@ -1,0 +1,19 @@
+<windowing:AppWindow
+    x:Class="Wallet.Avalonia.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    xmlns:windowing="using:FluentAvalonia.UI.Windowing"
+    x:DataType="vm:MainWindowViewModel"
+    Background="Transparent"
+    TransparencyLevelHint="Mica">
+    <ContentControl>
+        <Interaction.Behaviors>
+            <AttachedBehaviour>
+                <NavigateRegionAction Name="Window">
+                    <NavigateAction Region="Window" Route="Main" />
+                </NavigateRegionAction>
+            </AttachedBehaviour>
+        </Interaction.Behaviors>
+    </ContentControl>
+</windowing:AppWindow>

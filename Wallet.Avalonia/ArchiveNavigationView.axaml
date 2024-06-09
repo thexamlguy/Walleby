@@ -1,0 +1,35 @@
+<NavigationViewItem
+    x:Class="Wallet.Avalonia.ArchiveNavigationView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:ArchiveNavigationViewModel"
+    Content="Archive"
+    IsSelected="{Binding Selected, Mode=TwoWay}">
+    <Interaction.Behaviors>
+        <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateAction Region="Main" Route="Wallet">
+                    <Parameter Key="Filter" Value="{Binding Filter}" />
+                </NavigateAction>
+            </ConditionAction>
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="True" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateAction Region="Left" Route="ContentItemCollection">
+                    <Parameter Key="Filter" Value="{Binding Filter}" />
+                    <Parameter Key="Transition" Value="FromRight" />
+                    <Parameter Key="NavigationStackEnabled" Value="{x:True}" />
+                </NavigateAction>
+            </ConditionAction>
+        </DataTriggerBehavior>
+    </Interaction.Behaviors>
+</NavigationViewItem>

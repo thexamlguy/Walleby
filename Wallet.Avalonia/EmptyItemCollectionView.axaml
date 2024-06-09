@@ -1,0 +1,29 @@
+<UserControl
+    x:Class="Wallet.Avalonia.EmptyItemCollectionView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:EmptyItemCollectionViewModel">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock
+            Text="Nothing to see here"
+            TextAlignment="Center"
+            Theme="{DynamicResource BodyStrongTextBlockStyle}" />
+        <HyperlinkButton Content="Let's start securing your items">
+            <Interaction.Behaviors>
+                <EventTriggerBehavior EventName="Click">
+                    <NavigateAction Region="Left" Route="ItemCategoryCollection">
+                        <Parameter Key="Transition" Value="FromRight" />
+                        <Parameter Key="NavigationStackEnabled" Value="{x:True}" />
+                    </NavigateAction>
+                    <NavigateAction
+                        Region="{Binding Named, StringFormat='{}{0}:Content'}"
+                        Route="Item"
+                        Scope="self">
+                        <Parameter Key="State" Value="{x:Static vm:ItemState.Write}" />
+                    </NavigateAction>
+                </EventTriggerBehavior>
+            </Interaction.Behaviors>
+        </HyperlinkButton>
+    </StackPanel>
+</UserControl>

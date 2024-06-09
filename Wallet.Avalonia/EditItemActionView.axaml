@@ -1,0 +1,22 @@
+<UserControl
+    x:Class="Wallet.Avalonia.EditItemActionView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:EditItemActionViewModel">
+    <Button
+        Width="{StaticResource ButtonWidth}"
+        Height="{StaticResource ButtonHeight}"
+        VerticalAlignment="Center"
+        Command="{Binding InvokeCommand}"
+        Foreground="{DynamicResource IconForegroundBrush}"
+        ToolTip.Tip="Edit">
+        <TextBlock
+            Margin="0,3,0,0"
+            VerticalAlignment="Center"
+            FontFamily="{DynamicResource FluentThemeFontFamily}"
+            FontSize="16"
+            Foreground="{DynamicResource IconForegroundBrush}"
+            Text="&#xE759;" />
+    </Button>
+</UserControl>

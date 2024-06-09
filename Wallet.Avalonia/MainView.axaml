@@ -1,0 +1,29 @@
+<UserControl
+    x:Class="Wallet.Avalonia.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:MainViewModel">
+    <NavigationView
+        FooterMenuItemsSource="{Binding Footer}"
+        MenuItemTemplate="{Binding Template}"
+        MenuItemsSource="{Binding}"
+		IsSettingsVisible="False"
+        SelectedItem="{Binding SelectedItem}"
+        SelectionFollowsFocus="True">
+        <NavigationView.Resources>
+            <CornerRadius x:Key="NavigationViewContentGridCornerRadius">0</CornerRadius>
+            <Thickness x:Key="NavigationViewContentGridBorderThickness">1,0,0,0</Thickness>
+        </NavigationView.Resources>
+        <Frame>
+            <Interaction.Behaviors>
+                <AttachedBehaviour>
+                    <NavigateRegionAction Name="Main">
+                        <NavigateAction Region="Main" Route="Wallet" />
+                    </NavigateRegionAction>
+                </AttachedBehaviour>
+            </Interaction.Behaviors>
+        </Frame>
+    </NavigationView>
+</UserControl>
+
