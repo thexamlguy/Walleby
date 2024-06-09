@@ -159,6 +159,7 @@ public partial class App : Application
                         services.AddTemplate<PasswordEntryViewModel, PasswordEntryView>();
                         services.AddTemplate<MaskedTextEntryViewModel, MaskedTextEntryView>();
                         services.AddTemplate<DropdownEntryViewModel, DropdownEntryView>();
+                        services.AddTemplate<DateEntryViewModel, DateEntryView>();
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
@@ -183,7 +184,8 @@ public partial class App : Application
                         services.AddHandler<PasswordEntryViewModelHandler>(nameof(PasswordEntryConfiguration));
                         services.AddHandler<MaskedTextEntryViewModelHandler>(nameof(MaskedTextEntryConfiguration));
                         services.AddHandler<DropdownEntryViewModelHandler>(nameof(DropdownEntryConfiguration));
-
+                        services.AddHandler<DateEntryViewModelHandler>(nameof(DateEntryConfiguration));
+                        
                         services.AddHandler<ItemCreatedHandler>(ServiceLifetime.Singleton);
                         services.AddHandler<ItemModifiedHandler>(ServiceLifetime.Singleton);
                     });
