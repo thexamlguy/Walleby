@@ -47,7 +47,7 @@ public partial class App : Application
             .AddConfiguration("Item:Server", ItemConfiguration.Server)
             .AddConfiguration("Item:Education Record", ItemConfiguration.EducationRecord)
             .AddConfiguration("Item:Travel Documents", ItemConfiguration.TravelDocuments)
-
+            .AddConfiguration("Item:Concert Ticket", ItemConfiguration.ConcertTicket)            
             .ConfigureServices((context, services) =>
             {
                 services.AddAvalonia();

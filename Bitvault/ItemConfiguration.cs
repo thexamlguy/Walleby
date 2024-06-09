@@ -187,6 +187,50 @@ public record ItemConfiguration
         }
     };
 
+    public static ItemConfiguration ConcertTicket => new()
+    {
+        Sections = new List<ItemSectionConfiguration>
+        {
+            new ItemSectionConfiguration
+            {
+                Entries = new List<ItemEntryConfiguration>
+                {
+                    new TextEntryConfiguration
+                    {
+                        Label = "Artist"
+                    },
+                    new DateEntryConfiguration
+                    {
+                        Label = "Date"
+                    },
+                    new TextEntryConfiguration
+                    {
+                        Label = "Time"
+                    },
+                    new TextEntryConfiguration
+                    {
+                        Label = "Venue"
+                    },
+                    new TextEntryConfiguration
+                    {
+                        Label = "Seat"
+                    },
+                    new NumberEntryConfiguration
+                    {
+                        Label = "Price"
+                    },
+                    new AttachmentEntryConfiguration
+                    {
+                        Label = "Ticket"
+                    },
+                    new MultilineTextEntryConfiguration
+                    {
+                        Label = "Notes"
+                    }
+                }
+            }
+        }
+    };
 
     public static ItemConfiguration DrivingLicence => new()
     {
