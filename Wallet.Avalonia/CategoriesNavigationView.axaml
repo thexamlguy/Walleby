@@ -5,4 +5,5 @@
     xmlns:vm="using:Wallet"
     x:DataType="vm:CategoriesNavigationViewModel"
     Content="Categories"
-    MenuItemsSource="{Binding}" />
+    MenuItemsSource="{Binding}"
+    SelectsOnInvoked="False" />

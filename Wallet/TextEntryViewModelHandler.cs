@@ -8,7 +8,7 @@ public class TextEntryViewModelHandler(IServiceFactory serviceFactory) :
     public Task<IItemEntryViewModel?> Handle(CreateEventArgs<TextEntryConfiguration> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is TextEntryConfiguration configuration)
+        if (args.Sender is TextEntryConfiguration configuration)
         {
             string? label = configuration.Label;
             object? value = configuration.Value ?? "";

@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Toolkit.Foundation;
 
 namespace Wallet;
@@ -35,10 +34,6 @@ public partial class FilterNavigationViewModel :
 
     public Task Handle(ActivatedEventArgs<Wallet> args) =>
         Task.FromResult(Activated = true);
-
-    [RelayCommand]
-    public void Invoke() => Publisher.Publish(Notify.As(new Filter(Filter)),
-        nameof(ItemCollectionViewModel));
 }
 
 public partial class FilterNavigationViewModel<TWalletNavigation> :
@@ -46,7 +41,8 @@ public partial class FilterNavigationViewModel<TWalletNavigation> :
     IWalletNavigationViewModel,
     INotificationHandler<ActivatedEventArgs<Wallet>>,
     INotificationHandler<DeactivatedEventArgs<Wallet>>
-    where TWalletNavigation : IWalletNavigationViewModel
+    where TWalletNavigation :
+    IWalletNavigationViewModel
 {
     [ObservableProperty]
     private bool activated;
@@ -73,8 +69,4 @@ public partial class FilterNavigationViewModel<TWalletNavigation> :
 
     public Task Handle(ActivatedEventArgs<Wallet> args) =>
         Task.FromResult(Activated = true);
-
-    [RelayCommand]
-    public void Invoke() => Publisher.Publish(Notify.As(new Filter(Filter)),
-        nameof(ItemCollectionViewModel));
 }

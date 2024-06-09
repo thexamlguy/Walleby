@@ -8,7 +8,7 @@ public class DropdownEntryViewModelHandler(IServiceFactory serviceFactory) :
     public Task<IItemEntryViewModel?> Handle(CreateEventArgs<DropdownEntryConfiguration> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is DropdownEntryConfiguration configuration)
+        if (args.Sender is DropdownEntryConfiguration configuration)
         {
             List<DropdownValueViewModel> values = [];
             foreach (string item in configuration.Values)

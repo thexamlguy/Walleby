@@ -8,7 +8,7 @@ public class DateEntryViewModelHandler(IServiceFactory serviceFactory) :
     public Task<IItemEntryViewModel?> Handle(CreateEventArgs<DateEntryConfiguration> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is DateEntryConfiguration configuration)
+        if (args.Sender is DateEntryConfiguration configuration)
         {
             string? label = configuration.Label;
 

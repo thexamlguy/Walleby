@@ -8,7 +8,7 @@ public class MaskedTextEntryViewModelHandler(IServiceFactory serviceFactory) :
     public Task<IItemEntryViewModel?> Handle(CreateEventArgs<MaskedTextEntryConfiguration> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is MaskedTextEntryConfiguration configuration)
+        if (args.Sender is MaskedTextEntryConfiguration configuration)
         {
             string? label = configuration.Label;
             object? value = configuration.Value ?? "";

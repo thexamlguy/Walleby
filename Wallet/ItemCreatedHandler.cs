@@ -10,7 +10,7 @@ public class ItemCreatedHandler(IServiceProvider serviceProvider,
 {
     public Task Handle(CreatedEventArgs<Item<(Guid, string)>> args)
     {
-        if (args.Value is Item<(Guid, string)> item)
+        if (args.Sender is Item<(Guid, string)> item)
         {
             (Guid id, string name) = item.Value;
 

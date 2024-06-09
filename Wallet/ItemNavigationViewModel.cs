@@ -68,7 +68,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     public Task Handle(NotifyEventArgs<ItemHeader<string>> args)
     {
-        if (args.Value is ItemHeader<string> header)
+        if (args.Sender is ItemHeader<string> header)
         {
             Name = header.Value;
         }

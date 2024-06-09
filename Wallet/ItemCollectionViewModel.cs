@@ -16,7 +16,7 @@ public partial class ItemCollectionViewModel :
     [ObservableProperty]
     public string? named;
 
-    private WalletViewModelConfiguration configuration;
+    private ItemCollectionConfiguration configuration;
 
     public ItemCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
@@ -26,7 +26,7 @@ public partial class ItemCollectionViewModel :
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
-        WalletViewModelConfiguration configuration,
+        ItemCollectionConfiguration configuration,
         string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
@@ -39,7 +39,7 @@ public partial class ItemCollectionViewModel :
 
     public Task Handle(NotifyEventArgs<Filter> args)
     {
-        if (args.Value is Filter filter)
+        if (args.Sender is Filter filter)
         {
             configuration = configuration with { Filter = filter.Value };
             Fetch(true);
@@ -50,7 +50,7 @@ public partial class ItemCollectionViewModel :
 
     public Task Handle(NotifyEventArgs<Search<string>> args)
     {
-        if (args.Value is Search<string> search)
+        if (args.Sender is Search<string> search)
         {
             configuration = configuration with { Query = search.Value };
             Fetch(true);
@@ -71,5 +71,5 @@ public partial class ItemCollectionViewModel :
     }
 
     protected override SynchronizeExpression BuildAggregateExpression() =>
-        new(Synchronize.As<ItemNavigationViewModel, WalletViewModelConfiguration>(configuration));
+        new(Synchronize.As<ItemNavigationViewModel, ItemCollectionConfiguration>(configuration));
 }

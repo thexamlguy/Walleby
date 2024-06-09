@@ -12,7 +12,7 @@ public class CreateWalletHandler(IWalletFactory componentFactory,
     public async Task<bool> Handle(CreateEventArgs<Wallet<(string, string)>> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is Wallet <(string, string)> Wallet)
+        if (args.Sender is Wallet <(string, string)> Wallet)
         {
             if (Wallet.Value is (string name, string password) && 
                 name is { Length: > 0 } &&

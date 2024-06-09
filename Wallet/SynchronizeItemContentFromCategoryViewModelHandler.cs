@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Wallet;
 
 public class SynchronizeItemContentFromCategoryViewModelHandler(IItemConfigurationCollection configurations,
-    IDecoratorService<ItemConfiguration> decoratorItemConfiguration,
+    IDecoratorService<ItemConfiguration> itemConfigurationDecorator,
     IServiceFactory serviceFactory,
     IMediator mediator,
     IPublisher publisher) :
@@ -18,7 +18,7 @@ public class SynchronizeItemContentFromCategoryViewModelHandler(IItemConfigurati
             {
                 if (configurationFactory.Invoke() is ItemConfiguration configuration)
                 {
-                    decoratorItemConfiguration.Set(configuration);
+                    itemConfigurationDecorator.Set(configuration);
                     foreach (ItemSectionConfiguration configurationSection in configuration.Sections)
                     {
                         string id = $"{nameof(ItemSection)}:{Guid.NewGuid()}";

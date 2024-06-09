@@ -24,7 +24,7 @@
                         <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Region="Left" Route="ContentItemCollection">
+                <NavigateAction Region="Left" Route="ItemCollection">
                     <Parameter Key="Filter" Value="{Binding Filter}" />
                     <Parameter Key="Transition" Value="FromRight" />
                     <Parameter Key="NavigationStackEnabled" Value="{x:True}" />

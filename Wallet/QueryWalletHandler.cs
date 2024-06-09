@@ -19,20 +19,29 @@ public class QueryWalletHandler(IDbContextFactory<WalletContext> dbContextFactor
             ExpressionStarter<ItemEntry> predicate =
                 PredicateBuilder.New<ItemEntry>(true);
 
+            if (filter is { Length: <= 0 })
+            {
+                return items;
+            }
+
             if (filter == "All")
             {
                 predicate = predicate.And(x => x.State != 2);
             }
-
-            if (filter == "Starred")
+            else if (filter == "Starred")
             {
                 predicate = predicate.And(x => x.State != 2 && x.State == 1);
             }
-
-            if (filter == "Archive")
+            else if (filter == "Archive")
             {
                 predicate = predicate.And(x => x.State == 2);
             }
+            else
+            {
+                predicate = predicate.And(x => x.State != 2)
+                    .And(x => EF.Functions.Like(x.Category, $"%{filter}%"));
+            }
+
 
             if (text is { Length: > 0 })
             {

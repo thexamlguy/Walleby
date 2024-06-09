@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Wallet;
 
 public partial class ItemViewModel :
-    ObservableCollection,
+    ObservableCollection<IItemViewModel>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>
@@ -16,16 +16,16 @@ public partial class ItemViewModel :
     private bool favourite;
 
     [ObservableProperty]
-    private ItemState state;
-
-    [ObservableProperty]
-    private string named;
+    private bool fromCategory;
 
     [ObservableProperty]
     private string name;
 
     [ObservableProperty]
-    private bool fromCategory;
+    private string named;
+
+    [ObservableProperty]
+    private ItemState state;
 
     public ItemViewModel(IServiceProvider provider,
         IServiceFactory factory,
@@ -35,11 +35,11 @@ public partial class ItemViewModel :
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
-        ItemState state = ItemState.Read,
-        bool fromCategory = false,
         string name = "",
+        bool fromCategory = false,
         bool favourite = false,
-        bool archived = false) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        bool archived = false,
+        ItemState state = ItemState.Read) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Named = $"{named}";
@@ -48,12 +48,18 @@ public partial class ItemViewModel :
         Favourite = favourite;
         Archived = archived;
         Name = name;
-
-        Add<ItemHeaderViewModel>("", name, state);
-        Add<ItemContentViewModel>();
     }
 
     public IContentTemplate Template { get; set; }
+
+    public override void Dispose()
+    {
+        GC.SuppressFinalize(this);
+        Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new
+            List<IDisposable>())));
+
+        base.Dispose();
+    }
 
     public Task Handle(UpdateEventArgs<Item> args)
     {
@@ -65,14 +71,6 @@ public partial class ItemViewModel :
 
         State = ItemState.Write;
         return Task.CompletedTask;
-    }
-
-    public override void Dispose()
-    {
-        Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new
-            List<IDisposable>())));
-
-        base.Dispose();
     }
 
     public Task Handle(CancelEventArgs<Item> args)
@@ -95,7 +93,7 @@ public partial class ItemViewModel :
             Factory.Create<EditItemActionViewModel>(),
             Factory.Create<ArchiveItemActionViewModel>(),
         })));
-        
+
         Publisher.Publish(Confirm.As<Item>(),
             State is ItemState.New ? nameof(ItemState.New) : nameof(ItemState.Write));
 
@@ -135,4 +133,7 @@ public partial class ItemViewModel :
 
         return base.OnActivated();
     }
+
+    protected override SynchronizeExpression BuildAggregateExpression() =>
+        new(Synchronize.As<IItemViewModel, (string, string, ItemState)>(("", Name, State)));
 }

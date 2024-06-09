@@ -16,16 +16,17 @@ public partial class ItemCommandHeaderViewModel(IServiceProvider provider,
 
     public Task Handle(NotifyEventArgs<ItemCommandHeaderCollection> args)
     {
-        Clear();
-
-        if (args.Value is ItemCommandHeaderCollection commandCollection)
+        if (args.Sender is ItemCommandHeaderCollection commandCollection)
         {
-            foreach (IDisposable command in commandCollection)
+            Clear(args =>
             {
-                Add(command);
-            }
+                foreach (IDisposable command in commandCollection)
+                {
+                    args.Add(command);
+                }
+            });
         }
-
+     
         return Task.CompletedTask;
     }
 }

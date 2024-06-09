@@ -11,7 +11,7 @@ public class OpenWalletHandler(IConfigurationDescriptor<WalletConfiguration> des
     public async Task<bool> Handle(ActivateEventArgs<Wallet<string>> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is Wallet<string> Wallet && 
+        if (args.Sender is Wallet<string> Wallet && 
             descriptor.Name is { Length: > 0 } name &&
             Wallet.Value is { Length: > 0 } password)
         {

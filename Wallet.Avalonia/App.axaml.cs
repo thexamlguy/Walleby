@@ -120,12 +120,12 @@ public partial class App : Application
 
                         services.AddTemplate<OpenWalletViewModel, OpenWalletView>("OpenWallet");
 
-                        services.AddScoped<WalletViewModelConfiguration>();
+                        services.AddScoped<ItemCollectionConfiguration>();
 
                         services.AddTemplate<WalletViewModel, WalletView>("Wallet");
-                        services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ContentItemCollection");
+                        services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ItemCollection");
 
-                        services.AddHandler<SynchronizeItemViewModelHandler>();
+                        services.AddHandler<SynchronizeItemCollectionViewModelHandler>();
 
                         services.AddTemplate<WalletHeaderViewModel, WalletHeaderView>("WalletHeader");
                         services.AddTemplate<BackActionViewModel, BackActionView>();
@@ -146,9 +146,12 @@ public partial class App : Application
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddTemplate<EmptyItemCollectionViewModel, EmptyItemCollectionView>("EmptyItemCollection");
 
+                        services.AddScoped<IDecoratorService<ItemHeaderConfiguration>, DecoratorService<ItemHeaderConfiguration>>();
                         services.AddScoped<IDecoratorService<ItemConfiguration>, DecoratorService<ItemConfiguration>>();
 
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
+                        services.AddHandler<CreateItemViewModelHandler>("Item");
+
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
                         services.AddTemplate<ItemContentViewModel, ItemContentView>();
 

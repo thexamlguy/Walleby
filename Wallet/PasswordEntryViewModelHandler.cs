@@ -8,7 +8,7 @@ public class PasswordEntryViewModelHandler(IServiceFactory serviceFactory) :
     public Task<IItemEntryViewModel?> Handle(CreateEventArgs<PasswordEntryConfiguration> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is PasswordEntryConfiguration configuration)
+        if (args.Sender is PasswordEntryConfiguration configuration)
         {
             string? label = configuration.Label;
             object? value = configuration.Value ?? "";

@@ -8,10 +8,11 @@ public partial class ItemHeaderViewModel :
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>,
-    IHandler<ValidationEventArgs<ItemHeader>, bool>,
-    IHandler<ConfirmEventArgs<ItemHeader>, string?>,
-    INotificationHandler<NotifyEventArgs<ItemCategory<string>>>
+    INotificationHandler<NotifyEventArgs<ItemCategory<string>>>,
+    IItemViewModel
 {
+    private readonly ItemHeaderConfiguration configuration;
+
     [ObservableProperty]
     private string? category;
 
@@ -24,20 +25,17 @@ public partial class ItemHeaderViewModel :
         IPublisher publisher,
         ISubscription subscriber,
         IDisposer disposer,
+        ItemHeaderConfiguration configuration,
         ItemState state,
         string key,
         string value) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
     {
+        this.configuration = configuration;
+
         State = state;
         Value = value;
 
         Track(nameof(Value), () => Value, newValue => Value = newValue);
-    }
-
-    public Task<bool> Handle(ValidationEventArgs<ItemHeader> args,
-        CancellationToken cancellationToken)
-    {
-        return Task.FromResult(true);
     }
 
     public Task Handle(UpdateEventArgs<Item> args) =>
@@ -51,6 +49,14 @@ public partial class ItemHeaderViewModel :
         return Task.CompletedTask;
     }
 
+    protected override void OnValueChanged()
+    {
+        if (configuration is not null)
+        {
+            configuration.Name = Value;
+        }
+    }
+
     public Task Handle(ConfirmEventArgs<Item> args)
     {
         Commit();
@@ -61,14 +67,11 @@ public partial class ItemHeaderViewModel :
 
     public Task Handle(NotifyEventArgs<ItemCategory<string>> args)
     {
-        if (args.Value is ItemCategory<string> category)
+        if (args.Sender is ItemCategory<string> category)
         {
             Category = category.Value;
         }
 
         return Task.CompletedTask;
     }
-
-    public Task<string> Handle(ConfirmEventArgs<ItemHeader> args,
-        CancellationToken cancellationToken) => Task.FromResult(Value);
 }

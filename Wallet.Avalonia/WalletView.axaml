@@ -26,7 +26,7 @@
             <Interaction.Behaviors>
                 <AttachedBehaviour>
                     <NavigateRegionAction Name="Left">
-                        <NavigateAction Region="Left" Route="ContentItemCollection">
+                        <NavigateAction Region="Left" Route="ItemCollection">
                             <Parameter Key="Filter" Value="{Binding Filter}" />
                         </NavigateAction>
                     </NavigateRegionAction>

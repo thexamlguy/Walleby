@@ -8,7 +8,7 @@ public class MultilineTextEntryViewModelHandler(IServiceFactory serviceFactory) 
     public Task<IItemEntryViewModel?> Handle(CreateEventArgs<MultilineTextEntryConfiguration> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is MultilineTextEntryConfiguration configuration)
+        if (args.Sender is MultilineTextEntryConfiguration configuration)
         {
             string? label = configuration.Label;
             object? value = configuration.Value ?? "";

@@ -13,7 +13,7 @@ public class CreateItemHandler(IDbContextFactory<WalletContext> dbContextFactory
     public async Task<bool> Handle(CreateEventArgs<(Guid, string, string, ItemConfiguration)> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is (Guid id, string name, string category, ItemConfiguration configuration))
+        if (args.Sender is (Guid id, string name, string category, ItemConfiguration configuration))
         {
             try
             {

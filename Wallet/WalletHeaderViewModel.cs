@@ -18,7 +18,7 @@ public partial class WalletHeaderViewModel(IServiceProvider provider,
     {
         Clear();
 
-        if (args.Value is WalletCommandHeaderCollection commandCollection)
+        if (args.Sender is WalletCommandHeaderCollection commandCollection)
         {
             foreach (IDisposable command in commandCollection)
             {
