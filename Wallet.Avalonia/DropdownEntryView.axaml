@@ -78,7 +78,6 @@
                         </Style>
                     </Style>
                 </TextBox.Styles>
-
                 <Interaction.Behaviors>
                     <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
                         <AddClassAction ClassName="Read" RemoveIfExists="True" />
