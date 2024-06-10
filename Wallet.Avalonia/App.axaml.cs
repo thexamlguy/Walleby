@@ -167,6 +167,7 @@ public partial class App : Application
                         services.AddTemplate<DropdownEntryViewModel, DropdownEntryView>();
                         services.AddTemplate<DateEntryViewModel, DateEntryView>();
                         services.AddTemplate<HyperlinkEntryViewModel, HyperlinkEntryView>();
+                        services.AddTemplate<PinEntryViewModel, PinEntryView>();
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
@@ -195,6 +196,7 @@ public partial class App : Application
                         services.AddHandler<DropdownEntryViewModelHandler>(nameof(DropdownEntryConfiguration));
                         services.AddHandler<DateEntryViewModelHandler>(nameof(DateEntryConfiguration));
                         services.AddHandler<HyperlinkEntryViewModelHandler>(nameof(HyperlinkEntryConfiguration));
+                        services.AddHandler<PinEntryViewModelHandler>(nameof(PinEntryConfiguration));
 
                         services.AddHandler<ItemCreatedHandler>(ServiceLifetime.Singleton);
                         services.AddHandler<ItemModifiedHandler>(ServiceLifetime.Singleton);

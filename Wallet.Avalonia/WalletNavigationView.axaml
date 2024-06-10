@@ -82,7 +82,6 @@
                         <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
-                <NavigateAction Region="Main" Route="Wallet" />
                 <InvokeNavigationViewItemAction />
             </ConditionAction>
         </AttachedEventTriggerBehaviour>

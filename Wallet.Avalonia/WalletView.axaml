@@ -51,10 +51,7 @@
             BorderThickness="1,1,0,0"
             CornerRadius="8 0 0 0">
             <Grid RowDefinitions="Auto, *">
-                <Border
-                    Grid.Row="0"
-                    Height="44"
-                    Padding="4">
+                <Border Grid.Row="0" Padding="4">
                     <ContentControl>
                         <Interaction.Behaviors>
                             <AttachedBehaviour>

@@ -7,4 +7,3 @@ public record PinEntryConfiguration :
 
     public int Maximum { get; set; }
 }
-

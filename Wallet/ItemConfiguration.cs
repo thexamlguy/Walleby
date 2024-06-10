@@ -798,11 +798,12 @@ public record ItemConfiguration
             {
                 Entries = new List<ItemEntryConfiguration>
                 {
-                    new TextEntryConfiguration
-                    {
-                        Label = "Pin"
-                    },
                     new PinEntryConfiguration
+                    {
+                        Label = "Pin",
+                        Maximum = 4
+                    },
+                    new TextEntryConfiguration
                     {
                         Label = "Credit Limit",
                     },

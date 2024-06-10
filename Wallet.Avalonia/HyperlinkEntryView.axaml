@@ -33,7 +33,10 @@
                     </DataTriggerBehavior>
                 </Interaction.Behaviors>
             </TextBox>
-            <HyperlinkButton Command="{Binding InvokeCommand}" Content="{Binding Value}">
+            <HyperlinkButton
+                Padding="0"
+                Command="{Binding InvokeCommand}"
+                Content="{Binding Value}">
                 <HyperlinkButton.Styles>
                     <Style Selector="HyperlinkButton.Write">
                         <Setter Property="IsVisible" Value="False" />

@@ -4,7 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:DataType="vm:ManageViewModel">
-    <ScrollViewer Padding="12" HorizontalAlignment="Stretch">
+    <ScrollViewer
+        Margin="0,44,0,0"
+        Padding="12,0,12,12"
+        HorizontalAlignment="Stretch">
         <ItemsControl
             MaxWidth="768"
             ItemTemplate="{ReflectionBinding Template}"
