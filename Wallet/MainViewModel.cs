@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Extensions.DependencyInjection;
 using Toolkit.Foundation;
 
 namespace Wallet;
 
 [Notification(typeof(CreateEventArgs<IMainNavigationViewModel>), nameof(MainViewModel))]
+[Notification(typeof(InsertEventArgs<IMainNavigationViewModel>), nameof(MainViewModel))]
 public partial class MainViewModel :
     ObservableCollection<IMainNavigationViewModel>
 {

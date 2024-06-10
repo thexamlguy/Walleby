@@ -5,25 +5,27 @@ namespace Wallet;
 
 public class WalletActivatedHandler(IWalletHostCollection Wallets,
     IPublisher publisher) :
-    INotificationHandler<ActivatedEventArgs<IComponentHost>>
+    INotificationHandler<ActivatedEventArgs<Wallet<IComponentHost>>>
 {
-    public Task Handle(ActivatedEventArgs<IComponentHost> args)
+    public Task Handle(ActivatedEventArgs<Wallet<IComponentHost>> args)
     {
-        if (args.Sender is IComponentHost Wallet)
+        if (args.Sender is Wallet<IComponentHost> wallet && wallet.Sender is IComponentHost host)
         {
-            List<IComponentHost> sortedWallets = [.. Wallets, Wallet];
+            List<IComponentHost> sortedWallets = [.. Wallets, host];
             sortedWallets = [.. sortedWallets.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() is 
                 IConfigurationDescriptor<WalletConfiguration> descriptor ? descriptor.Name : null)];
 
-            int index = sortedWallets.IndexOf(Wallet);
+            int index = sortedWallets.IndexOf(host);
 
-            if (Wallet.Services.GetRequiredService<ConfigurationDescriptor<WalletConfiguration>>() is ConfigurationDescriptor<WalletConfiguration> descriptor)
+            if (host.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() is 
+                ConfigurationDescriptor<WalletConfiguration> descriptor)
             {
-                if (Wallet.Services.GetRequiredService<IServiceFactory>() is IServiceFactory serviceFactory)
+                if (host.Services.GetRequiredService<IServiceFactory>() is IServiceFactory serviceFactory)
                 {
-                    if (serviceFactory.Create<WalletNavigationViewModel>(descriptor.Name) is WalletNavigationViewModel viewModel)
+                    if (serviceFactory.Create<WalletNavigationViewModel>(descriptor.Name, false) 
+                        is WalletNavigationViewModel viewModel)
                     {
-                        publisher.Publish(new InsertEventArgs<IMainNavigationViewModel>(index, viewModel),
+                        publisher.Publish(Insert.As<IMainNavigationViewModel>(index, viewModel),
                             nameof(MainViewModel));
                     }
                 }

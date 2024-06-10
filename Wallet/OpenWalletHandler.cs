@@ -13,7 +13,7 @@ public class OpenWalletHandler(IConfigurationDescriptor<WalletConfiguration> des
     {
         if (args.Sender is Wallet<string> Wallet && 
             descriptor.Name is { Length: > 0 } name &&
-            Wallet.Value is { Length: > 0 } password)
+            Wallet.Sender is { Length: > 0 } password)
         {
             WalletConfiguration configuration = descriptor.Value;
             if (configuration.Key?.Split(':') is { Length: >= 2 } keyPart)

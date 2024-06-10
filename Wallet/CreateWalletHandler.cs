@@ -14,7 +14,7 @@ public class CreateWalletHandler(IWalletFactory componentFactory,
     {
         if (args.Sender is Wallet <(string, string)> Wallet)
         {
-            if (Wallet.Value is (string name, string password) && 
+            if (Wallet.Sender is (string name, string password) && 
                 name is { Length: > 0 } &&
                 password is { Length: > 0 })
             {
@@ -36,7 +36,7 @@ public class CreateWalletHandler(IWalletFactory componentFactory,
                             configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");
                             host.Start();
 
-                            publisher.Publish(Activated.As(host), cancellationToken);
+                            publisher.Publish(Activated.As(new Wallet<IComponentHost>(host)));
                             return true;
                         }
                     }
