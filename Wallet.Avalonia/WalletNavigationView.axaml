@@ -8,6 +8,7 @@
     x:DataType="vm:WalletNavigationViewModel"
     Content="{Binding Name}"
     IsExpanded="{Binding Expanded}"
+    IsSelected="{Binding Selected}"
     MenuItemsSource="{Binding}"
     NavigationViewExtension.IsItemInvokedEnabled="True"
     SelectsOnInvoked="True">
@@ -47,6 +48,7 @@
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="False" />
+                        <ComparisonCondition LeftOperand="{Binding Selected}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Main" Route="OpenWallet">
@@ -86,12 +88,12 @@
             </ConditionAction>
         </AttachedEventTriggerBehaviour>
         <DataTriggerBehavior Binding="{Binding Opened}" Value="False">
-			<RemoveClassAction ClassName="Closed" />
-			<AddClassAction ClassName="Closed" RemoveIfExists="True" />
+            <RemoveClassAction ClassName="Closed" />
+            <AddClassAction ClassName="Closed" RemoveIfExists="True" />
         </DataTriggerBehavior>
         <DataTriggerBehavior Binding="{Binding Opened}" Value="True">
-			<RemoveClassAction ClassName="Opened" />
-			<AddClassAction ClassName="Opened"  RemoveIfExists="True" />
+            <RemoveClassAction ClassName="Opened" />
+            <AddClassAction ClassName="Opened" RemoveIfExists="True" />
         </DataTriggerBehavior>
     </Interaction.Behaviors>
     <NavigationViewItem.Styles>

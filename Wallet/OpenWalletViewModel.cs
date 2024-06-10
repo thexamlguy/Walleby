@@ -24,7 +24,8 @@ public partial class OpenWalletViewModel(IServiceProvider provider,
     {
         if (Password is { Length: > 0 })
         {
-            if (await Mediator.Handle<ActivateEventArgs<Wallet<string>>, bool>(Activate.As(new Wallet<string>(Password))))
+            if (await Mediator.Handle<ActivateEventArgs<Wallet<string>>, 
+                bool>(Activate.As(new Wallet<string>(Password))))
             {
                 Publisher.Publish(Opened.As<Wallet>());
             }

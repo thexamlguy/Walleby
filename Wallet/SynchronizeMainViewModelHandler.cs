@@ -10,6 +10,7 @@ public class SynchronizeMainViewModelHandler(IPublisher publisher,
     public Task Handle(SynchronizeEventArgs<IMainNavigationViewModel> args)
     {
         bool selected = true;
+
         foreach (IComponentHost Wallet in Wallets.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>()
             is IConfigurationDescriptor<WalletConfiguration> descriptor ? descriptor.Name : null))
         {
