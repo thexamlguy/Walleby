@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class ItemEntryViewModel(IServiceProvider provider,
+public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
@@ -12,13 +12,14 @@ public partial class ItemEntryViewModel(IServiceProvider provider,
     ItemState state,
     ItemEntryConfiguration configuration,
     string key,
-    object value,
+    TValue value,
     double width) :
-    Observable<string, object>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
+    Observable<string, TValue>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
     IItemEntryViewModel,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>
+    where TValue : notnull
 {
     [ObservableProperty]
     private ItemState state = state;
@@ -46,5 +47,5 @@ public partial class ItemEntryViewModel(IServiceProvider provider,
     }
 
     protected override void OnValueChanged() =>
-                    configuration.Value = Value;
+        configuration.Value = Value;
 }

@@ -9,7 +9,7 @@ public partial class SearchWalletActionViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscription subscriber,
-    IDisposer disposer) : Observable<string>(provider, factory, mediator, publisher, subscriber, disposer)
+    IDisposer disposer) : Observable<string>(provider, factory, mediator, publisher, subscriber, disposer, "")
 {
     [ObservableProperty]
     private int index = 2;

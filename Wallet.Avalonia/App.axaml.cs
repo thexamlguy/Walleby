@@ -166,6 +166,7 @@ public partial class App : Application
                         services.AddTemplate<MaskedTextEntryViewModel, MaskedTextEntryView>();
                         services.AddTemplate<DropdownEntryViewModel, DropdownEntryView>();
                         services.AddTemplate<DateEntryViewModel, DateEntryView>();
+                        services.AddTemplate<HyperlinkEntryViewModel, HyperlinkEntryView>();
 
                         services.AddTemplate<ItemCommandHeaderViewModel, ItemCommandHeaderView>("ItemCommandHeader");
 
@@ -180,6 +181,8 @@ public partial class App : Application
                         services.AddHandler<ConfirmUpdateItemHandler>(nameof(ItemState.Write));
                         services.AddHandler<ConfirmCreateItemHandler>(nameof(ItemState.New));
 
+                        services.AddHandler<HyperlinkHandler>();
+
                         services.AddHandler<ArchiveItemHandler>();
                         services.AddHandler<UnarchiveItemHandler>();
                         services.AddHandler<FavouriteItemHandler>();
@@ -191,7 +194,8 @@ public partial class App : Application
                         services.AddHandler<MaskedTextEntryViewModelHandler>(nameof(MaskedTextEntryConfiguration));
                         services.AddHandler<DropdownEntryViewModelHandler>(nameof(DropdownEntryConfiguration));
                         services.AddHandler<DateEntryViewModelHandler>(nameof(DateEntryConfiguration));
-                        
+                        services.AddHandler<HyperlinkEntryViewModelHandler>(nameof(HyperlinkEntryConfiguration));
+
                         services.AddHandler<ItemCreatedHandler>(ServiceLifetime.Singleton);
                         services.AddHandler<ItemModifiedHandler>(ServiceLifetime.Singleton);
                     });

@@ -1,0 +1,62 @@
+<SettingsExpander
+    x:Class="Wallet.Avalonia.HyperlinkEntryView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:HyperlinkEntryViewModel"
+    Header="{Binding Key}">
+    <SettingsExpander.Footer>
+        <Grid>
+            <TextBox Text="{Binding Value}">
+                <TextBox.Styles>
+                    <Style Selector="TextBox.Write">
+                        <Setter Property="MinWidth" Value="{Binding Width}" />
+                        <Setter Property="IsVisible" Value="True" />
+                    </Style>
+                    <Style Selector="TextBox.Read">
+                        <Setter Property="MinWidth" Value="{Binding Width}" />
+                        <Setter Property="IsVisible" Value="False" />
+                    </Style>
+                </TextBox.Styles>
+                <Interaction.Behaviors>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
+                        <AddClassAction ClassName="Read" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Write" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                </Interaction.Behaviors>
+            </TextBox>
+            <HyperlinkButton Command="{Binding InvokeCommand}" Content="{Binding Value}">
+                <HyperlinkButton.Styles>
+                    <Style Selector="HyperlinkButton.Write">
+                        <Setter Property="IsVisible" Value="False" />
+                    </Style>
+                    <Style Selector="HyperlinkButton.Read">
+                        <Setter Property="IsVisible" Value="True" />
+                    </Style>
+                </HyperlinkButton.Styles>
+                <Interaction.Behaviors>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
+                        <AddClassAction ClassName="Read" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Write" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                </Interaction.Behaviors>
+            </HyperlinkButton>
+        </Grid>
+    </SettingsExpander.Footer>
+</SettingsExpander>

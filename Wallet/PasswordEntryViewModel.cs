@@ -11,5 +11,5 @@ public partial class PasswordEntryViewModel(IServiceProvider provider,
     ItemState state,
     ItemEntryConfiguration configuration,
     string key,
-    object value,
-    double width) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, width);
+    string value,
+    double width) : ItemEntryViewModel<string>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, width);

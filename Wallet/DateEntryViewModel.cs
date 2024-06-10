@@ -11,5 +11,5 @@ public partial class DateEntryViewModel(IServiceProvider provider,
     ItemState state,
     ItemEntryConfiguration configuration,
     string key,
-    object value,
-    double width) : ItemEntryViewModel(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, width);
+    DateTimeOffset value,
+    double width) : ItemEntryViewModel<DateTimeOffset>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, width);
