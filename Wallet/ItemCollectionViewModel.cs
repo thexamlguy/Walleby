@@ -11,7 +11,7 @@ public partial class ItemCollectionViewModel :
     ObservableCollection<ItemNavigationViewModel>,
     INotificationHandler<NotifyEventArgs<Filter>>,
     INotificationHandler<NotifyEventArgs<Search<string>>>,
-    IBackStack
+    INavigationBackStack
 {
     [ObservableProperty]
     public string? named;

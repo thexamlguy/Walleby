@@ -14,7 +14,7 @@
                 <EventTriggerBehavior EventName="Click">
                     <NavigateAction Region="Left" Route="ItemCategoryCollection">
                         <Parameter Key="Transition" Value="FromRight" />
-                        <Parameter Key="NavigationStackEnabled" Value="{x:True}" />
+                        <Parameter Key="IsBackStackEnabled" Value="{x:True}" />
                     </NavigateAction>
                     <NavigateAction
                         Region="{Binding Named, StringFormat='{}{0}:Content'}"

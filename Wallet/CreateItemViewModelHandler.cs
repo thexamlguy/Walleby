@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using Toolkit.Foundation;
+﻿using Toolkit.Foundation;
 
 namespace Wallet;
 
