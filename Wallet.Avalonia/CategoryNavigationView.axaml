@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:DataType="vm:CategoryNavigationViewModel"
-    Content="{Binding Filter}"
+    Content="{Binding Value}"
     IsSelected="{Binding Selected}">
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
@@ -15,7 +15,7 @@
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Main" Route="Wallet">
-                    <Parameter Key="Filter" Value="{Binding Filter}" />
+                    <Parameter Key="Filter" Value="{Binding Value}" />
                 </NavigateAction>
             </ConditionAction>
             <ConditionAction>
@@ -25,7 +25,7 @@
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Left" Route="ItemCollection">
-                    <Parameter Key="Filter" Value="{Binding Filter}" />
+                    <Parameter Key="Filter" Value="{Binding Value}" />
                     <Parameter Key="Transition" Value="FromRight" />
                     <Parameter Key="IsBackStackEnabled" Value="{x:True}" />
                     <Parameter Key="ClearBackStack" Value="{x:True}" />

@@ -13,15 +13,19 @@ public class ConfirmCreateItemHandler(IMediator mediator,
         if (itemHeaderConfiguration.Service is ItemHeaderConfiguration headerConfiguration &&
             itemConfigurationDecorator.Service is ItemConfiguration itemConfiguration)
         {
-            string? name = headerConfiguration?.Name;
-            if (name is not null)
+            if (headerConfiguration.Name is { Length: > 0 } name &&
+                headerConfiguration.Category is { Length: > 0 } category)
             {
                 Guid id = Guid.NewGuid();
-                publisher.Publish(Created.As(new Item<(Guid, string)>((id, name))));
+
+                Item<(Guid, string)> item = new((id, name));
+                publisher.Publish(Created.As(item));
 
                 await mediator.Handle<CreateEventArgs<(Guid, string, string,
                     ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, string, string, 
-                    ItemConfiguration)>((id, name, "", itemConfiguration)));
+                    ItemConfiguration)>((id, name, category, itemConfiguration)));
+
+                publisher.Publish(Changed.As(item));
             }
         }
     }

@@ -70,6 +70,7 @@ public partial class ItemHeaderViewModel :
         if (args.Sender is ItemCategory<string> category)
         {
             Category = category.Value;
+            configuration.Category = category.Value;
         }
 
         return Task.CompletedTask;

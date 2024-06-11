@@ -12,15 +12,12 @@ public class UpdateItemStateHandler(IDbContextFactory<WalletContext> dbContextFa
     {
         if (args.Value is (Guid id, int state))
         {
-            await Task.Run(async () =>
+            using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+            if (await context.FindAsync<ItemEntry>(id) is ItemEntry result)
             {
-                using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
-                if (await context.FindAsync<ItemEntry>(id) is ItemEntry result)
-                {
-                    result.State = state;
-                    await context.SaveChangesAsync();
-                }
-            }, cancellationToken);
+                result.State = state;
+                await context.SaveChangesAsync(cancellationToken);
+            }
         }
 
         return false;

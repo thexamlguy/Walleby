@@ -108,6 +108,7 @@ public partial class App : Application
                         services.AddHandler<CreateItemHandler>();
                         services.AddHandler<UpdateItemHander>();
                         services.AddHandler<UpdateItemStateHandler>();
+                        services.AddHandler<CountCategoriesHandler>();
 
                         services.AddHandler<OpenWalletHandler>();
 
@@ -183,6 +184,8 @@ public partial class App : Application
                         services.AddHandler<ConfirmCreateItemHandler>(nameof(ItemState.New));
 
                         services.AddHandler<HyperlinkHandler>();
+
+                        services.AddHandler<ItemChangedHandler>(ServiceLifetime.Singleton);
 
                         services.AddHandler<ArchiveItemHandler>();
                         services.AddHandler<UnarchiveItemHandler>();

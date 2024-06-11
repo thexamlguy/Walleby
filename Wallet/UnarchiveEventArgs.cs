@@ -1,3 +1,3 @@
 ﻿namespace Wallet;
 
-public record UnarchiveEventArgs<TValue>(TValue Value);
+public record UnarchiveEventArgs<TSender>(TSender Sender);

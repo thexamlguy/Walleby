@@ -9,7 +9,5 @@ public partial class CategoriesNavigationViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    string name) : FilterNavigationViewModel<CategoryNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer, name)
-{
-
-}
+    int key,
+    string value) : FilterNavigationViewModel<CategoryNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer, key, value);

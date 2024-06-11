@@ -12,7 +12,7 @@ public class QueryWalletHandler(IDbContextFactory<WalletContext> dbContextFactor
         Handle(QueryEventArgs<Wallet<(string, string)>> args,CancellationToken cancellationToken)
     {
         List<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)> items = [];
-        if (args.Value is Wallet<(string, string)> Wallet)
+        if (args.Sender is Wallet<(string, string)> Wallet)
         {
             (string filter, string text) = Wallet.Sender;
 

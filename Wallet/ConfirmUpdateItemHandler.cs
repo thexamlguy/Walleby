@@ -29,6 +29,8 @@ public class ConfirmUpdateItemHandler(IDecoratorService<Item<(Guid, string)>> it
 
                 await mediator.Handle<UpdateEventArgs<Item<(Guid, string, ItemConfiguration)>>, bool>(new UpdateEventArgs<Item<(Guid, string,
                     ItemConfiguration)>>(new Item<(Guid, string, ItemConfiguration)>((id, name, itemConfiguration))));
+
+                publisher.Publish(Changed.As(item));
             }
         }
     }

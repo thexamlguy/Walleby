@@ -4,7 +4,8 @@ namespace Wallet;
 
 public class ArchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decoratorService,
     ICache<Item<(Guid, string)>> cache,
-    IMediator mediator) :
+    IMediator mediator,
+    IPublisher publisher) :
     INotificationHandler<ArchiveEventArgs<Item>>
 {
     public async Task Handle(ArchiveEventArgs<Item> args)
@@ -21,6 +22,7 @@ public class ArchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decorato
                         bool>(new UpdateEventArgs<(Guid, int)>((id, 2)));
 
                     cache.Remove(item);
+                    publisher.Publish(Changed.As(item));
                 }
             } 
         }

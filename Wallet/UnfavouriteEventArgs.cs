@@ -1,3 +1,3 @@
 ﻿namespace Wallet;
 
-public record UnfavouriteEventArgs<TValue>(TValue Value);
+public record UnfavouriteEventArgs<TSender>(TSender Sender);

@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Wallet;
 
 public partial class FilterNavigationViewModel : 
-    ObservableCollection<IWalletNavigationViewModel>,
+    ObservableCollection<IWalletNavigationViewModel, int, string>,
     IWalletNavigationViewModel,
     INotificationHandler<ActivatedEventArgs<Wallet>>,
     INotificationHandler<DeactivatedEventArgs<Wallet>>
@@ -13,20 +13,18 @@ public partial class FilterNavigationViewModel :
     private bool activated;
 
     [ObservableProperty]
-    private string? filter;
-
-    [ObservableProperty]
     private bool selected;
 
-    public FilterNavigationViewModel(IServiceProvider provider,
-        IServiceFactory factory,
-        IMediator mediator,
+    public FilterNavigationViewModel(IServiceProvider provider, 
+        IServiceFactory factory, 
+        IMediator mediator, 
         IPublisher publisher,
         ISubscription subscriber,
         IDisposer disposer,
-        string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        int key, 
+        string value) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
     {
-        Filter = filter;
+
     }
 
     public Task Handle(DeactivatedEventArgs<Wallet> args) =>
@@ -37,7 +35,7 @@ public partial class FilterNavigationViewModel :
 }
 
 public partial class FilterNavigationViewModel<TWalletNavigation> :
-    ObservableCollection<TWalletNavigation>,
+    ObservableCollection<TWalletNavigation, int, string>,
     IWalletNavigationViewModel,
     INotificationHandler<ActivatedEventArgs<Wallet>>,
     INotificationHandler<DeactivatedEventArgs<Wallet>>
@@ -48,20 +46,18 @@ public partial class FilterNavigationViewModel<TWalletNavigation> :
     private bool activated;
 
     [ObservableProperty]
-    private string? filter;
-
-    [ObservableProperty]
     private bool selected;
 
     public FilterNavigationViewModel(IServiceProvider provider,
         IServiceFactory factory,
-        IMediator mediator,
+        IMediator mediator, 
         IPublisher publisher,
-        ISubscription subscriber,
+        ISubscription subscriber, 
         IDisposer disposer,
-        string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        int key,
+        string value) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
     {
-        Filter = filter;
+
     }
 
     public Task Handle(DeactivatedEventArgs<Wallet> args) =>

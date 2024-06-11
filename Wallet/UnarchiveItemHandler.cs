@@ -1,12 +1,11 @@
-﻿using Wallet.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Threading;
-using Toolkit.Foundation;
+﻿using Toolkit.Foundation;
 
 namespace Wallet;
 
 public class UnarchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decoratorService,
-    IDbContextFactory<WalletContext> dbContextFactory) :
+    ICache<Item<(Guid, string)>> cache,
+    IMediator mediator,
+    IPublisher publisher) :
     INotificationHandler<UnarchiveEventArgs<Item>>
 {
     public async Task Handle(UnarchiveEventArgs<Item> args)
@@ -17,12 +16,11 @@ public class UnarchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decora
             {
                 (Guid id, string name) = item.Value;
 
-                using WalletContext context = await dbContextFactory.CreateDbContextAsync();
-                if (await context.FindAsync<ItemEntry>(id) is ItemEntry result)
-                {
-                    result.State = 0;
-                    await context.SaveChangesAsync();
-                }
+                await mediator.Handle<UpdateEventArgs<(Guid, int)>,
+                    bool>(new UpdateEventArgs<(Guid, int)>((id, 0)));
+
+                cache.Add(item);
+                publisher.Publish(Changed.As(item));
             }
         }
         catch

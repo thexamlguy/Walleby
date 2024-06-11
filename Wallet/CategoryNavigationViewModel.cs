@@ -8,4 +8,4 @@ public partial class CategoryNavigationViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscription subscriber,
     IDisposer disposer,
-    string filter) : FilterNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, filter);
+    string value) : FilterNavigationViewModel(provider, factory, mediator, publisher, subscriber, disposer, 0, value);

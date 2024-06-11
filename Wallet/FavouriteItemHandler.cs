@@ -3,7 +3,8 @@
 namespace Wallet;
 
 public class FavouriteItemHandler(IDecoratorService<Item<(Guid, string)>> decoratorService,
-    IMediator mediator) :
+    IMediator mediator,
+    IPublisher publisher) :
     INotificationHandler<FavouriteEventArgs<Item>>
 {
     public async Task Handle(FavouriteEventArgs<Item> args)
@@ -14,6 +15,8 @@ public class FavouriteItemHandler(IDecoratorService<Item<(Guid, string)>> decora
             {
                 (Guid id, string name) = item.Value;
                 await mediator.Handle<UpdateEventArgs<(Guid, int)>, bool>(new UpdateEventArgs<(Guid, int)>((id, 1)));
+
+                publisher.Publish(Changed.As(item));
             }
         }
         catch
