@@ -8,7 +8,7 @@ public partial class SearchWalletActionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
-    ISubscription subscriber,
+    ISubscriber subscriber,
     IDisposer disposer) : Observable<string>(provider, factory, mediator, publisher, subscriber, disposer, "")
 {
     [ObservableProperty]

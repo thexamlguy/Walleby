@@ -8,7 +8,7 @@ public partial class CreateWalletViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IPublisher publisher,
     IMediator mediator,
-    ISubscription subscriber,
+    ISubscriber subscriber,
     IDisposer disposer) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer),
     IPrimaryConfirmation

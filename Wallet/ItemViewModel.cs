@@ -31,7 +31,7 @@ public partial class ItemViewModel :
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscription subscriber,
+        ISubscriber subscriber,
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
@@ -135,5 +135,5 @@ public partial class ItemViewModel :
     }
 
     protected override SynchronizeExpression BuildAggregateExpression() =>
-        new(Synchronize.As<IItemViewModel, (string, string, ItemState)>(("", Name, State)));
+        new(Toolkit.Foundation.Synchronize.As<IItemViewModel, (string, string, ItemState)>(("", Name, State)));
 }

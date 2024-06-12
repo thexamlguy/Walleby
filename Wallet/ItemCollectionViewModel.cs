@@ -22,7 +22,7 @@ public partial class ItemCollectionViewModel :
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscription subscriber,
+        ISubscriber subscriber,
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
@@ -42,7 +42,7 @@ public partial class ItemCollectionViewModel :
         if (args.Sender is Filter filter)
         {
             configuration = configuration with { Filter = filter.Value };
-            Fetch(true);
+            Synchronize(true);
         }
 
         return Task.CompletedTask;
@@ -53,7 +53,7 @@ public partial class ItemCollectionViewModel :
         if (args.Sender is Search<string> search)
         {
             configuration = configuration with { Query = search.Value };
-            Fetch(true);
+            Synchronize(true);
         }
 
         return Task.CompletedTask;
@@ -71,5 +71,5 @@ public partial class ItemCollectionViewModel :
     }
 
     protected override SynchronizeExpression BuildAggregateExpression() =>
-        new(Synchronize.As<ItemNavigationViewModel, ItemCollectionConfiguration>(configuration));
+        new(Toolkit.Foundation.Synchronize.As<ItemNavigationViewModel, ItemCollectionConfiguration>(configuration));
 }

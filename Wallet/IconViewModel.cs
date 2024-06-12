@@ -8,7 +8,7 @@ public partial class IconViewModel : Observable
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscription subscriber,
+        ISubscriber subscriber,
         IDisposer disposer) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
     }

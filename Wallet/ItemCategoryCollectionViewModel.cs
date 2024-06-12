@@ -8,7 +8,7 @@ public partial class ItemCategoryCollectionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
-    ISubscription subscriber,
+    ISubscriber subscriber,
     IDisposer disposer,
     IContentTemplate template) :
     ObservableCollection<ItemCategoryNavigationViewModel>(provider, factory, mediator, publisher, subscriber, disposer)

@@ -8,7 +8,7 @@ public partial class OpenWalletViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
-    ISubscription subscriber,
+    ISubscriber subscriber,
     IDisposer disposer,
     string name) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer)

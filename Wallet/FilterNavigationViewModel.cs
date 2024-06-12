@@ -3,11 +3,20 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class FilterNavigationViewModel : 
-    ObservableCollection<IWalletNavigationViewModel, int, string>,
+[Notification(typeof(NotifyEventArgs<Item<int>>), nameof(Value))]
+public abstract partial class FilterNavigationViewModel(IServiceProvider provider,
+    IServiceFactory factory,
+    IMediator mediator,
+    IPublisher publisher,
+    ISubscriber subscriber,
+    IDisposer disposer,
+    int key,
+    string value) : 
+    ObservableCollection<IWalletNavigationViewModel, int, string>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
     IWalletNavigationViewModel,
     INotificationHandler<ActivatedEventArgs<Wallet>>,
-    INotificationHandler<DeactivatedEventArgs<Wallet>>
+    INotificationHandler<DeactivatedEventArgs<Wallet>>,
+    INotificationHandler<NotifyEventArgs<Item<int>>>
 {
     [ObservableProperty]
     private bool activated;
@@ -15,16 +24,14 @@ public partial class FilterNavigationViewModel :
     [ObservableProperty]
     private bool selected;
 
-    public FilterNavigationViewModel(IServiceProvider provider, 
-        IServiceFactory factory, 
-        IMediator mediator, 
-        IPublisher publisher,
-        ISubscription subscriber,
-        IDisposer disposer,
-        int key, 
-        string value) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
+    public Task Handle(NotifyEventArgs<Item<int>> args)
     {
+        if (args.Sender is Item<int> item)
+        {
+            Key = item.Value;
+        }
 
+        return Task.CompletedTask;
     }
 
     public Task Handle(DeactivatedEventArgs<Wallet> args) =>
@@ -34,8 +41,16 @@ public partial class FilterNavigationViewModel :
         Task.FromResult(Activated = true);
 }
 
-public partial class FilterNavigationViewModel<TWalletNavigation> :
-    ObservableCollection<TWalletNavigation, int, string>,
+[Notification(typeof(NotifyEventArgs<Item<int>>), nameof(Value))]
+public abstract partial class FilterNavigationViewModel<TWalletNavigation>(IServiceProvider provider,
+    IServiceFactory factory,
+    IMediator mediator,
+    IPublisher publisher,
+    ISubscriber subscriber,
+    IDisposer disposer,
+    int key,
+    string value) :
+    ObservableCollection<TWalletNavigation, int, string>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
     IWalletNavigationViewModel,
     INotificationHandler<ActivatedEventArgs<Wallet>>,
     INotificationHandler<DeactivatedEventArgs<Wallet>>
@@ -47,18 +62,6 @@ public partial class FilterNavigationViewModel<TWalletNavigation> :
 
     [ObservableProperty]
     private bool selected;
-
-    public FilterNavigationViewModel(IServiceProvider provider,
-        IServiceFactory factory,
-        IMediator mediator, 
-        IPublisher publisher,
-        ISubscription subscriber, 
-        IDisposer disposer,
-        int key,
-        string value) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
-    {
-
-    }
 
     public Task Handle(DeactivatedEventArgs<Wallet> args) =>
         Task.FromResult(Activated = false);

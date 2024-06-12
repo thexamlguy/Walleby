@@ -4,7 +4,7 @@ namespace Wallet;
 
 public class WalletInitializer(IEnumerable<IConfigurationDescriptor<WalletConfiguration>> configurations,
     IComponentFactory componentFactory,
-    IWalletHostCollection Wallets) : IInitializer
+    IWalletHostCollection Wallets) : IInitialization
 {
     public async Task Initialize()
     {

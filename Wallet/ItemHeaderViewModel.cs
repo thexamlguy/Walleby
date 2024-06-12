@@ -23,7 +23,7 @@ public partial class ItemHeaderViewModel :
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscription subscriber,
+        ISubscriber subscriber,
         IDisposer disposer,
         ItemHeaderConfiguration configuration,
         ItemState state,

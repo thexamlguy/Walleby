@@ -8,7 +8,7 @@ public partial class ItemCategoryNavigationViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
-    ISubscription subscriber,
+    ISubscriber subscriber,
     IDisposer disposer,
     string name,
     bool selected = false) :

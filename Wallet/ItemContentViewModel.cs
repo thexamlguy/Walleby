@@ -6,7 +6,7 @@ namespace Wallet;
 public partial class ItemContentViewModel(IServiceProvider provider,
     IServiceFactory factory, IMediator mediator,
     IPublisher publisher,
-    ISubscription subscriber,
+    ISubscriber subscriber,
     IDisposer disposer,
     IContentTemplate template) :
     ObservableCollection<ItemSectionViewModel>(provider, factory, mediator, publisher, subscriber, disposer),

@@ -16,7 +16,7 @@ public partial class WalletViewModel :
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscription subscriber,
+        ISubscriber subscriber,
         IDisposer disposer,
         NamedComponent named,
         string filter) : base(provider, factory, mediator, publisher, subscriber, disposer)

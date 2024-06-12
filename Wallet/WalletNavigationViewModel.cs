@@ -31,7 +31,7 @@ public partial class WalletNavigationViewModel :
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscription subscriber,
+        ISubscriber subscriber,
         IDisposer disposer,
         IContentTemplate template,
         string name,

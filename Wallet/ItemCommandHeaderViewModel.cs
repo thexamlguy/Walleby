@@ -6,7 +6,7 @@ public partial class ItemCommandHeaderViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
-    ISubscription subscriber,
+    ISubscriber subscriber,
     IDisposer disposer,
     IContentTemplate template) :
     ObservableCollection(provider, factory, mediator, publisher, subscriber, disposer),

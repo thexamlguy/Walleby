@@ -7,7 +7,7 @@ public partial class FavouriteItemActionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
-    ISubscription subscriber,
+    ISubscriber subscriber,
     IDisposer disposer,
     bool value = false) : Observable<bool>(provider, factory, mediator, publisher, subscriber, disposer, value),
     IRemovable

@@ -15,7 +15,7 @@ public partial class MainViewModel :
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscription subscriber,
+        ISubscriber subscriber,
         IDisposer disposer,
         IContentTemplate template,
         FooterViewModel footer) : base(provider, factory, mediator, publisher, subscriber, disposer)
