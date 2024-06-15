@@ -28,7 +28,7 @@ public class QueryWalletHandler(IDbContextFactory<WalletContext> dbContextFactor
             {
                 predicate = predicate.And(x => x.State != 2);
             }
-            else if (filter == "Starred")
+            else if (filter == "Favourites")
             {
                 predicate = predicate.And(x => x.State != 2 && x.State == 1);
             }

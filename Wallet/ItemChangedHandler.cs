@@ -8,12 +8,12 @@ public class ItemChangedHandler(IMediator mediator,
 {
     public async Task Handle(ChangedEventArgs<Item> args)
     {
-        IReadOnlyCollection<(string, int)>? categoryCounts = await mediator.Handle<CountEventArgs<Item>, 
+        IReadOnlyCollection<(string, int)>? counts = await mediator.Handle<CountEventArgs<Item>, 
             IReadOnlyCollection<(string, int)>>(Count.As<Item>());
 
-        if (categoryCounts is { Count: > 0  } ) 
+        if (counts is { Count: > 0 } ) 
         {
-            foreach ((string key, int count) in categoryCounts)
+            foreach ((string key, int count) in counts)
             {
                 publisher.Publish(Notify.As(new Item<int>(count)), key);
             }

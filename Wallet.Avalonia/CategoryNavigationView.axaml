@@ -33,4 +33,7 @@
             </ConditionAction>
         </DataTriggerBehavior>
     </Interaction.Behaviors>
+    <NavigationViewItem.InfoBadge>
+        <InfoBadge Value="{Binding Key}" />
+    </NavigationViewItem.InfoBadge>
 </NavigationViewItem>

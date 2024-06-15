@@ -2,23 +2,27 @@
 
 namespace Wallet;
 
-public class SynchronizeCategoriesNavigationViewModelHandler(IItemConfigurationCollection configurations,
+public class SynchronizeCategoriesNavigationViewModelHandler(IMediator mediator,
+    IItemConfigurationCollection configurations,
     IServiceFactory serviceFactory,
     IPublisher publisher) :
     INotificationHandler<SynchronizeEventArgs<CategoryNavigationViewModel>>
 {
-    public Task Handle(SynchronizeEventArgs<CategoryNavigationViewModel> args)
+    public async Task Handle(SynchronizeEventArgs<CategoryNavigationViewModel> args)
     {
+        IReadOnlyCollection<(string Name, int Count)>? counts = await mediator.Handle<CountEventArgs<Item>,
+            IReadOnlyCollection<(string, int)>>(Count.As<Item>());
+
         foreach (KeyValuePair<string, Func<ItemConfiguration>> configuration in configurations)
         {
-            if (serviceFactory.Create<CategoryNavigationViewModel>(args => args.Initialize(),
-                configuration.Key)
+            int count = counts?.FirstOrDefault(x => x.Name == configuration.Key).Count ?? 0;
+            string name = configuration.Key;
+
+            if (serviceFactory.Create<CategoryNavigationViewModel>(args => args.Initialize(), count, name)
                 is CategoryNavigationViewModel viewModel)
             {
                 publisher.Publish(Create.As(viewModel), nameof(CategoriesNavigationViewModel));
             }
         }
-
-        return Task.CompletedTask;
     }
 }

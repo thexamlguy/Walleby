@@ -19,7 +19,8 @@ public class SynchronizeItemCollectionViewModelHandler(IMediator mediator,
 
             IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>? results = 
                 await mediator.Handle<QueryEventArgs<Wallet<(string?, string?)>>,
-                    IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>>(Query.As(new Wallet<(string?, string?)>((configuration.Filter, configuration.Query))));
+                    IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite,
+                    bool Archived)>>(Query.As(new Wallet<(string?, string?)>((configuration.Filter, configuration.Query))));
 
             if (results is not null)
             {
@@ -27,7 +28,8 @@ public class SynchronizeItemCollectionViewModelHandler(IMediator mediator,
                 {
                     IServiceScope serviceScope = serviceProvider.CreateScope();
                     IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
-                    IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider.GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
+                    IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider
+                        .GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
                     if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(), 
                         Id, Name, "Description", Category, selected, Favourite, Archived) 

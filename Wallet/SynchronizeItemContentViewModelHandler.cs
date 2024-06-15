@@ -16,8 +16,8 @@ public class SynchronizeItemContentViewModelHandler(IDecoratorService<Item<(Guid
         {
             if (item.Value is (Guid Id, _))
             {
-                (_, _, _, _, ItemConfiguration? configuration) = await mediator.Handle<RequestEventArgs<Item<Guid>>, (Guid, string, string?, string,
-                    ItemConfiguration?)>(Request.As(new Item<Guid>(Id)));
+                (_, _, _, _, ItemConfiguration? configuration) = await mediator.Handle<RequestEventArgs<Item<Guid>>, 
+                    (Guid, string, string?, string, ItemConfiguration?)>(Request.As(new Item<Guid>(Id)));
 
                 if (configuration is not null)
                 {

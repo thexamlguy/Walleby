@@ -8,7 +8,7 @@
         <Button MinWidth="132" Content="Create Wallet">
             <Interaction.Behaviors>
                 <EventTriggerBehavior EventName="Click">
-                    <NavigateAction Region="self" Route="CreateWallet" />
+                    <NavigateAction Region="{x:Type ContentDialog}" Route="CreateWallet" />
                 </EventTriggerBehavior>
             </Interaction.Behaviors>
         </Button>
