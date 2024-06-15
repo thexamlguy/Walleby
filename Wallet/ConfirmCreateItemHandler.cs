@@ -25,7 +25,7 @@ public class ConfirmCreateItemHandler(IMediator mediator,
                     ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, string, string, 
                     ItemConfiguration)>((id, name, category, itemConfiguration)));
 
-                publisher.Publish(Changed.As(item));
+                publisher.Publish(Changed.As<Item>());
             }
         }
     }
