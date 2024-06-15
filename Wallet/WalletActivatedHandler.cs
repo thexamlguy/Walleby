@@ -22,7 +22,8 @@ public class WalletActivatedHandler(IWalletHostCollection Wallets,
             {
                 if (host.Services.GetRequiredService<IServiceFactory>() is IServiceFactory serviceFactory)
                 {
-                    if (serviceFactory.Create<WalletNavigationViewModel>(descriptor.Name, false) 
+                    if (serviceFactory.Create<WalletNavigationViewModel>(args => args.Initialize(), 
+                        descriptor.Name, false) 
                         is WalletNavigationViewModel viewModel)
                     {
                         publisher.Publish(Insert.As<IMainNavigationViewModel>(index, viewModel),

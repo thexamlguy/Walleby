@@ -21,7 +21,8 @@ public class CountCategoriesHandler(IDbContextFactory<WalletContext> dbContextFa
             })
             .ToListAsync(cancellationToken: cancellationToken);
 
-        var categoryCounts = await context.Items.Where(x => !string.IsNullOrEmpty(x.Category))
+        var categoryCounts = await context.Items.Where(x => x.State != 2 &&
+            !string.IsNullOrEmpty(x.Category))
             .GroupBy(i => i.Category)
             .Select(g => new
             {
