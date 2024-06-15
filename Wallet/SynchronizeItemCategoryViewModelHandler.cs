@@ -12,7 +12,8 @@ public class SynchronizeItemCategoryViewModelHandler(IItemConfigurationCollectio
         bool selected = true;
         foreach (KeyValuePair<string, Func<ItemConfiguration>> configuration in configurations)
         {
-            if (serviceFactory.Create<ItemCategoryNavigationViewModel>(configuration.Key, selected)
+            if (serviceFactory.Create<ItemCategoryNavigationViewModel>(args => args.Initialize(), 
+                configuration.Key, selected)
                 is ItemCategoryNavigationViewModel viewModel)
             {
                 publisher.Publish(Create.As(viewModel), nameof(ItemCategoryCollectionViewModel));

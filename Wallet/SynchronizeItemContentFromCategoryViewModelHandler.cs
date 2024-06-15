@@ -22,7 +22,7 @@ public class SynchronizeItemContentFromCategoryViewModelHandler(IItemConfigurati
                     foreach (ItemSectionConfiguration configurationSection in configuration.Sections)
                     {
                         string id = $"{nameof(ItemSection)}:{Guid.NewGuid()}";
-                        if (serviceFactory.Create<ItemSectionViewModel>(id)
+                        if (serviceFactory.Create<ItemSectionViewModel>(args => args.Initialize(), id)
                             is ItemSectionViewModel sectionViewModel)
                         {
                             publisher.Publish(Create.As(sectionViewModel), nameof(ItemContentViewModel));

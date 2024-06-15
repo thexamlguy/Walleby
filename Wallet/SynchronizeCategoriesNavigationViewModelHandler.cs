@@ -11,7 +11,8 @@ public class SynchronizeCategoriesNavigationViewModelHandler(IItemConfigurationC
     {
         foreach (KeyValuePair<string, Func<ItemConfiguration>> configuration in configurations)
         {
-            if (serviceFactory.Create<CategoryNavigationViewModel>(configuration.Key)
+            if (serviceFactory.Create<CategoryNavigationViewModel>(args => args.Initialize(),
+                configuration.Key)
                 is CategoryNavigationViewModel viewModel)
             {
                 publisher.Publish(Create.As(viewModel), nameof(CategoriesNavigationViewModel));
