@@ -26,5 +26,12 @@
                 PasswordChar="&#x25CF;"
                 Watermark="Confirm password" />
         </StackPanel>
+        <ProgressRing
+            Width="48"
+            Height="48"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsActive="{Binding Active}"
+            IsVisible="{Binding Active}" />
     </Grid>
 </ContentDialog>
