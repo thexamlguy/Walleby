@@ -7,11 +7,11 @@
     <StackPanel
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
+        IsEnabled="{Binding !Active}"
         Spacing="12">
         <PersonPicture
             Width="144"
             Height="144"
-            Margin="0,-144,0,0"
             DisplayName="{Binding Name}" />
         <TextBlock
             Text="{Binding Name}"
@@ -28,5 +28,9 @@
                 </KeyBindingTriggerBehaviour>
             </Interaction.Behaviors>
         </TextBox>
+        <ProgressRing
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsActive="{Binding Active}" />
     </StackPanel>
 </UserControl>

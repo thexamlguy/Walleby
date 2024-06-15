@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel.DataAnnotations;
 using Toolkit.Foundation;
 
 namespace Wallet;
@@ -22,12 +23,14 @@ public partial class OpenWalletViewModel(IServiceProvider provider,
     [RelayCommand]
     private async Task Invoke()
     {
-        if (Password is { Length: > 0 })
+        using (await new ActivityLock(this))
         {
-            if (await Mediator.Handle<ActivateEventArgs<Wallet<string>>, 
-                bool>(Activate.As(new Wallet<string>(Password))))
+            if (Password is { Length: > 0 })
             {
-                Publisher.Publish(Opened.As<Wallet>());
+                if (await Mediator.Handle<ActivateEventArgs<Wallet<string>>, bool>(Activate.As(new Wallet<string>(Password))))
+                {
+                    Publisher.Publish(Opened.As<Wallet>());
+                }
             }
         }
     }
