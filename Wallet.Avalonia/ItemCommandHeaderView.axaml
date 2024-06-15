@@ -23,6 +23,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <ItemsControl
+        Height="36"
         HorizontalAlignment="Right"
         ItemTemplate="{ReflectionBinding Template}"
         ItemsSource="{Binding}">
