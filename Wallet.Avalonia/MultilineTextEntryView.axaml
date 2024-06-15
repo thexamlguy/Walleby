@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:DataType="vm:MultilineTextEntryViewModel"
-    Header="{Binding Key}">
+    Header="{Binding Key}"
+    IsExpanded="True">
     <TextBox Text="{Binding Value}" TextWrapping="Wrap">
         <TextBox.Styles>
             <Style Selector="TextBox.Write">
