@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Reactive.Disposables;
 using Toolkit.Foundation;
 
 namespace Wallet;
@@ -21,7 +22,7 @@ public partial class CreateWalletViewModel(IServiceProvider provider,
     [ObservableProperty]
     private string password;
 
-    public async Task<bool> Confirm()
+    public async Task<bool> ConfirmPrimary()
     {
         using (await new ActivityLock(this))
         {
