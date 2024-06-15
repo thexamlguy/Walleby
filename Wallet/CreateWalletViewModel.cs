@@ -21,7 +21,12 @@ public partial class CreateWalletViewModel(IServiceProvider provider,
     [ObservableProperty]
     private string password;
 
-    public async Task<bool> Confirm() =>
-        await Mediator.Handle<CreateEventArgs<Wallet<(string, string)>>, 
-            bool>(Create.As(new Wallet<(string, string)>((Name, Password))));
+    public async Task<bool> Confirm()
+    {
+        using (await new ActivityLock(this))
+        {
+            return await Mediator.Handle<CreateEventArgs<Wallet<(string, string)>>,
+                bool>(Create.As(new Wallet<(string, string)>((Name, Password))));
+        }
+    }
 }
