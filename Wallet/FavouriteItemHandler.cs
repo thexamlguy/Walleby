@@ -16,7 +16,7 @@ public class FavouriteItemHandler(IDecoratorService<Item<(Guid, string)>> decora
                 (Guid id, string name) = item.Value;
                 await mediator.Handle<UpdateEventArgs<(Guid, int)>, bool>(new UpdateEventArgs<(Guid, int)>((id, 1)));
 
-                publisher.Publish(Changed.As(item));
+                publisher.Publish(Changed.As<Item>());
             }
         }
         catch

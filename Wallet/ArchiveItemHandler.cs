@@ -22,7 +22,7 @@ public class ArchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decorato
                         bool>(new UpdateEventArgs<(Guid, int)>((id, 2)));
 
                     cache.Remove(item);
-                    publisher.Publish(Changed.As(item));
+                    publisher.Publish(Changed.As<Item>());
                 }
             } 
         }

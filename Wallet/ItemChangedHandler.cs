@@ -4,12 +4,12 @@ namespace Wallet;
 
 public class ItemChangedHandler(IMediator mediator,
     IPublisher publisher) : 
-    INotificationHandler<ChangedEventArgs<Item<(Guid, string)>>>
+    INotificationHandler<ChangedEventArgs<Item>>
 {
-    public async Task Handle(ChangedEventArgs<Item<(Guid, string)>> args)
+    public async Task Handle(ChangedEventArgs<Item> args)
     {
-        IReadOnlyCollection<(string, int)>? categoryCounts = await mediator.Handle<CountEventArgs<ItemCategory>, 
-            IReadOnlyCollection<(string, int)>>(Count.As<ItemCategory>());
+        IReadOnlyCollection<(string, int)>? categoryCounts = await mediator.Handle<CountEventArgs<Item>, 
+            IReadOnlyCollection<(string, int)>>(Count.As<Item>());
 
         if (categoryCounts is { Count: > 0  } ) 
         {

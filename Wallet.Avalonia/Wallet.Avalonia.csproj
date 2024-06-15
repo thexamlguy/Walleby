@@ -76,6 +76,9 @@
 	  <Compile Update="ItemContentView.axaml.cs">
 	    <DependentUpon>ItemContentView.axaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="FavouritesNavigationView.axaml.cs">
+	    <DependentUpon>FavouritesNavigationView.axaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="TextEntryView.axaml.cs">
 	    <DependentUpon>TextEntryView.axaml</DependentUpon>
 	  </Compile>

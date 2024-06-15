@@ -47,9 +47,11 @@ public partial class WalletNavigationViewModel :
     public Task Handle(OpenedEventArgs<Wallet> args)
     {
         Add<AllNavigationViewModel>("All", 0);
-        Add<StarredNavigationViewModel>("Starred", 0);
+        Add<FavouritesNavigationViewModel>("Favourites", 0);
         Add<ArchiveNavigationViewModel>("Archive", 0);
         Add<CategoriesNavigationViewModel>("Categories", 0);
+
+        Publisher.Publish(Changed.As<Item>());
 
         Opened = true;
         return Task.CompletedTask;

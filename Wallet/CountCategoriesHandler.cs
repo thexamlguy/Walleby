@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using Toolkit.Foundation;
 using Wallet.Data;
 
 namespace Wallet;
 
 public class CountCategoriesHandler(IDbContextFactory<WalletContext> dbContextFactory) : 
-    IHandler<CountEventArgs<ItemCategory>, IReadOnlyCollection<(string, int)>>
+    IHandler<CountEventArgs<Item>, IReadOnlyCollection<(string, int)>>
 {
-    public async Task<IReadOnlyCollection<(string, int)>> Handle(CountEventArgs<ItemCategory> args, 
+    public async Task<IReadOnlyCollection<(string, int)>> Handle(CountEventArgs<Item> args, 
         CancellationToken cancellationToken)
     {
         using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);

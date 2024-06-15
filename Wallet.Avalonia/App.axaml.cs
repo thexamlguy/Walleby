@@ -113,7 +113,7 @@ public partial class App : Application
 
                         services.AddTemplate<WalletNavigationViewModel, WalletNavigationView>();
                         services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
-                        services.AddTemplate<StarredNavigationViewModel, StarredNavigationView>();
+                        services.AddTemplate<FavouritesNavigationViewModel, FavouritesNavigationView>();
                         services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
                         services.AddTemplate<CategoryNavigationViewModel, CategoryNavigationView>();
                         services.AddTemplate<ArchiveNavigationViewModel, ArchiveNavigationView>();

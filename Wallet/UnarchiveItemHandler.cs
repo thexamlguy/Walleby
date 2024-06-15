@@ -20,7 +20,7 @@ public class UnarchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decora
                     bool>(new UpdateEventArgs<(Guid, int)>((id, 0)));
 
                 cache.Add(item);
-                publisher.Publish(Changed.As(item));
+                publisher.Publish(Changed.As<Item>());
             }
         }
         catch
