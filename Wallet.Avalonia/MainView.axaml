@@ -6,9 +6,9 @@
     x:DataType="vm:MainViewModel">
     <NavigationView
         FooterMenuItemsSource="{Binding Footer}"
+        IsSettingsVisible="False"
         MenuItemTemplate="{Binding Template}"
         MenuItemsSource="{Binding}"
-		IsSettingsVisible="False"
         SelectedItem="{Binding SelectedItem}"
         SelectionFollowsFocus="True">
         <NavigationView.Resources>

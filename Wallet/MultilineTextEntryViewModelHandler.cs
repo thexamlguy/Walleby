@@ -14,7 +14,7 @@ public class MultilineTextEntryViewModelHandler(IServiceFactory serviceFactory) 
             string? value = $"{configuration.Value}" ?? "";
             double? width = configuration.Width;
 
-            if (serviceFactory.Create<MultilineTextEntryViewModel>(args => args.OnInitialize(), 
+            if (serviceFactory.Create<MultilineTextEntryViewModel>(args => args.Initialize(), 
                 [.. args.Parameters, configuration, label, value, width])
                 is MultilineTextEntryViewModel viewModel)
             {

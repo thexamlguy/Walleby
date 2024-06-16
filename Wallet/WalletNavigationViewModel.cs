@@ -13,19 +13,19 @@ public partial class WalletNavigationViewModel :
     ISelectable
 {
     [ObservableProperty]
-    private bool activated;
-
-    [ObservableProperty]
-    private bool expanded = true;
+    private bool isExpanded = true;
 
     [ObservableProperty]
     private string name;
 
     [ObservableProperty]
-    private bool opened;
+    private bool isOpened;
 
     [ObservableProperty]
-    private bool selected;
+    private bool isSelected;
+
+    [ObservableProperty]
+    private bool isActivated;
 
     public WalletNavigationViewModel(IServiceProvider provider,
         IServiceFactory factory,
@@ -35,11 +35,11 @@ public partial class WalletNavigationViewModel :
         IDisposer disposer,
         IContentTemplate template,
         string name,
-        bool selected) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        bool isSelected) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Name = name;
-        Selected = selected;
+        IsSelected = isSelected;
     }
 
     public IContentTemplate Template { get; set; }
@@ -53,21 +53,21 @@ public partial class WalletNavigationViewModel :
 
         Publisher.Publish(Changed.As<Item>());
 
-        Opened = true;
+        IsOpened = true;
         return Task.CompletedTask;
     }
 
     public Task Handle(ClosedEventArgs<Wallet> args)
     {
-        Opened = true;
+        IsOpened = true;
         Clear();
 
         return Task.CompletedTask;
     }
 
     public Task Handle(DeactivatedEventArgs<Wallet> args) =>
-        Task.FromResult(Activated = false);
+        Task.FromResult(IsActivated = false);
 
     public Task Handle(ActivatedEventArgs<Wallet> args) =>
-        Task.FromResult(Activated = true);
+        Task.FromResult(IsActivated = true);
 }

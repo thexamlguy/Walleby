@@ -5,9 +5,9 @@
     xmlns:vm="using:Wallet"
     x:DataType="vm:ArchiveNavigationViewModel"
     Content="Archive"
-    IsSelected="{Binding Selected, Mode=TwoWay}">
+    IsSelected="{Binding IsSelected}">
     <Interaction.Behaviors>
-        <DataTriggerBehavior Binding="{Binding Selected}" Value="True">
+        <DataTriggerBehavior Binding="{Binding IsSelected}" Value="True">
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">

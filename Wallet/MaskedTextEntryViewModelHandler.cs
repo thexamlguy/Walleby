@@ -14,7 +14,7 @@ public class MaskedTextEntryViewModelHandler(IServiceFactory serviceFactory) :
             string? value = $"{configuration.Value}" ?? "";
             double? width = configuration.Width;
 
-            if (serviceFactory.Create<MaskedTextEntryViewModel>(args => args.OnInitialize(), 
+            if (serviceFactory.Create<MaskedTextEntryViewModel>(args => args.Initialize(), 
                 [.. args.Parameters, configuration, configuration.Pattern, label, value, width])
                 is MaskedTextEntryViewModel viewModel)
             {

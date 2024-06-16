@@ -15,7 +15,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     string name = "",
     string description = "",
     string category = "",
-    bool selected = false,
+    bool isSelected = false,
     bool favourite = false,
     bool archived = false) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer),
@@ -50,7 +50,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     private string named = $"{named}";
 
     [ObservableProperty]
-    private bool selected = selected;
+    private bool isSelected = isSelected;
 
     public IContentTemplate Template { get; set; } = template;
 

@@ -25,15 +25,15 @@ public partial class WalletViewModel :
         Filter = filter;
     }
 
-    public override async Task OnActivated()
+    public override async Task Activated()
     {
-        Publisher.Publish(Activated.As<Wallet>());
-        await base.OnActivated();
+        Publisher.Publish(Toolkit.Foundation.Activated.As<Wallet>());
+        await base.Activated();
     }
 
-    public override async Task OnDeactivated()
+    public override async Task Deactivated()
     {
-        Publisher.Publish(Deactivated.As<Wallet>());
-        await base.OnDeactivated();
+        Publisher.Publish(Toolkit.Foundation.Deactivated.As<Wallet>());
+        await base.Deactivated();
     }
 }

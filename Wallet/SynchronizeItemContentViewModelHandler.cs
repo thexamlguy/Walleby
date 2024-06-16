@@ -25,7 +25,7 @@ public class SynchronizeItemContentViewModelHandler(IDecoratorService<Item<(Guid
                     foreach (ItemSectionConfiguration configurationSection in configuration.Sections)
                     {
                         string id = $"{nameof(ItemSection)}:{Guid.NewGuid()}";
-                        if (serviceFactory.Create<ItemSectionViewModel>(args => args.OnInitialize(), id)
+                        if (serviceFactory.Create<ItemSectionViewModel>(args => args.Initialize(), id)
                             is ItemSectionViewModel sectionViewModel)
                         {
                             publisher.Publish(Create.As(sectionViewModel), nameof(ItemContentViewModel));

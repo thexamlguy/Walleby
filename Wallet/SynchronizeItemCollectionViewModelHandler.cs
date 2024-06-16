@@ -31,7 +31,7 @@ public class SynchronizeItemCollectionViewModelHandler(IMediator mediator,
                     IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider
                         .GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
-                    if (serviceFactory.Create<ItemNavigationViewModel>(args => args.OnInitialize(), 
+                    if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(), 
                         Id, Name, "Description", Category, selected, Favourite, Archived) 
                         is ItemNavigationViewModel viewModel)
                     {

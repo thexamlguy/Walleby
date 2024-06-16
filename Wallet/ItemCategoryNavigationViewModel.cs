@@ -11,7 +11,7 @@ public partial class ItemCategoryNavigationViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer,
     string name,
-    bool selected = false) :
+    bool isSelected = false) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer),
     ISelectable,
     IRemovable
@@ -20,7 +20,7 @@ public partial class ItemCategoryNavigationViewModel(IServiceProvider provider,
     private string name = name;
 
     [ObservableProperty]
-    private bool selected = selected;
+    private bool isSelected = isSelected;
 
     [RelayCommand]
     public void Invoke() => Publisher.Publish(Notify.As(new ItemCategory<string>(Name)));

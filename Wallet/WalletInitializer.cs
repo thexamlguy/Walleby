@@ -7,7 +7,7 @@ public class WalletInitializer(IEnumerable<IConfigurationDescriptor<WalletConfig
     IWalletHostCollection Wallets) : 
     IInitialization
 {
-    public async Task OnInitialize()
+    public async Task Initialize()
     {
         foreach (IConfigurationDescriptor<WalletConfiguration> configuration in configurations)
         {

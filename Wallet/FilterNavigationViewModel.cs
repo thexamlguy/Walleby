@@ -19,10 +19,10 @@ public abstract partial class FilterNavigationViewModel(IServiceProvider provide
     INotificationHandler<NotifyEventArgs<Item<int>>>
 {
     [ObservableProperty]
-    private bool activated;
+    private bool isActivated;
 
     [ObservableProperty]
-    private bool selected;
+    private bool isSelected;
 
     public Task Handle(NotifyEventArgs<Item<int>> args)
     {
@@ -35,10 +35,10 @@ public abstract partial class FilterNavigationViewModel(IServiceProvider provide
     }
 
     public Task Handle(DeactivatedEventArgs<Wallet> args) =>
-        Task.FromResult(Activated = false);
+        Task.FromResult(IsActivated = false);
 
     public Task Handle(ActivatedEventArgs<Wallet> args) =>
-        Task.FromResult(Activated = true);
+        Task.FromResult(IsActivated = true);
 }
 
 [Notification(typeof(NotifyEventArgs<Item<int>>), nameof(Value))]
@@ -61,7 +61,7 @@ public abstract partial class FilterNavigationViewModel<TWalletNavigation>(IServ
     private bool activated;
 
     [ObservableProperty]
-    private bool selected;
+    private bool isSelected;
 
     public Task Handle(DeactivatedEventArgs<Wallet> args) =>
         Task.FromResult(Activated = false);

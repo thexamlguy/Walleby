@@ -14,7 +14,6 @@ public partial class OpenWalletViewModel : Observable
     [ObservableProperty]
     private string? password;
 
-
     [ObservableProperty]
     private string? repeatedPassword;
 
@@ -28,7 +27,6 @@ public partial class OpenWalletViewModel : Observable
         string name) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         this.validation = validation;
-
         Name = name;
     }
 
