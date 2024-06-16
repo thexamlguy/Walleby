@@ -2,29 +2,56 @@
     x:Class="Wallet.Avalonia.CreateWalletView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:vm="using:Wallet"
-    Title="Create Wallet"
+    Title="Create a new wallet"
     x:DataType="vm:CreateWalletViewModel"
     CloseButtonText="Cancel"
-    IsPrimaryButtonEnabled="{Binding !Active}"
-    IsSecondaryButtonEnabled="{Binding !Active}"
+    DefaultButton="Primary"
     PrimaryButtonText="Create">
+    <ContentDialog.Styles>
+        <Style Selector="ui|ContentDialog.Write">
+            <Setter Property="IsPrimaryButtonEnabled" Value="True" />
+        </Style>
+        <Style Selector="ui|ContentDialog.Read">
+            <Setter Property="IsPrimaryButtonEnabled" Value="False" />
+        </Style>
+        <Style Selector="ui|ContentDialog.Active">
+            <Setter Property="IsPrimaryButtonEnabled" Value="False" />
+        </Style>
+    </ContentDialog.Styles>
+    <Interaction.Behaviors>
+        <DataTriggerBehavior Binding="{Binding Validation.HasErrors}" Value="True">
+            <AddClassAction ClassName="Read" RemoveIfExists="True" />
+            <RemoveClassAction ClassName="Write" />
+        </DataTriggerBehavior>
+        <DataTriggerBehavior Binding="{Binding Validation.HasErrors}" Value="False">
+            <AddClassAction ClassName="Write" RemoveIfExists="True" />
+            <RemoveClassAction ClassName="Read" />
+        </DataTriggerBehavior>
+        <DataTriggerBehavior Binding="{Binding Active}" Value="True">
+            <AddClassAction ClassName="Active" RemoveIfExists="True" />
+        </DataTriggerBehavior>
+        <DataTriggerBehavior Binding="{Binding Active}" Value="False">
+            <RemoveClassAction ClassName="Active" />
+        </DataTriggerBehavior>
+    </Interaction.Behaviors>
     <Grid>
-        <StackPanel Width="400" IsEnabled="{Binding !Active}">
-            <TextBox
-                Margin="0,0,0,18"
-                Text="{Binding Name}"
-                Watermark="Enter Wallet name" />
-            <TextBox
-                Margin="0,0,0,18"
-                Classes="revealPasswordButton"
-                PasswordChar="&#x25CF;"
-                Text="{Binding Password}"
-                Watermark="Enter password" />
-            <TextBox
-                Classes="revealPasswordButton"
-                PasswordChar="&#x25CF;"
-                Watermark="Confirm password" />
+        <StackPanel
+            Width="400"
+            IsEnabled="{Binding !Active}"
+            Spacing="18">
+            <StackPanel>
+                <TextBlock Margin="0,0,0,6" Text="Name" />
+                <TextBox Text="{Binding Name}" Watermark="e.g. Personal" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Margin="0,0,0,6" Text="Password" />
+                <TextBox
+                    Classes="revealPasswordButton"
+                    PasswordChar="&#x25CF;"
+                    Text="{Binding Password}" />
+            </StackPanel>
         </StackPanel>
         <ProgressRing
             Width="48"
