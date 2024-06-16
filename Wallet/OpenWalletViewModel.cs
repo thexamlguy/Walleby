@@ -1,21 +1,21 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics.CodeAnalysis;
 using Toolkit.Foundation;
 
 namespace Wallet;
 
 public partial class OpenWalletViewModel : Observable
 {
-    private readonly IValidation validation;
+    [ObservableProperty]
+    private IValidation validation;
 
     [ObservableProperty]
     private string? name;
 
+    [MaybeNull]
     [ObservableProperty]
-    private string? password;
-
-    [ObservableProperty]
-    private string? repeatedPassword;
+    private string password;
 
     public OpenWalletViewModel(IValidation validation,
         IServiceProvider provider, 
@@ -35,12 +35,10 @@ public partial class OpenWalletViewModel : Observable
     {
         using (await new ActivityLock(this))
         {
-            if (Password is { Length: > 0 })
+            if (await validation.Validate(() => Password, [new ValidationRule(async () => 
+                await Mediator.Handle<ActivateEventArgs<Wallet<string>>, bool>(Activate.As(new Wallet<string>(Password))), "The password is incorrect, please try again.")]))
             {
-                if (await Mediator.Handle<ActivateEventArgs<Wallet<string>>, bool>(Activate.As(new Wallet<string>(Password))))
-                {
-                    Publisher.Publish(Opened.As<Wallet>());
-                }
+                Publisher.Publish(Opened.As<Wallet>());
             }
         }
     }

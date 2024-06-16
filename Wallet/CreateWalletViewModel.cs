@@ -61,7 +61,7 @@ public partial class CreateWalletViewModel :
     {
         if (args.PropertyName is string name)
         {
-            Validation.Validate(name);
+            _ = Validation.Validate(name);
         }
 
         base.OnPropertyChanged(args);

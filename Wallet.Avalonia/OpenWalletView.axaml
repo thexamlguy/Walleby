@@ -23,14 +23,17 @@
             PasswordChar="&#x25CF;"
             Text="{Binding Password}">
             <Interaction.Behaviors>
-                <KeyBindingTriggerBehaviour Gesture="Enter">
+                <KeyBindingTriggerBehaviour Gesture="Enter" IsEnabled="{Binding Password, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
                     <InvokeCommandAction Command="{Binding InvokeCommand}" />
                 </KeyBindingTriggerBehaviour>
             </Interaction.Behaviors>
         </TextBox>
-        <ProgressRing
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            IsActive="{Binding IsActive}" />
+        <Grid>
+            <TextBlock HorizontalAlignment="Center" Text="{ReflectionBinding Validation.Errors[Password]}" />
+            <ProgressRing
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsActive="{Binding IsActive}" />
+        </Grid>
     </StackPanel>
 </UserControl>
