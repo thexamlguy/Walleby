@@ -19,7 +19,7 @@ public class SynchronizeMainViewModelHandler(IPublisher publisher,
             {
                 if (Wallet.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
                 {
-                    if (factory.Create<WalletNavigationViewModel>(args => args.Initialize(), descriptor.Name, selected) 
+                    if (factory.Create<WalletNavigationViewModel>(args => args.OnInitialize(), descriptor.Name, selected) 
                         is WalletNavigationViewModel viewModel)
                     {
                         publisher.Publish(Create.As<IMainNavigationViewModel>(viewModel),

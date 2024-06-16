@@ -7,7 +7,7 @@
     <StackPanel
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
-        IsEnabled="{Binding !Active}"
+        IsEnabled="{Binding !IsActive}"
         Spacing="12">
         <PersonPicture
             Width="144"
@@ -31,6 +31,6 @@
         <ProgressRing
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            IsActive="{Binding Active}" />
+            IsActive="{Binding IsActive}" />
     </StackPanel>
 </UserControl>

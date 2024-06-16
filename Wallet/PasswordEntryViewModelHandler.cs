@@ -14,7 +14,7 @@ public class PasswordEntryViewModelHandler(IServiceFactory serviceFactory) :
             string? value = $"{configuration.Value}" ?? "";
             double? width = configuration.Width;
 
-            if (serviceFactory.Create<PasswordEntryViewModel>(args => args.Initialize(), 
+            if (serviceFactory.Create<PasswordEntryViewModel>(args => args.OnInitialize(), 
                 [.. args.Parameters, configuration, label, value, width])
                 is PasswordEntryViewModel viewModel)
             {

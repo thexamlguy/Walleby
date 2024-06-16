@@ -29,17 +29,31 @@
             <AddClassAction ClassName="Write" RemoveIfExists="True" />
             <RemoveClassAction ClassName="Read" />
         </DataTriggerBehavior>
-        <DataTriggerBehavior Binding="{Binding Active}" Value="True">
-            <AddClassAction ClassName="Active" RemoveIfExists="True" />
+        <DataTriggerBehavior Binding="{Binding IsActive}" Value="True">
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding IsConfirmed}" RightOperand="False" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <AddClassAction ClassName="Active" RemoveIfExists="True" />
+            </ConditionAction>
         </DataTriggerBehavior>
-        <DataTriggerBehavior Binding="{Binding Active}" Value="False">
-            <RemoveClassAction ClassName="Active" />
+        <DataTriggerBehavior Binding="{Binding IsActive}" Value="False">
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding IsConfirmed}" RightOperand="False" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <RemoveClassAction ClassName="Active" />
+            </ConditionAction>
         </DataTriggerBehavior>
     </Interaction.Behaviors>
     <Grid>
         <StackPanel
             Width="400"
-            IsEnabled="{Binding !Active}"
+            IsEnabled="{Binding !IsActive}"
             Spacing="18">
             <StackPanel>
                 <TextBlock Margin="0,0,0,6" Text="Name" />
@@ -58,7 +72,7 @@
             Height="48"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            IsActive="{Binding Active}"
-            IsVisible="{Binding Active}" />
+            IsActive="{Binding IsActive}"
+            IsVisible="{Binding IsActive}" />
     </Grid>
 </ContentDialog>

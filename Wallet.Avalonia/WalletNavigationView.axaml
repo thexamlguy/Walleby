@@ -59,7 +59,7 @@
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="True" />
-                        <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
+                        <ComparisonCondition LeftOperand="{Binding IsActivated}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Main" Route="Wallet" />
@@ -81,7 +81,7 @@
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
                         <ComparisonCondition LeftOperand="{Binding Opened}" RightOperand="True" />
-                        <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
+                        <ComparisonCondition LeftOperand="{Binding IsActivated}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <InvokeNavigationViewItemAction />

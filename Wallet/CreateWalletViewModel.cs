@@ -5,7 +5,8 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class CreateWalletViewModel : Observable,
+public partial class CreateWalletViewModel :
+    Observable,
     IPrimaryConfirmation
 {
     [MaybeNull]
@@ -22,6 +23,9 @@ public partial class CreateWalletViewModel : Observable,
 
     [ObservableProperty]
     private IValidation validation;
+
+    [ObservableProperty]
+    private bool isConfirmed;
 
     public CreateWalletViewModel(IValidation validation, 
         IServiceProvider provider,
@@ -46,8 +50,10 @@ public partial class CreateWalletViewModel : Observable,
     {
         using (await new ActivityLock(this))
         {
-            return await Mediator.Handle<CreateEventArgs<Wallet<(string, string)>>,
+            IsConfirmed = await Mediator.Handle<CreateEventArgs<Wallet<(string, string)>>,
                 bool>(Create.As(new Wallet<(string, string)>((Name, Password))));
+
+            return IsConfirmed;
         }
     }
 

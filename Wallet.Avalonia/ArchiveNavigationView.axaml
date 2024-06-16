@@ -11,7 +11,7 @@
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
-                        <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="False" />
+                        <ComparisonCondition LeftOperand="{Binding IsActivated}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Main" Route="Wallet">
@@ -21,7 +21,7 @@
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
-                        <ComparisonCondition LeftOperand="{Binding Activated}" RightOperand="True" />
+                        <ComparisonCondition LeftOperand="{Binding IsActivated}" RightOperand="True" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
                 <NavigateAction Region="Left" Route="ItemCollection">

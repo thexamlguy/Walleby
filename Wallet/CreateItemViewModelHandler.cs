@@ -29,7 +29,7 @@ public class CreateItemViewModelHandler(IServiceFactory serviceFactory,
 
         itemHeaderConfigurationDecorator.Set(configuration);
 
-        if (serviceFactory.Create<ItemViewModel>(args => args.Initialize(), args.Parameters) is ItemViewModel itemViewModel)
+        if (serviceFactory.Create<ItemViewModel>(args => args.OnInitialize(), args.Parameters) is ItemViewModel itemViewModel)
         {
             itemViewModel.Add<ItemHeaderViewModel>(configuration, state, "", name);
             itemViewModel.Add<ItemContentViewModel>();

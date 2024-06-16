@@ -18,7 +18,7 @@ public class SynchronizeCategoriesNavigationViewModelHandler(IMediator mediator,
             int count = counts?.FirstOrDefault(x => x.Name == configuration.Key).Count ?? 0;
             string name = configuration.Key;
 
-            if (serviceFactory.Create<CategoryNavigationViewModel>(args => args.Initialize(), count, name)
+            if (serviceFactory.Create<CategoryNavigationViewModel>(args => args.OnInitialize(), count, name)
                 is CategoryNavigationViewModel viewModel)
             {
                 publisher.Publish(Create.As(viewModel), nameof(CategoriesNavigationViewModel));

@@ -22,7 +22,7 @@ public class WalletActivatedHandler(IWalletHostCollection Wallets,
             {
                 if (host.Services.GetRequiredService<IServiceFactory>() is IServiceFactory serviceFactory)
                 {
-                    if (serviceFactory.Create<WalletNavigationViewModel>(args => args.Initialize(), 
+                    if (serviceFactory.Create<WalletNavigationViewModel>(args => args.OnInitialize(), 
                         descriptor.Name, false) 
                         is WalletNavigationViewModel viewModel)
                     {
