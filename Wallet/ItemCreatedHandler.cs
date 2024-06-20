@@ -18,7 +18,8 @@ public class ItemCreatedHandler(IServiceProvider serviceProvider,
             IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
             IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider.GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
-            if (serviceFactory.Create<ItemNavigationViewModel>(id, name, "Description", true)
+            if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(),
+                id, name, "Description", true)
                 is ItemNavigationViewModel viewModel)
             {
                 cache.Add(item);

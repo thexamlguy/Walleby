@@ -19,7 +19,8 @@ public class DateEntryViewModelHandler(IServiceFactory serviceFactory) :
 
             double? width = configuration.Width;
 
-            if (serviceFactory.Create<DateEntryViewModel>([.. args.Parameters, configuration, label, value, width])
+            if (serviceFactory.Create<DateEntryViewModel>(args => args.Initialize(), 
+                [.. args.Parameters, configuration, label, value, width])
                 is DateEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);
