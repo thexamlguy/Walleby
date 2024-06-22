@@ -19,7 +19,7 @@
                 <Parameter Key="Favourite" Value="{Binding Favourite}" />
                 <Parameter Key="Archived" Value="{Binding Archived}" />
                 <Parameter Key="State" Value="{x:Static vm:ItemState.Read}" />
-                <Parameter Key="IsBackStackEnabled" Value="{x:True}" />
+                <Parameter Key="IsBackStackEnabled" Value="{x:False}" />
                 <Parameter Key="ClearBackStack" Value="{x:True}" />
             </NavigateAction>
         </AttachedEventTriggerBehaviour>
