@@ -35,8 +35,9 @@ public partial class OpenWalletViewModel : Observable
     {
         using (await new ActivityLock(this))
         {
-            if (await validation.Validate(() => Password, [new ValidationRule(async () => 
-                await Mediator.Handle<ActivateEventArgs<Wallet<string>>, bool>(Activate.As(new Wallet<string>(Password))), "The password is incorrect, please try again.")]))
+            if (await Validation.Validate(() => Password, [new ValidationRule(async () => 
+                await Mediator.Handle<ActivateEventArgs<Wallet<string>>, bool>(Activate.As(new Wallet<string>(Password))), 
+                    "The password is incorrect, please try again.")]))
             {
                 Publisher.Publish(Opened.As<Wallet>());
             }
