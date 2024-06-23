@@ -8,9 +8,27 @@
         FooterMenuItemsSource="{Binding Footer}"
         IsSettingsVisible="False"
         MenuItemTemplate="{Binding Template}"
-        MenuItemsSource="{Binding}"
-        SelectedItem="{Binding SelectedItem}"
+        MenuItemsSource="{Binding SelectedItem, Mode=TwoWay}"
         SelectionFollowsFocus="True">
+        <NavigationView.PaneCustomContent>
+            <Grid RowDefinitions="*,Auto">
+                <ListBox
+                    Grid.Row="0"
+                    Margin="1,0,1,0"
+                    HorizontalAlignment="Stretch"
+                    ItemTemplate="{ReflectionBinding Template}"
+                    ItemsSource="{Binding}"
+                    SelectedItem="{Binding SelectedItem}">
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="MinWidth" Value="0" />
+                            <Setter Property="Margin" Value="2,0,2,0" />
+                        </Style>
+                    </ListBox.Styles>
+                </ListBox>
+                <NavigationViewItemSeparator Grid.Row="1" />
+            </Grid>
+        </NavigationView.PaneCustomContent>
         <NavigationView.Resources>
             <CornerRadius x:Key="NavigationViewContentGridCornerRadius">0</CornerRadius>
             <Thickness x:Key="NavigationViewContentGridBorderThickness">1,0,0,0</Thickness>

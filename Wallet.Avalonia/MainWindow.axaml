@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     xmlns:windowing="using:FluentAvalonia.UI.Windowing"
-    x:DataType="vm:MainWindowViewModel">
+    x:DataType="vm:MainWindowViewModel"
+    Background="Transparent"
+    TransparencyLevelHint="Mica">
     <ContentControl>
         <Interaction.Behaviors>
             <AttachedBehaviour>
