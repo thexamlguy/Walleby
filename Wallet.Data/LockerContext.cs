@@ -15,10 +15,12 @@ public class WalletContext(DbContextOptions<WalletContext> options) :
     {
         modelBuilder.Entity<ItemEntry>()
             .HasMany(x => x.Tags)
-            .WithOne();
+            .WithOne()
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<ItemEntry>()
             .HasMany(x => x.Blobs)
-            .WithOne();
+            .WithOne()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

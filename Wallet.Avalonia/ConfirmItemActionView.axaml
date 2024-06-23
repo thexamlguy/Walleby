@@ -15,7 +15,7 @@
             Margin="0,3,0,0"
             VerticalAlignment="Center"
             FontFamily="{DynamicResource FluentThemeFontFamily}"
-            FontSize="16"
+            FontSize="18"
             Foreground="{DynamicResource IconForegroundBrush}"
             Text="&#xE3EA;" />
     </Button>

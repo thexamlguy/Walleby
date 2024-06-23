@@ -23,6 +23,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     INotificationHandler<UnarchiveEventArgs<Item>>,
     INotificationHandler<FavouriteEventArgs<Item>>,
     INotificationHandler<UnfavouriteEventArgs<Item>>,
+    INotificationHandler<DeleteEventArgs<Item>>,
     INotificationHandler<NotifyEventArgs<ItemHeader<string>>>,
     IKeyed<Guid>,
     ISelectable,
@@ -44,14 +45,13 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     private Guid id = id;
 
     [ObservableProperty]
+    private bool isSelected = isSelected;
+
+    [ObservableProperty]
     private string? name = name;
 
     [ObservableProperty]
     private string named = $"{named}";
-
-    [ObservableProperty]
-    private bool isSelected = isSelected;
-
     public IContentTemplate Template { get; set; } = template;
 
     public Task Handle(ArchiveEventArgs<Item> args) =>
@@ -75,4 +75,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
         return Task.CompletedTask;
     }
+
+    public Task Handle(DeleteEventArgs<Item> args) =>
+        Task.Run(Dispose);
 }

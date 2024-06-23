@@ -14,9 +14,9 @@
         <TextBlock
             Margin="0,3,0,0"
             VerticalAlignment="Center"
-            FontFamily="{DynamicResource SymbolThemeFontFamily}"
-            FontSize="16"
+            FontFamily="{DynamicResource FluentThemeFontFamily}"
+            FontSize="18"
             Foreground="{DynamicResource IconForegroundBrush}"
-            Text="&#xE107;" />
+            Text="&#xE5B9;" />
     </Button>
 </UserControl>

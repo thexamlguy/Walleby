@@ -5,6 +5,11 @@
     xmlns:vm="using:Wallet"
     x:DataType="vm:ItemSectionViewModel">
     <ItemsControl ItemTemplate="{ReflectionBinding Template}" ItemsSource="{Binding}">
+        <ItemsControl.Styles>
+            <Style Selector="ContentPresenter">
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+        </ItemsControl.Styles>
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel Orientation="Vertical" Spacing="4" />

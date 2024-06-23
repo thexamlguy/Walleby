@@ -2,8 +2,15 @@
     x:Class="Wallet.Avalonia.ItemView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:vm="using:Wallet"
     x:DataType="vm:ItemViewModel">
+    <UserControl.Styles>
+        <Style Selector="ui|SettingsExpander">
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
+        </Style>
+    </UserControl.Styles>
     <Interaction.Behaviors>
         <AttachedBehaviour>
             <NavigateAction

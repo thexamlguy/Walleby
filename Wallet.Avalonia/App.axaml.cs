@@ -105,6 +105,7 @@ public partial class App : Application
                         services.AddHandler<QueryWalletHandler>();
                         services.AddHandler<RequestItemHandler>();
                         services.AddHandler<CreateItemHandler>();
+                        services.AddHandler<DeleteItemHandler>();
                         services.AddHandler<UpdateItemHander>();
                         services.AddHandler<UpdateItemStateHandler>();
                         services.AddHandler<CountCategoriesHandler>();
@@ -181,7 +182,8 @@ public partial class App : Application
 
                         services.AddHandler<ConfirmUpdateItemHandler>(nameof(ItemState.Write));
                         services.AddHandler<ConfirmCreateItemHandler>(nameof(ItemState.New));
-
+                        services.AddHandler<ConfirmDeleteItemHandler>();
+    
                         services.AddHandler<HyperlinkHandler>();
 
                         services.AddHandler<ItemChangedHandler>(ServiceLifetime.Singleton);

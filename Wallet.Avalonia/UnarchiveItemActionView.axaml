@@ -10,12 +10,12 @@
         VerticalAlignment="Center"
         Command="{Binding InvokeCommand}"
         Foreground="{DynamicResource IconForegroundBrush}"
-        ToolTip.Tip="Unarchive">
+        ToolTip.Tip="Restore">
         <TextBlock
             VerticalAlignment="Center"
             FontFamily="{DynamicResource FluentThemeFontFamily}"
-            FontSize="16"
+            FontSize="18"
             Foreground="{DynamicResource IconForegroundBrush}"
-            Text="&#xF1A0;" />
+            Text="&#xE075;" />
     </Button>
 </UserControl>

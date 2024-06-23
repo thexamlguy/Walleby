@@ -12,7 +12,7 @@ public class UpdateItemHander(IDbContextFactory<WalletContext> dbContextFactory)
     public async Task<bool> Handle(UpdateEventArgs<Item<(Guid, string, ItemConfiguration)>> args,
         CancellationToken cancellationToken)
     {
-        if (args.Value is Item<(Guid, string, ItemConfiguration)> item)
+        if (args.Sender is Item<(Guid, string, ItemConfiguration)> item)
         {
             (Guid id, string name, ItemConfiguration configuration) = item.Value;
 

@@ -108,6 +108,7 @@ public partial class ItemViewModel :
             Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
             {
                 Factory.Create<UnarchiveItemActionViewModel>(),
+                Factory.Create<DeleteItemActionViewModel>(),
             })));
         }
         else
