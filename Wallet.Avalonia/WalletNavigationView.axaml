@@ -5,8 +5,10 @@
     xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:vm="using:Wallet"
     x:DataType="vm:WalletNavigationViewModel"
-    Content="{Binding Name}"
     ListBoxExtension.IsItemInvokedEnabled="True">
+    <ListBoxItem.Resources>
+        <SolidColorBrush x:Key="StarredIconForegroundBrush" Color="#FFEDB120" />
+    </ListBoxItem.Resources>
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding IsOpened}" Value="False">
             <ConditionAction>
@@ -33,4 +35,16 @@
             </ConditionAction>
         </AttachedEventTriggerBehaviour>
     </Interaction.Behaviors>
+    <Grid Margin="0,2,0,2" ColumnDefinitions="Auto, *">
+        <Grid
+            Grid.Column="0"
+            Width="40"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <PersonPicture Height="30" DisplayName="{Binding Name}" />
+        </Grid>
+        <Grid Grid.Column="1" Margin="{StaticResource NavigationViewItemContentPresenterMargin}">
+            <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
+        </Grid>
+    </Grid>
 </ListBoxItem>

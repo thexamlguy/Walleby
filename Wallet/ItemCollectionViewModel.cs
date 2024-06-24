@@ -63,7 +63,6 @@ public partial class ItemCollectionViewModel :
     {
         Publisher.Publish(Notify.As(Factory.Create<WalletCommandHeaderCollection>(new List<IDisposable>
         {
-            Factory.Create<CreateItemActionViewModel>(),
             Factory.Create<SearchWalletActionViewModel>(),
         })));
 

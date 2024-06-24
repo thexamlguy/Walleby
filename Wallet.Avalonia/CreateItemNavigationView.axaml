@@ -1,0 +1,29 @@
+<NavigationViewItem
+    x:Class="Wallet.Avalonia.CreateItemNavigationView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:CreateItemNavigationViewModel"
+    Content="New Item"
+    NavigationViewExtension.IsItemInvokedEnabled="True"
+    SelectsOnInvoked="False">
+    <Interaction.Behaviors>
+        <AttachedEventTriggerBehaviour RoutedEvent="{x:Static NavigationViewExtension.ItemInvokedEvent}">
+            <NavigateAction Region="Left" Route="ItemCategoryCollection">
+                <Parameter Key="Transition" Value="FromRight" />
+                <Parameter Key="IsBackStackEnabled" Value="{x:True}" />
+                <Parameter Key="ClearBackStack" Value="{x:True}" />
+            </NavigateAction>
+            <NavigateAction
+                Region="{Binding Named, StringFormat='{}{0}:Content'}"
+                Route="Item"
+                Scope="self">
+                <Parameter Key="FromCategory" Value="{x:True}" />
+                <Parameter Key="State" Value="{x:Static vm:ItemState.New}" />
+            </NavigateAction>
+        </AttachedEventTriggerBehaviour>
+    </Interaction.Behaviors>
+    <NavigationViewItem.IconSource>
+        <PathIconSource Data="F1 M 6 11.799999 C 6 11.666666 6.046666 11.546667 6.14 11.44 C 6.233333 11.333334 6.346666 11.280001 6.48 11.28 L 9.52 11.28 L 9.52 8.28 C 9.519999 8.146667 9.566666 8.033334 9.66 7.94 C 9.753333 7.846666 9.866667 7.799999 10 7.799999 C 10.133333 7.799999 10.253332 7.846666 10.36 7.94 C 10.466665 8.033334 10.519999 8.146667 10.52 8.28 L 10.52 11.28 L 13.52 11.28 C 13.653332 11.280001 13.766665 11.333334 13.86 11.44 C 13.953333 11.546667 14 11.666666 14 11.799999 C 14 11.933332 13.953333 12.046666 13.86 12.139999 C 13.766665 12.233334 13.653332 12.293333 13.52 12.32 L 10.52 12.32 L 10.52 15.279999 C 10.519999 15.44 10.466665 15.566667 10.36 15.66 C 10.253332 15.753333 10.133333 15.799999 10 15.799999 C 9.866667 15.799999 9.746666 15.753333 9.639999 15.66 C 9.533333 15.566667 9.48 15.453333 9.48 15.32 L 9.48 12.28 L 6.52 12.28 C 6.36 12.306667 6.233333 12.266666 6.14 12.16 C 6.046666 12.053333 6 11.933332 6 11.799999 Z M 10 19.799999 C 11.439999 19.799999 12.773333 19.439999 14 18.719999 C 15.226665 18 16.199999 17.026667 16.92 15.799999 C 17.639999 14.573334 18 13.24 18 11.799999 C 18 10.360001 17.639999 9.026667 16.92 7.799999 C 16.199999 6.573334 15.226665 5.6 14 4.879999 C 12.773333 4.16 11.439999 3.799999 10 3.799999 C 8.559999 3.799999 7.226666 4.16 6 4.879999 C 4.773333 5.6 3.8 6.573334 3.08 7.799999 C 2.36 9.026667 2 10.360001 2 11.799999 C 2 13.24 2.36 14.573334 3.08 15.799999 C 3.8 17.026667 4.773333 18 6 18.719999 C 7.226666 19.439999 8.559999 19.799999 10 19.799999 Z M 10 18.799999 C 8.719999 18.799999 7.546666 18.486666 6.48 17.859999 C 5.413333 17.233334 4.566667 16.386665 3.94 15.32 C 3.313333 14.253333 3 13.08 3 11.799999 C 3 10.52 3.313333 9.346666 3.94 8.28 C 4.566667 7.213333 5.413333 6.366667 6.48 5.74 C 7.546666 5.113333 8.719999 4.799999 10 4.799999 C 11.28 4.799999 12.453333 5.113333 13.52 5.74 C 14.586666 6.366667 15.433332 7.213333 16.059999 8.28 C 16.686666 9.346666 17 10.52 17 11.799999 C 17 13.08 16.686666 14.253333 16.059999 15.32 C 15.433332 16.386665 14.586666 17.233334 13.52 17.859999 C 12.453333 18.486666 11.28 18.799999 10 18.799999 Z " />
+    </NavigationViewItem.IconSource>
+</NavigationViewItem>

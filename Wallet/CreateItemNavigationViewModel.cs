@@ -3,16 +3,17 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class CreateItemActionViewModel(IServiceProvider provider,
+public partial class CreateItemNavigationViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer,
-    NamedComponent named) : Observable(provider, factory, mediator, publisher, subscriber, disposer)
+    NamedComponent named) : Observable(provider, factory, mediator, publisher, subscriber, disposer),
+    IWalletNavigationViewModel
 {
     [ObservableProperty]
-    private int index = 0;
+    private bool isSelected;
 
     [ObservableProperty]
     private string named = $"{named}";

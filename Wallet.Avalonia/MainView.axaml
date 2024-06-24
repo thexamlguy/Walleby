@@ -13,10 +13,10 @@
         SelectionFollowsFocus="True">
         <Interaction.Behaviors>
             <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsOpened}" Value="True">
-                <InvokeNavigationViewItemAction />
+                <InvokeNavigationViewItemAction SelectedIndex="1" />
             </DataTriggerBehavior>
             <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsSelected}" Value="True">
-                <InvokeNavigationViewItemAction />
+                <InvokeNavigationViewItemAction SelectedIndex="1" />
             </DataTriggerBehavior>
         </Interaction.Behaviors>
         <NavigationView.PaneCustomContent>
@@ -34,6 +34,7 @@
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem">
                             <Setter Property="MinWidth" Value="0" />
+                            <Setter Property="Padding" Value="0" />
                             <Setter Property="Margin" Value="2,0,2,0" />
                         </Style>
                     </ListBox.Styles>

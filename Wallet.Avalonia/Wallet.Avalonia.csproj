@@ -56,8 +56,8 @@
 	  <Compile Update="ItemCollectionView.axaml.cs">
 	    <DependentUpon>ItemCollectionView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="CreateItemActionView.axaml.cs">
-	    <DependentUpon>CreateItemActionView.axaml</DependentUpon>
+	  <Compile Update="CreateItemNavigationView.axaml.cs">
+	    <DependentUpon>CreateItemNavigationView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="ItemCommandHeaderView.axaml.cs">
 	    <DependentUpon>ItemCommandHeaderView.axaml</DependentUpon>

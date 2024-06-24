@@ -116,6 +116,8 @@ public partial class App : Application
                         services.AddHandler<OpenWalletHandler>();
 
                         services.AddTemplate<WalletNavigationViewModel, WalletNavigationView>();
+
+                        services.AddTemplate<CreateItemNavigationViewModel, CreateItemNavigationView>();
                         services.AddTemplate<AllNavigationViewModel, AllNavigationView>();
                         services.AddTemplate<FavouritesNavigationViewModel, FavouritesNavigationView>();
                         services.AddTemplate<CategoriesNavigationViewModel, CategoriesNavigationView>();
@@ -133,7 +135,6 @@ public partial class App : Application
 
                         services.AddTemplate<WalletHeaderViewModel, WalletHeaderView>("WalletHeader");
                         services.AddTemplate<BackActionViewModel, BackActionView>();
-                        services.AddTemplate<CreateItemActionViewModel, CreateItemActionView>();
                         services.AddTemplate<SearchWalletActionViewModel, SearchWalletActionView>();
 
                         services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ItemCategoryCollection");
