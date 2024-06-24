@@ -14,7 +14,7 @@ public class QueryWalletHandler(IDbContextFactory<WalletContext> dbContextFactor
         List<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)> items = [];
         if (args.Sender is Wallet<(string, string)> Wallet)
         {
-            (string filter, string text) = Wallet.Sender;
+            (string filter, string text) = Wallet.Value;
 
             ExpressionStarter<ItemEntry> predicate =
                 PredicateBuilder.New<ItemEntry>(true);

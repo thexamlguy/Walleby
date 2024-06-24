@@ -65,9 +65,15 @@ public partial class WalletNavigationViewModel :
         return Task.CompletedTask;
     }
 
-    public Task Handle(DeactivatedEventArgs<Wallet> args) =>
-        Task.FromResult(IsActivated = false);
+    public Task Handle(DeactivatedEventArgs<Wallet> args)
+    {
+        IsActivated = false;
+        return Task.CompletedTask;
+    }
 
-    public Task Handle(ActivatedEventArgs<Wallet> args) =>
-        Task.FromResult(IsActivated = true);
+    public Task Handle(ActivatedEventArgs<Wallet> args)
+    {
+        IsActivated = true;
+        return Task.CompletedTask;
+    }
 }

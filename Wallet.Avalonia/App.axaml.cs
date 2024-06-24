@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Toolkit.Avalonia;
 using Toolkit.Foundation;
+using FluentAvalonia.Core;
 
 namespace Wallet.Avalonia;
 
@@ -20,6 +21,8 @@ public partial class App : Application
     public override void Initialize()
     {
         this.EnableHotReload();
+        FAUISettings.SetAnimationsEnabledAtAppLevel(false);
+
         AvaloniaXamlLoader.Load(this);
     }
 

@@ -34,11 +34,17 @@ public abstract partial class FilterNavigationViewModel(IServiceProvider provide
         return Task.CompletedTask;
     }
 
-    public Task Handle(DeactivatedEventArgs<Wallet> args) =>
-        Task.FromResult(IsActivated = false);
+    public Task Handle(DeactivatedEventArgs<Wallet> args)
+    {
+        IsActivated = false;
+        return Task.CompletedTask;
+    }
 
-    public Task Handle(ActivatedEventArgs<Wallet> args) =>
-        Task.FromResult(IsActivated = true);
+    public Task Handle(ActivatedEventArgs<Wallet> args)
+    {
+        IsActivated = true;
+        return Task.CompletedTask;
+    }
 }
 
 [Notification(typeof(NotifyEventArgs<Item<int>>), nameof(Value))]
@@ -58,14 +64,20 @@ public abstract partial class FilterNavigationViewModel<TWalletNavigation>(IServ
     IWalletNavigationViewModel
 {
     [ObservableProperty]
-    private bool activated;
+    private bool isActivated;
 
     [ObservableProperty]
     private bool isSelected;
 
-    public Task Handle(DeactivatedEventArgs<Wallet> args) =>
-        Task.FromResult(Activated = false);
+    public Task Handle(DeactivatedEventArgs<Wallet> args)
+    {
+        IsActivated = false;        
+        return Task.CompletedTask;
+    }
 
-    public Task Handle(ActivatedEventArgs<Wallet> args) =>
-        Task.FromResult(Activated = true);
+    public Task Handle(ActivatedEventArgs<Wallet> args)
+    {
+        IsActivated = true;
+        return Task.CompletedTask;
+    }
 }

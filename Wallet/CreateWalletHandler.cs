@@ -14,7 +14,7 @@ public class CreateWalletHandler(IWalletFactory componentFactory,
     {
         if (args.Sender is Wallet <(string, string)> Wallet)
         {
-            if (Wallet.Sender is (string name, string password) && 
+            if (Wallet.Value is (string name, string password) && 
                 name is { Length: > 0 } &&
                 password is { Length: > 0 })
             {

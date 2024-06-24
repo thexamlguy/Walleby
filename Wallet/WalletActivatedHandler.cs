@@ -9,7 +9,7 @@ public class WalletActivatedHandler(IWalletHostCollection Wallets,
 {
     public Task Handle(ActivatedEventArgs<Wallet<IComponentHost>> args)
     {
-        if (args.Sender is Wallet<IComponentHost> wallet && wallet.Sender is IComponentHost host)
+        if (args.Sender is Wallet<IComponentHost> wallet && wallet.Value is IComponentHost host)
         {
             List<IComponentHost> sortedWallets = [.. Wallets, host];
             sortedWallets = [.. sortedWallets.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() is 

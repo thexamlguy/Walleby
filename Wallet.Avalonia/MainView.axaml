@@ -2,14 +2,23 @@
     x:Class="Wallet.Avalonia.MainView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:vm="using:Wallet"
     x:DataType="vm:MainViewModel">
     <NavigationView
         FooterMenuItemsSource="{Binding Footer}"
         IsSettingsVisible="False"
         MenuItemTemplate="{Binding Template}"
-        MenuItemsSource="{Binding SelectedItem, Mode=TwoWay}"
+        MenuItemsSource="{Binding SelectedItem}"
         SelectionFollowsFocus="True">
+        <Interaction.Behaviors>
+            <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsOpened}" Value="True">
+                <InvokeNavigationViewItemAction />
+            </DataTriggerBehavior>
+            <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsSelected}" Value="True">
+                <InvokeNavigationViewItemAction />
+            </DataTriggerBehavior>
+        </Interaction.Behaviors>
         <NavigationView.PaneCustomContent>
             <Grid RowDefinitions="*,Auto">
                 <ListBox
@@ -19,6 +28,9 @@
                     ItemTemplate="{ReflectionBinding Template}"
                     ItemsSource="{Binding}"
                     SelectedItem="{Binding SelectedItem}">
+                    <ListBox.Resources>
+                        <StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="SubtleFillColorTransparentBrush" />
+                    </ListBox.Resources>
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem">
                             <Setter Property="MinWidth" Value="0" />

@@ -5,6 +5,8 @@ namespace Wallet.Avalonia;
 public partial class AllNavigationView :
     NavigationViewItem
 {
-    public AllNavigationView() => 
+    public AllNavigationView()
+    {
         InitializeComponent();
+    }
 }
