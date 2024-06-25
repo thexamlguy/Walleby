@@ -15,14 +15,12 @@
                 VerticalAlignment="Center"
                 FontFamily="{DynamicResource FluentThemeFontFamily}"
                 FontSize="18"
-                Foreground="{DynamicResource IconForegroundBrush}"
                 IsVisible="{Binding !Value}"
                 Text="&#xEF61;" />
             <TextBlock
                 VerticalAlignment="Center"
                 FontFamily="{DynamicResource FluentThemeFontFamily}"
                 FontSize="18"
-                Foreground="{DynamicResource IconForegroundBrush}"
                 IsVisible="{Binding Value}"
                 Text="&#xEF60;" />
         </Grid>

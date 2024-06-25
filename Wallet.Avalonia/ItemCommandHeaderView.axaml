@@ -12,14 +12,6 @@
             <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{DynamicResource SubtleFillColorSecondary}" />
             <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{DynamicResource SubtleFillColorTertiary}" />
             <Thickness x:Key="ButtonBorderThemeThickness">0</Thickness>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="IconForegroundBrush" Color="#AB000000" />
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="IconForegroundBrush" Color="#ABFFFFFF" />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <ItemsControl

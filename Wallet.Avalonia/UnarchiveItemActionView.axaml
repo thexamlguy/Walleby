@@ -9,13 +9,11 @@
         Height="{StaticResource ButtonHeight}"
         VerticalAlignment="Center"
         Command="{Binding InvokeCommand}"
-        Foreground="{DynamicResource IconForegroundBrush}"
         ToolTip.Tip="Restore">
         <TextBlock
             VerticalAlignment="Center"
             FontFamily="{DynamicResource FluentThemeFontFamily}"
             FontSize="18"
-            Foreground="{DynamicResource IconForegroundBrush}"
             Text="&#xE075;" />
     </Button>
 </UserControl>

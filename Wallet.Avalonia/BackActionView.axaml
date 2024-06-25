@@ -10,28 +10,18 @@
             <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{DynamicResource SubtleFillColorSecondary}" />
             <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{DynamicResource SubtleFillColorTertiary}" />
             <Thickness x:Key="ButtonBorderThemeThickness">0</Thickness>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="IconForegroundBrush" Color="#AB000000" />
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="IconForegroundBrush" Color="#ABFFFFFF" />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Button
         Width="{StaticResource ButtonWidth}"
         Height="{StaticResource ButtonHeight}"
         VerticalAlignment="Center"
-        Foreground="{DynamicResource IconForegroundBrush}"
         ToolTip.Tip="Back">
         <TextBlock
             Margin="0,3,0,0"
             VerticalAlignment="Center"
             FontFamily="{DynamicResource FluentThemeFontFamily}"
             FontSize="16"
-            Foreground="{DynamicResource IconForegroundBrush}"
             Text="&#xE0F5;" />
         <Interaction.Behaviors>
             <EventTriggerBehavior EventName="Click">

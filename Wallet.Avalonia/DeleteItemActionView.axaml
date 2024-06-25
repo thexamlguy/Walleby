@@ -9,14 +9,12 @@
         Height="{StaticResource ButtonHeight}"
         VerticalAlignment="Center"
         Command="{Binding InvokeCommand}"
-        Foreground="{DynamicResource IconForegroundBrush}"
         ToolTip.Tip="Delete">
         <TextBlock
             Margin="0,3,0,0"
             VerticalAlignment="Center"
             FontFamily="{DynamicResource FluentThemeFontFamily}"
             FontSize="18"
-            Foreground="{DynamicResource IconForegroundBrush}"
             Text="&#xE5B9;" />
     </Button>
 </UserControl>
