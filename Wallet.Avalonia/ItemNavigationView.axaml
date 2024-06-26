@@ -31,7 +31,7 @@
         <Grid Grid.Column="0">
             <PersonPicture Height="40" DisplayName="{Binding Name}" />
             <TextBlock
-                Margin="0,0,2,12"
+                Margin="0,0,0,-2"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 FontFamily="{DynamicResource FluentThemeFontFamily}"

@@ -12,7 +12,7 @@
             <NavigateAction Region="Left" Route="ItemCategoryCollection">
                 <Parameter Key="Transition" Value="FromRight" />
                 <Parameter Key="IsBackStackEnabled" Value="{x:True}" />
-                <Parameter Key="ClearBackStack" Value="{x:True}" />
+                <Parameter Key="ClearBackStack" Value="[2-2]" />
             </NavigateAction>
             <NavigateAction
                 Region="{Binding Named, StringFormat='{}{0}:Content'}"
