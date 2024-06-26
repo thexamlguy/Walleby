@@ -36,6 +36,7 @@ public abstract partial class FilterNavigationViewModel(IServiceProvider provide
 
     public Task Handle(DeactivatedEventArgs<Wallet> args)
     {
+        IsSelected = false;
         IsActivated = false;
         return Task.CompletedTask;
     }
@@ -71,6 +72,7 @@ public abstract partial class FilterNavigationViewModel<TWalletNavigation>(IServ
 
     public Task Handle(DeactivatedEventArgs<Wallet> args)
     {
+        IsSelected = false;
         IsActivated = false;        
         return Task.CompletedTask;
     }
