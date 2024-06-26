@@ -10,13 +10,18 @@
             <InvokeCommandAction Command="{Binding InvokeCommand}" />
         </AttachedEventTriggerBehaviour>
     </Interaction.Behaviors>
-    <Grid Background="Transparent" ColumnDefinitions="Auto,*">
+    <Grid
+        Margin="0,6,6,6"
+        Background="Transparent"
+        ColumnDefinitions="Auto,*">
         <PersonPicture
             Grid.Column="0"
             Height="40"
             DisplayName="{Binding Name}" />
-        <StackPanel Grid.Column="1" Margin="12,12,6,12">
-            <TextBlock Text="{Binding Name}" />
-        </StackPanel>
+        <TextBlock
+            Grid.Column="1"
+            Margin="12,0,0,0"
+            VerticalAlignment="Center"
+            Text="{Binding Name}" />
     </Grid>
 </ListBoxItem>
