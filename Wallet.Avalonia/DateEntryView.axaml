@@ -4,12 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:DataType="vm:DateEntryViewModel"
-    Header="{Binding Key}">
+    Header="{Binding Key}"
+    IsExpanded="False">
+    <SettingsExpander.Resources>
+        <Thickness x:Key="TextControlThemePadding">10,5,6,6</Thickness>
+        <Thickness x:Key="TextControlCompactThemePadding">0</Thickness>
+    </SettingsExpander.Resources>
     <SettingsExpander.Footer>
         <Grid>
             <DatePicker SelectedDate="{Binding Value}">
                 <DatePicker.Styles>
                     <Style Selector="DatePicker.Write">
+                        <Setter Property="MaxWidth" Value="{Binding Width}" />
                         <Setter Property="MinWidth" Value="{Binding Width}" />
                         <Setter Property="IsVisible" Value="True" />
                     </Style>
@@ -44,7 +50,9 @@
                         <Setter Property="BorderBrush" Value="Transparent" />
                         <Setter Property="Background" Value="Transparent" />
                         <Setter Property="IsVisible" Value="True" />
-                        <Setter Property="Foreground">
+                        <Setter Property="Padding" Value="{StaticResource TextControlCompactThemePadding}" />
+                        <Setter Property="MinHeight" Value="0" />
+						<Setter Property="Foreground">
                             <Setter.Value>
                                 <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
                             </Setter.Value>
