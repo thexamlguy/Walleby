@@ -4,11 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:vm="using:Wallet"
-    Title="Create a new wallet"
     x:DataType="vm:CreateWalletViewModel"
     CloseButtonText="Cancel"
     DefaultButton="Primary"
     PrimaryButtonText="Create">
+    <ContentDialog.Resources>
+        <x:Double x:Key="PersonPictureSize">144</x:Double>
+        <x:Double x:Key="ButtonSize">36</x:Double>
+        <Thickness x:Key="ButtonMargin">0,0,6,6</Thickness>
+        <CornerRadius x:Key="ButtonCornerRadius">18</CornerRadius>
+    </ContentDialog.Resources>
     <ContentDialog.Styles>
         <Style Selector="ui|ContentDialog.Write">
             <Setter Property="IsPrimaryButtonEnabled" Value="True" />
@@ -53,8 +58,43 @@
     <Grid>
         <StackPanel
             Width="400"
+            Margin="0,-24,0,0"
             IsEnabled="{Binding !IsActive}"
             Spacing="18">
+            <Grid HorizontalAlignment="Center">
+                <PersonPicture
+                    Width="{StaticResource PersonPictureSize}"
+                    Height="{StaticResource PersonPictureSize}"
+                    DisplayName="{Binding Name}" />
+                <DropDownButton
+                    Width="{StaticResource ButtonSize}"
+                    Height="{StaticResource ButtonSize}"
+                    Margin="{StaticResource ButtonMargin}"
+                    Padding="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    CornerRadius="{StaticResource ButtonCornerRadius}">
+                    <DropDownButton.Styles>
+                        <Style Selector="DropDownButton /template/ ui|FontIcon#DropDownGlyph">
+                            <Setter Property="IsVisible" Value="False" />
+                        </Style>
+                    </DropDownButton.Styles>
+                    <DropDownButton.Flyout>
+                        <MenuFlyout>
+                            <MenuItem Header="Import picture" />
+                            <MenuItem Header="Remove picture" />
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                    <TextBlock
+                        Margin="0,3,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="{DynamicResource FluentThemeFontFamily}"
+                        FontSize="18"
+                        Text="&#xE36A;" />
+                </DropDownButton>
+            </Grid>
             <StackPanel>
                 <TextBlock Margin="0,0,0,6" Text="Name" />
                 <TextBox Text="{Binding Name}" Watermark="e.g. Personal" />

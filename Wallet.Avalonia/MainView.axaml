@@ -19,6 +19,17 @@
                 <InvokeNavigationViewItemAction SelectedIndex="1" />
             </DataTriggerBehavior>
         </Interaction.Behaviors>
+        <NavigationView.PaneHeader>
+            <Border
+                Margin="12,0,0,0"
+                Padding="12,4,12,4"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Background="{DynamicResource AccentFillColorDefaultBrush}"
+                CornerRadius="12">
+                <TextBlock FontSize="10" Text="BETA PREVIEW 1" />
+            </Border>
+        </NavigationView.PaneHeader>
         <NavigationView.PaneCustomContent>
             <Grid RowDefinitions="*,Auto">
                 <ListBox
