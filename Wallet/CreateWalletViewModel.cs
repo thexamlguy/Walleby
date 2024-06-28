@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using Toolkit.Foundation;
@@ -26,6 +27,12 @@ public partial class CreateWalletViewModel :
 
     [ObservableProperty]
     private bool isConfirmed;
+
+    [RelayCommand]
+    public async Task Import()
+    {
+        await Mediator.Handle<RequestEventArgs<ProfileImage>, IImageDescriptor>(Request.As<ProfileImage>());
+    }
 
     public CreateWalletViewModel(IValidation validation, 
         IServiceProvider provider,

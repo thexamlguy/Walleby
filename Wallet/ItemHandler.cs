@@ -5,13 +5,13 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class RequestItemHandler(IDbContextFactory<WalletContext> dbContextFactory) : 
+public class ItemHandler(IDbContextFactory<WalletContext> dbContextFactory) : 
     IHandler<RequestEventArgs<Item<Guid>>, (Guid, string, string?, string, ItemConfiguration?)>
 {
     public async Task<(Guid, string, string?, string, ItemConfiguration?)> Handle(RequestEventArgs<Item<Guid>> args, 
         CancellationToken cancellationToken)
     {
-        if (args.Value is Item<Guid> item)
+        if (args.Sender is Item<Guid> item)
         {
             Guid id = item.Value;
 

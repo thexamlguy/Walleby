@@ -105,8 +105,9 @@ public partial class App : Application
                             }
                         });
 
+                        services.AddHandler<ProfileImageHandler>();
                         services.AddHandler<QueryWalletHandler>();
-                        services.AddHandler<RequestItemHandler>();
+                        services.AddHandler<ItemHandler>();
                         services.AddHandler<CreateItemHandler>();
                         services.AddHandler<DeleteItemHandler>();
                         services.AddHandler<UpdateItemHander>();
@@ -212,7 +213,9 @@ public partial class App : Application
                 })!);
 
                 services.AddTransient<IWalletFactory, WalletFactory>();
+
                 services.AddHandler<CreateWalletHandler>();
+                services.AddHandler<ProfileImageHandler>();
 
                 services.AddSingleton<IWalletHostCollection, WalletHostCollection>();
                 services.AddInitializer<WalletInitializer>();

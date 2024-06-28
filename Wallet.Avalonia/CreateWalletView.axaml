@@ -83,8 +83,8 @@
                     </DropDownButton.Styles>
                     <DropDownButton.Flyout>
                         <MenuFlyout>
-                            <MenuItem Header="Import picture" />
-                            <MenuItem Header="Remove picture" />
+                            <MenuItem Command="{Binding ImportCommand}" Header="Import image" />
+                            <MenuItem Header="Remove image" />
                         </MenuFlyout>
                     </DropDownButton.Flyout>
                     <TextBlock
