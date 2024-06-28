@@ -10,6 +10,12 @@ public partial class CreateWalletViewModel :
     Observable,
     IPrimaryConfirmation
 {
+    [ObservableProperty]
+    private IImageDescriptor? image;
+
+    [ObservableProperty]
+    private bool isConfirmed;
+
     [MaybeNull]
     [ObservableProperty]
     private string name;
@@ -25,21 +31,12 @@ public partial class CreateWalletViewModel :
     [ObservableProperty]
     private IValidation validation;
 
-    [ObservableProperty]
-    private bool isConfirmed;
-
-    [RelayCommand]
-    public async Task Import()
-    {
-        await Mediator.Handle<RequestEventArgs<ProfileImage>, IImageDescriptor>(Request.As<ProfileImage>());
-    }
-
-    public CreateWalletViewModel(IValidation validation, 
+    public CreateWalletViewModel(IValidation validation,
         IServiceProvider provider,
         IServiceFactory factory,
-        IMediator mediator, 
+        IMediator mediator,
         IPublisher publisher,
-        ISubscriber subscriber, 
+        ISubscriber subscriber,
         IDisposer disposer) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Validation = validation;
@@ -47,7 +44,7 @@ public partial class CreateWalletViewModel :
         Validation.Add(() => Name, [new ValidationRule(() => Name is { Length: > 0 })],
             ValidationTrigger.Immediate);
 
-        Validation.Add(() => Password, [new ValidationRule(() => Password is { Length: > 0 })], 
+        Validation.Add(() => Password, [new ValidationRule(() => Password is { Length: > 0 })],
             ValidationTrigger.Immediate);
 
         Name = name;
@@ -63,6 +60,10 @@ public partial class CreateWalletViewModel :
             return IsConfirmed;
         }
     }
+
+    [RelayCommand]
+    public async Task Import() => Image = await Mediator.Handle<RequestEventArgs<ProfileImage>,
+        IImageDescriptor>(Request.As<ProfileImage>());
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs args)
     {

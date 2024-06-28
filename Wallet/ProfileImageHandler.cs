@@ -13,7 +13,7 @@ public class ProfileImageHandler(IFileProvider fileProvider,
         {
             if (files.FirstOrDefault() is string file)
             {
-                return await imageProvider.Get(file, 100, 100, true);
+                return await imageProvider.Get(file, 200, 200, true);
             }
         }
 
