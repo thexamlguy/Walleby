@@ -85,7 +85,10 @@
                     <DropDownButton.Flyout>
                         <MenuFlyout>
                             <MenuItem Command="{Binding ImportCommand}" Header="Import image" />
-                            <MenuItem Header="Remove image" />
+                            <MenuItem
+                                Command="{Binding RemoveCommand}"
+                                Header="Remove image"
+                                IsEnabled="{Binding ImageDescriptor, Converter={x:Static ObjectConverters.IsNotNull}}" />
                         </MenuFlyout>
                     </DropDownButton.Flyout>
                     <TextBlock
