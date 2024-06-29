@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class WalletInitializer(IHostingEnvironment environment, IEnumerable<IConfigurationDescriptor<WalletConfiguration>> configurations,
+public class WalletInitializer(IHostEnvironment environment, 
     IComponentFactory componentFactory,
     IWalletHostCollection Wallets) : 
     IInitialization
