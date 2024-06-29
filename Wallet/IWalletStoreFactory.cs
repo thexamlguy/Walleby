@@ -1,6 +1,6 @@
 ﻿namespace Wallet;
 
-public interface IWalletStorageFactory
+public interface IWalletStoreFactory
 {
     Task<bool> Create(string name, SecurityKey key);
 }

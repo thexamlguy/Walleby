@@ -1,47 +1,34 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Text;
 using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class CreateWalletHandler(IWalletFactory componentFactory,
+public class CreateWalletHandler(IWalletHostFactory componentFactory,
     IPublisher publisher) :
-    IHandler<CreateEventArgs<Wallet<(string, string)>>, bool>
+    IHandler<CreateEventArgs<Wallet<(string, string, IImageDescriptor?)>>, bool>
 {
-    public async Task<bool> Handle(CreateEventArgs<Wallet<(string, string)>> args,
+    public async Task<bool> Handle(CreateEventArgs<Wallet<(string, string, IImageDescriptor?)>> args,
         CancellationToken cancellationToken)
     {
-        if (args.Sender is Wallet <(string, string)> Wallet)
+        if (args.Sender is Wallet <(string, string, IImageDescriptor?)> Wallet)
         {
-            if (Wallet.Value is (string name, string password) && 
+            if (Wallet.Value is (string name, string password,
+                IImageDescriptor thumbnail) && 
                 name is { Length: > 0 } &&
                 password is { Length: > 0 })
             {
                 if (componentFactory.Create(name) is IComponentHost host)
                 {
-                    ISecurityKeyFactory keyFactory = host.Services.GetRequiredService<ISecurityKeyFactory>();
-                    IDecoratorService<SecurityKey> secureKeyStore = host.Services.GetRequiredService<IDecoratorService<SecurityKey>>();
-                    IWalletStorageFactory WalletStorageFactory = host.Services.GetRequiredService<IWalletStorageFactory>();
-
-                    if (keyFactory.Create(Encoding.UTF8.GetBytes(password)) is SecurityKey key)
+                    IWalletFactory factory = host.Services.GetRequiredService<IWalletFactory>();
+                    if (await factory.Create(name, password, thumbnail))
                     {
-                        secureKeyStore.Set(key);
+                        host.Start();
+                        publisher.Publish(Activated.As(new Wallet<IComponentHost>(host)));
 
-                        if (await WalletStorageFactory.Create(name, key))
-                        {
-                            IWritableConfiguration<WalletConfiguration> configuration =
-                                host.Services.GetRequiredService<IWritableConfiguration<WalletConfiguration>>();
-
-                            configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");
-                            host.Start();
-
-                            publisher.Publish(Activated.As(new Wallet<IComponentHost>(host)));
-                            return true;
-                        }
+                        return true;
                     }
                 }
-
             }
         }
 

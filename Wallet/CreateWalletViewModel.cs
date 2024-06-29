@@ -54,16 +54,16 @@ public partial class CreateWalletViewModel :
     {
         using (await new ActivityLock(this))
         {
-            IsConfirmed = await Mediator.Handle<CreateEventArgs<Wallet<(string, string)>>,
-                bool>(Create.As(new Wallet<(string, string)>((Name, Password))));
+            IsConfirmed = await Mediator.Handle<CreateEventArgs<Wallet<(string, string, IImageDescriptor?)>>,
+                bool>(Create.As(new Wallet<(string, string, IImageDescriptor?)>((Name, Password, ImageDescriptor))));
 
             return IsConfirmed;
         }
     }
 
     [RelayCommand]
-    public async Task Import() => ImageDescriptor = await Mediator.Handle<RequestEventArgs<ProfileImage>,
-        IImageDescriptor>(Request.As<ProfileImage>());
+    public async Task Import() => ImageDescriptor = await Mediator.Handle<ReadEventArgs<ProfileImage>,
+        IImageDescriptor>(Read.As<ProfileImage>());
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs args)
     {

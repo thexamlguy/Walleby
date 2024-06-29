@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class WalletInitializer(IHostEnvironment environment, 
+public class WalletCollectionInitializer(IHostEnvironment environment, 
     IComponentFactory componentFactory,
     IWalletHostCollection Wallets) : 
     IInitialization

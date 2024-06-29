@@ -1,9 +1,10 @@
 ﻿using Toolkit.Foundation;
 
-namespace Wallet
+namespace Wallet;
+
+public interface IWalletFactory
 {
-    public interface IWalletFactory
-    {
-        IComponentHost? Create(string key);
-    }
+    Task<bool> Create(string name, 
+        string password,
+        IImageDescriptor thumbnail);
 }

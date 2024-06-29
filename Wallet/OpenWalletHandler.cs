@@ -5,7 +5,7 @@ namespace Wallet;
 
 public class OpenWalletHandler(IConfigurationDescriptor<WalletConfiguration> descriptor,
     ISecurityKeyFactory securityKeyFactory,
-    IWalletStorageFactory WalletStorageFactory) :
+    IWalletStoreFactory WalletStorageFactory) :
     IHandler<ActivateEventArgs<Wallet<string>>, bool>
 {
     public async Task<bool> Handle(ActivateEventArgs<Wallet<string>> args,

@@ -6,10 +6,10 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class WalletStorageFactory(IDecoratorService<WalletConnection> connection,
+public class WalletStoreFactory(IDecoratorService<WalletConnection> connection,
     IHostEnvironment environment,
     IServiceProvider provider) :
-    IWalletStorageFactory
+    IWalletStoreFactory
 {
     public async Task<bool> Create(string name,
         SecurityKey key)

@@ -74,6 +74,8 @@ public partial class App : Application
                         services.AddTransient(_ =>
                             provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>());
 
+                        services.AddTransient<IWalletFactory, WalletFactory>();
+
                         services.AddTransient<IKeyGenerator, KeyGenerator>();
                         services.AddTransient<IEncryptor, AesEncryptor>();
                         services.AddTransient<IDecryptor, AesDecryptor>();
@@ -82,7 +84,7 @@ public partial class App : Application
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
 
                         services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
-                        services.AddTransient<IWalletStorageFactory, WalletStorageFactory>();
+                        services.AddTransient<IWalletStoreFactory, WalletStoreFactory>();
 
                         services.AddTransient<IItemConfigurationCollection, ItemConfigurationCollection>(provider =>
                         {
@@ -105,7 +107,8 @@ public partial class App : Application
                             }
                         });
 
-                        services.AddHandler<ProfileImageHandler>();
+                        services.AddHandler<ReadProfileImageHandler>();
+
                         services.AddHandler<QueryWalletHandler>();
                         services.AddHandler<ItemHandler>();
                         services.AddHandler<CreateItemHandler>();
@@ -212,13 +215,13 @@ public partial class App : Application
                     });
                 })!);
 
-                services.AddTransient<IWalletFactory, WalletFactory>();
-
-                services.AddHandler<CreateWalletHandler>();
-                services.AddHandler<ProfileImageHandler>();
+                services.AddTransient<IWalletHostFactory, WalletHostFactory>();
 
                 services.AddSingleton<IWalletHostCollection, WalletHostCollection>();
-                services.AddInitializer<WalletInitializer>();
+                services.AddInitializer<WalletCollectionInitializer>();
+
+                services.AddHandler<CreateWalletHandler>();
+                services.AddHandler<ReadProfileImageHandler>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
                 services.AddHandler<SynchronizeMainViewModelHandler>();
