@@ -66,7 +66,7 @@
                     Width="{StaticResource PersonPictureSize}"
                     Height="{StaticResource PersonPictureSize}"
                     DisplayName="{Binding Name}"
-                    ProfilePicture="{Binding Image, Converter={ImageDescriptorToBitmapConverter}}" />
+                    ProfilePicture="{Binding ImageDescriptor.Image}" />
                 <DropDownButton
                     Width="{StaticResource ButtonSize}"
                     Height="{StaticResource ButtonSize}"

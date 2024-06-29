@@ -11,7 +11,7 @@ public partial class CreateWalletViewModel :
     IPrimaryConfirmation
 {
     [ObservableProperty]
-    private IImageDescriptor? image;
+    private IImageDescriptor? imageDescriptor;
 
     [ObservableProperty]
     private bool isConfirmed;
@@ -62,7 +62,7 @@ public partial class CreateWalletViewModel :
     }
 
     [RelayCommand]
-    public async Task Import() => Image = await Mediator.Handle<RequestEventArgs<ProfileImage>,
+    public async Task Import() => ImageDescriptor = await Mediator.Handle<RequestEventArgs<ProfileImage>,
         IImageDescriptor>(Request.As<ProfileImage>());
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs args)
