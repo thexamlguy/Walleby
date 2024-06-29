@@ -5,9 +5,10 @@ namespace Wallet;
 public class WalletFactory(IComponentFactory componentFactory) :
     IWalletFactory
 {
-    public IComponentHost? Create(string name)
+    public IComponentHost? Create(string key)
     {
-        if (componentFactory.Create<IWalletComponent, WalletConfiguration>($"Wallet:{name}", new WalletConfiguration()) is IComponentHost host)
+        if (componentFactory.Create<WalletComponent, WalletConfiguration>($"Wallet:{key}",
+            new WalletConfiguration()) is IComponentHost host)
         {
             return host;
         }

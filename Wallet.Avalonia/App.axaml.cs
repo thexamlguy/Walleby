@@ -62,7 +62,7 @@ public partial class App : Application
                 }
 
                 services.AddHandler<WalletActivatedHandler>();
-                services.AddTransient<IWalletComponent>(provider => Component.Register<WalletComponent>(provider, args =>
+                services.AddTransient(provider => Component.Create<WalletComponent>(provider, args =>
                 {
                     args.AddServices(services =>
                     {

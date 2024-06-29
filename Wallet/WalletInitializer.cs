@@ -11,7 +11,7 @@ public class WalletInitializer(IEnumerable<IConfigurationDescriptor<WalletConfig
     {
         foreach (IConfigurationDescriptor<WalletConfiguration> configuration in configurations)
         {
-            if (componentFactory.Create<IWalletComponent,
+            if (componentFactory.Create<WalletComponent,
                 WalletConfiguration>(configuration.Section, configuration.Value)
                 is IComponentHost host)
             {

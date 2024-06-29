@@ -1,6 +1,6 @@
 ﻿namespace Wallet;
 
-public class WalletConnection(string connection)
+public record WalletConnection(string connection)
 {
     private readonly string connection = connection;
 
