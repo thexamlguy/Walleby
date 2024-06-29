@@ -86,6 +86,8 @@ public partial class App : Application
                         services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
                         services.AddTransient<IWalletStoreFactory, WalletStoreFactory>();
 
+                        services.AddTransient<IInitialization, WalletProfileImageInitializer>();
+
                         services.AddTransient<IItemConfigurationCollection, ItemConfigurationCollection>(provider =>
                         {
                             IEnumerable<IConfigurationDescriptor<ItemConfiguration>> items =
@@ -94,6 +96,8 @@ public partial class App : Application
 
                             return new ItemConfigurationCollection(items.ToDictionary(x => x.Name, x => (Func<ItemConfiguration>)(() => x.Value)));
                         });
+
+                        services.TryAddSingleton<IDecoratorService<ProfileImage<IImageDescriptor>>, DecoratorService<ProfileImage<IImageDescriptor>>>();
 
                         services.TryAddSingleton<IDecoratorService<SecurityKey>, DecoratorService<SecurityKey>>();
                         services.TryAddSingleton<IDecoratorService<WalletConnection>, DecoratorService<WalletConnection>>();
@@ -107,7 +111,7 @@ public partial class App : Application
                             }
                         });
 
-                        services.AddHandler<ReadProfileImageHandler>();
+                        services.AddHandler<CreateProfileImageHandler>();
 
                         services.AddHandler<QueryWalletHandler>();
                         services.AddHandler<ItemHandler>();
@@ -221,7 +225,7 @@ public partial class App : Application
                 services.AddInitializer<WalletCollectionInitializer>();
 
                 services.AddHandler<CreateWalletHandler>();
-                services.AddHandler<ReadProfileImageHandler>();
+                services.AddHandler<CreateProfileImageHandler>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
                 services.AddHandler<SynchronizeMainViewModelHandler>();

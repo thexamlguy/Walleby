@@ -15,11 +15,15 @@ public class SynchronizeMainViewModelHandler(IPublisher publisher,
             is IConfigurationDescriptor<WalletConfiguration> descriptor ? descriptor.Name : null))
         {
             if (Wallet.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() 
-                is IConfigurationDescriptor<WalletConfiguration> descriptor)
+                is IConfigurationDescriptor<WalletConfiguration> configuration)
             {
                 if (Wallet.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
                 {
-                    if (factory.Create<WalletNavigationViewModel>(args => args.Initialize(), descriptor.Name, selected) 
+                    IDecoratorService<ProfileImage<IImageDescriptor>> profileImageDecorator =
+                        Wallet.Services.GetRequiredService<IDecoratorService<ProfileImage<IImageDescriptor>>>();
+                    ProfileImage<IImageDescriptor>? profileImage = profileImageDecorator.Service;
+
+                    if (factory.Create<WalletNavigationViewModel>(args => args.Initialize(), configuration.Name, profileImage?.Value, selected) 
                         is WalletNavigationViewModel viewModel)
                     {
                         publisher.Publish(Create.As<IMainNavigationViewModel>(viewModel),

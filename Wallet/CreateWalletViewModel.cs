@@ -62,8 +62,8 @@ public partial class CreateWalletViewModel :
     }
 
     [RelayCommand]
-    public async Task Import() => ImageDescriptor = await Mediator.Handle<ReadEventArgs<ProfileImage>,
-        IImageDescriptor>(Read.As<ProfileImage>());
+    public async Task Import() => ImageDescriptor = await Mediator.Handle<CreateEventArgs<ProfileImage>,
+        IImageDescriptor>(Create.As<ProfileImage>());
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs args)
     {

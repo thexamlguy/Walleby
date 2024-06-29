@@ -17,6 +17,7 @@
                 </ConditionAction.Condition>
                 <NavigateAction Region="Main" Route="OpenWallet">
                     <Parameter Key="Name" Value="{Binding Name}" />
+                    <Parameter Key="ImageDescriptor" Value="{Binding ImageDescriptor}" />
                 </NavigateAction>
             </ConditionAction>
         </DataTriggerBehavior>
@@ -29,9 +30,13 @@
                 </ConditionAction.Condition>
                 <NavigateAction Region="Main" Route="OpenWallet">
                     <Parameter Key="Name" Value="{Binding Name}" />
+                    <Parameter Key="ImageDescriptor" Value="{Binding ImageDescriptor}" />
                 </NavigateAction>
             </ConditionAction>
         </AttachedEventTriggerBehaviour>
     </Interaction.Behaviors>
-    <PersonPicture Height="40" DisplayName="{Binding Name}" />
+    <PersonPicture
+        Height="40"
+        DisplayName="{Binding Name}"
+        ProfilePicture="{Binding ImageDescriptor.Image}" />
 </ListBoxItem>

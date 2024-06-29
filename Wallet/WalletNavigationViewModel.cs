@@ -27,6 +27,9 @@ public partial class WalletNavigationViewModel :
     [ObservableProperty]
     private bool isActivated;
 
+    [ObservableProperty]
+    private IImageDescriptor imageDescriptor;
+
     public WalletNavigationViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
@@ -35,10 +38,12 @@ public partial class WalletNavigationViewModel :
         IDisposer disposer,
         IContentTemplate template,
         string name,
+        IImageDescriptor imageDescriptor,
         bool isSelected) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
         Name = name;
+        ImageDescriptor = imageDescriptor;
         IsSelected = isSelected;
     }
 

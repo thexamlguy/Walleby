@@ -8,7 +8,7 @@ public class WalletCollectionInitializer(IHostEnvironment environment,
     IWalletHostCollection Wallets) : 
     IInitialization
 {
-    public async Task Initialize()
+    public void Initialize()
     {
         foreach (string wallet in Directory.EnumerateDirectories(Path.Combine(environment.ContentRootPath, "Wallet")))
         {
@@ -16,11 +16,11 @@ public class WalletCollectionInitializer(IHostEnvironment environment,
             string section = $"Wallet:{name}";
 
             if (componentFactory.Create<WalletComponent,
-                WalletConfiguration>(section)
+                WalletConfiguration>(section, new WalletConfiguration())
                 is IComponentHost host)
             {
                 Wallets.Add(host);
-                await host.StartAsync();
+                host.Start();
             }
         }
     }

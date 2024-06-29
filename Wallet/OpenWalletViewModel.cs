@@ -13,6 +13,9 @@ public partial class OpenWalletViewModel : Observable
     [ObservableProperty]
     private string? name;
 
+    [ObservableProperty]
+    private IImageDescriptor imageDescriptor;
+
     [MaybeNull]
     [ObservableProperty]
     private string password;
@@ -24,10 +27,13 @@ public partial class OpenWalletViewModel : Observable
         IPublisher publisher, 
         ISubscriber subscriber,
         IDisposer disposer,
-        string name) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        string name,
+        IImageDescriptor imageDescriptor) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         this.validation = validation;
+
         Name = name;
+        ImageDescriptor = imageDescriptor;
     }
 
     [RelayCommand]

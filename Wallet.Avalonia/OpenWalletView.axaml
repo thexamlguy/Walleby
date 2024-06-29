@@ -12,7 +12,8 @@
         <PersonPicture
             Width="144"
             Height="144"
-            DisplayName="{Binding Name}" />
+            DisplayName="{Binding Name}"
+            ProfilePicture="{Binding ImageDescriptor.Image}" />
         <TextBlock
             Text="{Binding Name}"
             TextAlignment="Center"
