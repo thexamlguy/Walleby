@@ -10,7 +10,13 @@ public class WalletCollectionInitializer(IHostEnvironment environment,
 {
     public void Initialize()
     {
-        foreach (string wallet in Directory.EnumerateDirectories(Path.Combine(environment.ContentRootPath, "Wallet")))
+        string path = Path.Combine(environment.ContentRootPath, "Wallet");
+        if (!Directory.Exists(path))
+        {
+            return;
+        }
+
+        foreach (string wallet in Directory.EnumerateDirectories(path))
         {
             string name = Path.GetFileName(wallet);
             string section = $"Wallet:{name}";
