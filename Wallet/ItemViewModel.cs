@@ -101,7 +101,7 @@ public partial class ItemViewModel :
         return Task.CompletedTask;
     }
 
-    public override Task Activated()
+    public override Task OnActivated()
     {
         if (Archived)
         {
@@ -132,7 +132,7 @@ public partial class ItemViewModel :
             }
         }
 
-        return base.Activated();
+        return base.OnActivated();
     }
 
     protected override SynchronizeExpression BuildAggregateExpression() =>

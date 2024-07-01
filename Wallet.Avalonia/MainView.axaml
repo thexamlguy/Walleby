@@ -6,6 +6,7 @@
     xmlns:vm="using:Wallet"
     x:DataType="vm:MainViewModel">
     <NavigationView
+        x:Name="NavigationView"
         FooterMenuItemsSource="{Binding Footer}"
         IsSettingsVisible="False"
         MenuItemTemplate="{Binding Template}"
@@ -33,6 +34,7 @@
         <NavigationView.PaneCustomContent>
             <Grid RowDefinitions="*,Auto">
                 <ListBox
+                    x:Name="ListBox"
                     Grid.Row="0"
                     Margin="1,2,1,0"
                     HorizontalAlignment="Center"
@@ -167,6 +169,14 @@
                             </StackPanel>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
+                    <Interaction.Behaviors>
+                        <DataTriggerBehavior Binding="{Binding $parent[NavigationView].SelectedItem, Converter={NamedTypeConverter}}" Value="ManageNavigationViewModel">
+                            <ChangePropertyAction
+                                PropertyName="SelectedItem"
+                                TargetObject="{Binding #ListBox}"
+                                Value="{x:Null}" />
+                        </DataTriggerBehavior>
+                    </Interaction.Behaviors>
                 </ListBox>
                 <NavigationViewItemSeparator Grid.Row="1" />
             </Grid>

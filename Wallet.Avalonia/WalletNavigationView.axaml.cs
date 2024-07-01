@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using Toolkit.UI.Controls.Avalonia;
 
 namespace Wallet.Avalonia;
 

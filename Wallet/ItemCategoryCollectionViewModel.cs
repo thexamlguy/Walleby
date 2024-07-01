@@ -16,13 +16,13 @@ public partial class ItemCategoryCollectionViewModel(IServiceProvider provider,
     [ObservableProperty]
     private IContentTemplate template = template;
 
-    public override Task Activated()
+    public override Task OnActivated()
     {
         Publisher.Publish(Notify.As(Factory.Create<WalletCommandHeaderCollection>(new List<IDisposable>
         {
             Factory.Create<BackActionViewModel>(),
         })));
 
-        return base.Activated();
+        return base.OnActivated();
     }
 }

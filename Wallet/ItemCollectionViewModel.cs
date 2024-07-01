@@ -59,14 +59,14 @@ public partial class ItemCollectionViewModel :
         return Task.CompletedTask;
     }
 
-    public override Task Activated()
+    public override Task OnActivated()
     {
         Publisher.Publish(Notify.As(Factory.Create<WalletCommandHeaderCollection>(new List<IDisposable>
         {
             Factory.Create<SearchWalletActionViewModel>(),
         })));
 
-        return base.Activated();
+        return base.OnActivated();
     }
 
     protected override SynchronizeExpression BuildAggregateExpression() =>

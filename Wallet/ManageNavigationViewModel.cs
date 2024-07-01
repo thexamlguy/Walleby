@@ -1,4 +1,5 @@
-﻿using Toolkit.Foundation;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Toolkit.Foundation;
 
 namespace Wallet;
 
@@ -9,4 +10,9 @@ public partial class ManageNavigationViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer),
-    IMainNavigationViewModel;
+    IMainNavigationViewModel,
+    ISelectable
+{
+    [ObservableProperty]
+    private bool isSelected;
+}

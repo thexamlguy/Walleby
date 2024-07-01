@@ -56,10 +56,10 @@ public partial class WalletNavigationViewModel :
         Add<FavouritesNavigationViewModel>("Favourites", 0);
         Add<ArchiveNavigationViewModel>("Archive", 0);
         Add<CategoriesNavigationViewModel>("Categories", 0);
+        IsOpened = true;
 
         Publisher.Publish(Changed.As<Item>());
 
-        IsOpened = true;
         return Task.CompletedTask;
     }
 

@@ -38,8 +38,8 @@ public class SynchronizeItemCollectionViewModelHandler(IMediator mediator,
                         Item<(Guid, string)> item = new((Id, Name));
 
                         decoratorService.Set(item);
-
                         cache.Add(item);
+
                         publisher.Publish(Create.As(viewModel), nameof(ItemCollectionViewModel));
                     }
 
