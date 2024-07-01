@@ -15,6 +15,8 @@ public record ItemEntry
 
     public int State { get; set; } = 0;
 
+    public BlobEntry? Image { get; set; }
+
     public required string Category { get; set; }
 
     public ICollection<TagEntry> Tags { get; set; } = new List<TagEntry>();

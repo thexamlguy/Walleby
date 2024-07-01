@@ -22,9 +22,9 @@ public class ConfirmCreateItemHandler(IMediator mediator,
                 Item<(Guid, string, string, IImageDescriptor?)> item = new((id, name, category, imageDescriptor));
                 publisher.Publish(Created.As(item));
 
-                await mediator.Handle<CreateEventArgs<(Guid, string, string,
-                    ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, string, string, 
-                    ItemConfiguration)>((id, name, category, itemConfiguration)));
+                await mediator.Handle<CreateEventArgs<(Guid, string, string, IImageDescriptor?,
+                    ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, string, string, IImageDescriptor?, 
+                    ItemConfiguration)>((id, name, category, imageDescriptor, itemConfiguration)));
 
                 publisher.Publish(Changed.As<Item>());
             }

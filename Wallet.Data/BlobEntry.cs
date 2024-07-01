@@ -11,7 +11,7 @@ public record BlobEntry
     public int Type { get; set; }
 
     [Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public DateTime DateTime { get; set; }
 }
