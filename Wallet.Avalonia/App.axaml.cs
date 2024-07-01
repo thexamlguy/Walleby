@@ -163,7 +163,6 @@ public partial class App : Application
                         services.AddScoped<IDecoratorService<ItemConfiguration>, DecoratorService<ItemConfiguration>>();
 
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
-                        services.AddHandler<CreateItemViewModelHandler>("Item");
 
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
                         services.AddTemplate<ItemContentViewModel, ItemContentView>();

@@ -35,7 +35,9 @@ public partial class ItemViewModel :
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
+        IDecoratorService<ItemHeaderConfiguration> itemHeaderConfigurationDecorator,
         string name = "",
+        ImageDescriptor? imageDescriptor = null,
         bool fromCategory = false,
         bool favourite = false,
         bool archived = false,
@@ -48,6 +50,16 @@ public partial class ItemViewModel :
         Favourite = favourite;
         Archived = archived;
         Name = name;
+
+        ItemHeaderConfiguration configuration = new()
+        {
+            Name = name
+        };
+
+        itemHeaderConfigurationDecorator.Set(configuration);
+
+        Add<ItemHeaderViewModel>(configuration, state, name, imageDescriptor);
+        Add<ItemContentViewModel>();
     }
 
     public IContentTemplate Template { get; set; }

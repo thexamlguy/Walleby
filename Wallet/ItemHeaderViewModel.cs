@@ -5,7 +5,7 @@ using Toolkit.Foundation;
 namespace Wallet;
 
 public partial class ItemHeaderViewModel : 
-    Observable<string, string>,
+    Observable<string>,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>,
@@ -19,6 +19,7 @@ public partial class ItemHeaderViewModel :
 
     [ObservableProperty]
     private IImageDescriptor? imageDescriptor;
+
     [ObservableProperty]
     private ItemState state;
 
@@ -30,13 +31,14 @@ public partial class ItemHeaderViewModel :
         IDisposer disposer,
         ItemHeaderConfiguration configuration,
         ItemState state,
-        string key,
-        string value) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
+        string value,
+        IImageDescriptor? imageDescriptor = null) : base(provider, factory, mediator, publisher, subscriber, disposer, value)
     {
         this.configuration = configuration;
 
         State = state;
         Value = value;
+        ImageDescriptor = imageDescriptor;
 
         Track(nameof(Value), () => Value, newValue => Value = newValue);
     }
@@ -83,6 +85,14 @@ public partial class ItemHeaderViewModel :
         if (configuration is not null)
         {
             configuration.Name = Value;
+        }
+    }
+
+    partial void OnImageDescriptorChanging(IImageDescriptor? value)
+    {
+        if (configuration is not null)
+        {
+            configuration.ImageDescriptor = value;
         }
     }
 }

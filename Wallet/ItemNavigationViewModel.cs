@@ -15,6 +15,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     string name = "",
     string description = "",
     string category = "",
+    IImageDescriptor? imageDescriptor = default,
     bool isSelected = false,
     bool favourite = false,
     bool archived = false) :
@@ -43,6 +44,9 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     [ObservableProperty]
     private Guid id = id;
+
+    [ObservableProperty]
+    private IImageDescriptor? imageDescriptor = imageDescriptor;
 
     [ObservableProperty]
     private bool isSelected = isSelected;

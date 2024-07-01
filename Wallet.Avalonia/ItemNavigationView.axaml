@@ -15,6 +15,7 @@
                 Route="Item"
                 Scope="self">
                 <Parameter Key="Name" Value="{Binding Name}" />
+                <Parameter Key="ImageDescriptor" Value="{Binding ImageDescriptor}" />
                 <Parameter Key="FromCategory" Value="{x:False}" />
                 <Parameter Key="Favourite" Value="{Binding Favourite}" />
                 <Parameter Key="Archived" Value="{Binding Archived}" />
@@ -29,7 +30,10 @@
         Background="Transparent"
         ColumnDefinitions="40,*">
         <Grid Grid.Column="0">
-            <PersonPicture Height="40" DisplayName="{Binding Name}" />
+            <PersonPicture
+                Height="40"
+                DisplayName="{Binding Name}"
+                ProfilePicture="{Binding ImageDescriptor.Image}" />
             <TextBlock
                 Margin="0,0,0,-2"
                 HorizontalAlignment="Right"
