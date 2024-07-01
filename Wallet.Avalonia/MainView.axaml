@@ -28,7 +28,10 @@
                 VerticalAlignment="Center"
                 Background="{DynamicResource AccentFillColorDefaultBrush}"
                 CornerRadius="12">
-                <TextBlock FontSize="10" Text="BETA PREVIEW 1" />
+                <TextBlock
+                    FontSize="10"
+                    Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                    Text="BETA PREVIEW 1" />
             </Border>
         </NavigationView.PaneHeader>
         <NavigationView.PaneCustomContent>
