@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Toolkit.Foundation;
 
 namespace Wallet;
@@ -16,6 +17,8 @@ public partial class ItemHeaderViewModel :
     [ObservableProperty]
     private string? category;
 
+    [ObservableProperty]
+    private IImageDescriptor? imageDescriptor;
     [ObservableProperty]
     private ItemState state;
 
@@ -49,14 +52,6 @@ public partial class ItemHeaderViewModel :
         return Task.CompletedTask;
     }
 
-    protected override void OnValueChanged()
-    {
-        if (configuration is not null)
-        {
-            configuration.Name = Value;
-        }
-    }
-
     public Task Handle(ConfirmEventArgs<Item> args)
     {
         Commit();
@@ -74,5 +69,20 @@ public partial class ItemHeaderViewModel :
         }
 
         return Task.CompletedTask;
+    }
+
+    [RelayCommand]
+    public async Task Import() => ImageDescriptor = await Mediator.Handle<CreateEventArgs<ProfileImage>,
+        IImageDescriptor>(Create.As<ProfileImage>());
+
+    [RelayCommand]
+    public void Remove() => ImageDescriptor = null;
+
+    protected override void OnValueChanged()
+    {
+        if (configuration is not null)
+        {
+            configuration.Name = Value;
+        }
     }
 }

@@ -2,21 +2,84 @@
     x:Class="Wallet.Avalonia.ItemHeaderView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:vm="using:Wallet"
     x:DataType="vm:ItemHeaderViewModel">
+    <UserControl.Resources>
+        <x:Double x:Key="PersonPictureSize">144</x:Double>
+        <x:Double x:Key="ButtonSize">36</x:Double>
+        <x:Double x:Key="TextBoxMaxWidth">360</x:Double>
+        <x:Double x:Key="TextBoxMinWidth">264</x:Double>
+        <Thickness x:Key="ButtonMargin">0,0,6,6</Thickness>
+        <CornerRadius x:Key="ButtonCornerRadius">18</CornerRadius>
+    </UserControl.Resources>
     <StackPanel Grid.Column="1" Spacing="12">
-        <PersonPicture
-            Width="144"
-            Height="144"
-            DisplayName="{Binding Value}" />
+        <Grid HorizontalAlignment="Center">
+            <PersonPicture
+                Width="{StaticResource PersonPictureSize}"
+                Height="{StaticResource PersonPictureSize}"
+                DisplayName="{Binding Value}"
+                ProfilePicture="{Binding ImageDescriptor.Image}" />
+            <DropDownButton
+                Width="{StaticResource ButtonSize}"
+                Height="{StaticResource ButtonSize}"
+                Margin="{StaticResource ButtonMargin}"
+                Padding="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                CornerRadius="{StaticResource ButtonCornerRadius}">
+                <DropDownButton.Styles>
+                    <Style Selector="DropDownButton.Write">
+                        <Setter Property="IsVisible" Value="True" />
+                    </Style>
+                    <Style Selector="DropDownButton.Read">
+                        <Setter Property="IsVisible" Value="False" />
+                    </Style>
+                    <Style Selector="DropDownButton /template/ ui|FontIcon#DropDownGlyph">
+                        <Setter Property="IsVisible" Value="False" />
+                    </Style>
+                </DropDownButton.Styles>
+                <Interaction.Behaviors>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
+                        <AddClassAction ClassName="Read" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Write" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
+                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
+                        <RemoveClassAction ClassName="Read" />
+                    </DataTriggerBehavior>
+                </Interaction.Behaviors>
+                <DropDownButton.Flyout>
+                    <MenuFlyout>
+                        <MenuItem Command="{Binding ImportCommand}" Header="Import image" />
+                        <MenuItem
+                            Command="{Binding RemoveCommand}"
+                            Header="Remove image"
+                            IsEnabled="{Binding ImageDescriptor, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                    </MenuFlyout>
+                </DropDownButton.Flyout>
+                <TextBlock
+                    Margin="0,3,0,0"
+                    VerticalAlignment="Center"
+                    FontFamily="{DynamicResource FluentThemeFontFamily}"
+                    FontSize="18"
+                    Text="&#xE36A;" />
+            </DropDownButton>
+        </Grid>
         <TextBox
-            MaxWidth="360"
+            MaxWidth="{StaticResource TextBoxMaxWidth}"
             Text="{Binding Value}"
             TextAlignment="Center"
             Watermark="Enter name">
             <TextBox.Styles>
                 <Style Selector="TextBox.Write">
-                    <Setter Property="MinWidth" Value="264" />
+                    <Setter Property="MinWidth" Value="{StaticResource TextBoxMinWidth}" />
                 </Style>
                 <Style Selector="TextBox.Read">
                     <Setter Property="MinWidth" Value="0" />

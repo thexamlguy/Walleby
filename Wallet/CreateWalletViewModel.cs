@@ -24,10 +24,6 @@ public partial class CreateWalletViewModel :
     [ObservableProperty]
     private string password;
 
-    [MaybeNull]
-    [ObservableProperty]
-    private string? repeatedPassword;
-
     [ObservableProperty]
     private IValidation validation;
 
