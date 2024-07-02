@@ -23,7 +23,7 @@ public class SynchronizeMainViewModelHandler(IPublisher publisher,
                         Wallet.Services.GetRequiredService<IDecoratorService<ProfileImage<IImageDescriptor>>>();
                     ProfileImage<IImageDescriptor>? profileImage = profileImageDecorator.Service;
 
-                    if (factory.Create<WalletNavigationViewModel>(args => args.Initialize(), configuration.Name, profileImage?.Value, selected) 
+                    if (factory.Create<WalletNavigationViewModel>(args => args.Initialize(), configuration.Name, profileImage?.Value ?? null, selected) 
                         is WalletNavigationViewModel viewModel)
                     {
                         publisher.Publish(Create.As<IMainNavigationViewModel>(viewModel),

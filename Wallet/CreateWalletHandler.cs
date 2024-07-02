@@ -11,17 +11,17 @@ public class CreateWalletHandler(IWalletHostFactory componentFactory,
     public async Task<bool> Handle(CreateEventArgs<Wallet<(string, string, IImageDescriptor?)>> args,
         CancellationToken cancellationToken)
     {
-        if (args.Sender is Wallet <(string, string, IImageDescriptor?)> Wallet)
+        if (args.Sender is Wallet<(string, string, IImageDescriptor?)> wallet)
         {
-            if (Wallet.Value is (string name, string password,
-                IImageDescriptor thumbnail) && 
-                name is { Length: > 0 } &&
+            (string name, string password, IImageDescriptor? imageDescriptor) = wallet.Value;
+
+            if (name is { Length: > 0 } &&
                 password is { Length: > 0 })
             {
                 if (componentFactory.Create(name) is IComponentHost host)
                 {
                     IWalletFactory factory = host.Services.GetRequiredService<IWalletFactory>();
-                    if (await factory.Create(name, password, thumbnail))
+                    if (await factory.Create(name, password, imageDescriptor))
                     {
                         host.Start();
                         publisher.Publish(Activated.As(new Wallet<IComponentHost>(host)));

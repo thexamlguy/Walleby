@@ -14,7 +14,7 @@ public class WalletFactory(ISecurityKeyFactory securityKeyFactory,
 {
     public async Task<bool> Create(string name,
         string password, 
-        IImageDescriptor thumbnail)
+        IImageDescriptor? imageDescriptor)
     {
         if (securityKeyFactory.Create(Encoding.UTF8.GetBytes(password)) is SecurityKey key)
         {
@@ -25,10 +25,14 @@ public class WalletFactory(ISecurityKeyFactory securityKeyFactory,
                 configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:" +
                     $"{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");
 
-                string file = Path.Combine(environment.ContentRootPath, "Thumbnail.png");
-                using FileStream stream = File.OpenWrite(file);
+                if (imageDescriptor is not null)
+                {
+                    string file = Path.Combine(environment.ContentRootPath, "Thumbnail.png");
+                    using FileStream stream = File.OpenWrite(file);
 
-                imageWriter.Write(thumbnail, stream);
+                    imageWriter.Write(imageDescriptor, stream);
+                }
+
                 return true;
             }
         }
