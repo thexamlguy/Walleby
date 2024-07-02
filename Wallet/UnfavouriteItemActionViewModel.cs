@@ -12,5 +12,5 @@ public partial class UnfavouriteItemActionViewModel(IServiceProvider provider,
     IRemovable
 {
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Unfavourite.As<Item>());
+    private void Invoke() => Publisher.Publish(Unfavourite.As<Item>());
 }

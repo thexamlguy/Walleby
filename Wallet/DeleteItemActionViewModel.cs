@@ -11,5 +11,5 @@ public partial class DeleteItemActionViewModel(IServiceProvider provider,
     IDisposer disposer) : Observable(provider, factory, mediator, publisher, subscriber, disposer)
 {
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Delete.As<Item>());
+    private void Invoke() => Publisher.Publish(Delete.As<Item>());
 }

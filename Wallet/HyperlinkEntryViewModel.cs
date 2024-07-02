@@ -16,5 +16,5 @@ public partial class HyperlinkEntryViewModel(IServiceProvider provider,
     double width) : ItemEntryViewModel<string>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, width)
 {
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Create.As(new Hyperlink(Value)));
+    private void Invoke() => Publisher.Publish(Create.As(new Hyperlink(Value)));
 }

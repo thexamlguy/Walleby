@@ -3,11 +3,11 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class SynchronizeMainViewModelHandler(IPublisher publisher,
+public class MainViewModelActivationHandler(IPublisher publisher,
     IWalletHostCollection Wallets) :
-    INotificationHandler<SynchronizeEventArgs<IMainNavigationViewModel>>
+    INotificationHandler<ActivationEventArgs<IMainNavigationViewModel>>
 {
-    public Task Handle(SynchronizeEventArgs<IMainNavigationViewModel> args)
+    public Task Handle(ActivationEventArgs<IMainNavigationViewModel> args)
     {
         bool selected = true;
 

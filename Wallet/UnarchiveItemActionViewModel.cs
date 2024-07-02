@@ -12,5 +12,5 @@ public partial class UnarchiveItemActionViewModel(IServiceProvider provider,
     IRemovable
 {
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Unarchive.As<Item>());
+    private void Invoke() => Publisher.Publish(Unarchive.As<Item>());
 }

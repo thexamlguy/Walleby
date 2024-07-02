@@ -58,11 +58,11 @@ public partial class CreateWalletViewModel :
     }
 
     [RelayCommand]
-    public async Task Import() => ImageDescriptor = await Mediator.Handle<CreateEventArgs<ProfileImage>,
+    private async Task Import() => ImageDescriptor = await Mediator.Handle<CreateEventArgs<ProfileImage>,
         IImageDescriptor>(Create.As<ProfileImage>());
 
     [RelayCommand]
-    public void Remove() => ImageDescriptor = null;
+    private void Remove() => ImageDescriptor = null;
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs args)
     {

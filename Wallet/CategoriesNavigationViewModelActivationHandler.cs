@@ -2,13 +2,13 @@
 
 namespace Wallet;
 
-public class SynchronizeCategoriesNavigationViewModelHandler(IMediator mediator,
+public class CategoriesNavigationViewModelActivationHandler(IMediator mediator,
     IItemConfigurationCollection configurations,
     IServiceFactory serviceFactory,
     IPublisher publisher) :
-    INotificationHandler<SynchronizeEventArgs<CategoryNavigationViewModel>>
+    INotificationHandler<ActivationEventArgs<CategoryNavigationViewModel>>
 {
-    public async Task Handle(SynchronizeEventArgs<CategoryNavigationViewModel> args)
+    public async Task Handle(ActivationEventArgs<CategoryNavigationViewModel> args)
     {
         IReadOnlyCollection<(string Name, int Count)>? counts = await mediator.Handle<CountEventArgs<Item>,
             IReadOnlyCollection<(string, int)>>(Count.As<Item>());

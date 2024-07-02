@@ -3,20 +3,23 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class SynchronizeItemContentFromCategoryViewModelHandler(IItemConfigurationCollection configurations,
+public class ItemContentViewModelActivationHandler(IDecoratorService<Item<(Guid, string)>> itemDecorator,
     IDecoratorService<ItemConfiguration> itemConfigurationDecorator,
-    IServiceFactory serviceFactory,
     IMediator mediator,
+    IServiceFactory serviceFactory,
     IPublisher publisher) :
-    INotificationHandler<SynchronizeEventArgs<IItemEntryViewModel, string>>
+    INotificationHandler<ActivationEventArgs<ItemSectionViewModel>>
 {
-    public async Task Handle(SynchronizeEventArgs<IItemEntryViewModel, string> args)
+    public async Task Handle(ActivationEventArgs<ItemSectionViewModel> args)
     {
-        if (args.Value is string category)
+        if (itemDecorator.Service is Item<(Guid, string)> item)
         {
-            if (configurations.TryGetValue(category, out Func<ItemConfiguration>? configurationFactory))
+            if (item.Value is (Guid Id, _))
             {
-                if (configurationFactory.Invoke() is ItemConfiguration configuration)
+                (_, _, _, _, ItemConfiguration? configuration) = await mediator.Handle<RequestEventArgs<Item<Guid>>, 
+                    (Guid, string, string?, string, ItemConfiguration?)>(Request.As(new Item<Guid>(Id)));
+
+                if (configuration is not null)
                 {
                     itemConfigurationDecorator.Set(configuration);
                     foreach (ItemSectionConfiguration configurationSection in configuration.Sections)
@@ -31,7 +34,7 @@ public class SynchronizeItemContentFromCategoryViewModelHandler(IItemConfigurati
                                 Type messageType = typeof(CreateEventArgs<>).MakeGenericType(entryConfiguration.GetType());
                                 ConstructorInfo? constructor = messageType.GetConstructor([entryConfiguration.GetType(), typeof(object[])]);
 
-                                if (constructor?.Invoke(new object[] { entryConfiguration, new object[] { ItemState.New } }) is object message)
+                                if (constructor?.Invoke(new object[] { entryConfiguration, new object[] { ItemState.Read } }) is object message)
                                 {
                                     if (await mediator.Handle<object, IItemEntryViewModel?>(message,
                                         entryConfiguration.GetType().Name) is IItemEntryViewModel entryViewModel)

@@ -23,5 +23,5 @@ public partial class ItemCategoryNavigationViewModel(IServiceProvider provider,
     private bool isSelected = isSelected;
 
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Notify.As(new ItemCategory<string>(Name)));
+    private void Invoke() => Publisher.Publish(Notify.As(new ItemCategory<string>(Name)));
 }

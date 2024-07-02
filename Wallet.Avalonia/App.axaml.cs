@@ -142,7 +142,7 @@ public partial class App : Application
                         services.AddTemplate<WalletViewModel, WalletView>("Wallet");
                         services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ItemCollection");
 
-                        services.AddHandler<SynchronizeItemCollectionViewModelHandler>();
+                        services.AddHandler<ItemCollectionViewModelActivatedHandler>();
 
                         services.AddTemplate<WalletHeaderViewModel, WalletHeaderView>("WalletHeader");
                         services.AddTemplate<BackActionViewModel, BackActionView>();
@@ -151,15 +151,17 @@ public partial class App : Application
                         services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
 
-                        services.AddHandler<SynchronizeCategoriesNavigationViewModelHandler>();
+                        services.AddHandler<CategoriesNavigationViewModelActivationHandler>();
 
-                        services.AddHandler<SynchronizeItemCategoryViewModelHandler>();
+                        services.AddHandler<ItemCategoryViewModelActivatedHandler>();
 
                         services.AddScoped<IDecoratorService<Item<(Guid, string)>>, DecoratorService<Item<(Guid, string)>>>();
 
                         services.AddTemplate<AddItemNavigationViewModel, AddItemNavigationView>();
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
+                        services.AddHandler<ItemNavigationViewModelActivatedHandler>();
+               
                         services.AddTemplate<EmptyItemCollectionViewModel, EmptyItemCollectionView>("EmptyItemCollection");
 
                         services.AddScoped<IDecoratorService<ItemHeaderConfiguration>, DecoratorService<ItemHeaderConfiguration>>();
@@ -170,8 +172,8 @@ public partial class App : Application
                         services.AddTemplate<ItemHeaderViewModel, ItemHeaderView>();
                         services.AddTemplate<ItemContentViewModel, ItemContentView>();
 
-                        services.AddHandler<SynchronizeItemContentViewModelHandler>();
-                        services.AddHandler<SynchronizeItemContentFromCategoryViewModelHandler>();
+                        services.AddHandler<ItemContentViewModelActivationHandler>();
+                        services.AddHandler<ItemContentFromCategoryViewModelActivationHandler>();
 
                         services.AddTemplate<ItemSectionViewModel, ItemSectionView>();
 
@@ -230,7 +232,7 @@ public partial class App : Application
                 services.AddHandler<CreateProfileImageHandler>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
-                services.AddHandler<SynchronizeMainViewModelHandler>();
+                services.AddHandler<MainViewModelActivationHandler>();
 
                 services.AddTransient<FooterViewModel>();
 

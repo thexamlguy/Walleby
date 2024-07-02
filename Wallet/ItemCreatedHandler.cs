@@ -6,20 +6,20 @@ namespace Wallet;
 public class ItemCreatedHandler(IServiceProvider serviceProvider,
     ICache<Item<(Guid, string)>> cache,
     IPublisher publisher) :
-    INotificationHandler<CreatedEventArgs<Item<(Guid, string, string, IImageDescriptor?)>>>
+    INotificationHandler<CreatedEventArgs<Item<(Guid, string, string)>>>
 {
-    public Task Handle(CreatedEventArgs<Item<(Guid, string, string, IImageDescriptor?)>> args)
+    public Task Handle(CreatedEventArgs<Item<(Guid, string, string)>> args)
     {
-        if (args.Sender is Item<(Guid, string, string, IImageDescriptor?)> item)
+        if (args.Sender is Item<(Guid, string, string)> item)
         {
-            (Guid id, string name, string category, IImageDescriptor? imageDescriptor) = item.Value;
+            (Guid id, string name, string category) = item.Value;
 
             IServiceScope serviceScope = serviceProvider.CreateScope();
             IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
             IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider.GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
             if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(),
-                id, name, "Description", category, imageDescriptor, true)
+                id, name, "Description", category, true)
                 is ItemNavigationViewModel viewModel)
             {
                 Item<(Guid, string)> cachedItem = new((id, name));

@@ -42,7 +42,7 @@ public partial class ItemCollectionViewModel :
         if (args.Sender is Filter filter)
         {
             configuration = configuration with { Filter = filter.Value };
-            Synchronize(true);
+            Activate(true);
         }
 
         return Task.CompletedTask;
@@ -53,7 +53,7 @@ public partial class ItemCollectionViewModel :
         if (args.Sender is Search<string> search)
         {
             configuration = configuration with { Query = search.Value };
-            Synchronize(true);
+            Activate(true);
         }
 
         return Task.CompletedTask;
@@ -69,6 +69,6 @@ public partial class ItemCollectionViewModel :
         return base.OnActivated();
     }
 
-    protected override SynchronizeExpression BuildAggregateExpression() =>
-        new(Toolkit.Foundation.Synchronize.As<ItemNavigationViewModel, ItemCollectionConfiguration>(configuration));
+    protected override ActivationBuilder ActivationBuilder() =>
+        new(Activation.As<ItemNavigationViewModel, ItemCollectionConfiguration>(configuration));
 }

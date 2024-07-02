@@ -17,13 +17,16 @@
                 <Parameter Key="Name" Value="{Binding Name}" />
                 <Parameter Key="ImageDescriptor" Value="{Binding ImageDescriptor}" />
                 <Parameter Key="FromCategory" Value="{x:False}" />
-                <Parameter Key="Favourite" Value="{Binding Favourite}" />
-                <Parameter Key="Archived" Value="{Binding Archived}" />
+                <Parameter Key="Favourite" Value="{Binding IsFavourite}" />
+                <Parameter Key="Archived" Value="{Binding IsArchived}" />
                 <Parameter Key="State" Value="{x:Static vm:ItemState.Read}" />
                 <Parameter Key="IsBackStackEnabled" Value="{x:False}" />
                 <Parameter Key="ClearBackStack" Value="{x:True}" />
             </NavigateAction>
         </AttachedEventTriggerBehaviour>
+        <EventTriggerBehavior EventName="AttachedToVisualTree">
+            <InvokeCommandAction Command="{Binding AttachedCommand}" />
+        </EventTriggerBehavior>
     </Interaction.Behaviors>
     <Grid
         Margin="0,6,6,6"
@@ -41,7 +44,7 @@
                 FontFamily="{DynamicResource FluentThemeFontFamily}"
                 FontSize="16"
                 Foreground="{DynamicResource StarredIconForegroundBrush}"
-                IsVisible="{Binding Favourite}"
+                IsVisible="{Binding IsFavourite}"
                 Text="&#xEF60;" />
         </Grid>
         <StackPanel Grid.Column="1" Margin="12,0,0,0">

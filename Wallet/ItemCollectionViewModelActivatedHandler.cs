@@ -3,13 +3,13 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class SynchronizeItemCollectionViewModelHandler(IMediator mediator,
+public class ItemCollectionViewModelActivatedHandler(IMediator mediator,
     IServiceProvider serviceProvider,
     ICache<Item<(Guid, string)>> cache,
     IPublisher publisher) :
-    INotificationHandler<SynchronizeEventArgs<ItemNavigationViewModel, ItemCollectionConfiguration>>
+    INotificationHandler<ActivationEventArgs<ItemNavigationViewModel, ItemCollectionConfiguration>>
 {
-    public async Task Handle(SynchronizeEventArgs<ItemNavigationViewModel,
+    public async Task Handle(ActivationEventArgs<ItemNavigationViewModel,
         ItemCollectionConfiguration> args)
     {
         if (args.Value is ItemCollectionConfiguration configuration)

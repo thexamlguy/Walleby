@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics;
 using Toolkit.Foundation;
 
 namespace Wallet;
@@ -15,10 +17,9 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     string name = "",
     string description = "",
     string category = "",
-    IImageDescriptor? imageDescriptor = default,
     bool isSelected = false,
-    bool favourite = false,
-    bool archived = false) :
+    bool isFavourite = false,
+    bool isArchived = false) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer),
     INotificationHandler<ArchiveEventArgs<Item>>,
     INotificationHandler<UnarchiveEventArgs<Item>>,
@@ -26,13 +27,11 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     INotificationHandler<UnfavouriteEventArgs<Item>>,
     INotificationHandler<DeleteEventArgs<Item>>,
     INotificationHandler<NotifyEventArgs<ItemHeader<string>>>,
+    INotificationHandler<NotifyEventArgs<Item<IImageDescriptor>>>,
     IKeyed<Guid>,
     ISelectable,
     IRemovable
 {
-    [ObservableProperty]
-    private bool archived = archived;
-
     [ObservableProperty]
     private string? category = category;
 
@@ -40,14 +39,18 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     private string? description = description;
 
     [ObservableProperty]
-    private bool favourite = favourite;
-
-    [ObservableProperty]
     private Guid id = id;
 
     [ObservableProperty]
-    private IImageDescriptor? imageDescriptor = imageDescriptor;
+    private IImageDescriptor? imageDescriptor;
 
+    [ObservableProperty]
+    private bool isArchived = isArchived;
+    [ObservableProperty]
+    private bool isAttached;
+
+    [ObservableProperty]
+    private bool isFavourite = isFavourite;
     [ObservableProperty]
     private bool isSelected = isSelected;
 
@@ -58,17 +61,29 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     private string named = $"{named}";
     public IContentTemplate Template { get; set; } = template;
 
-    public Task Handle(ArchiveEventArgs<Item> args) =>
-        Task.Run(Dispose);
+    public Task Handle(ArchiveEventArgs<Item> args)
+    {
+        Dispose();
+        return Task.CompletedTask;
+    }
 
-    public Task Handle(UnarchiveEventArgs<Item> args) =>
-        Task.Run(Dispose);
+    public Task Handle(UnarchiveEventArgs<Item> args)
+    {
+        Dispose();
+        return Task.CompletedTask;
+    }
 
-    public Task Handle(FavouriteEventArgs<Item> args) =>
-        Task.FromResult(Favourite = true);
+    public Task Handle(FavouriteEventArgs<Item> args)
+    {
+        IsFavourite = true;
+        return Task.CompletedTask;
+    }
 
-    public Task Handle(UnfavouriteEventArgs<Item> args) =>
-        Task.FromResult(Favourite = false);
+    public Task Handle(UnfavouriteEventArgs<Item> args)
+    {
+        IsFavourite = false;
+        return Task.CompletedTask;
+    }
 
     public Task Handle(NotifyEventArgs<ItemHeader<string>> args)
     {
@@ -80,6 +95,29 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
         return Task.CompletedTask;
     }
 
-    public Task Handle(DeleteEventArgs<Item> args) =>
-        Task.Run(Dispose);
+    public Task Handle(DeleteEventArgs<Item> args)
+    {
+        Dispose();
+        return Task.CompletedTask;
+    }
+
+    public Task Handle(NotifyEventArgs<Item<IImageDescriptor>> args)
+    {
+        if (args.Sender is Item<IImageDescriptor> item)
+        {
+            ImageDescriptor = item.Value;
+        }
+
+        return Task.CompletedTask;
+    }
+
+    [RelayCommand]
+    private void Attached()
+    {
+        if (!IsAttached)
+        {
+            Publisher.Publish(Activation.As<ItemNavigationViewModel, Guid>(Id));
+            IsAttached = true;
+        }
+    }
 }

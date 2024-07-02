@@ -2,12 +2,12 @@
 
 namespace Wallet;
 
-public class SynchronizeItemCategoryViewModelHandler(IItemConfigurationCollection configurations,
+public class ItemCategoryViewModelActivatedHandler(IItemConfigurationCollection configurations,
     IServiceFactory serviceFactory,
     IPublisher publisher) :
-    INotificationHandler<SynchronizeEventArgs<ItemCategoryNavigationViewModel>>
+    INotificationHandler<ActivationEventArgs<ItemCategoryNavigationViewModel>>
 {
-    public Task Handle(SynchronizeEventArgs<ItemCategoryNavigationViewModel> args)
+    public Task Handle(ActivationEventArgs<ItemCategoryNavigationViewModel> args)
     {
         bool selected = true;
         foreach (KeyValuePair<string, Func<ItemConfiguration>> configuration in configurations)

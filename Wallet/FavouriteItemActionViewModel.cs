@@ -13,7 +13,7 @@ public partial class FavouriteItemActionViewModel(IServiceProvider provider,
     IRemovable
 {
     [RelayCommand]
-    public void Invoke()
+    private void Invoke()
     {
         if (!Value)
         {

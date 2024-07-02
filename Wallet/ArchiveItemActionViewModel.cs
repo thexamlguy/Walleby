@@ -12,5 +12,5 @@ public partial class ArchiveItemActionViewModel(IServiceProvider provider,
     IRemovable
 {
     [RelayCommand]
-    public void Invoke() => Publisher.Publish(Archive.As<Item>());
+    private void Invoke() => Publisher.Publish(Archive.As<Item>());
 }

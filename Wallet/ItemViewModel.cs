@@ -146,7 +146,4 @@ public partial class ItemViewModel :
 
         return base.OnActivated();
     }
-
-    protected override SynchronizeExpression BuildAggregateExpression() =>
-        new(Toolkit.Foundation.Synchronize.As<IItemViewModel, (string, string, ItemState)>(("", Name, State)));
 }

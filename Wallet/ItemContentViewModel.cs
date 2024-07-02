@@ -21,7 +21,7 @@ public partial class ItemContentViewModel(IServiceProvider provider,
         if (args.Sender is ItemCategory<string> category 
             && category.Value is string value)
         {
-            Fetch(() => new SynchronizeExpression(new SynchronizeEventArgs<IItemEntryViewModel,
+            Activate(() => new ActivationBuilder(new ActivationEventArgs<IItemEntryViewModel,
                 string>(value)), true);
         }
 
