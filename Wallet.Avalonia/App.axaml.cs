@@ -114,7 +114,10 @@ public partial class App : Application
                         services.AddHandler<CreateProfileImageHandler>();
 
                         services.AddHandler<QueryWalletHandler>();
+
                         services.AddHandler<ItemHandler>();
+                        services.AddHandler<ItemImageHandler>();
+                  
                         services.AddHandler<CreateItemHandler>();
                         services.AddHandler<DeleteItemHandler>();
                         services.AddHandler<UpdateItemHander>();

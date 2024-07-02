@@ -22,6 +22,7 @@ public class ItemHandler(IDbContextFactory<WalletContext> dbContextFactory) :
                 {
                     x.Id,
                     x.Name,
+                    HasImage = x.ImageId != null,
                     x.Description,
                     x.Category,
                     Blob = x.Blobs
