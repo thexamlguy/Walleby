@@ -31,11 +31,12 @@ public class WalletContext(DbContextOptions<WalletContext> options) :
             .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<ItemEntry>()
-            .HasOne(x => x.Image)
+        modelBuilder.Entity<ItemEntry>().
+        HasOne(i => i.Image)
             .WithOne()
-            .HasForeignKey<ItemEntry>()
-            .IsRequired(false);
+            .HasForeignKey<ItemEntry>(i => i.ImageId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<BlobEntry>()
             .HasKey(x => x.Id);

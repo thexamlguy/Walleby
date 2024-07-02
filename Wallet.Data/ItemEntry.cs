@@ -15,6 +15,8 @@ public record ItemEntry
 
     public int State { get; set; } = 0;
 
+    public Guid? ImageId { get; set; }
+
     public BlobEntry? Image { get; set; }
 
     public required string Category { get; set; }
