@@ -5,7 +5,8 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class OpenWalletViewModel : Observable
+public partial class OpenWalletViewModel : 
+    Observable
 {
     [ObservableProperty]
     private IValidation validation;
@@ -14,7 +15,7 @@ public partial class OpenWalletViewModel : Observable
     private string? name;
 
     [ObservableProperty]
-    private IImageDescriptor imageDescriptor;
+    private IImageDescriptor? imageDescriptor;
 
     [MaybeNull]
     [ObservableProperty]
@@ -28,7 +29,7 @@ public partial class OpenWalletViewModel : Observable
         ISubscriber subscriber,
         IDisposer disposer,
         string name,
-        IImageDescriptor imageDescriptor) : base(provider, factory, mediator, publisher, subscriber, disposer)
+        IImageDescriptor? imageDescriptor = default) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         this.validation = validation;
 
