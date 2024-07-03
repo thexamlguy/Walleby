@@ -6,9 +6,14 @@
     x:DataType="vm:WalletViewModel">
     <Grid
         x:Name="Container"
-        ColumnDefinitions="320,Auto,*,Auto"
         Grid.IsSharedSizeScope="True"
         RowDefinitions="Auto,*">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320" MinWidth="144" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         <Grid
             Grid.Row="0"
             Grid.ColumnSpan="3"
