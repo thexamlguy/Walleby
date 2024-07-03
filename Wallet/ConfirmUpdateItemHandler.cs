@@ -15,22 +15,26 @@ public class ConfirmUpdateItemHandler(IDecoratorService<Item<(Guid, string)>> it
             itemHeaderConfiguration.Service is ItemHeaderConfiguration headerConfiguration &&
             itemConfigurationDecorator.Service is ItemConfiguration itemConfiguration)
         {
-            string? name = headerConfiguration?.Name;
-            if (name is not null)
+            if (headerConfiguration?.Name is { Length: > 0 } name &&
+                headerConfiguration.Category is { Length: > 0 } category)
             {
-                publisher.Publish(Notify.As(new ItemHeader<string>(name)));
+                IImageDescriptor? imageDescriptor = headerConfiguration.ImageDescriptor;
 
-                (Guid id, string _) = item.Value;
+                publisher.Publish(Notify.As(new Item<string>(name)));
+                publisher.Publish(Notify.As(new Item<IImageDescriptor?>(imageDescriptor)));
+
+                (Guid id, _) = item.Value;
+
+                await mediator.Handle<UpdateEventArgs<Item<(Guid, string, string, IImageDescriptor?, 
+                    ItemConfiguration)>>, bool>(new UpdateEventArgs<Item<(Guid, string, string, IImageDescriptor?,
+                    ItemConfiguration)>>(new Item<(Guid, string, string, IImageDescriptor?, ItemConfiguration)>((id, 
+                    name, category, imageDescriptor, itemConfiguration))));
 
                 Item<(Guid, string)> newItem = new((id, name));
                 publisher.Publish(Modified.As(item, newItem));
 
                 itemDecorator.Set(newItem);
-
-                await mediator.Handle<UpdateEventArgs<Item<(Guid, string, ItemConfiguration)>>, bool>(new UpdateEventArgs<Item<(Guid, string,
-                    ItemConfiguration)>>(new Item<(Guid, string, ItemConfiguration)>((id, name, itemConfiguration))));
-
-                publisher.Publish(Changed.As(item));
+                publisher.Publish(Changed.As(newItem));
             }
         }
     }

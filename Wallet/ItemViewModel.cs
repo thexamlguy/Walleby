@@ -37,6 +37,7 @@ public partial class ItemViewModel :
         NamedComponent named,
         IDecoratorService<ItemHeaderConfiguration> itemHeaderConfigurationDecorator,
         string name = "",
+        string category = "",
         ImageDescriptor? imageDescriptor = null,
         bool fromCategory = false,
         bool favourite = false,
@@ -53,7 +54,8 @@ public partial class ItemViewModel :
 
         ItemHeaderConfiguration configuration = new()
         {
-            Name = name
+            Name = name,
+            Category = category,
         };
 
         itemHeaderConfigurationDecorator.Set(configuration);

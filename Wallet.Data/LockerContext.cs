@@ -17,11 +17,6 @@ public class WalletContext(DbContextOptions<WalletContext> options) :
             .HasKey(x => x.Id);
 
         modelBuilder.Entity<ItemEntry>()
-            .Property(x => x.Id)
-            .ValueGeneratedOnAdd()
-            .HasDefaultValueSql("NEWID()");
-
-        modelBuilder.Entity<ItemEntry>()
             .HasMany(x => x.Tags)
             .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
@@ -40,10 +35,5 @@ public class WalletContext(DbContextOptions<WalletContext> options) :
 
         modelBuilder.Entity<BlobEntry>()
             .HasKey(x => x.Id);
-
-        modelBuilder.Entity<BlobEntry>()
-            .Property(x => x.Id)
-            .ValueGeneratedOnAdd()
-            .HasDefaultValueSql("NEWID()");
     }
 }

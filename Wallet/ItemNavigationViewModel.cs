@@ -25,7 +25,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     INotificationHandler<FavouriteEventArgs<Item>>,
     INotificationHandler<UnfavouriteEventArgs<Item>>,
     INotificationHandler<DeleteEventArgs<Item>>,
-    INotificationHandler<NotifyEventArgs<ItemHeader<string>>>,
+    INotificationHandler<NotifyEventArgs<Item<string>>>,
     INotificationHandler<NotifyEventArgs<Item<IImageDescriptor>>>,
     IKeyed<Guid>,
     ISelectable,
@@ -45,11 +45,13 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     [ObservableProperty]
     private bool isArchived = isArchived;
+
     [ObservableProperty]
     private bool isAttached;
 
     [ObservableProperty]
     private bool isFavourite = isFavourite;
+
     [ObservableProperty]
     private bool isSelected = isSelected;
 
@@ -84,9 +86,9 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
         return Task.CompletedTask;
     }
 
-    public Task Handle(NotifyEventArgs<ItemHeader<string>> args)
+    public Task Handle(NotifyEventArgs<Item<string>> args)
     {
-        if (args.Sender is ItemHeader<string> header)
+        if (args.Sender is Item<string> header)
         {
             Name = header.Value;
         }

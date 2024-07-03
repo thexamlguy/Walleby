@@ -41,7 +41,8 @@ public partial class ItemHeaderViewModel :
         Value = value;
         ImageDescriptor = imageDescriptor;
 
-        Track(nameof(Value), () => Value, newValue => Value = newValue);
+        Track(nameof(Value), () => Value, x => Value = x);
+        Track(nameof(ImageDescriptor), () => ImageDescriptor, x => ImageDescriptor = x);
     }
 
     public Task Handle(UpdateEventArgs<Item> args) =>
@@ -74,29 +75,6 @@ public partial class ItemHeaderViewModel :
         return Task.CompletedTask;
     }
 
-    [RelayCommand]
-    private async Task Import() => ImageDescriptor = await Mediator.Handle<CreateEventArgs<ProfileImage>,
-        IImageDescriptor>(Create.As<ProfileImage>());
-
-    [RelayCommand]
-    private void Remove() => ImageDescriptor = null;
-
-    protected override void OnValueChanged()
-    {
-        if (configuration is not null)
-        {
-            configuration.Name = Value;
-        }
-    }
-
-    partial void OnImageDescriptorChanging(IImageDescriptor? value)
-    {
-        if (configuration is not null)
-        {
-            configuration.ImageDescriptor = value;
-        }
-    }
-
     public Task Handle(NotifyEventArgs<Item<IImageDescriptor>> args)
     {
         if (args.Sender is Item<IImageDescriptor> item)
@@ -106,4 +84,46 @@ public partial class ItemHeaderViewModel :
 
         return Task.CompletedTask;
     }
+
+    protected override void OnValueChanged()
+    {
+        if (configuration is not null)
+        {
+            configuration.Name = Value;
+        }
+    }
+
+    [RelayCommand]
+    private async Task Import() => ImageDescriptor = await Mediator.Handle<CreateEventArgs<ProfileImage>,
+        IImageDescriptor>(Create.As<ProfileImage>());
+
+    partial void OnImageDescriptorChanged(IImageDescriptor? value)
+    {
+        if (configuration is not null)
+        {
+            configuration.ImageDescriptor = value;
+        }
+    }
+
+    partial void OnImageDescriptorChanged(IImageDescriptor? oldValue,
+        IImageDescriptor? newValue)
+    {
+        if (configuration is not null)
+        {
+            if (State is ItemState.Write)
+            {
+                if (newValue != oldValue)
+                {
+                    configuration.ImageDescriptor = newValue;
+                }
+            }
+            else
+            {
+                configuration.ImageDescriptor = newValue;
+            }
+        }
+    }
+
+    [RelayCommand]
+    private void Remove() => ImageDescriptor = null;
 }

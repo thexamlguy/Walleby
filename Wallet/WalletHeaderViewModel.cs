@@ -17,7 +17,6 @@ public partial class WalletHeaderViewModel(IServiceProvider provider,
     public Task Handle(NotifyEventArgs<WalletCommandHeaderCollection> args)
     {
         Clear();
-
         if (args.Sender is WalletCommandHeaderCollection commandCollection)
         {
             foreach (IDisposable command in commandCollection)

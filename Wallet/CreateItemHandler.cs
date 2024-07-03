@@ -15,6 +15,7 @@ public class CreateItemHandler(IImageWriter imageWriter,
         CancellationToken cancellationToken)
     {
         (Guid id, string name, string category, IImageDescriptor? imageDescriptor, ItemConfiguration configuration) = args.Sender;
+       
         try
         {
             string content = JsonSerializer.Serialize(configuration);
