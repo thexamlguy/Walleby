@@ -10,6 +10,7 @@ public partial class ItemHeaderViewModel :
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>,
     INotificationHandler<NotifyEventArgs<ItemCategory<string>>>,
+    INotificationHandler<NotifyEventArgs<Item<IImageDescriptor>>>,
     IItemViewModel
 {
     private readonly ItemHeaderConfiguration configuration;
@@ -94,5 +95,15 @@ public partial class ItemHeaderViewModel :
         {
             configuration.ImageDescriptor = value;
         }
+    }
+
+    public Task Handle(NotifyEventArgs<Item<IImageDescriptor>> args)
+    {
+        if (args.Sender is Item<IImageDescriptor> item)
+        {
+            ImageDescriptor = item.Value;
+        }
+
+        return Task.CompletedTask;
     }
 }
