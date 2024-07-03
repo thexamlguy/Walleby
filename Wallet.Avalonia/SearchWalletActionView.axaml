@@ -24,8 +24,12 @@
         MaxWidth="500"
         CornerRadius="16"
         Text="{Binding Value}"
-        TextBlock.TextAlignment="Center"
         Watermark="Search">
+        <AutoCompleteBox.Styles>
+            <Style Selector="AutoCompleteBox /template/ TextBox#PART_TextBox">
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+            </Style>
+        </AutoCompleteBox.Styles>
         <Interaction.Behaviors>
             <KeyBindingTriggerBehaviour Gesture="Enter">
                 <InvokeCommandAction Command="{Binding InvokeCommand}" />
