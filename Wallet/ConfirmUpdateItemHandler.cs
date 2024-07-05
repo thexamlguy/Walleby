@@ -11,9 +11,9 @@ public class ConfirmUpdateItemHandler(IDecoratorService<Item<(Guid, string)>> it
 {
     public async Task Handle(ConfirmEventArgs<Item> args)
     {
-        if (itemDecorator?.Service is Item<(Guid, string)> item &&
-            itemHeaderConfiguration.Service is ItemHeaderConfiguration headerConfiguration &&
-            itemConfigurationDecorator.Service is ItemConfiguration itemConfiguration)
+        if (itemDecorator?.Value is Item<(Guid, string)> item &&
+            itemHeaderConfiguration.Value is ItemHeaderConfiguration headerConfiguration &&
+            itemConfigurationDecorator.Value is ItemConfiguration itemConfiguration)
         {
             if (headerConfiguration?.Name is { Length: > 0 } name &&
                 headerConfiguration.Category is { Length: > 0 } category)

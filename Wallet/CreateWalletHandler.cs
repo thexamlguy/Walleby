@@ -20,8 +20,8 @@ public class CreateWalletHandler(IWalletHostFactory componentFactory,
             {
                 if (componentFactory.Create(name) is IComponentHost host)
                 {
-                    IWalletFactory factory = host.Services.GetRequiredService<IWalletFactory>();
-                    if (await factory.Create(name, password, imageDescriptor))
+                    IWalletFactory walletFactory = host.Services.GetRequiredService<IWalletFactory>();
+                    if (await walletFactory.Create(name, password, imageDescriptor))
                     {
                         host.Start();
                         publisher.Publish(Activated.As(new Wallet<IComponentHost>(host)));

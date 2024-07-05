@@ -12,7 +12,7 @@ public class ItemContentViewModelActivationHandler(IDecoratorService<Item<(Guid,
 {
     public async Task Handle(ActivationEventArgs<ItemSectionViewModel> args)
     {
-        if (itemDecorator.Service is Item<(Guid, string)> item)
+        if (itemDecorator.Value is Item<(Guid, string)> item)
         {
             if (item.Value is (Guid Id, _))
             {

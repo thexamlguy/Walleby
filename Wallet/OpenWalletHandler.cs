@@ -5,10 +5,11 @@ namespace Wallet;
 
 public class OpenWalletHandler(IConfigurationDescriptor<WalletConfiguration> descriptor,
     ISecurityKeyFactory securityKeyFactory,
-    IWalletStoreFactory WalletStorageFactory) :
-    IHandler<ActivateEventArgs<Wallet<string>>, bool>
+    IWalletConnectionFactory walletConnectionFactory,
+    IDecoratorService<WalletConnection> walletConnectionDecorator) :
+    IHandler<OpenEventArgs<Wallet<string>>, bool>
 {
-    public async Task<bool> Handle(ActivateEventArgs<Wallet<string>> args,
+    public async Task<bool> Handle(OpenEventArgs<Wallet<string>> args,
         CancellationToken cancellationToken)
     {
         if (args.Sender is Wallet<string> Wallet && 
@@ -21,10 +22,13 @@ public class OpenWalletHandler(IConfigurationDescriptor<WalletConfiguration> des
                 byte[]? salt = Convert.FromBase64String(keyPart[0]);
                 byte[]? encryptedKey = Convert.FromBase64String(keyPart[1]);
 
-                if (securityKeyFactory.Create(Encoding.UTF8.GetBytes(password), encryptedKey, salt) is SecurityKey key)
+                if (securityKeyFactory.Create(Encoding.UTF8.GetBytes(password), 
+                    encryptedKey, salt) is SecurityKey securityKey)
                 {
-                    if (await WalletStorageFactory.Create(name, key))
+                    if (await walletConnectionFactory.Create(name, Convert.ToBase64String(securityKey.DecryptedKey)) 
+                        is WalletConnection connection)
                     {
+                        walletConnectionDecorator.Set(connection);
                         return true;
                     }
                 }

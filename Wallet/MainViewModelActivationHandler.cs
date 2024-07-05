@@ -21,7 +21,7 @@ public class MainViewModelActivationHandler(IPublisher publisher,
                 {
                     IDecoratorService<ProfileImage<IImageDescriptor>> profileImageDecorator =
                         Wallet.Services.GetRequiredService<IDecoratorService<ProfileImage<IImageDescriptor>>>();
-                    ProfileImage<IImageDescriptor>? profileImage = profileImageDecorator.Service;
+                    ProfileImage<IImageDescriptor>? profileImage = profileImageDecorator.Value;
 
                     if (factory.Create<WalletNavigationViewModel>(args => args.Initialize(), configuration.Name, profileImage?.Value ?? null, selected) 
                         is WalletNavigationViewModel viewModel)

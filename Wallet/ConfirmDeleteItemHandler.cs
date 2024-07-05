@@ -12,7 +12,7 @@ public class ConfirmDeleteItemHandler(IDecoratorService<Item<(Guid, string)>> de
     {
         try
         {
-            if (decoratorService.Service is Item<(Guid, string)> item)
+            if (decoratorService.Value is Item<(Guid, string)> item)
             {
                 (Guid id, string name) = item.Value;
 

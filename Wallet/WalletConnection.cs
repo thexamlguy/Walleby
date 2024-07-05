@@ -1,8 +1,9 @@
-﻿namespace Wallet;
+﻿using Wallet.Data;
 
-public record WalletConnection(string connection)
+namespace Wallet;
+
+public record WalletConnection(string Value) : 
+    IConnection
 {
-    private readonly string connection = connection;
-
-    public override string ToString() => connection;
+    public override string ToString() => Value;
 }

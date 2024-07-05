@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Toolkit.Foundation;
 
 namespace Wallet;
@@ -75,6 +76,15 @@ public partial class WalletNavigationViewModel :
     {
         IsActivated = false;
         return Task.CompletedTask;
+    }
+
+    [RelayCommand]
+    private async Task Lock()
+    {
+        if (await Mediator.Handle<CloseEventArgs<Wallet>, bool>(Close.As<Wallet>()))
+        {
+            IsOpened = false;
+        }
     }
 
     public Task Handle(ActivatedEventArgs<Wallet> args)

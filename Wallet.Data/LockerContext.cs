@@ -2,14 +2,20 @@
 
 namespace Wallet.Data;
 
-public class WalletContext(DbContextOptions<WalletContext> options) :
-    DbContext(options)
+public interface IConnection;
+
+public class WalletContext(IConnection connection) : DbContext
 {
     public DbSet<BlobEntry> Blobs { get; set; }
 
     public DbSet<ItemEntry> Items { get; set; }
 
     public DbSet<TagEntry> Tags { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite($"{connection}");
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

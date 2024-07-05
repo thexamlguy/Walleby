@@ -25,7 +25,7 @@ public class WalletActivatedHandler(IWalletHostCollection Wallets,
                     IDecoratorService<ProfileImage<IImageDescriptor>> profileImageDecorator =
                         host.Services.GetRequiredService<IDecoratorService<ProfileImage<IImageDescriptor>>>();
                     
-                    ProfileImage<IImageDescriptor>? profileImage = profileImageDecorator.Service;
+                    ProfileImage<IImageDescriptor>? profileImage = profileImageDecorator.Value;
                     if (serviceFactory.Create<WalletNavigationViewModel>(args => args.Initialize(), 
                         descriptor.Name, profileImage?.Value, false) 
                         is WalletNavigationViewModel viewModel)

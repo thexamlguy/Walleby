@@ -5,8 +5,7 @@ using Toolkit.Foundation;
 namespace Wallet;
 
 public class WalletFactory(ISecurityKeyFactory securityKeyFactory,
-    IDecoratorService<SecurityKey> secureKeyStore,
-    IWalletStoreFactory walletStoreFactory,
+    IWalletDatabaseFactory walletDatabaseFactory,
     IWritableConfiguration<WalletConfiguration> configuration,
     IHostEnvironment environment,
     IImageWriter imageWriter) :
@@ -18,9 +17,7 @@ public class WalletFactory(ISecurityKeyFactory securityKeyFactory,
     {
         if (securityKeyFactory.Create(Encoding.UTF8.GetBytes(password)) is SecurityKey key)
         {
-            secureKeyStore.Set(key);
-
-            if (await walletStoreFactory.Create(name, key))
+            if (await walletDatabaseFactory.Create(name, Convert.ToBase64String(key.DecryptedKey)))
             {
                 configuration.Write(args => args.Key = $"{Convert.ToBase64String(key.Salt)}:" +
                     $"{Convert.ToBase64String(key.EncryptedKey)}:{Convert.ToBase64String(key.DecryptedKey)}");

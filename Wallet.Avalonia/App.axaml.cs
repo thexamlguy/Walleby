@@ -84,7 +84,8 @@ public partial class App : Application
                         services.AddTransient<IKeyDeriver, KeyDeriver>();
 
                         services.AddTransient<ISecurityKeyFactory, SecurityKeyFactory>();
-                        services.AddTransient<IWalletStoreFactory, WalletStoreFactory>();
+                        services.AddTransient<IWalletDatabaseFactory, WalletDatabaseFactory>();
+                        services.AddTransient<IWalletConnectionFactory, WalletConnectionFactory>();
 
                         services.AddTransient<IInitialization, WalletProfileImageInitializer>();
 
@@ -94,22 +95,19 @@ public partial class App : Application
                                 provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>().OrderBy(x => x.Name) ??
                                 Enumerable.Empty<IConfigurationDescriptor<ItemConfiguration>>();
 
-                            return new ItemConfigurationCollection(items.ToDictionary(x => x.Name, x => (Func<ItemConfiguration>)(() => x.Value)));
+                            return new ItemConfigurationCollection(items.ToDictionary(x => x.Name, 
+                                x => (Func<ItemConfiguration>)(() => x.Value)));
                         });
 
-                        services.TryAddSingleton<IDecoratorService<ProfileImage<IImageDescriptor>>, DecoratorService<ProfileImage<IImageDescriptor>>>();
+                        services.TryAddSingleton<IDecoratorService<ProfileImage<IImageDescriptor>>, 
+                            DecoratorService<ProfileImage<IImageDescriptor>>>();
 
                         services.TryAddSingleton<IDecoratorService<SecurityKey>, DecoratorService<SecurityKey>>();
                         services.TryAddSingleton<IDecoratorService<WalletConnection>, DecoratorService<WalletConnection>>();
 
-                        services.AddDbContextFactory<WalletContext>((provider, args) =>
-                        {
-                            if (provider.GetRequiredService<IDecoratorService<WalletConnection>>()
-                                is IDecoratorService<WalletConnection> connection)
-                            {
-                                args.UseSqlite($"{connection.Service}");
-                            }
-                        });
+                        services.AddTransient<IConnection>(provider => provider.GetRequiredService<IDecoratorService<WalletConnection>>().Value!);
+
+                        services.AddDbContextFactory<WalletContext>();
 
                         services.AddHandler<CreateProfileImageHandler>();
 
@@ -125,6 +123,7 @@ public partial class App : Application
                         services.AddHandler<CountCategoriesHandler>();
 
                         services.AddHandler<OpenWalletHandler>();
+                        services.AddHandler<CloseWalletHandler>();
 
                         services.AddTemplate<WalletNavigationViewModel, WalletNavigationView>();
 

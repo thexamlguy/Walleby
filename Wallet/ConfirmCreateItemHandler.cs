@@ -10,8 +10,8 @@ public class ConfirmCreateItemHandler(IMediator mediator,
 {
     public async Task Handle(ConfirmEventArgs<Item> args)
     {
-        if (itemHeaderConfiguration.Service is ItemHeaderConfiguration headerConfiguration &&
-            itemConfigurationDecorator.Service is ItemConfiguration itemConfiguration)
+        if (itemHeaderConfiguration.Value is ItemHeaderConfiguration headerConfiguration &&
+            itemConfigurationDecorator.Value is ItemConfiguration itemConfiguration)
         {
             if (headerConfiguration.Name is { Length: > 0 } name &&
                 headerConfiguration.Category is { Length: > 0 } category)
