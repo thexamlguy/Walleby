@@ -10,6 +10,7 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer,
+    IClipboardWriter clipboardWriter,
     ItemState state,
     ItemEntryConfiguration configuration,
     string key,
@@ -59,14 +60,11 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
         configuration.Value = Value;
 
     [RelayCommand]
-    private void Hide()
-    {
-        IsRevealed = false;
-    }
+    private void Hide() => IsRevealed = false;
 
     [RelayCommand]
-    private void Reveal()
-    {
-        IsRevealed = true;
-    }
+    private void Reveal() => IsRevealed = true;
+
+    [RelayCommand]
+    private void Copy() => clipboardWriter.Write($"{Value}");
 }

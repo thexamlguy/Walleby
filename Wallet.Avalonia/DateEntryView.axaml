@@ -7,24 +7,11 @@
     Header="{Binding Key}"
     IsExpanded="False">
     <SettingsExpander.Resources>
-        <Thickness x:Key="TextControlThemePadding">10,5,6,6</Thickness>
-        <Thickness x:Key="TextControlCompactThemePadding">0</Thickness>
+        <Thickness x:Key="TextControlCompactPadding">0</Thickness>
+        <Thickness x:Key="TextControlCompactMargin">0,-3,0,0</Thickness>
     </SettingsExpander.Resources>
     <SettingsExpander.Action>
-        <Button
-            Grid.Column="1"
-            MinWidth="30"
-            MinHeight="40"
-            Margin="8,0,0,0"
-            Padding="5,0,5,0"
-            Theme="{StaticResource TransparentButton}">
-            <Viewbox Width="14" Height="14">
-                <PathIcon
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Data="F1 M 6.24 11.799999 C 6.239999 12.146667 6.119999 12.440001 5.88 12.679999 C 5.64 12.92 5.346666 13.039999 5 13.039999 C 4.653333 13.039999 4.36 12.92 4.12 12.679999 C 3.88 12.440001 3.76 12.146667 3.76 11.799999 C 3.76 11.453333 3.88 11.16 4.12 10.919999 C 4.36 10.679999 4.653333 10.559999 5 10.559999 C 5.346666 10.559999 5.64 10.679999 5.88 10.919999 C 6.119999 11.16 6.239999 11.453333 6.24 11.799999 Z M 11.24 11.799999 C 11.24 12.146667 11.12 12.440001 10.88 12.679999 C 10.639999 12.92 10.346666 13.039999 10 13.039999 C 9.653333 13.039999 9.359999 12.92 9.12 12.679999 C 8.879999 12.440001 8.76 12.146667 8.76 11.799999 C 8.76 11.453333 8.879999 11.16 9.12 10.919999 C 9.359999 10.679999 9.653333 10.559999 10 10.559999 C 10.346666 10.559999 10.639999 10.679999 10.88 10.919999 C 11.12 11.16 11.24 11.453333 11.24 11.799999 Z M 15 13.039999 C 15.346665 13.039999 15.639999 12.92 15.88 12.679999 C 16.119999 12.440001 16.24 12.146667 16.24 11.799999 C 16.24 11.453333 16.119999 11.16 15.88 10.919999 C 15.639999 10.679999 15.346665 10.559999 15 10.559999 C 14.653333 10.559999 14.36 10.679999 14.12 10.919999 C 13.879999 11.16 13.759998 11.453333 13.759999 11.799999 C 13.759998 12.146667 13.879999 12.440001 14.12 12.679999 C 14.36 12.92 14.653333 13.039999 15 13.039999 Z " />
-            </Viewbox>
-        </Button>
+        <ItemEntryActionView />
     </SettingsExpander.Action>
     <SettingsExpander.Footer>
         <Grid>
@@ -66,7 +53,8 @@
                         <Setter Property="BorderBrush" Value="Transparent" />
                         <Setter Property="Background" Value="Transparent" />
                         <Setter Property="IsVisible" Value="True" />
-                        <Setter Property="Padding" Value="{StaticResource TextControlCompactThemePadding}" />
+                        <Setter Property="Margin" Value="{StaticResource TextControlCompactMargin}" />
+                        <Setter Property="Padding" Value="{StaticResource TextControlCompactPadding}" />
                         <Setter Property="MinHeight" Value="0" />
                         <Setter Property="Foreground">
                             <Setter.Value>

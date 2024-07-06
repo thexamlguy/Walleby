@@ -9,13 +9,14 @@ public partial class HyperlinkEntryViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer,
+    IClipboardWriter clipboardWriter,
     ItemState state,
     ItemEntryConfiguration configuration,
     string key,
     string value,
     double width,
     bool isConcealed,
-    bool isRevealed) : ItemEntryViewModel<string>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width)
+    bool isRevealed) : ItemEntryViewModel<string>(provider, factory, mediator, publisher, subscriber, disposer, clipboardWriter, state, configuration, key, value, isConcealed, isRevealed, width)
 {
     [RelayCommand]
     private void Invoke() => Publisher.Publish(Create.As(new Hyperlink(Value)));

@@ -10,6 +10,9 @@
         <Thickness x:Key="TextControlThemePadding">10,5,6,6</Thickness>
         <Thickness x:Key="TextControlCompactThemePadding">0</Thickness>
     </SettingsExpander.Resources>
+    <SettingsExpander.Action>
+        <ItemEntryActionView />
+    </SettingsExpander.Action>
     <SettingsExpander.Footer>
         <TextBox Text="{Binding Value}">
             <TextBox.Styles>
