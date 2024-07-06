@@ -15,7 +15,7 @@ public class TextEntryViewModelHandler(IServiceFactory serviceFactory) :
             double? width = configuration.Width;
 
             if (serviceFactory.Create<TextEntryViewModel>(args => args.Initialize(), 
-                [.. args.Parameters, configuration, label, value, width])
+                [.. args.Parameters, configuration, label, value, false, false, width])
                 is TextEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);

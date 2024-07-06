@@ -12,4 +12,6 @@ public partial class PinEntryViewModel(IServiceProvider provider,
     ItemEntryConfiguration configuration,
     string key,
     string value,
-    double width) : ItemEntryViewModel<string>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, width);
+    double width,
+    bool isConcealed,
+    bool isRevealed) : ItemEntryViewModel<string>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width);

@@ -15,7 +15,7 @@ public class PasswordEntryViewModelHandler(IServiceFactory serviceFactory) :
             double? width = configuration.Width;
 
             if (serviceFactory.Create<PasswordEntryViewModel>(args => args.Initialize(), 
-                [.. args.Parameters, configuration, label, value, width])
+                [.. args.Parameters, configuration, label, value, true, false, width])
                 is PasswordEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);

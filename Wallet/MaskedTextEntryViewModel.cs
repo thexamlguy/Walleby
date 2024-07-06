@@ -14,7 +14,9 @@ public partial class MaskedTextEntryViewModel(IServiceProvider provider,
     string pattern,
     string key,
     string value,
-    double width) : ItemEntryViewModel<string>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, width)
+    bool isConcealed,
+    bool isRevealed,
+    double width) : ItemEntryViewModel<string>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width)
 {
     [ObservableProperty]
     private string pattern = pattern;

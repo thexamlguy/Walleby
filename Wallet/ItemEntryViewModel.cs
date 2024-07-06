@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Toolkit.Foundation;
 
 namespace Wallet;
@@ -13,6 +14,8 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
     ItemEntryConfiguration configuration,
     string key,
     TValue value,
+    bool isConcealed,
+    bool isRevealed,
     double width) :
     Observable<string, TValue>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
     IItemEntryViewModel,
@@ -21,6 +24,12 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
     INotificationHandler<CancelEventArgs<Item>>
     where TValue : notnull
 {
+    [ObservableProperty]
+    private bool isConcealed = isConcealed;
+
+    [ObservableProperty]
+    private bool isRevealed = isRevealed;
+
     [ObservableProperty]
     private ItemState state = state;
 
@@ -48,4 +57,16 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
 
     protected override void OnValueChanged() =>
         configuration.Value = Value;
+
+    [RelayCommand]
+    private void Hide()
+    {
+        IsRevealed = false;
+    }
+
+    [RelayCommand]
+    private void Reveal()
+    {
+        IsRevealed = true;
+    }
 }

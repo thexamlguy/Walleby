@@ -23,7 +23,7 @@ public class DropdownEntryViewModelHandler(IServiceFactory serviceFactory) :
             DropdownValueViewModel? selected = values.FirstOrDefault(x => x.Value is not null && x.Value.Equals($"{value}"));
 
             if (serviceFactory.Create<DropdownEntryViewModel>(args => args.Initialize(),
-                [values, .. args.Parameters, configuration, label, value, width, selected])
+                [values, .. args.Parameters, configuration, label, value, width, false, false, selected])
                 is DropdownEntryViewModel viewModel)
             {
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);
