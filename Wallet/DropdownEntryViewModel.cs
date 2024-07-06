@@ -16,8 +16,10 @@ public partial class DropdownEntryViewModel :
         ItemEntryConfiguration configuration, 
         string key,
         object value,
+        bool isConcealed,
+        bool isRevealed,
         double width,
-        DropdownValueViewModel selectedItem) : base(provider, factory, mediator, publisher, subscriber, disposer, items, state, configuration, key, value, width)
+        DropdownValueViewModel selectedItem) : base(provider, factory, mediator, publisher, subscriber, disposer, items, state, configuration, key, value, isConcealed, isRevealed, width)
     {
         SelectedItem = selectedItem;
     }
@@ -33,7 +35,9 @@ public partial class DropdownEntryViewModel :
         ItemEntryConfiguration configuration,
         string key,
         object value,
-        double width) : base(provider, factory, mediator, publisher, subscriber, disposer, items, state, configuration, key, value, width)
+        bool isConcealed,
+        bool isRevealed,
+        double width) : base(provider, factory, mediator, publisher, subscriber, disposer, items, state, configuration, key, value, isConcealed, isRevealed, width)
     {
     }
 }

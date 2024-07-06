@@ -65,6 +65,5 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
     private void Reveal() => IsRevealed = true;
 
     [RelayCommand]
-    private void Copy() => 
-        Publisher.Publish(Write.As(new Clipboard<object>($"{Value}")));
+    private void Copy() =>  Publisher.Publish(Write.As(new Clipboard<object>($"{Value}")));
 }

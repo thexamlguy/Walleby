@@ -31,7 +31,7 @@
                 <TextBlock
                     FontSize="10"
                     Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
-                    Text="BETA PREVIEW 2" />
+                    Text="BETA PREVIEW 3" />
             </Border>
         </NavigationView.PaneHeader>
         <NavigationView.PaneCustomContent>

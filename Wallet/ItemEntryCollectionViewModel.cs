@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Toolkit.Foundation;
 
 namespace Wallet;
@@ -27,13 +28,24 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         ItemEntryConfiguration configuration,
         string key,
         object value,
+        bool isConcealed,
+        bool isRevealed,
         double width) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
     {
         this.configuration = configuration;
 
         State = state;
+        IsConcealed = isConcealed;
+        IsRevealed = isRevealed;
         Width = width;
     }
+
+    [ObservableProperty]
+    private bool isConcealed;
+
+    [ObservableProperty]
+    private bool isRevealed;
+
 
     [ObservableProperty]
     private double width;
@@ -50,6 +62,8 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         ItemEntryConfiguration configuration,
         string key,
         object value,
+        bool isConcealed,
+        bool isRevealed,
         double width) : base(provider, factory, mediator, publisher, subscriber, disposer, items, key, value)
     {
         this.configuration = configuration;
@@ -84,4 +98,14 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         State = ItemState.Read;
         return Task.CompletedTask;
     }
+
+
+    [RelayCommand]
+    private void Hide() => IsRevealed = false;
+
+    [RelayCommand]
+    private void Reveal() => IsRevealed = true;
+
+    [RelayCommand]
+    private void Copy() => Publisher.Publish(Write.As(new Clipboard<object>($"{Value}")));
 }
