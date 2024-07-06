@@ -7,6 +7,7 @@
     Header="{Binding Key}"
     IsExpanded="False">
     <SettingsExpander.Resources>
+        <Thickness x:Key="TextControlMargin">0</Thickness>
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
         <Thickness x:Key="TextControlCompactMargin">0,-3,0,0</Thickness>
     </SettingsExpander.Resources>
@@ -24,6 +25,7 @@
                     </Style>
                     <Style Selector="DatePicker.Read">
                         <Setter Property="MinWidth" Value="0" />
+                        <Setter Property="MinHeight" Value="0" />
                         <Setter Property="IsVisible" Value="False" />
                     </Style>
                 </DatePicker.Styles>
