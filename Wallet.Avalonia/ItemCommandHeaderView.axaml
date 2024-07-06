@@ -6,7 +6,7 @@
     x:DataType="vm:ItemCommandHeaderViewModel">
     <UserControl.Resources>
         <ResourceDictionary>
-            <x:Double x:Key="ButtonWidth">40</x:Double>
+            <x:Double x:Key="ButtonWidth">36</x:Double>
             <x:Double x:Key="ButtonHeight">36</x:Double>
             <SolidColorBrush x:Key="ButtonBackground" Color="{DynamicResource SubtleFillColorTransparent}" />
             <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{DynamicResource SubtleFillColorSecondary}" />
@@ -21,7 +21,7 @@
         ItemsSource="{Binding}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal" Spacing="4" />
+                <StackPanel Orientation="Horizontal" Spacing="6" />
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
     </ItemsControl>

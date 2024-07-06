@@ -4,7 +4,7 @@ namespace Wallet;
 
 public record Closed
 {
-    public static ChangedEventArgs<TValue> As<TValue>(TValue value) => new(value);
+    public static ClosedEventArgs<TValue> As<TValue>(TValue value) => new(value);
 
-    public static ChangedEventArgs<TValue> As<TValue>() where TValue : new() => new(new TValue());
+    public static ClosedEventArgs<TValue> As<TValue>() where TValue : new() => new(new TValue());
 }

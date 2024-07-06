@@ -10,7 +10,6 @@
     <ListBoxItem.Resources>
         <x:Double x:Key="IconSize">40</x:Double>
         <CornerRadius x:Key="IconCornerRadius">40</CornerRadius>
-
     </ListBoxItem.Resources>
     <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding IsOpened}" Value="False">

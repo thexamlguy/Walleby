@@ -57,8 +57,8 @@ public partial class WalletNavigationViewModel :
         Add<FavouritesNavigationViewModel>("Favourites", 0);
         Add<ArchiveNavigationViewModel>("Archive", 0);
         Add<CategoriesNavigationViewModel>("Categories", 0);
-        IsOpened = true;
 
+        IsOpened = true;
         Publisher.Publish(Changed.As<Item>());
 
         return Task.CompletedTask;
@@ -66,7 +66,7 @@ public partial class WalletNavigationViewModel :
 
     public Task Handle(ClosedEventArgs<Wallet> args)
     {
-        IsOpened = true;
+        IsOpened = false;
         Clear();
 
         return Task.CompletedTask;
@@ -83,7 +83,7 @@ public partial class WalletNavigationViewModel :
     {
         if (await Mediator.Handle<CloseEventArgs<Wallet>, bool>(Close.As<Wallet>()))
         {
-            IsOpened = false;
+            Publisher.Publish(Closed.As<Wallet>());
         }
     }
 
