@@ -5,6 +5,7 @@ using Toolkit.Foundation;
 namespace Wallet;
 
 public class CreateWalletHandler(IWalletHostFactory componentFactory,
+    IWalletHostCollection wallets,
     IPublisher publisher) :
     IHandler<CreateEventArgs<Wallet<(string, string, IImageDescriptor?)>>, bool>
 {
@@ -23,9 +24,10 @@ public class CreateWalletHandler(IWalletHostFactory componentFactory,
                     IWalletFactory walletFactory = host.Services.GetRequiredService<IWalletFactory>();
                     if (await walletFactory.Create(name, password, imageDescriptor))
                     {
+                        wallets.Add(host);
                         host.Start();
-                        publisher.Publish(Activated.As(new Wallet<IComponentHost>(host)));
 
+                        publisher.Publish(Activated.As(new Wallet<IComponentHost>(host)));
                         return true;
                     }
                 }

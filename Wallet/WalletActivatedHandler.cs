@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class WalletActivatedHandler(IWalletHostCollection Wallets,
+public class WalletActivatedHandler(IWalletHostCollection wallets,
     IPublisher publisher) :
     INotificationHandler<ActivatedEventArgs<Wallet<IComponentHost>>>
 {
@@ -11,8 +11,7 @@ public class WalletActivatedHandler(IWalletHostCollection Wallets,
     {
         if (args.Sender is Wallet<IComponentHost> wallet && wallet.Value is IComponentHost host)
         {
-            List<IComponentHost> sortedWallets = [.. Wallets, host];
-            sortedWallets = [.. sortedWallets.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() is 
+            List<IComponentHost> sortedWallets = [.. wallets.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() is
                 IConfigurationDescriptor<WalletConfiguration> descriptor ? descriptor.Name : null)];
 
             int index = sortedWallets.IndexOf(host);

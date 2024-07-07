@@ -5,7 +5,7 @@ namespace Wallet;
 
 public class WalletCollectionInitializer(IHostEnvironment environment, 
     IComponentFactory componentFactory,
-    IWalletHostCollection Wallets) : 
+    IWalletHostCollection wallets) : 
     IInitialization
 {
     public void Initialize()
@@ -25,7 +25,7 @@ public class WalletCollectionInitializer(IHostEnvironment environment,
                 WalletConfiguration>(section, new WalletConfiguration())
                 is IComponentHost host)
             {
-                Wallets.Add(host);
+                wallets.Add(host);
                 host.Start();
             }
         }
