@@ -19,9 +19,9 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
     double width) :
     Observable<string, TValue>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
     IItemEntryViewModel,
-    INotificationHandler<UpdateEventArgs<Item>>,
-    INotificationHandler<ConfirmEventArgs<Item>>,
-    INotificationHandler<CancelEventArgs<Item>>
+    INotificationHandler<ConfirmEventArgs<ItemEntry>>,
+    INotificationHandler<UpdateEventArgs<ItemEntry>>,
+    INotificationHandler<CancelEventArgs<ItemEntry>>
     where TValue : notnull
 {
     [ObservableProperty]
@@ -36,10 +36,10 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
     [ObservableProperty]
     private double width = width;
 
-    public Task Handle(UpdateEventArgs<Item> args) =>
+    public Task Handle(UpdateEventArgs<ItemEntry> args) =>
         Task.FromResult(State = ItemState.Write);
 
-    public Task Handle(CancelEventArgs<Item> args)
+    public Task Handle(CancelEventArgs<ItemEntry> args)
     {
         Revert();
 
@@ -47,7 +47,7 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
         return Task.CompletedTask;
     }
 
-    public Task Handle(ConfirmEventArgs<Item> args)
+    public Task Handle(ConfirmEventArgs<ItemEntry> args)
     {
         Commit();
 

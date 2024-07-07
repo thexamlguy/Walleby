@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Wallet.Data;
 
 [Table("Items")]
-public record ItemEntry
+public record ItemEntity
 {
     [Key]
     public Guid Id { get; set; }
@@ -17,11 +17,11 @@ public record ItemEntry
 
     public Guid? ImageId { get; set; }
 
-    public BlobEntry? Image { get; set; }
+    public BlobEntity? Image { get; set; }
 
     public required string Category { get; set; }
 
-    public ICollection<TagEntry> Tags { get; set; } = new List<TagEntry>();
+    public ICollection<TagEntity> Tags { get; set; } = new List<TagEntity>();
 
-    public ICollection<BlobEntry> Blobs { get; set;  } = new List<BlobEntry>();
+    public ICollection<BlobEntity> Blobs { get; set;  } = new List<BlobEntity>();
 }

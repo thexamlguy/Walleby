@@ -1,14 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Xml.Linq;
 using Toolkit.Foundation;
+using Wallet.Data;
 
 namespace Wallet;
 
 public partial class ItemHeaderViewModel : 
     Observable<string>,
-    INotificationHandler<UpdateEventArgs<Item>>,
-    INotificationHandler<ConfirmEventArgs<Item>>,
-    INotificationHandler<CancelEventArgs<Item>>,
+    IHandler<ValidateEventArgs<ItemEntry>, bool>,
+    INotificationHandler<UpdateEventArgs<ItemEntry>>,
+    INotificationHandler<ConfirmEventArgs<ItemEntry>>,
+    INotificationHandler<CancelEventArgs<ItemEntry>>,
     INotificationHandler<NotifyEventArgs<ItemCategory<string>>>,
     INotificationHandler<NotifyEventArgs<Item<IImageDescriptor>>>,
     IItemViewModel
@@ -30,11 +33,14 @@ public partial class ItemHeaderViewModel :
         IPublisher publisher,
         ISubscriber subscriber,
         IDisposer disposer,
+        IValidation validation,
         ItemHeaderConfiguration configuration,
         ItemState state,
         string value,
         IImageDescriptor? imageDescriptor = null) : base(provider, factory, mediator, publisher, subscriber, disposer, value)
     {
+        Validation = validation;
+
         this.configuration = configuration;
 
         State = state;
@@ -43,12 +49,18 @@ public partial class ItemHeaderViewModel :
 
         Track(nameof(Value), () => Value, x => Value = x);
         Track(nameof(ImageDescriptor), () => ImageDescriptor, x => ImageDescriptor = x);
+
+        Validation.Add(() => Value, [new ValidationRule(() => Value is { Length: > 0 }, "Name is required")],
+            ValidationTrigger.Deferred);
     }
 
-    public Task Handle(UpdateEventArgs<Item> args) =>
+    [ObservableProperty]
+    private IValidation validation;
+
+    public Task Handle(UpdateEventArgs<ItemEntry> args) =>
         Task.FromResult(State = ItemState.Write);
 
-    public Task Handle(CancelEventArgs<Item> args)
+    public Task Handle(CancelEventArgs<ItemEntry> args)
     {
         Revert();
 
@@ -56,7 +68,7 @@ public partial class ItemHeaderViewModel :
         return Task.CompletedTask;
     }
 
-    public Task Handle(ConfirmEventArgs<Item> args)
+    public Task Handle(ConfirmEventArgs<ItemEntry> args)
     {
         Commit();
 
@@ -84,6 +96,9 @@ public partial class ItemHeaderViewModel :
 
         return Task.CompletedTask;
     }
+
+    public async Task<bool> Handle(ValidateEventArgs<ItemEntry> args,
+        CancellationToken cancellationToken) => await Validation.Validate();
 
     protected override void OnValueChanged()
     {

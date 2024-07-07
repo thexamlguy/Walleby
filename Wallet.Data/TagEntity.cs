@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Wallet.Data;
 
 [Table("Tags")]
-public class TagEntry
+public class TagEntity
 {
     [Key]
     public Guid Id { get; set; }

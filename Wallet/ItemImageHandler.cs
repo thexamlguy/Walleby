@@ -16,7 +16,7 @@ public class ItemImageHandler(IDbContextFactory<WalletContext> dbContextFactory,
             Guid id = item.Value;
 
             using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
-            var result = await context.Set<ItemEntry>()
+            var result = await context.Set<ItemEntity>()
                 .Where(x => x.Id == id)
                 .Select(x => new
                 {
@@ -25,7 +25,7 @@ public class ItemImageHandler(IDbContextFactory<WalletContext> dbContextFactory,
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (result is not null && 
-                result.Image is BlobEntry image &&
+                result.Image is BlobEntity image &&
                 image.Data is { Length: > 0 } data)
             {
                 MemoryStream stream = new(data);

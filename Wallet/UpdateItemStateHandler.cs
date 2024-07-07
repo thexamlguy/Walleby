@@ -13,7 +13,7 @@ public class UpdateItemStateHandler(IDbContextFactory<WalletContext> dbContextFa
         if (args.Sender is (Guid id, int state))
         {
             using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
-            if (await context.FindAsync<ItemEntry>(id) is ItemEntry result)
+            if (await context.FindAsync<ItemEntity>(id) is ItemEntity result)
             {
                 result.State = state;
                 await context.SaveChangesAsync(cancellationToken);

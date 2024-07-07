@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Toolkit.Foundation;
+using Wallet.Data;
 
 namespace Wallet;
 
@@ -77,6 +78,7 @@ public partial class ItemViewModel :
 
     public Task Handle(UpdateEventArgs<Item> args)
     {
+        Publisher.Publish(Update.As<ItemEntry>());
         Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
         {
             Factory.Create<ConfirmItemActionViewModel>(),
@@ -89,6 +91,7 @@ public partial class ItemViewModel :
 
     public Task Handle(CancelEventArgs<Item> args)
     {
+        Publisher.Publish(Cancel.As<ItemEntry>());
         Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
         {
             Factory.Create<EditItemActionViewModel>(),
@@ -99,20 +102,29 @@ public partial class ItemViewModel :
         return Task.CompletedTask;
     }
 
-    public Task Handle(ConfirmEventArgs<Item> args)
+    public async Task Handle(ConfirmEventArgs<Item> args)
     {
-        Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
+        List<bool> results = [];
+        await foreach (bool result in Mediator.HandleManyAsync<ValidateEventArgs<ItemEntry>, bool>(Validate.As<ItemEntry>()))
         {
-            Factory.Create<FavouriteItemActionViewModel>(Favourite),
-            Factory.Create<EditItemActionViewModel>(),
-            Factory.Create<ArchiveItemActionViewModel>(),
-        })));
+            results.Add(result);
+        }
 
-        Publisher.Publish(Confirm.As<Item>(),
-            State is ItemState.New ? nameof(ItemState.New) : nameof(ItemState.Write));
+        if (results.All(result => result))
+        {
+            Publisher.Publish(Confirm.As<ItemEntry>());
+            Publisher.Publish(Notify.As(Factory.Create<ItemCommandHeaderCollection>(new List<IDisposable>
+            {
+                Factory.Create<FavouriteItemActionViewModel>(Favourite),
+                Factory.Create<EditItemActionViewModel>(),
+                Factory.Create<ArchiveItemActionViewModel>(),
+            })));
 
-        State = ItemState.Read;
-        return Task.CompletedTask;
+            Publisher.Publish(Confirm.As<Item>(),
+                State is ItemState.New ? nameof(ItemState.New) : nameof(ItemState.Write));
+
+            State = ItemState.Read;
+        }
     }
 
     public override Task OnActivated()

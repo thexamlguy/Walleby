@@ -20,7 +20,7 @@ public class UpdateItemHander(IDbContextFactory<WalletContext> dbContextFactory,
             try
             {
                 using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
-                ItemEntry? result = result = await context.Set<ItemEntry>()
+                ItemEntity? result = result = await context.Set<ItemEntity>()
                     .Include(x => x.Image).FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
                 if (result is not null)
@@ -40,7 +40,7 @@ public class UpdateItemHander(IDbContextFactory<WalletContext> dbContextFactory,
                         imageWriter.Write(imageDescriptor, memoryStream);
                         thumbData = memoryStream.ToArray();
 
-                        if (result.Image is BlobEntry existingImageBlob)
+                        if (result.Image is BlobEntity existingImageBlob)
                         {
                             existingImageBlob.Data = thumbData;
                             existingImageBlob.DateTime = DateTime.UtcNow;
@@ -49,7 +49,7 @@ public class UpdateItemHander(IDbContextFactory<WalletContext> dbContextFactory,
                         }
                         else
                         {
-                            result.Image = new BlobEntry
+                            result.Image = new BlobEntity
                             {
                                 Id = Guid.NewGuid(),
                                 Data = thumbData,

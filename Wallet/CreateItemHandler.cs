@@ -28,12 +28,12 @@ public class CreateItemHandler(IImageWriter imageWriter,
                 thumbData = memoryStream.ToArray();
             }
 
-            ItemEntry itemEntry = new()
+            ItemEntity itemEntry = new()
             {
                 Id = id,
                 Name = name,
                 Category = category,
-                Image = thumbData != null ? new BlobEntry
+                Image = thumbData != null ? new BlobEntity
                 {
                     Id = Guid.NewGuid(),
                     Data = thumbData,
@@ -42,7 +42,7 @@ public class CreateItemHandler(IImageWriter imageWriter,
                 } : null,
                 Blobs =
                     {
-                        new BlobEntry
+                        new BlobEntity
                         {
                             Id = Guid.NewGuid(),
                             Data = Encoding.UTF8.GetBytes(content),
@@ -53,7 +53,7 @@ public class CreateItemHandler(IImageWriter imageWriter,
             };
 
             using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
-            EntityEntry<ItemEntry>? result = await context.AddAsync(itemEntry, cancellationToken);
+            EntityEntry<ItemEntity>? result = await context.AddAsync(itemEntry, cancellationToken);
 
             await context.SaveChangesAsync(cancellationToken);
 

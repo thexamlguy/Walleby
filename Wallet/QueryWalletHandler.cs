@@ -16,8 +16,8 @@ public class QueryWalletHandler(IDbContextFactory<WalletContext> dbContextFactor
         {
             (string filter, string text) = Wallet.Value;
 
-            ExpressionStarter<ItemEntry> predicate =
-                PredicateBuilder.New<ItemEntry>(true);
+            ExpressionStarter<ItemEntity> predicate =
+                PredicateBuilder.New<ItemEntity>(true);
 
             if (filter is { Length: <= 0 })
             {
@@ -49,7 +49,7 @@ public class QueryWalletHandler(IDbContextFactory<WalletContext> dbContextFactor
             }
 
             using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
-            var results = await context.Set<ItemEntry>()
+            var results = await context.Set<ItemEntity>()
                 .Where(predicate)
                 .Select(x => new
                 {

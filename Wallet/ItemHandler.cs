@@ -16,7 +16,7 @@ public class ItemHandler(IDbContextFactory<WalletContext> dbContextFactory) :
             Guid id = item.Value;
 
             using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
-            var result = await context.Set<ItemEntry>()
+            var result = await context.Set<ItemEntity>()
                 .Where(x => x.Id == id)
                 .Select(x => new
                 {
@@ -35,7 +35,7 @@ public class ItemHandler(IDbContextFactory<WalletContext> dbContextFactory) :
             if (result is not null)
             {
                 ItemConfiguration? configuration = null;
-                if (result.Blob is BlobEntry blob && blob.Data is { Length: > 0 } data)
+                if (result.Blob is BlobEntity blob && blob.Data is { Length: > 0 } data)
                 {
                     try
                     {

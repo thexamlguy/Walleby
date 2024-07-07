@@ -15,7 +15,7 @@ public class DeleteItemHandler(IDbContextFactory<WalletContext> dbContextFactory
             Guid id = item.Value;
 
             using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
-            if (await context.FindAsync<ItemEntry>(id) is ItemEntry result)
+            if (await context.FindAsync<ItemEntity>(id) is ItemEntity result)
             {
                 context.Items.Remove(result);
                 await context.SaveChangesAsync(cancellationToken);

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Wallet.Data;
 
 [Table("Blobs")]
-public record BlobEntry
+public record BlobEntity
 {
     public byte[]? Data { get; set; }
 

@@ -6,11 +6,11 @@ public interface IConnection;
 
 public class WalletContext(IConnection connection) : DbContext
 {
-    public DbSet<BlobEntry> Blobs { get; set; }
+    public DbSet<BlobEntity> Blobs { get; set; }
 
-    public DbSet<ItemEntry> Items { get; set; }
+    public DbSet<ItemEntity> Items { get; set; }
 
-    public DbSet<TagEntry> Tags { get; set; }
+    public DbSet<TagEntity> Tags { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -19,27 +19,27 @@ public class WalletContext(IConnection connection) : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ItemEntry>()
+        modelBuilder.Entity<ItemEntity>()
             .HasKey(x => x.Id);
 
-        modelBuilder.Entity<ItemEntry>()
+        modelBuilder.Entity<ItemEntity>()
             .HasMany(x => x.Tags)
             .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<ItemEntry>()
+        modelBuilder.Entity<ItemEntity>()
             .HasMany(x => x.Blobs)
             .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<ItemEntry>().
+        modelBuilder.Entity<ItemEntity>().
         HasOne(i => i.Image)
             .WithOne()
-            .HasForeignKey<ItemEntry>(i => i.ImageId)
+            .HasForeignKey<ItemEntity>(i => i.ImageId)
             .IsRequired(false)
             .OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.Entity<BlobEntry>()
+        modelBuilder.Entity<BlobEntity>()
             .HasKey(x => x.Id);
     }
 }
