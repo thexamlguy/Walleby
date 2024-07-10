@@ -29,6 +29,8 @@ public partial class MainViewModel :
     {
         if (args.Sender is WalletNavigationViewModel wallet)
         {
+            SelectedItem = null;
+
             Reset(args => args.SetSource(wallet), false);
             SelectedItem = wallet;
         }
