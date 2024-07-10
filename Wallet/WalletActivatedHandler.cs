@@ -49,7 +49,7 @@ public class WalletActivatedHandler(IWalletHostCollection wallets,
                         is WalletNavigationViewModel viewModel)
                     {
                         publisher.Publish(Insert.As<IWalletNavigationViewModel>(index, viewModel),
-                            nameof(MainViewModel));
+                            nameof(WalletNavigationCollectionViewModel));
                     }
                 }
             }
