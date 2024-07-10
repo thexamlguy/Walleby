@@ -9,4 +9,4 @@ public partial class CreateWalletNavigationViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer),
-    IMainNavigationViewModel;
+    INavigationViewModel;

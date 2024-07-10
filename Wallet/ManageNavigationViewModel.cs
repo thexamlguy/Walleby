@@ -10,7 +10,7 @@ public partial class ManageNavigationViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer) :
     Observable(provider, factory, mediator, publisher, subscriber, disposer),
-    IMainNavigationViewModel,
+    INavigationViewModel,
     ISelectable
 {
     [ObservableProperty]

@@ -10,7 +10,27 @@
         FooterMenuItemsSource="{Binding Footer}"
         IsSettingsVisible="False"
         MenuItemTemplate="{Binding Template}"
+        MenuItemsSource="{Binding}"
         SelectedItem="{Binding SelectedItem}">
+        <Interaction.Behaviors>
+            <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsOpened}" Value="True">
+                <InvokeNavigationViewItemAction SelectedIndex="1" />
+            </DataTriggerBehavior>
+        </Interaction.Behaviors>
+        <NavigationView.PaneHeader>
+            <Border
+                Margin="12,0,0,0"
+                Padding="12,4,12,4"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Background="{DynamicResource AccentFillColorDefaultBrush}"
+                CornerRadius="12">
+                <TextBlock
+                    FontSize="10"
+                    Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                    Text="PREVIEW 4" />
+            </Border>
+        </NavigationView.PaneHeader>
         <NavigationView.PaneCustomContent>
             <Grid RowDefinitions="*,Auto">
                 <ContentControl Grid.Row="0">
@@ -36,48 +56,6 @@
                 </AttachedBehaviour>
             </Interaction.Behaviors>
         </Frame>
-
-        <!--<Interaction.Behaviors>
-            <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsOpened}" Value="True">
-                <InvokeNavigationViewItemAction SelectedIndex="1" />
-            </DataTriggerBehavior>
-            <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsSelected}" Value="True">
-                <InvokeNavigationViewItemAction SelectedIndex="1" />
-            </DataTriggerBehavior>
-        </Interaction.Behaviors>
-        <NavigationView.PaneHeader>
-            <Border
-                Margin="12,0,0,0"
-                Padding="12,4,12,4"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Background="{DynamicResource AccentFillColorDefaultBrush}"
-                CornerRadius="12">
-                <TextBlock
-                    FontSize="10"
-                    Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
-                    Text="{ReflectionBinding SelectedItem.Name}" />
-            </Border>
-        </NavigationView.PaneHeader>
-        <NavigationView.PaneCustomContent>
-            <Grid RowDefinitions="*,Auto">
-
-                <NavigationViewItemSeparator Grid.Row="1" />
-            </Grid>
-        </NavigationView.PaneCustomContent>
-        <NavigationView.Resources>
-            <CornerRadius x:Key="NavigationViewContentGridCornerRadius">0</CornerRadius>
-            <Thickness x:Key="NavigationViewContentGridBorderThickness">1,0,0,0</Thickness>
-        </NavigationView.Resources>
-        <Frame>
-            <Interaction.Behaviors>
-                <AttachedBehaviour>
-                    <NavigateRegionAction Name="Main">
-                        <NavigateAction Region="Main" Route="Wallet" />
-                    </NavigateRegionAction>
-                </AttachedBehaviour>
-            </Interaction.Behaviors>
-        </Frame>-->
     </NavigationView>
 </UserControl>
 

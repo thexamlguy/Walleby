@@ -6,7 +6,7 @@ namespace Wallet;
 [Notification(typeof(InsertEventArgs<IWalletNavigationViewModel>), nameof(WalletNavigationCollectionViewModel))]
 public partial class WalletNavigationCollectionViewModel :
     ObservableCollection<IWalletNavigationViewModel>,
-    INotificationHandler<SelectionEventArgs<IMainNavigationViewModel>>
+    INotificationHandler<SelectionEventArgs<INavigationViewModel>>
 {
     public WalletNavigationCollectionViewModel(IServiceProvider provider, 
         IServiceFactory factory,
@@ -21,9 +21,9 @@ public partial class WalletNavigationCollectionViewModel :
 
     public IContentTemplate Template { get; set; }
 
-    public Task Handle(SelectionEventArgs<IMainNavigationViewModel> args)
+    public Task Handle(SelectionEventArgs<INavigationViewModel> args)
     {
-        if (args.Sender is not null)
+        if (args.Sender is ManageNavigationViewModel)
         {
             SelectedItem = null;
         }

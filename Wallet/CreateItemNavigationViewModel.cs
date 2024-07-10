@@ -10,7 +10,7 @@ public partial class CreateItemNavigationViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer,
     NamedComponent named) : Observable(provider, factory, mediator, publisher, subscriber, disposer),
-    IWalletNavigationViewModel
+    INavigationViewModel
 {
     [ObservableProperty]
     private bool isSelected;

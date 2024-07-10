@@ -4,7 +4,7 @@ namespace Wallet;
 
 public partial class ManageViewModel :
     ObservableCollection,
-    IMainNavigationViewModel
+    INavigationViewModel
 {
     public ManageViewModel(IServiceProvider provider,
         IServiceFactory factory,

@@ -12,8 +12,8 @@ public abstract partial class FilterNavigationViewModel(IServiceProvider provide
     IDisposer disposer,
     int key,
     string value) : 
-    ObservableCollection<IWalletNavigationViewModel, int, string>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
-    IWalletNavigationViewModel,
+    ObservableCollection<INavigationViewModel, int, string>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
+    INavigationViewModel,
     INotificationHandler<ActivatedEventArgs<Wallet>>,
     INotificationHandler<DeactivatedEventArgs<Wallet>>,
     INotificationHandler<NotifyEventArgs<Item<int>>>
@@ -38,6 +38,7 @@ public abstract partial class FilterNavigationViewModel(IServiceProvider provide
     {
         IsSelected = false;
         IsActivated = false;
+
         return Task.CompletedTask;
     }
 
@@ -58,11 +59,11 @@ public abstract partial class FilterNavigationViewModel<TWalletNavigation>(IServ
     int key,
     string value) :
     ObservableCollection<TWalletNavigation, int, string>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
-    IWalletNavigationViewModel,
+    INavigationViewModel,
     INotificationHandler<ActivatedEventArgs<Wallet>>,
     INotificationHandler<DeactivatedEventArgs<Wallet>>
     where TWalletNavigation :
-    IWalletNavigationViewModel
+    INavigationViewModel
 {
     [ObservableProperty]
     private bool isActivated;
@@ -74,6 +75,7 @@ public abstract partial class FilterNavigationViewModel<TWalletNavigation>(IServ
     {
         IsSelected = false;
         IsActivated = false;        
+
         return Task.CompletedTask;
     }
 

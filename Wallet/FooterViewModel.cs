@@ -3,7 +3,7 @@
 namespace Wallet;
 
 public partial class FooterViewModel :
-    ObservableCollection<IMainNavigationViewModel>
+    ObservableCollection<INavigationViewModel>
 {
     public FooterViewModel(IServiceProvider provider,
         IServiceFactory factory,

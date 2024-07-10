@@ -18,7 +18,7 @@ public partial class ItemCommandHeaderViewModel(IServiceProvider provider,
     {
         if (args.Sender is ItemCommandHeaderCollection commandCollection)
         {
-            Clear(args =>
+            Reset(args =>
             {
                 foreach (IDisposable command in commandCollection)
                 {

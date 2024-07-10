@@ -5,6 +5,7 @@
     xmlns:vm="using:Wallet"
     x:DataType="vm:CreateItemNavigationViewModel"
     Content="New Item"
+    IsSelected="False"
     NavigationViewExtension.IsItemInvokedEnabled="True"
     SelectsOnInvoked="False">
     <Interaction.Behaviors>

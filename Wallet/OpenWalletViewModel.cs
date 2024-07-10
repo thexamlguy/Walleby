@@ -50,17 +50,4 @@ public partial class OpenWalletViewModel :
             }
         }
     }
-
-
-    //public override async Task OnActivated()
-    //{
-    //    Publisher.Publish(Activated.As<Wallet>());
-    //    await base.OnActivated();
-    //}
-
-    //public override async Task OnDeactivated()
-    //{
-    //    Publisher.Publish(Deactivated.As<Wallet>());
-    //    await base.OnDeactivated();
-    //}
 }

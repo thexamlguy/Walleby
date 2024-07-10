@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 namespace Wallet;
 
 public partial class MainViewModel :
-    ObservableCollection<IMainNavigationViewModel>,
+    ObservableCollection<INavigationViewModel>,
     INotificationHandler<SelectionEventArgs<IWalletNavigationViewModel>>
 {
     [ObservableProperty]
@@ -27,9 +27,14 @@ public partial class MainViewModel :
 
     public Task Handle(SelectionEventArgs<IWalletNavigationViewModel> args)
     {
-        if (args.Sender is not null)
+        if (args.Sender is WalletNavigationViewModel wallet)
         {
-            SelectedItem = null;
+            Reset(args => args.SetSource(wallet), false);
+            SelectedItem = wallet;
+        }
+        else
+        {
+            Clear(false);
         }
 
         return Task.CompletedTask;
