@@ -12,19 +12,6 @@
         <CornerRadius x:Key="IconCornerRadius">40</CornerRadius>
     </ListBoxItem.Resources>
     <Interaction.Behaviors>
-        <DataTriggerBehavior Binding="{Binding IsOpened}" Value="False">
-            <ConditionAction>
-                <ConditionAction.Condition>
-                    <ConditionalExpression ForwardChaining="And">
-                        <ComparisonCondition LeftOperand="{Binding IsSelected}" RightOperand="True" />
-                    </ConditionalExpression>
-                </ConditionAction.Condition>
-                <NavigateAction Region="Main" Route="OpenWallet">
-                    <Parameter Key="Name" Value="{Binding Name}" />
-                    <Parameter Key="ImageDescriptor" Value="{Binding ImageDescriptor}" />
-                </NavigateAction>
-            </ConditionAction>
-        </DataTriggerBehavior>
         <AttachedEventTriggerBehaviour RoutedEvent="{x:Static ListBoxExtension.ItemInvokedEvent}">
             <ConditionAction>
                 <ConditionAction.Condition>

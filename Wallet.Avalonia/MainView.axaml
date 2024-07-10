@@ -10,8 +10,7 @@
         FooterMenuItemsSource="{Binding Footer}"
         IsSettingsVisible="False"
         MenuItemTemplate="{Binding Template}"
-        MenuItemsSource="{Binding SelectedItem}"
-        SelectionFollowsFocus="True">
+        MenuItemsSource="{Binding #ListBox.SelectedItem}">
         <Interaction.Behaviors>
             <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsOpened}" Value="True">
                 <InvokeNavigationViewItemAction SelectedIndex="1" />
@@ -31,19 +30,19 @@
                 <TextBlock
                     FontSize="10"
                     Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
-                    Text="BETA PREVIEW 3" />
+                    Text="{ReflectionBinding SelectedItem.Name}" />
             </Border>
         </NavigationView.PaneHeader>
         <NavigationView.PaneCustomContent>
             <Grid RowDefinitions="*,Auto">
-                <OverflowListBox
+                <Overflow
                     x:Name="ListBox"
                     Grid.Row="0"
                     HorizontalAlignment="Center"
                     ItemTemplate="{ReflectionBinding Template}"
                     ItemsSource="{Binding}"
                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-                    <OverflowListBox.Resources>
+                    <Overflow.Resources>
                         <StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="SubtleFillColorTransparentBrush" />
                         <x:Double x:Key="WalletItemSize">40</x:Double>
                         <CornerRadius x:Key="WalletItemCornerRadius">40</CornerRadius>
@@ -146,26 +145,26 @@
                                 </Style>
                             </Style>
                         </ControlTheme>
-                    </OverflowListBox.Resources>
-                    <OverflowListBox.Styles>
-                        <Style Selector="OverflowListBox.Closed">
+                    </Overflow.Resources>
+                    <Overflow.Styles>
+                        <Style Selector="Overflow.Closed">
                             <Setter Property="Margin" Value="1,2,1,0" />
                             <Style Selector="^ StackPanel">
                                 <Setter Property="Orientation" Value="Vertical" />
                             </Style>
                         </Style>
-                        <Style Selector="OverflowListBox.Opened">
+                        <Style Selector="Overflow.Opened">
                             <Setter Property="Margin" Value="12,2,12,0" />
                             <Style Selector="^ StackPanel">
                                 <Setter Property="Orientation" Value="Horizontal" />
                             </Style>
                         </Style>
-                    </OverflowListBox.Styles>
-                    <OverflowListBox.ItemsPanel>
+                    </Overflow.Styles>
+                    <Overflow.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Spacing="6" />
                         </ItemsPanelTemplate>
-                    </OverflowListBox.ItemsPanel>
+                    </Overflow.ItemsPanel>
                     <Interaction.Behaviors>
                         <DataTriggerBehavior Binding="{Binding $parent[NavigationView].IsPaneOpen}" Value="True">
                             <AddClassAction ClassName="Opened" RemoveIfExists="True" />
@@ -175,14 +174,20 @@
                             <AddClassAction ClassName="Closed" RemoveIfExists="True" />
                             <RemoveClassAction ClassName="Opened" />
                         </DataTriggerBehavior>
-                        <DataTriggerBehavior Binding="{Binding $parent[NavigationView].SelectedItem, Converter={NamedTypeConverter}}" Value="ManageNavigationViewModel">
+                        <DataTriggerBehavior Binding="{Binding #ListBox.SelectedItem, Converter={NamedTypeConverter}}" Value="WalletNavigationViewModel">
+                            <ChangePropertyAction
+                                PropertyName="SelectedItem"
+                                TargetObject="{Binding #NavigationView}"
+                                Value="{x:Null}" />
+                        </DataTriggerBehavior>
+                        <DataTriggerBehavior Binding="{Binding #NavigationView.SelectedItem, Converter={NamedTypeConverter}}" Value="ManageNavigationViewModel">
                             <ChangePropertyAction
                                 PropertyName="SelectedItem"
                                 TargetObject="{Binding #ListBox}"
                                 Value="{x:Null}" />
                         </DataTriggerBehavior>
                     </Interaction.Behaviors>
-                </OverflowListBox>
+                </Overflow>
                 <NavigationViewItemSeparator Grid.Row="1" />
             </Grid>
         </NavigationView.PaneCustomContent>

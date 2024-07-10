@@ -11,8 +11,27 @@ public class WalletActivatedHandler(IWalletHostCollection wallets,
     {
         if (args.Sender is Wallet<IComponentHost> wallet && wallet.Value is IComponentHost host)
         {
-            List<IComponentHost> sortedWallets = [.. wallets.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() is
-                IConfigurationDescriptor<WalletConfiguration> descriptor ? descriptor.Name : null)];
+            List<IComponentHost> sortedWallets =
+            [
+                .. wallets.OrderBy(wallet =>
+                {
+                    var descriptor = wallet.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>();
+                    return descriptor?.Name;
+                },
+                Comparer<string?>.Create((x, y) =>
+                {
+                    bool xIsNumeric = int.TryParse(x, out int xNum);
+                    bool yIsNumeric = int.TryParse(y, out int yNum);
+
+                    return (xIsNumeric, yIsNumeric) switch
+                    {
+                        (true, true) => xNum.CompareTo(yNum),
+                        (true, false) => -1,
+                        (false, true) => 1,
+                        _ => string.Compare(x, y, StringComparison.Ordinal)
+                    };
+                })),
+            ];
 
             int index = sortedWallets.IndexOf(host);
 

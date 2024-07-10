@@ -11,10 +11,26 @@ public class MainViewModelActivationHandler(IPublisher publisher,
     {
         bool selected = true;
 
-        foreach (IComponentHost Wallet in Wallets.OrderBy(x => x.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>()
-            is IConfigurationDescriptor<WalletConfiguration> descriptor ? descriptor.Name : null))
+        foreach (IComponentHost Wallet in Wallets.OrderBy(x =>
         {
-            if (Wallet.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() 
+            IConfigurationDescriptor<WalletConfiguration> descriptor = x.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>();
+            return descriptor?.Name;
+        },
+            Comparer<string?>.Create((x, y) =>
+            {
+                bool xIsNumeric = int.TryParse(x, out int xNum);
+                bool yIsNumeric = int.TryParse(y, out int yNum);
+
+                return (xIsNumeric, yIsNumeric) switch
+                {
+                    (true, true) => xNum.CompareTo(yNum),
+                    (true, false) => -1,
+                    (false, true) => 1,
+                    _ => string.Compare(x, y, StringComparison.Ordinal)
+                };
+            })))
+        {
+            if (Wallet.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>()
                 is IConfigurationDescriptor<WalletConfiguration> configuration)
             {
                 if (Wallet.Services.GetRequiredService<IServiceFactory>() is IServiceFactory factory)
@@ -23,7 +39,7 @@ public class MainViewModelActivationHandler(IPublisher publisher,
                         Wallet.Services.GetRequiredService<IDecoratorService<ProfileImage<IImageDescriptor>>>();
                     ProfileImage<IImageDescriptor>? profileImage = profileImageDecorator.Value;
 
-                    if (factory.Create<WalletNavigationViewModel>(args => args.Initialize(), configuration.Name, profileImage?.Value ?? null, selected) 
+                    if (factory.Create<WalletNavigationViewModel>(args => args.Initialize(), configuration.Name, profileImage?.Value ?? null, selected)
                         is WalletNavigationViewModel viewModel)
                     {
                         publisher.Publish(Create.As<IMainNavigationViewModel>(viewModel),
