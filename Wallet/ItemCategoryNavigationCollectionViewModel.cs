@@ -3,8 +3,8 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-[Notification(typeof(CreateEventArgs<ItemCategoryNavigationViewModel>), nameof(ItemCategoryCollectionViewModel))]
-public partial class ItemCategoryCollectionViewModel(IServiceProvider provider,
+[Notification(typeof(CreateEventArgs<ItemCategoryNavigationViewModel>), nameof(ItemCategoryNavigationCollectionViewModel))]
+public partial class ItemCategoryNavigationCollectionViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
     IPublisher publisher,

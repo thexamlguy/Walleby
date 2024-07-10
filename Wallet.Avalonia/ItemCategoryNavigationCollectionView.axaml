@@ -1,9 +1,9 @@
 <UserControl
-    x:Class="Wallet.Avalonia.ItemCategoryCollectionView"
+    x:Class="Wallet.Avalonia.ItemCategoryNavigationCollectionView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
-    x:DataType="vm:ItemCategoryCollectionViewModel">
+    x:DataType="vm:ItemCategoryNavigationCollectionViewModel">
     <ListBox
         Margin="2,-1,0,0"
         AutoScrollToSelectedItem="True"

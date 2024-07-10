@@ -3,16 +3,16 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class ItemCollectionViewModelActivatedHandler(IMediator mediator,
+public class ItemNavigationCollectionViewModelActivatedHandler(IMediator mediator,
     IServiceProvider serviceProvider,
     ICache<Item<(Guid, string)>> cache,
     IPublisher publisher) :
-    INotificationHandler<ActivationEventArgs<ItemNavigationViewModel, ItemCollectionConfiguration>>
+    INotificationHandler<ActivationEventArgs<ItemNavigationViewModel, ItemNavigationCollectionConfiguration>>
 {
     public async Task Handle(ActivationEventArgs<ItemNavigationViewModel,
-        ItemCollectionConfiguration> args)
+        ItemNavigationCollectionConfiguration> args)
     {
-        if (args.Value is ItemCollectionConfiguration configuration)
+        if (args.Value is ItemNavigationCollectionConfiguration configuration)
         {
             cache.Clear();
             bool selected = true;
@@ -40,7 +40,7 @@ public class ItemCollectionViewModelActivatedHandler(IMediator mediator,
                         decoratorService.Set(item);
                         cache.Add(item);
 
-                        publisher.Publish(Create.As(viewModel), nameof(ItemCollectionViewModel));
+                        publisher.Publish(Create.As(viewModel), nameof(ItemNavigationCollectionViewModel));
                     }
 
                     selected = false;

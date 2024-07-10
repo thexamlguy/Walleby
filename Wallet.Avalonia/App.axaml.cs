@@ -136,18 +136,18 @@ public partial class App : Application
 
                         services.AddTemplate<OpenWalletViewModel, OpenWalletView>("OpenWallet");
 
-                        services.AddScoped<ItemCollectionConfiguration>();
+                        services.AddScoped<ItemNavigationCollectionConfiguration>();
 
                         services.AddTemplate<WalletViewModel, WalletView>("Wallet");
-                        services.AddTemplate<ItemCollectionViewModel, ItemCollectionView>("ItemCollection");
+                        services.AddTemplate<ItemNavigationCollectionViewModel, ItemNavigationCollectionView>("ItemCollection");
 
-                        services.AddHandler<ItemCollectionViewModelActivatedHandler>();
+                        services.AddHandler<ItemNavigationCollectionViewModelActivatedHandler>();
 
                         services.AddTemplate<WalletHeaderViewModel, WalletHeaderView>("WalletHeader");
                         services.AddTemplate<BackActionViewModel, BackActionView>();
                         services.AddTemplate<SearchWalletActionViewModel, SearchWalletActionView>();
 
-                        services.AddTemplate<ItemCategoryCollectionViewModel, ItemCategoryCollectionView>("ItemCategoryCollection");
+                        services.AddTemplate<ItemCategoryNavigationCollectionViewModel, ItemCategoryNavigationCollectionView>("ItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
 
                         services.AddHandler<CategoriesNavigationViewModelActivationHandler>();
@@ -231,7 +231,9 @@ public partial class App : Application
                 services.AddHandler<CreateProfileImageHandler>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
-                services.AddHandler<MainViewModelActivationHandler>();
+                services.AddHandler<WalletNavigationCollectionViewModelActivationHandler>();
+
+                services.AddTemplate<WalletNavigationCollectionViewModel, WalletNavigationCollectionView>("Wallets");
 
                 services.AddTransient<FooterViewModel>();
 

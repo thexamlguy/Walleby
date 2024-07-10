@@ -1,9 +1,9 @@
 <UserControl
-    x:Class="Wallet.Avalonia.ItemCollectionView"
+    x:Class="Wallet.Avalonia.ItemNavigationCollectionView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
-    x:DataType="vm:ItemCollectionViewModel">
+    x:DataType="vm:ItemNavigationCollectionViewModel">
     <Interaction.Behaviors>
         <AttachedBehaviour>
             <ConditionAction>

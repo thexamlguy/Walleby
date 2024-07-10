@@ -16,5 +16,5 @@ public partial class SearchWalletActionViewModel(IServiceProvider provider,
 
     [RelayCommand]
     private void Invoke() => Publisher.Publish(Notify.As(new Search<string>(Value)),
-        nameof(ItemCollectionViewModel));
+        nameof(ItemNavigationCollectionViewModel));
 }

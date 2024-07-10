@@ -29,7 +29,7 @@ public class ItemCreatedHandler(IServiceProvider serviceProvider,
                 decoratorService.Set(cachedItem);
 
                 publisher.Publish(Insert.As(index, viewModel), 
-                    nameof(ItemCollectionViewModel));
+                    nameof(ItemNavigationCollectionViewModel));
             }
         }
 

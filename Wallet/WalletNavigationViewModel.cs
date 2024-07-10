@@ -6,7 +6,7 @@ namespace Wallet;
 
 public partial class WalletNavigationViewModel :
     ObservableCollection<IWalletNavigationViewModel>,
-    IMainNavigationViewModel,
+    IWalletNavigationViewModel,
     INotificationHandler<OpenedEventArgs<Wallet>>,
     INotificationHandler<ClosedEventArgs<Wallet>>,
     INotificationHandler<ActivatedEventArgs<Wallet>>,
@@ -52,11 +52,11 @@ public partial class WalletNavigationViewModel :
 
     public Task Handle(OpenedEventArgs<Wallet> args)
     {
-        Add<CreateItemNavigationViewModel>();
-        Add<AllNavigationViewModel>("All", 0);
-        Add<FavouritesNavigationViewModel>("Favourites", 0);
-        Add<ArchiveNavigationViewModel>("Archive", 0);
-        Add<CategoriesNavigationViewModel>("Categories", 0);
+        //Add<CreateItemNavigationViewModel>();
+        //Add<AllNavigationViewModel>("All", 0);
+        //Add<FavouritesNavigationViewModel>("Favourites", 0);
+        //Add<ArchiveNavigationViewModel>("Archive", 0);
+        //Add<CategoriesNavigationViewModel>("Categories", 0);
 
         IsOpened = true;
         Publisher.Publish(Changed.As<Item>());

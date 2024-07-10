@@ -1,6 +1,6 @@
 ﻿namespace Wallet;
 
-public record ItemCollectionConfiguration
+public record ItemNavigationCollectionConfiguration
 {
     public string? Filter { get; set; } = "All";
 

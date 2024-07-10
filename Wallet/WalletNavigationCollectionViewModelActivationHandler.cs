@@ -3,11 +3,11 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class MainViewModelActivationHandler(IPublisher publisher,
+public class WalletNavigationCollectionViewModelActivationHandler(IPublisher publisher,
     IWalletHostCollection Wallets) :
-    INotificationHandler<ActivationEventArgs<IMainNavigationViewModel>>
+    INotificationHandler<ActivationEventArgs<IWalletNavigationViewModel>>
 {
-    public Task Handle(ActivationEventArgs<IMainNavigationViewModel> args)
+    public Task Handle(ActivationEventArgs<IWalletNavigationViewModel> args)
     {
         bool selected = true;
 
@@ -42,8 +42,8 @@ public class MainViewModelActivationHandler(IPublisher publisher,
                     if (factory.Create<WalletNavigationViewModel>(args => args.Initialize(), configuration.Name, profileImage?.Value ?? null, selected)
                         is WalletNavigationViewModel viewModel)
                     {
-                        publisher.Publish(Create.As<IMainNavigationViewModel>(viewModel),
-                            nameof(MainViewModel));
+                        publisher.Publish(Create.As<IWalletNavigationViewModel>(viewModel),
+                            nameof(WalletNavigationCollectionViewModel));
 
                         selected = false;
                     }

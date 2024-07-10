@@ -1,14 +1,11 @@
-﻿using Avalonia.Xaml.Interactions.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Toolkit.Foundation;
 
 namespace Wallet;
 
-[Notification(typeof(CreateEventArgs<IMainNavigationViewModel>), nameof(MainViewModel))]
-[Notification(typeof(InsertEventArgs<IMainNavigationViewModel>), nameof(MainViewModel))]
 public partial class MainViewModel :
-    ObservableCollection<IMainNavigationViewModel>
+    ObservableCollection<IMainNavigationViewModel>,
+    INotificationHandler<SelectionEventArgs<IWalletNavigationViewModel>>
 {
     [ObservableProperty]
     private FooterViewModel footer;
@@ -27,4 +24,14 @@ public partial class MainViewModel :
     }
 
     public IContentTemplate Template { get; set; }
+
+    public Task Handle(SelectionEventArgs<IWalletNavigationViewModel> args)
+    {
+        if (args.Sender is not null)
+        {
+            SelectedItem = null;
+        }
+
+        return Task.CompletedTask;
+    }
 }

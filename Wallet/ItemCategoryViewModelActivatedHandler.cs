@@ -16,7 +16,7 @@ public class ItemCategoryViewModelActivatedHandler(IItemConfigurationCollection 
                 configuration.Key, selected)
                 is ItemCategoryNavigationViewModel viewModel)
             {
-                publisher.Publish(Create.As(viewModel), nameof(ItemCategoryCollectionViewModel));
+                publisher.Publish(Create.As(viewModel), nameof(ItemCategoryNavigationCollectionViewModel));
                 selected = false;
             }
         }

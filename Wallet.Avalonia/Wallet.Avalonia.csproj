@@ -50,11 +50,11 @@
 	  <Compile Update="ItemCategoryNavigationView.axaml.cs">
 	    <DependentUpon>ItemCategoryNavigationView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ItemCategoryCollectionView.axaml.cs">
-	    <DependentUpon>ItemCategoryCollectionView.axaml</DependentUpon>
+	  <Compile Update="ItemCategoryNavigationCollectionView.axaml.cs">
+	    <DependentUpon>ItemCategoryNavigationCollectionView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ItemCollectionView.axaml.cs">
-	    <DependentUpon>ItemCollectionView.axaml</DependentUpon>
+	  <Compile Update="ItemNavigationCollectionView.axaml.cs">
+	    <DependentUpon>ItemNavigationCollectionView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="CreateItemNavigationView.axaml.cs">
 	    <DependentUpon>CreateItemNavigationView.axaml</DependentUpon>

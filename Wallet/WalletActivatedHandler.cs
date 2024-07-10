@@ -48,7 +48,7 @@ public class WalletActivatedHandler(IWalletHostCollection wallets,
                         descriptor.Name, profileImage?.Value, false) 
                         is WalletNavigationViewModel viewModel)
                     {
-                        publisher.Publish(Insert.As<IMainNavigationViewModel>(index, viewModel),
+                        publisher.Publish(Insert.As<IWalletNavigationViewModel>(index, viewModel),
                             nameof(MainViewModel));
                     }
                 }

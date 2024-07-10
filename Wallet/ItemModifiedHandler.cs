@@ -29,7 +29,7 @@ public class ItemModifiedHandler(IServiceProvider serviceProvider,
                 decoratorService.Set(newItem);
 
                 publisher.Publish(MoveTo.As<ItemNavigationViewModel>(oldIndex, newIndex),
-                    nameof(ItemCollectionViewModel));
+                    nameof(ItemNavigationCollectionViewModel));
             }
         }
 

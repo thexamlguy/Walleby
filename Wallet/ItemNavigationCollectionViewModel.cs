@@ -3,11 +3,11 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-[Notification(typeof(CreateEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
-[Notification(typeof(InsertEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
-[Notification(typeof(MoveToEventArgs<ItemNavigationViewModel>), nameof(ItemCollectionViewModel))]
-[Notification(typeof(NotifyEventArgs<Search<string>>), nameof(ItemCollectionViewModel))]
-public partial class ItemCollectionViewModel :
+[Notification(typeof(CreateEventArgs<ItemNavigationViewModel>), nameof(ItemNavigationCollectionViewModel))]
+[Notification(typeof(InsertEventArgs<ItemNavigationViewModel>), nameof(ItemNavigationCollectionViewModel))]
+[Notification(typeof(MoveToEventArgs<ItemNavigationViewModel>), nameof(ItemNavigationCollectionViewModel))]
+[Notification(typeof(NotifyEventArgs<Search<string>>), nameof(ItemNavigationCollectionViewModel))]
+public partial class ItemNavigationCollectionViewModel :
     ObservableCollection<ItemNavigationViewModel>,
     INotificationHandler<NotifyEventArgs<Filter>>,
     INotificationHandler<NotifyEventArgs<Search<string>>>,
@@ -16,9 +16,9 @@ public partial class ItemCollectionViewModel :
     [ObservableProperty]
     public string? named;
 
-    private ItemCollectionConfiguration configuration;
+    private ItemNavigationCollectionConfiguration configuration;
 
-    public ItemCollectionViewModel(IServiceProvider provider,
+    public ItemNavigationCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
@@ -26,7 +26,7 @@ public partial class ItemCollectionViewModel :
         IDisposer disposer,
         IContentTemplate template,
         NamedComponent named,
-        ItemCollectionConfiguration configuration,
+        ItemNavigationCollectionConfiguration configuration,
         string? filter = null) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {
         Template = template;
@@ -70,5 +70,5 @@ public partial class ItemCollectionViewModel :
     }
 
     protected override ActivationBuilder ActivationBuilder() =>
-        new(Activation.As<ItemNavigationViewModel, ItemCollectionConfiguration>(configuration));
+        new(Activation.As<ItemNavigationViewModel, ItemNavigationCollectionConfiguration>(configuration));
 }
