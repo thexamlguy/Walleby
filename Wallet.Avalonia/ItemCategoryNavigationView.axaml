@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:DataType="vm:ItemCategoryNavigationViewModel"
+    IsSelected="{Binding IsSelected}"
     ListBoxExtension.IsItemInvokedEnabled="True">
     <Interaction.Behaviors>
         <AttachedEventTriggerBehaviour RoutedEvent="{x:Static ListBoxExtension.ItemInvokedEvent}">
