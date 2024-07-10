@@ -16,6 +16,7 @@
             <ConditionAction>
                 <ConditionAction.Condition>
                     <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding IsActivated}" RightOperand="False" />
                         <ComparisonCondition LeftOperand="{Binding IsOpened}" RightOperand="False" />
                     </ConditionalExpression>
                 </ConditionAction.Condition>
