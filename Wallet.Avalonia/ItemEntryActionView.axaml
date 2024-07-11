@@ -17,6 +17,8 @@
         MinHeight="{StaticResource MoreButtonMinHeight}"
         Margin="{StaticResource MoreButtonMargin}"
         Padding="{StaticResource MoreButtonPadding}"
+        HorizontalContentAlignment="Center"
+        VerticalContentAlignment="Center"
         Theme="{StaticResource TransparentButton}">
         <Viewbox Width="14" Height="14">
             <PathIcon

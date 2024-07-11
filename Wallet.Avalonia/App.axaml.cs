@@ -3,7 +3,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Wallet.Data;
 using HotAvalonia;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +12,7 @@ using System.Linq;
 using Toolkit.Avalonia;
 using Toolkit.Foundation;
 using FluentAvalonia.Core;
+using Avalonia.Controls;
 
 namespace Wallet.Avalonia;
 
@@ -231,9 +231,9 @@ public partial class App : Application
                 services.AddHandler<CreateProfileImageHandler>();
 
                 services.AddTemplate<MainViewModel, MainView>("Main");
-                services.AddHandler<WalletNavigationCollectionViewModelActivationHandler>();
 
                 services.AddTemplate<WalletNavigationCollectionViewModel, WalletNavigationCollectionView>("Wallets");
+                services.AddHandler<WalletNavigationCollectionViewModelActivationHandler>();
 
                 services.AddTransient<FooterViewModel>();
 

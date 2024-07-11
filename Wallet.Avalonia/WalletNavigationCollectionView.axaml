@@ -9,110 +9,6 @@
         ItemTemplate="{ReflectionBinding Template}"
         ItemsSource="{Binding}"
         SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-        <Overflow.Resources>
-            <StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="SubtleFillColorTransparentBrush" />
-            <x:Double x:Key="WalletItemSize">40</x:Double>
-            <CornerRadius x:Key="WalletItemCornerRadius">40</CornerRadius>
-            <ControlTheme x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
-                <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-                <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
-                <Setter Property="Background" Value="{DynamicResource ListViewItemBackground}" />
-                <Setter Property="Foreground" Value="{DynamicResource ListViewItemForeground}" />
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="VerticalContentAlignment" Value="Center" />
-                <Setter Property="Width" Value="{StaticResource WalletItemSize}" />
-                <Setter Property="Height" Value="{StaticResource WalletItemSize}" />
-                <Setter Property="MinHeight" Value="{StaticResource WalletItemSize}" />
-                <Setter Property="MinWidth" Value="{StaticResource WalletItemSize}" />
-                <Setter Property="CornerRadius" Value="{StaticResource WalletItemCornerRadius}" />
-                <Setter Property="Template">
-                    <ControlTemplate>
-                        <Panel>
-                            <Border
-                                x:Name="PART_ContentBorder"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}">
-                                <Grid>
-                                    <ContentPresenter
-                                        Name="PART_ContentPresenter"
-                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Content="{TemplateBinding Content}"
-                                        ContentTemplate="{TemplateBinding ContentTemplate}" />
-                                    <Border
-                                        Name="SelectionIndicator"
-                                        BorderBrush="{DynamicResource AccentFillColorDefaultBrush}"
-                                        BorderThickness="3"
-                                        CornerRadius="{TemplateBinding CornerRadius}"
-                                        IsVisible="False"
-                                        UseLayoutRounding="False" />
-                                </Grid>
-                            </Border>
-                        </Panel>
-                    </ControlTemplate>
-                </Setter>
-                <Style Selector="^:disabled">
-                    <Setter Property="Opacity" Value="0.5" />
-                </Style>
-                <Style Selector="^:pointerover">
-                    <Style Selector="^ /template/ Border#PART_ContentBorder">
-                        <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundPointerOver}" />
-                    </Style>
-                    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundPointerOver}" />
-                    </Style>
-                </Style>
-                <Style Selector="^:pressed">
-                    <Style Selector="^ /template/ Border#PART_ContentBorder">
-                        <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundPressed}" />
-                    </Style>
-                    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundPressed}" />
-                    </Style>
-                </Style>
-                <Style Selector="^:selected">
-                    <Style Selector="^ /template/ Border#PART_ContentBorder">
-                        <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundSelected}" />
-                    </Style>
-                    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundSelected}" />
-                    </Style>
-                    <Style Selector="^ /template/ Border#SelectionIndicator">
-                        <Setter Property="IsVisible" Value="True" />
-                    </Style>
-                    <Style Selector="^:not(:focus) /template/ Border#PART_ContentBorder">
-                        <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundSelected}" />
-                    </Style>
-                    <Style Selector="^:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundSelected}" />
-                    </Style>
-                    <Style Selector="^:pointerover">
-                        <Style Selector="^ /template/ Border#PART_ContentBorder">
-                            <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundSelectedPointerOver}" />
-                        </Style>
-                        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-                            <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundSelectedPointerOver}" />
-                        </Style>
-                        <Style Selector="^ /template/ Border#SelectionIndicator">
-                            <Setter Property="BorderBrush" Value="{DynamicResource ListViewItemSelectionIndicatorPointerOverBrush}" />
-                        </Style>
-                    </Style>
-                    <Style Selector="^:pressed">
-                        <Style Selector="^ /template/ Border#PART_ContentBorder">
-                            <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundSelectedPressed}" />
-                        </Style>
-                        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-                            <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundSelectedPressed}" />
-                        </Style>
-                    </Style>
-                    <Style Selector="^:disabled /template/ Border#SelectionIndicator">
-                        <Setter Property="BorderBrush" Value="{DynamicResource ListViewItemSelectionIndicatorDisabledBrush}" />
-                    </Style>
-                </Style>
-            </ControlTheme>
-        </Overflow.Resources>
         <Overflow.Styles>
             <Style Selector="Overflow.Closed">
                 <Setter Property="Margin" Value="1,2,1,0" />
@@ -127,11 +23,6 @@
                 </Style>
             </Style>
         </Overflow.Styles>
-        <Overflow.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel Spacing="6" />
-            </ItemsPanelTemplate>
-        </Overflow.ItemsPanel>
         <Interaction.Behaviors>
             <DataTriggerBehavior Binding="{Binding $parent[NavigationView].IsPaneOpen}" Value="True">
                 <AddClassAction ClassName="Opened" RemoveIfExists="True" />
