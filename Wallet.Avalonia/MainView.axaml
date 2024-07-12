@@ -13,7 +13,7 @@
         MenuItemsSource="{Binding}"
         SelectedItem="{Binding SelectedItem}">
         <Interaction.Behaviors>
-            <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsOpened}" Value="True">
+            <DataTriggerBehavior Binding="{ReflectionBinding SelectedItem.IsOpened, Mode=TwoWay}" Value="True">
                 <InvokeNavigationViewItemAction SelectedIndex="1" />
             </DataTriggerBehavior>
         </Interaction.Behaviors>

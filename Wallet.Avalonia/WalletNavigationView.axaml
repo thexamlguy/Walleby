@@ -26,6 +26,20 @@
                 </NavigateAction>
             </ConditionAction>
         </AttachedEventTriggerBehaviour>
+        <DataTriggerBehavior Binding="{Binding IsOpened}" Value="False">
+            <ConditionAction>
+                <ConditionAction.Condition>
+                    <ConditionalExpression ForwardChaining="And">
+                        <ComparisonCondition LeftOperand="{Binding IsActivated}" RightOperand="True" />
+                        <ComparisonCondition LeftOperand="{Binding IsOpened}" RightOperand="True" />
+                    </ConditionalExpression>
+                </ConditionAction.Condition>
+                <NavigateAction Region="Main" Route="OpenWallet">
+                    <Parameter Key="Name" Value="{Binding Name}" />
+                    <Parameter Key="ImageDescriptor" Value="{Binding ImageDescriptor}" />
+                </NavigateAction>
+            </ConditionAction>
+        </DataTriggerBehavior>
     </Interaction.Behaviors>
     <Grid>
         <PersonPicture
@@ -33,27 +47,29 @@
             Height="{StaticResource IconSize}"
             DisplayName="{Binding Name}"
             ProfilePicture="{Binding ImageDescriptor.Image}" />
-        <Button
-            Width="{StaticResource IconSize}"
-            Height="{StaticResource IconSize}"
-            Background="Transparent"
-            CornerRadius="{StaticResource IconCornerRadius}"
-            IsVisible="{Binding IsActivated}">
-            <Button.Flyout>
-                <MenuFlyout>
-                    <MenuItem
-                        Width="216"
-                        Command="{Binding LockCommand}"
-                        Header="Lock">
-                        <MenuItem.Icon>
-                            <PathIcon
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Data="F1 M 10 14.799999 C 10.266666 14.799999 10.499999 14.699999 10.7 14.5 C 10.9 14.299999 11 14.066667 11 13.799999 C 11 13.533333 10.9 13.299999 10.7 13.099999 C 10.499999 12.9 10.266666 12.799999 10 12.799999 C 9.733333 12.799999 9.499999 12.9 9.3 13.099999 C 9.099999 13.299999 9 13.533333 9 13.799999 C 9 14.066667 9.099999 14.299999 9.3 14.5 C 9.499999 14.699999 9.733333 14.799999 10 14.799999 Z M 6 7.799999 L 7 7.799999 L 7 6.799999 C 7 5.973333 7.293333 5.266666 7.88 4.68 C 8.466666 4.093334 9.173333 3.799999 10 3.799999 C 10.826666 3.799999 11.533333 4.093334 12.12 4.68 C 12.706666 5.266666 13 5.973333 13 6.799999 L 13 7.799999 L 14 7.799999 C 14.826666 7.799999 15.533332 8.093332 16.119999 8.679999 C 16.706665 9.266666 17 9.973333 17 10.799999 L 17 16.799999 C 17 17.626667 16.706665 18.333332 16.119999 18.92 C 15.533332 19.506666 14.826666 19.799999 14 19.799999 L 6 19.799999 C 5.173333 19.799999 4.466666 19.506666 3.88 18.92 C 3.293333 18.333332 3 17.626667 3 16.799999 L 3 10.799999 C 3 9.973333 3.293333 9.266666 3.88 8.679999 C 4.466666 8.093332 5.173333 7.799999 6 7.799999 Z M 10 4.799999 C 9.44 4.799999 8.966666 4.993332 8.58 5.379999 C 8.193333 5.766666 8 6.240001 8 6.799999 L 8 7.799999 L 12 7.799999 L 12 6.799999 C 12 6.240001 11.806666 5.766666 11.42 5.379999 C 11.033333 4.993332 10.559999 4.799999 10 4.799999 Z M 16 10.799999 C 16 10.24 15.806666 9.766666 15.42 9.379999 C 15.033333 8.993333 14.559999 8.799999 14 8.799999 L 6 8.799999 C 5.44 8.799999 4.966666 8.993333 4.58 9.379999 C 4.193333 9.766666 4 10.24 4 10.799999 L 4 16.799999 C 4 17.360001 4.193333 17.833332 4.58 18.219999 C 4.966666 18.606667 5.44 18.799999 6 18.799999 L 14 18.799999 C 14.559999 18.799999 15.033333 18.606667 15.42 18.219999 C 15.806666 17.833332 16 17.360001 16 16.799999 Z " />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuFlyout>
-            </Button.Flyout>
-        </Button>
+        <Grid IsVisible="{Binding IsActivated}">
+            <Button
+                Width="{StaticResource IconSize}"
+                Height="{StaticResource IconSize}"
+                Background="Transparent"
+                CornerRadius="{StaticResource IconCornerRadius}"
+                IsVisible="{Binding IsOpened}">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuItem
+                            Width="216"
+                            Command="{Binding LockCommand}"
+                            Header="Lock">
+                            <MenuItem.Icon>
+                                <PathIcon
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Data="F1 M 10 14.799999 C 10.266666 14.799999 10.499999 14.699999 10.7 14.5 C 10.9 14.299999 11 14.066667 11 13.799999 C 11 13.533333 10.9 13.299999 10.7 13.099999 C 10.499999 12.9 10.266666 12.799999 10 12.799999 C 9.733333 12.799999 9.499999 12.9 9.3 13.099999 C 9.099999 13.299999 9 13.533333 9 13.799999 C 9 14.066667 9.099999 14.299999 9.3 14.5 C 9.499999 14.699999 9.733333 14.799999 10 14.799999 Z M 6 7.799999 L 7 7.799999 L 7 6.799999 C 7 5.973333 7.293333 5.266666 7.88 4.68 C 8.466666 4.093334 9.173333 3.799999 10 3.799999 C 10.826666 3.799999 11.533333 4.093334 12.12 4.68 C 12.706666 5.266666 13 5.973333 13 6.799999 L 13 7.799999 L 14 7.799999 C 14.826666 7.799999 15.533332 8.093332 16.119999 8.679999 C 16.706665 9.266666 17 9.973333 17 10.799999 L 17 16.799999 C 17 17.626667 16.706665 18.333332 16.119999 18.92 C 15.533332 19.506666 14.826666 19.799999 14 19.799999 L 6 19.799999 C 5.173333 19.799999 4.466666 19.506666 3.88 18.92 C 3.293333 18.333332 3 17.626667 3 16.799999 L 3 10.799999 C 3 9.973333 3.293333 9.266666 3.88 8.679999 C 4.466666 8.093332 5.173333 7.799999 6 7.799999 Z M 10 4.799999 C 9.44 4.799999 8.966666 4.993332 8.58 5.379999 C 8.193333 5.766666 8 6.240001 8 6.799999 L 8 7.799999 L 12 7.799999 L 12 6.799999 C 12 6.240001 11.806666 5.766666 11.42 5.379999 C 11.033333 4.993332 10.559999 4.799999 10 4.799999 Z M 16 10.799999 C 16 10.24 15.806666 9.766666 15.42 9.379999 C 15.033333 8.993333 14.559999 8.799999 14 8.799999 L 6 8.799999 C 5.44 8.799999 4.966666 8.993333 4.58 9.379999 C 4.193333 9.766666 4 10.24 4 10.799999 L 4 16.799999 C 4 17.360001 4.193333 17.833332 4.58 18.219999 C 4.966666 18.606667 5.44 18.799999 6 18.799999 L 14 18.799999 C 14.559999 18.799999 15.033333 18.606667 15.42 18.219999 C 15.806666 17.833332 16 17.360001 16 16.799999 Z " />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </Grid>
     </Grid>
 </ListBoxItem>
