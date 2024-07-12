@@ -5,7 +5,8 @@
     xmlns:vm="using:Wallet"
     x:DataType="vm:MultilineTextEntryViewModel"
     Header="{Binding Key}"
-    IsExpanded="True">
+    IsExpanded="True"
+    IsToggleable="True">
     <TextBox Text="{Binding Value}" TextWrapping="Wrap">
         <TextBox.Styles>
             <Style Selector="TextBox.Write">

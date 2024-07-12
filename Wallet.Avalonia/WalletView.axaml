@@ -65,13 +65,13 @@
                         </Interaction.Behaviors>
                     </ContentControl>
                 </Border>
-                <Frame Grid.Row="1">
+                <ContentControl Grid.Row="1">
                     <Interaction.Behaviors>
                         <AttachedBehaviour>
                             <NavigateRegionAction Name="{Binding Named, StringFormat='{}{0}:Content'}" />
                         </AttachedBehaviour>
                     </Interaction.Behaviors>
-                </Frame>
+                </ContentControl>
             </Grid>
         </Border>
     </Grid>
