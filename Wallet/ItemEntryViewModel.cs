@@ -4,37 +4,51 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
-    IServiceFactory factory,
-    IMediator mediator,
-    IPublisher publisher,
-    ISubscriber subscriber,
-    IDisposer disposer,
-    ItemState state,
-    ItemEntryConfiguration configuration,
-    string key,
-    TValue value,
-    bool isConcealed,
-    bool isRevealed,
-    double width) :
-    Observable<string, TValue>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
+public partial class ItemEntryViewModel<TValue> :
+    Observable<string, TValue>,
     IItemEntryViewModel,
     INotificationHandler<ConfirmEventArgs<ItemEntry>>,
     INotificationHandler<UpdateEventArgs<ItemEntry>>,
     INotificationHandler<CancelEventArgs<ItemEntry>>
     where TValue : notnull
 {
-    [ObservableProperty]
-    private bool isConcealed = isConcealed;
+    public ItemEntryViewModel(IServiceProvider provider,
+        IServiceFactory factory,
+        IMediator mediator,
+        IPublisher publisher,
+        ISubscriber subscriber,
+        IDisposer disposer,
+        ItemState state,
+        ItemEntryConfiguration configuration,
+        string key,
+        TValue value,
+        bool isConcealed,
+        bool isRevealed,
+        double width) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
+    {
+        this.configuration = configuration;
+
+        State = state;
+        IsConcealed = isConcealed;
+        IsRevealed = isRevealed;
+        Width = width;
+
+        Track(nameof(Value), () => Value, x => Value = x);
+    }
+
+    private readonly ItemEntryConfiguration configuration;
 
     [ObservableProperty]
-    private bool isRevealed = isRevealed;
+    private bool isConcealed;
 
     [ObservableProperty]
-    private ItemState state = state;
+    private bool isRevealed;
 
     [ObservableProperty]
-    private double width = width;
+    private ItemState state;
+
+    [ObservableProperty]
+    private double width;
 
     public Task Handle(UpdateEventArgs<ItemEntry> args) =>
         Task.FromResult(State = ItemState.Write);
@@ -55,8 +69,13 @@ public partial class ItemEntryViewModel<TValue>(IServiceProvider provider,
         return Task.CompletedTask;
     }
 
-    protected override void OnValueChanged() =>
-        configuration.Value = Value;
+    protected override void OnValueChanged()
+    {
+        if (configuration is not null)
+        {
+            configuration.Value = Value;
+        }
+    }
 
     [RelayCommand]
     private void Hide() => IsRevealed = false;

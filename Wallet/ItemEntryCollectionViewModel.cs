@@ -13,12 +13,20 @@ public partial class ItemEntryCollectionViewModel<TItem> :
     where TItem : notnull, 
     IDisposable
 {
-    [ObservableProperty]
-    private ItemState state;
-
     private readonly ItemEntryConfiguration configuration;
 
-    public ItemEntryCollectionViewModel(IServiceProvider provider, 
+    [ObservableProperty]
+    private bool isConcealed;
+
+    [ObservableProperty]
+    private bool isRevealed;
+
+    [ObservableProperty]
+    private ItemState state;
+    [ObservableProperty]
+    private double width;
+
+    public ItemEntryCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
@@ -38,18 +46,9 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         IsConcealed = isConcealed;
         IsRevealed = isRevealed;
         Width = width;
+
+        Track(nameof(Value), () => Value, x => Value = x);
     }
-
-    [ObservableProperty]
-    private bool isConcealed;
-
-    [ObservableProperty]
-    private bool isRevealed;
-
-
-    [ObservableProperty]
-    private double width;
-
 
     public ItemEntryCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
@@ -69,15 +68,11 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         this.configuration = configuration;
 
         State = state;
+        IsConcealed = isConcealed;
+        IsRevealed = isRevealed;
         Width = width;
-    }
 
-    protected override void OnValueChanged()
-    {
-        if (configuration is not null)
-        {
-            configuration.Value = Value;
-        }
+        Track(nameof(Value), () => Value, x => Value = x);
     }
 
     public Task Handle(UpdateEventArgs<Item> args) =>
@@ -99,13 +94,20 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         return Task.CompletedTask;
     }
 
+    protected override void OnValueChanged()
+    {
+        if (configuration is not null)
+        {
+            configuration.Value = Value;
+        }
+    }
+
+    [RelayCommand]
+    private void Copy() => Publisher.Publish(Write.As(new Clipboard<object>($"{Value}")));
 
     [RelayCommand]
     private void Hide() => IsRevealed = false;
 
     [RelayCommand]
     private void Reveal() => IsRevealed = true;
-
-    [RelayCommand]
-    private void Copy() => Publisher.Publish(Write.As(new Clipboard<object>($"{Value}")));
 }

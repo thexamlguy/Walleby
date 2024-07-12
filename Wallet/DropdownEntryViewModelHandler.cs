@@ -11,6 +11,8 @@ public class DropdownEntryViewModelHandler(IServiceFactory serviceFactory) :
         if (args.Sender is DropdownEntryConfiguration configuration)
         {
             List<DropdownValueViewModel> values = [];
+            values.Add(serviceFactory.Create<DropdownValueViewModel>());
+
             foreach (string item in configuration.Values)
             {
                 values.Add(serviceFactory.Create<DropdownValueViewModel>(item));
