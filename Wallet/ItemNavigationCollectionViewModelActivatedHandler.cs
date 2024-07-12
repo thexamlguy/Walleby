@@ -31,7 +31,7 @@ public class ItemNavigationCollectionViewModelActivatedHandler(IMediator mediato
                     IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider
                         .GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
-                    if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(), 
+                    if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(), configuration.Filter, 
                         Id, Name, "Description", Category, selected, Favourite, Archived) 
                         is ItemNavigationViewModel viewModel)
                     {

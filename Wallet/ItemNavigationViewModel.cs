@@ -12,6 +12,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     IDisposer disposer,
     IContentTemplate template,
     NamedComponent named,
+    string filter,
     Guid id,
     string name = "",
     string description = "",
@@ -38,6 +39,9 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
     private string? description = description;
 
     [ObservableProperty]
+    private string filter = filter;
+
+    [ObservableProperty]
     private Guid id = id;
 
     [ObservableProperty]
@@ -60,6 +64,7 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     [ObservableProperty]
     private string named = $"{named}";
+
     public IContentTemplate Template { get; set; } = template;
 
     public Task Handle(ArchiveEventArgs<Item> args)
@@ -82,6 +87,11 @@ public partial class ItemNavigationViewModel(IServiceProvider provider,
 
     public Task Handle(UnfavouriteEventArgs<Item> args)
     {
+        if (Filter == "Favourites")
+        {
+            Dispose();
+        }
+
         IsFavourite = false;
         return Task.CompletedTask;
     }
