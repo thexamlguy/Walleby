@@ -2,9 +2,9 @@ using Toolkit.UI.Controls.Avalonia;
 
 namespace Wallet.Avalonia;
 
-public partial class DropdownEntryView : 
+public partial class CommentEntryCollectionView : 
     SettingsExpander
 {
-    public DropdownEntryView() => 
+    public CommentEntryCollectionView() =>
         InitializeComponent();
 }

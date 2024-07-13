@@ -24,7 +24,7 @@ public record ItemConfiguration
                     {
                         Label = "Date of birth"
                     },
-                    new DropdownEntryConfiguration
+                    new DropdownEntryCollectionConfiguration
                     {
                         Label = "Gender",
                         Values = ["Male", "Female", "Non-binary", "Prefer not to say", "Other"]
@@ -82,7 +82,7 @@ public record ItemConfiguration
                     {
                         Label = "Name on account"
                     },
-                    new DropdownEntryConfiguration
+                    new DropdownEntryCollectionConfiguration
                     {                        
                         Label = "Type",
                         Values = [
@@ -157,7 +157,7 @@ public record ItemConfiguration
             {
                 Entries = new List<ItemEntryConfiguration>
                 {
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -178,7 +178,7 @@ public record ItemConfiguration
                     {
                         Label = "Description",
                     },
-                    new AttachmentEntryConfiguration
+                    new AttachmentEntryCollectionConfiguration
                     {
                         Label = "Attachments",
                     }
@@ -219,11 +219,11 @@ public record ItemConfiguration
                     {
                         Label = "Price"
                     },
-                    new AttachmentEntryConfiguration
+                    new AttachmentEntryCollectionConfiguration
                     {
                         Label = "Ticket"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -317,7 +317,7 @@ public record ItemConfiguration
                     {
                         Label = "Two-factor Authentication (2FA)"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -342,7 +342,7 @@ public record ItemConfiguration
                     {
                         Label = "Expiration Date"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -391,7 +391,7 @@ public record ItemConfiguration
                     {
                         Label = "Documentation URL"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Additional Notes"
                     }
@@ -428,11 +428,11 @@ public record ItemConfiguration
                     {
                         Label = "Major/Field of Study"
                     },
-                    new AttachmentEntryConfiguration
+                    new AttachmentEntryCollectionConfiguration
                     {
                         Label = "Attachments"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -473,7 +473,7 @@ public record ItemConfiguration
                     {
                         Label = "Due Date"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -518,7 +518,7 @@ public record ItemConfiguration
                     {
                         Label = "Contact Information"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -567,11 +567,11 @@ public record ItemConfiguration
                     {
                         Label = "Contact Information"
                     },
-                    new AttachmentEntryConfiguration
+                    new AttachmentEntryCollectionConfiguration
                     {
                         Label = "Attachments"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -616,11 +616,11 @@ public record ItemConfiguration
                     {
                         Label = "Purpose/Details"
                     },
-                    new AttachmentEntryConfiguration
+                    new AttachmentEntryCollectionConfiguration
                     {
                         Label = "Attachments"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -669,7 +669,7 @@ public record ItemConfiguration
                     {
                         Label = "Backup Seed Phrase"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -738,7 +738,7 @@ public record ItemConfiguration
                     {
                         Label = "Passport Photo"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -759,7 +759,7 @@ public record ItemConfiguration
                     {
                         Label = "Cardholder"
                     },
-                    new DropdownEntryConfiguration
+                    new DropdownEntryCollectionConfiguration
                     {
                         Label = "Type",
                         Values = ["American Express", "Discover", "Maestro", "Mastercard", "Visa"]
@@ -807,7 +807,7 @@ public record ItemConfiguration
                     {
                         Label = "Interest Rates",
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Rewards"
                     }
@@ -878,7 +878,7 @@ public record ItemConfiguration
                     {
                         Label = "Remote Desktop URL"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -939,7 +939,7 @@ public record ItemConfiguration
                     {
                         Label = "Backup Location"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }
@@ -996,7 +996,7 @@ public record ItemConfiguration
                     {
                         Label = "Usage Restrictions"
                     },
-                    new MultilineTextEntryConfiguration
+                    new CommentEntryCollectionConfiguration
                     {
                         Label = "Notes"
                     }

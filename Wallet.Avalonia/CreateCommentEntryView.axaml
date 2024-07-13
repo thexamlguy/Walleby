@@ -1,0 +1,79 @@
+<SettingsExpanderItem
+    x:Class="Wallet.Avalonia.CreateCommentEntryView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:CreateCommentEntryViewModel">
+    <SettingsExpanderItem.Resources>
+        <ControlTheme x:Key="TextBoxAddButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="{DynamicResource TextControlButtonForeground}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource TextControlButtonBorderBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border
+                        Name="ButtonLayoutGrid"
+                        Margin="{DynamicResource TextBoxInnerButtonMargin}"
+                        Background="Transparent"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <SymbolIcon
+                            Name="Glyph"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="{StaticResource TextBoxIconFontSize}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Symbol="Add" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover">
+                <Style Selector="^ /template/ Border#ButtonLayoutGrid">
+                    <Setter Property="Background" Value="{DynamicResource TextControlButtonBackgroundPointerOver}" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource TextControlButtonBorderBrushPointerOver}" />
+                </Style>
+
+                <Style Selector="^ /template/ SymbolIcon#Glyph">
+                    <Setter Property="Foreground" Value="{DynamicResource TextControlButtonForegroundPointerOver}" />
+                </Style>
+            </Style>
+
+            <Style Selector="^:pressed">
+                <Style Selector="^ /template/ Border#ButtonLayoutGrid">
+                    <Setter Property="Background" Value="{DynamicResource TextControlButtonBackgroundPressed}" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource TextControlButtonBorderBrushPressed}" />
+                </Style>
+
+                <Style Selector="^ /template/ SymbolIcon#Glyph">
+                    <Setter Property="Foreground" Value="{DynamicResource TextControlButtonForegroundPressed}" />
+                </Style>
+            </Style>
+
+            <Style Selector="^:disabled /template/ Border#ButtonLayoutGrid">
+                <Setter Property="Opacity" Value="0" />
+            </Style>
+        </ControlTheme>
+
+    </SettingsExpanderItem.Resources>
+    <TextBox
+        MaxHeight="216"
+        AcceptsReturn="True"
+        Text="{Binding Value}"
+        TextWrapping="Wrap"
+        Watermark="Add a note">
+        <TextBox.InnerRightContent>
+            <Button
+                Width="30"
+                Padding="{StaticResource HelperButtonThemePadding}"
+                VerticalAlignment="Stretch"
+                Command="{Binding InvokeCommand}"
+                Content="Add"
+                CornerRadius="{DynamicResource ControlCornerRadius}"
+                Focusable="False"
+                IsTabStop="False"
+                Theme="{StaticResource TextBoxAddButtonStyle}" />
+        </TextBox.InnerRightContent>
+    </TextBox>
+</SettingsExpanderItem>

@@ -1,0 +1,10 @@
+<SettingsExpander
+    x:Class="Wallet.Avalonia.CommentEntryCollectionView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Wallet"
+    x:DataType="vm:CommentEntryCollectionViewModel"
+    Header="{Binding Key}"
+    IsExpanded="True"
+    ItemTemplate="{ReflectionBinding Template}"
+    ItemsSource="{Binding}" />

@@ -2,7 +2,7 @@
 
 namespace Wallet;
 
-public record DropdownEntryConfiguration :
+public record DropdownEntryCollectionConfiguration :
     ItemEntryConfiguration
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

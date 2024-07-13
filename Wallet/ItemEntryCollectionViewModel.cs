@@ -4,13 +4,13 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class ItemEntryCollectionViewModel<TItem> : 
-    ObservableCollection<TItem, string, object>,
+public partial class ItemEntryCollectionViewModel<TItem, TValue> : 
+    ObservableCollection<TItem, string, TValue>,
     IItemEntryViewModel,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>
-    where TItem : notnull, 
+    where TItem : notnull,
     IDisposable
 {
     private readonly ItemEntryConfiguration configuration;
@@ -23,6 +23,7 @@ public partial class ItemEntryCollectionViewModel<TItem> :
 
     [ObservableProperty]
     private ItemState state;
+
     [ObservableProperty]
     private double width;
 
@@ -35,7 +36,7 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         ItemState state,
         ItemEntryConfiguration configuration,
         string key,
-        object value,
+        TValue value,
         bool isConcealed,
         bool isRevealed,
         double width) : base(provider, factory, mediator, publisher, subscriber, disposer, key, value)
@@ -60,7 +61,7 @@ public partial class ItemEntryCollectionViewModel<TItem> :
         ItemState state,
         ItemEntryConfiguration configuration,
         string key,
-        object value,
+        TValue value,
         bool isConcealed,
         bool isRevealed,
         double width) : base(provider, factory, mediator, publisher, subscriber, disposer, items, key, value)

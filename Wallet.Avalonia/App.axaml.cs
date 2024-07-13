@@ -177,10 +177,14 @@ public partial class App : Application
                         services.AddTemplate<ItemSectionViewModel, ItemSectionView>();
 
                         services.AddTemplate<TextEntryViewModel, TextEntryView>();
-                        services.AddTemplate<MultilineTextEntryViewModel, MultilineTextEntryView>();
+
+                        services.AddTemplate<CreateCommentEntryViewModel, CreateCommentEntryView>();
+                        services.AddTemplate<CommentEntryViewModel, CommentEntryView>();
+                        services.AddTemplate<CommentEntryCollectionViewModel, CommentEntryCollectionView>();
+
                         services.AddTemplate<PasswordEntryViewModel, PasswordEntryView>();
                         services.AddTemplate<MaskedTextEntryViewModel, MaskedTextEntryView>();
-                        services.AddTemplate<DropdownEntryViewModel, DropdownEntryView>();
+                        services.AddTemplate<DropdownEntryCollectionViewModel, DropdownEntryCollectionView>();
                         services.AddTemplate<DateEntryViewModel, DateEntryView>();
                         services.AddTemplate<HyperlinkEntryViewModel, HyperlinkEntryView>();
                         services.AddTemplate<PinEntryViewModel, PinEntryView>();
@@ -209,10 +213,10 @@ public partial class App : Application
                         services.AddHandler<UnfavouriteItemHandler>();
 
                         services.AddHandler<TextEntryViewModelHandler>(nameof(TextEntryConfiguration));
-                        services.AddHandler<MultilineTextEntryViewModelHandler>(nameof(MultilineTextEntryConfiguration));
+                        services.AddHandler<CommentEntryCollectionViewModelHandler>(nameof(CommentEntryCollectionConfiguration));
                         services.AddHandler<PasswordEntryViewModelHandler>(nameof(PasswordEntryConfiguration));
                         services.AddHandler<MaskedTextEntryViewModelHandler>(nameof(MaskedTextEntryConfiguration));
-                        services.AddHandler<DropdownEntryViewModelHandler>(nameof(DropdownEntryConfiguration));
+                        services.AddHandler<DropdownEntryCollectionViewModelHandler>(nameof(DropdownEntryCollectionConfiguration));
                         services.AddHandler<DateEntryViewModelHandler>(nameof(DateEntryConfiguration));
                         services.AddHandler<HyperlinkEntryViewModelHandler>(nameof(HyperlinkEntryConfiguration));
                         services.AddHandler<PinEntryViewModelHandler>(nameof(PinEntryConfiguration));

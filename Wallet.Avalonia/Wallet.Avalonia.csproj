@@ -74,8 +74,8 @@
 	  <Compile Update="DismissItemActionView.axaml.cs">
 	    <DependentUpon>DismissItemActionView.axaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="DropdownEntryView.axaml.cs">
-	    <DependentUpon>DropdownEntryView.axaml</DependentUpon>
+	  <Compile Update="DropdownEntryCollectionView.axaml.cs">
+	    <DependentUpon>DropdownEntryCollectionView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="ItemHeaderView.axaml.cs">
 	    <DependentUpon>ItemHeaderView.axaml</DependentUpon>
@@ -85,6 +85,9 @@
 	  </Compile>
 	  <Compile Update="FavouritesNavigationView.axaml.cs">
 	    <DependentUpon>FavouritesNavigationView.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="CommentEntryCollectionView.axaml.cs">
+	    <DependentUpon>CommentEntryCollectionView.axaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="TextEntryView.axaml.cs">
 	    <DependentUpon>TextEntryView.axaml</DependentUpon>
