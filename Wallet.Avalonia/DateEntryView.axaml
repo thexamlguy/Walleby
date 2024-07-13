@@ -10,6 +10,10 @@
         <Thickness x:Key="TextControlMargin">0</Thickness>
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
         <Thickness x:Key="TextControlCompactMargin">0,-3,0,0</Thickness>
+        <SolidColorBrush x:Key="DatePickerButtonBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="DatePickerButtonBorderBrushPointerOver" Color="Transparent" />
+        <Thickness x:Key="DatePickerHostPadding">0,5,0,6</Thickness>
+        <Thickness x:Key="DatePickerHostMonthPadding">9,5,0,6</Thickness>
     </SettingsExpander.Resources>
     <SettingsExpander.Action>
         <ItemEntryActionView />
@@ -22,6 +26,7 @@
                         <Setter Property="MaxWidth" Value="{Binding Width}" />
                         <Setter Property="MinWidth" Value="{Binding Width}" />
                         <Setter Property="IsVisible" Value="True" />
+                        <Setter Property="Height" Value="32" />
                     </Style>
                     <Style Selector="DatePicker.Read">
                         <Setter Property="MinWidth" Value="0" />

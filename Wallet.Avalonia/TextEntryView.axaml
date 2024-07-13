@@ -11,6 +11,8 @@
         <Thickness x:Key="TextControlPadding">10,5,6,6</Thickness>
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
         <Thickness x:Key="TextControlCompactMargin">0,-3,0,0</Thickness>
+        <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent" />
     </SettingsExpander.Resources>
     <SettingsExpander.Action>
         <ItemEntryActionView />
@@ -31,7 +33,7 @@
                     <Setter Property="BorderBrush" Value="Transparent" />
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="Margin" Value="{StaticResource TextControlCompactMargin}" />
-                    <Setter Property="Padding" Value="{StaticResource TextControlCompactPadding}" />                    
+                    <Setter Property="Padding" Value="{StaticResource TextControlCompactPadding}" />
                     <Setter Property="MinHeight" Value="0" />
                     <Setter Property="TextWrapping" Value="NoWrap" />
                     <Setter Property="Foreground">

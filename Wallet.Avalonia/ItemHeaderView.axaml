@@ -13,6 +13,8 @@
         <x:Double x:Key="TextBoxMinWidth">264</x:Double>
         <Thickness x:Key="ButtonMargin">0,0,6,6</Thickness>
         <CornerRadius x:Key="ButtonCornerRadius">18</CornerRadius>
+        <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent" />
     </UserControl.Resources>
     <StackPanel Grid.Column="1" Spacing="12">
         <Grid HorizontalAlignment="Center">

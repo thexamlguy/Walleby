@@ -7,15 +7,18 @@
     Header="{Binding Key}"
     IsExpanded="True"
     IsToggleable="True">
-    <TextBox Text="{Binding Value}" TextWrapping="Wrap">
+    <TextBox
+        Text="{Binding Value}"
+        TextWrapping="Wrap"
+        Watermark="Add a note">
         <TextBox.Styles>
             <Style Selector="TextBox.Write">
-                <Setter Property="Height" Value="216" />
+                <Setter Property="MaxHeight" Value="216" />
                 <Setter Property="AcceptsTab" Value="True" />
                 <Setter Property="AcceptsReturn" Value="True" />
+                <Setter Property="BorderBrush" Value="Transparent" />
             </Style>
             <Style Selector="TextBox.Read">
-                <Setter Property="Height" Value="216" />
                 <Setter Property="IsReadOnly" Value="True" />
                 <Setter Property="BorderBrush" Value="Transparent" />
                 <Setter Property="Background" Value="Transparent" />

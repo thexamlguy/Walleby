@@ -11,6 +11,8 @@
         <Thickness x:Key="TextControlPadding">10,5,6,6</Thickness>
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
         <Thickness x:Key="TextControlCompactMargin">0,-3,0,0</Thickness>
+        <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="Transparent" />
     </SettingsExpander.Resources>
     <SettingsExpander.Action>
         <ItemEntryActionView />
