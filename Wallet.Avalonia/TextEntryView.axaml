@@ -7,12 +7,22 @@
     Header="{Binding Key}"
     IsExpanded="False">
     <SettingsExpander.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <StaticResource x:Key="TextControlBorderBrush" ResourceKey="ControlStrokeColorDefaultBrush" />
+                    <StaticResource x:Key="TextControlBorderBrushPointerOver" ResourceKey="ControlStrokeColorDefaultBrush" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <StaticResource x:Key="TextControlBorderBrush" ResourceKey="SubtleFillColorTransparentBrush" />
+                    <StaticResource x:Key="TextControlBorderBrushPointerOver" ResourceKey="SubtleFillColorTransparentBrush" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
         <Thickness x:Key="TextControlMargin">0</Thickness>
         <Thickness x:Key="TextControlPadding">10,5,6,6</Thickness>
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
         <Thickness x:Key="TextControlCompactMargin">0,-3,0,0</Thickness>
-        <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent" />
-        <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent" />
     </SettingsExpander.Resources>
     <SettingsExpander.Action>
         <ItemEntryActionView />

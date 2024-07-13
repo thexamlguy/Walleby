@@ -7,12 +7,22 @@
     Header="{Binding Key}"
     IsExpanded="False">
     <SettingsExpander.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <StaticResource x:Key="ComboBoxBorderBrush" ResourceKey="ControlStrokeColorDefaultBrush" />
+                    <StaticResource x:Key="ComboBoxBorderBrushPointerOver" ResourceKey="ControlStrokeColorDefaultBrush" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <StaticResource x:Key="ComboBoxBorderBrush" ResourceKey="SubtleFillColorTransparentBrush" />
+                    <StaticResource x:Key="ComboBoxBorderBrushPointerOver" ResourceKey="SubtleFillColorTransparentBrush" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
         <Thickness x:Key="TextControlMargin">0</Thickness>
         <Thickness x:Key="TextControlPadding">10,5,6,6</Thickness>
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
         <Thickness x:Key="TextControlCompactMargin">0,-3,0,0</Thickness>
-        <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="Transparent" />
-        <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="Transparent" />
     </SettingsExpander.Resources>
     <SettingsExpander.Action>
         <ItemEntryActionView />

@@ -7,11 +7,21 @@
     Header="{Binding Key}"
     IsExpanded="False">
     <SettingsExpander.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.ThemeDictionaries>
+				<ResourceDictionary x:Key="Light">
+					<StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="ControlStrokeColorDefaultBrush" />
+					<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="ControlStrokeColorDefaultBrush" />
+				</ResourceDictionary>
+				<ResourceDictionary x:Key="Dark">
+					<StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="SubtleFillColorTransparentBrush" />
+					<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="SubtleFillColorTransparentBrush" />
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+		</ResourceDictionary>
         <Thickness x:Key="TextControlMargin">0</Thickness>
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
         <Thickness x:Key="TextControlCompactMargin">0,-3,0,0</Thickness>
-        <SolidColorBrush x:Key="DatePickerButtonBorderBrush" Color="Transparent" />
-        <SolidColorBrush x:Key="DatePickerButtonBorderBrushPointerOver" Color="Transparent" />
         <Thickness x:Key="DatePickerHostPadding">0,5,0,6</Thickness>
         <Thickness x:Key="DatePickerHostMonthPadding">9,5,0,6</Thickness>
     </SettingsExpander.Resources>
