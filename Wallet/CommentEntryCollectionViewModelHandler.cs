@@ -11,7 +11,7 @@ public class CommentEntryCollectionViewModelHandler(IServiceFactory serviceFacto
         if (args.Sender is CommentEntryCollectionConfiguration configuration)
         {
             string? label = configuration.Label;
-            string? value = $"{configuration.Value}" ?? "";
+            List<Comment> value =   new List<Comment>();
             double? width = configuration.Width;
 
             if (serviceFactory.Create<CommentEntryCollectionViewModel>(args => args.Initialize(), 

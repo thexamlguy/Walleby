@@ -1,3 +1,3 @@
 ﻿namespace Wallet;
 
-public record Hyperlink(string Value);
+public record Hyperlink(string? Value);

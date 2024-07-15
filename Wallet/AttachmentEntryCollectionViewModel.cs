@@ -9,9 +9,9 @@ public partial class AttachmentEntryCollectionViewModel(IServiceProvider provide
     ISubscriber subscriber,
     IDisposer disposer,
     ItemState state,
-    ItemEntryConfiguration configuration,
+    IItemEntryConfiguration<ICollection<Comment>> configuration,
     string key,
-    ICollection<Comment<(string, DateTimeOffset)>> value,
+    ICollection<Comment> value,
     bool isConcealed,
     bool isRevealed,
-    double width) : ItemEntryCollectionViewModel<AttachmentEntryViewModel, ICollection<Comment<(string, DateTimeOffset)>>>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width);
+    double width) : ItemEntryCollectionViewModel<AttachmentEntryViewModel, ICollection<Comment>>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width);

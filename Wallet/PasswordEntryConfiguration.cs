@@ -1,7 +1,4 @@
 ﻿namespace Wallet;
 
 public record PasswordEntryConfiguration :
-    ItemEntryConfiguration
-{
-
-}
+    ItemEntryConfiguration<string>;

@@ -14,15 +14,15 @@ namespace Wallet;
 [JsonDerivedType(typeof(DateEntryConfiguration), typeDiscriminator: "Date")]
 [JsonDerivedType(typeof(HyperlinkEntryConfiguration), typeDiscriminator: "Hyperlink")]
 [JsonDerivedType(typeof(PinEntryConfiguration), typeDiscriminator: "Pin")]
-public record ItemEntryConfiguration : 
-    IItemEntryConfiguration
+public record ItemEntryConfiguration<TValue> : 
+    IItemEntryConfiguration<TValue>
 {
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public string? Label { get; set; }
 
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public object? Value { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public TValue? Value { get; set; }
 
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public double? Width { get; set; } = 296;
 }

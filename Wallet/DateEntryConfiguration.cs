@@ -1,7 +1,4 @@
 ﻿namespace Wallet;
 
 public record DateEntryConfiguration :
-    ItemEntryConfiguration
-{
-
-}
+    ItemEntryConfiguration<DateTimeOffset?>;

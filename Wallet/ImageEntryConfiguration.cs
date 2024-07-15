@@ -1,7 +1,4 @@
 ﻿namespace Wallet;
 
 public record ImageEntryConfiguration :
-    ItemEntryConfiguration
-{
-
-}
+    ItemEntryConfiguration<string>;

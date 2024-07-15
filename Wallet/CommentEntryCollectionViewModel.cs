@@ -10,21 +10,22 @@ public partial class CommentEntryCollectionViewModel(IServiceProvider provider,
     IDisposer disposer,
     IContentTemplate template,
     ItemState state,
-    ItemEntryConfiguration configuration,
+    ItemEntryConfiguration<ICollection<Comment>> configuration,
     string key,
-    ICollection<Comment<(string, DateTimeOffset)>> value,
+    ICollection<Comment> value,
     bool isConcealed,
     bool isRevealed,
-    double width) : ItemEntryCollectionViewModel<ICommentEntryViewModel, ICollection<Comment<(string, DateTimeOffset)>>>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width),
-    INotificationHandler<CreateEventArgs<Comment<string>>>
+    double width) : ItemEntryCollectionViewModel<ICommentEntryViewModel, ICollection<Comment>>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width),
+    INotificationHandler<CreateEventArgs<Comment>>
 {
     public IContentTemplate Template { get; set; } = template;
 
-    public Task Handle(CreateEventArgs<Comment<string>> args)
+    public Task Handle(CreateEventArgs<Comment> args)
     {
-        if (args.Sender is Comment<string> comment)
+        if (args.Sender is Comment comment)
         {
-            Insert<CommentEntryViewModel>(0, DateTimeOffset.Now, comment.Value);
+            Insert<CommentEntryViewModel>(0, comment.DateTime, comment.Text);
+            Value.Add(comment);
         }
 
         return Task.CompletedTask;

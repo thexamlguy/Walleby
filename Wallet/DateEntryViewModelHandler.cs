@@ -12,11 +12,7 @@ public class DateEntryViewModelHandler(IServiceFactory serviceFactory) :
         {
             string? label = configuration.Label;
 
-            if (!DateTimeOffset.TryParse($"{configuration.Value}", out DateTimeOffset value))
-            {
-                value = DateTimeOffset.Now;
-            }
-
+            DateTimeOffset? value = configuration.Value is not null ? configuration.Value : DateTimeOffset.Now;
             double? width = configuration.Width;
 
             if (serviceFactory.Create<DateEntryViewModel>(args => args.Initialize(), 

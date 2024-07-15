@@ -7,11 +7,25 @@ namespace Wallet;
 public partial class ItemEntryViewModel<TValue> :
     Observable<string, TValue>,
     IItemEntryViewModel,
+    IHandler<ValidateEventArgs<ItemEntry>, bool>,
     INotificationHandler<ConfirmEventArgs<ItemEntry>>,
     INotificationHandler<UpdateEventArgs<ItemEntry>>,
     INotificationHandler<CancelEventArgs<ItemEntry>>
-    where TValue : notnull
 {
+    private readonly IItemEntryConfiguration<TValue> configuration;
+
+    [ObservableProperty]
+    private bool isConcealed;
+
+    [ObservableProperty]
+    private bool isRevealed;
+
+    [ObservableProperty]
+    private ItemState state;
+
+    [ObservableProperty]
+    private double width;
+
     public ItemEntryViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
@@ -19,7 +33,7 @@ public partial class ItemEntryViewModel<TValue> :
         ISubscriber subscriber,
         IDisposer disposer,
         ItemState state,
-        ItemEntryConfiguration configuration,
+        IItemEntryConfiguration<TValue> configuration,
         string key,
         TValue value,
         bool isConcealed,
@@ -35,20 +49,6 @@ public partial class ItemEntryViewModel<TValue> :
 
         Track(nameof(Value), () => Value, x => Value = x);
     }
-
-    private readonly ItemEntryConfiguration configuration;
-
-    [ObservableProperty]
-    private bool isConcealed;
-
-    [ObservableProperty]
-    private bool isRevealed;
-
-    [ObservableProperty]
-    private ItemState state;
-
-    [ObservableProperty]
-    private double width;
 
     public Task Handle(UpdateEventArgs<ItemEntry> args) =>
         Task.FromResult(State = ItemState.Write);
@@ -69,20 +69,23 @@ public partial class ItemEntryViewModel<TValue> :
         return Task.CompletedTask;
     }
 
-    protected override void OnValueChanged()
+    public async Task<bool> Handle(ValidateEventArgs<ItemEntry> args,
+        CancellationToken cancellationToken)
     {
         if (configuration is not null)
         {
             configuration.Value = Value;
         }
+
+        return await Task.FromResult(true);
     }
+
+    [RelayCommand]
+    private void Copy() => Publisher.Publish(Write.As(new Clipboard<object>($"{Value}")));
 
     [RelayCommand]
     private void Hide() => IsRevealed = false;
 
     [RelayCommand]
     private void Reveal() => IsRevealed = true;
-
-    [RelayCommand]
-    private void Copy() =>  Publisher.Publish(Write.As(new Clipboard<object>($"{Value}")));
 }

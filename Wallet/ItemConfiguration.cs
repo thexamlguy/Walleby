@@ -10,7 +10,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -76,7 +76,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new NumberEntryConfiguration
                     {
@@ -155,7 +155,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new CommentEntryCollectionConfiguration
                     {
@@ -172,7 +172,7 @@ public record ItemConfiguration
         {
             new ()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -193,7 +193,7 @@ public record ItemConfiguration
         {
             new ItemSectionConfiguration
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -238,7 +238,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -295,7 +295,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -332,7 +332,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new PasswordEntryConfiguration
                     {
@@ -357,7 +357,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -406,7 +406,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -447,7 +447,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -488,7 +488,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -533,7 +533,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -586,7 +586,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -635,7 +635,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -684,7 +684,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -753,7 +753,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -792,7 +792,7 @@ public record ItemConfiguration
             },
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new PinEntryConfiguration
                     {
@@ -815,7 +815,7 @@ public record ItemConfiguration
             },
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -840,7 +840,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -893,7 +893,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -954,7 +954,7 @@ public record ItemConfiguration
         {
             new()
             {
-                Entries = new List<ItemEntryConfiguration>
+                Entries = new List<IItemEntryConfiguration>
                 {
                     new TextEntryConfiguration
                     {
@@ -1004,5 +1004,4 @@ public record ItemConfiguration
             }
         }
     };
-
 }

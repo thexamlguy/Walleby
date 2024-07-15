@@ -1,7 +1,4 @@
 ﻿namespace Wallet;
 
 public record HyperlinkEntryConfiguration :
-    ItemEntryConfiguration
-{
-
-}
+    ItemEntryConfiguration<string>;

@@ -3,8 +3,6 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public record Comment<TValue>(TValue Value);
-
 public partial class CreateCommentEntryViewModel(IServiceProvider provider,
     IServiceFactory factory,
     IMediator mediator,
@@ -16,7 +14,7 @@ public partial class CreateCommentEntryViewModel(IServiceProvider provider,
     [RelayCommand]
     private void Invoke()
     {
-        Publisher.Publish(Create.As(new Comment<string?>(Value)));
+        Publisher.Publish(Create.As(new Comment { Text = Value, DateTime = DateTimeOffset.Now }));
         Value = null;
     }
 }

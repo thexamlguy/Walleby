@@ -2,5 +2,5 @@
 
 public record ItemSectionConfiguration
 {
-    public IList<ItemEntryConfiguration> Entries { get; set; } = new List<ItemEntryConfiguration>();
+    public IList<IItemEntryConfiguration> Entries { get; set; } = new List<IItemEntryConfiguration>();
 }

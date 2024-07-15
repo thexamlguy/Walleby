@@ -7,13 +7,14 @@ namespace Wallet;
 public partial class ItemEntryCollectionViewModel<TItem, TValue> : 
     ObservableCollection<TItem, string, TValue>,
     IItemEntryViewModel,
+    IHandler<ValidateEventArgs<ItemEntry>, bool>,
     INotificationHandler<UpdateEventArgs<Item>>,
     INotificationHandler<ConfirmEventArgs<Item>>,
     INotificationHandler<CancelEventArgs<Item>>
     where TItem : notnull,
     IDisposable
 {
-    private readonly ItemEntryConfiguration configuration;
+    private readonly IItemEntryConfiguration<TValue> configuration;
 
     [ObservableProperty]
     private bool isConcealed;
@@ -34,7 +35,7 @@ public partial class ItemEntryCollectionViewModel<TItem, TValue> :
         ISubscriber subscriber,
         IDisposer disposer,
         ItemState state,
-        ItemEntryConfiguration configuration,
+        IItemEntryConfiguration<TValue> configuration,
         string key,
         TValue value,
         bool isConcealed,
@@ -59,7 +60,7 @@ public partial class ItemEntryCollectionViewModel<TItem, TValue> :
         IDisposer disposer,
         IEnumerable<TItem> items,
         ItemState state,
-        ItemEntryConfiguration configuration,
+        IItemEntryConfiguration<TValue> configuration,
         string key,
         TValue value,
         bool isConcealed,
@@ -95,12 +96,15 @@ public partial class ItemEntryCollectionViewModel<TItem, TValue> :
         return Task.CompletedTask;
     }
 
-    protected override void OnValueChanged()
+    public async Task<bool> Handle(ValidateEventArgs<ItemEntry> args,
+        CancellationToken cancellationToken)
     {
         if (configuration is not null)
         {
             configuration.Value = Value;
         }
+
+        return await Task.FromResult(true);
     }
 
     [RelayCommand]

@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Xml.Linq;
 using Toolkit.Foundation;
-using Wallet.Data;
 
 namespace Wallet;
 

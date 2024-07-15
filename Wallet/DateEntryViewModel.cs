@@ -9,9 +9,9 @@ public partial class DateEntryViewModel(IServiceProvider provider,
     ISubscriber subscriber,
     IDisposer disposer,
     ItemState state,
-    ItemEntryConfiguration configuration,
+    IItemEntryConfiguration<DateTimeOffset?> configuration,
     string key,
-    DateTimeOffset value,
+    DateTimeOffset? value,
     bool isConcealed,
     bool isRevealed,
-    double width) : ItemEntryViewModel<DateTimeOffset>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width);
+    double width) : ItemEntryViewModel<DateTimeOffset?>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width);

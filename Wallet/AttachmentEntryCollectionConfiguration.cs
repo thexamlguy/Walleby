@@ -1,4 +1,4 @@
 ﻿namespace Wallet;
 
 public record AttachmentEntryCollectionConfiguration :
-    ItemEntryConfiguration;
+    ItemEntryConfiguration<string>;

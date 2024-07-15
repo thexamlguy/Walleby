@@ -3,8 +3,8 @@
 namespace Wallet;
 
 public record DropdownEntryCollectionConfiguration :
-    ItemEntryConfiguration
+    ItemEntryConfiguration<object>
 {
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public IList<string> Values { get; set; } = new List<string>();
 }

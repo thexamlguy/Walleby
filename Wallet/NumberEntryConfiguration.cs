@@ -1,7 +1,7 @@
 ﻿namespace Wallet;
 
 public record NumberEntryConfiguration : 
-    ItemEntryConfiguration
+    ItemEntryConfiguration<string>
 {
     public int MinLength { get; set; }
 

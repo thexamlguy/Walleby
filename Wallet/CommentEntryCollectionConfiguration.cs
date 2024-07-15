@@ -1,4 +1,4 @@
 ﻿namespace Wallet;
 
 public record CommentEntryCollectionConfiguration :
-    ItemEntryConfiguration;
+    ItemEntryConfiguration<ICollection<Comment>>;
