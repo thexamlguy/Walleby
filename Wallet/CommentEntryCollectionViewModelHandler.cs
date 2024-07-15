@@ -11,15 +11,18 @@ public class CommentEntryCollectionViewModelHandler(IServiceFactory serviceFacto
         if (args.Sender is CommentEntryCollectionConfiguration configuration)
         {
             string? label = configuration.Label;
-            List<Comment> value =   new List<Comment>();
+            List<Comment> values = configuration.Value is not null ? new List<Comment>(configuration.Value) : [];
             double? width = configuration.Width;
 
             if (serviceFactory.Create<CommentEntryCollectionViewModel>(args => args.Initialize(), 
-                [.. args.Parameters, configuration, label, value, false, false, width])
+                [.. args.Parameters, configuration, label, values, false, false, width])
                 is CommentEntryCollectionViewModel viewModel)
             {
+                foreach (Comment value in values.OrderByDescending(x => x.DateTime))
+                {
+                    viewModel.Add<CommentEntryViewModel>(value.DateTime, value.Text);
+                }
 
-                viewModel.Add<CreateCommentEntryViewModel>();
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);
             }
         }

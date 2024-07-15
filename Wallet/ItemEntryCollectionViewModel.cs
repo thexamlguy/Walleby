@@ -77,15 +77,27 @@ public partial class ItemEntryCollectionViewModel<TItem, TValue> :
         Track(nameof(Value), () => Value, x => Value = x);
     }
 
-    public Task Handle(UpdateEventArgs<Item> args) =>
-        Task.FromResult(State = ItemState.Write);
+    public Task Handle(UpdateEventArgs<Item> args)
+    {
+        State = ItemState.Write;
+        OnStateChanged();
+
+        return Task.CompletedTask;
+    }
 
     public Task Handle(CancelEventArgs<Item> args)
     {
         Revert();
 
         State = ItemState.Read;
+        OnStateChanged();
+
         return Task.CompletedTask;
+    }
+
+    protected virtual void OnStateChanged()
+    {
+
     }
 
     public Task Handle(ConfirmEventArgs<Item> args)
@@ -93,6 +105,8 @@ public partial class ItemEntryCollectionViewModel<TItem, TValue> :
         Commit();
 
         State = ItemState.Read;
+        OnStateChanged();
+
         return Task.CompletedTask;
     }
 

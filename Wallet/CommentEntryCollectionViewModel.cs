@@ -30,5 +30,17 @@ public partial class CommentEntryCollectionViewModel(IServiceProvider provider,
 
         return Task.CompletedTask;
     }
+
+    protected override void OnStateChanged()
+    {
+        if (State is ItemState.Write)
+        {
+            Add<CreateCommentEntryViewModel>();
+        }
+        else
+        {
+            RemoveAt(Count - 1);
+        }
+    }
 }
 
