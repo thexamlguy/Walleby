@@ -34,28 +34,23 @@
                     <Setter Property="Background" Value="{DynamicResource TextControlButtonBackgroundPointerOver}" />
                     <Setter Property="BorderBrush" Value="{DynamicResource TextControlButtonBorderBrushPointerOver}" />
                 </Style>
-
                 <Style Selector="^ /template/ SymbolIcon#Glyph">
                     <Setter Property="Foreground" Value="{DynamicResource TextControlButtonForegroundPointerOver}" />
                 </Style>
             </Style>
-
             <Style Selector="^:pressed">
                 <Style Selector="^ /template/ Border#ButtonLayoutGrid">
                     <Setter Property="Background" Value="{DynamicResource TextControlButtonBackgroundPressed}" />
                     <Setter Property="BorderBrush" Value="{DynamicResource TextControlButtonBorderBrushPressed}" />
                 </Style>
-
                 <Style Selector="^ /template/ SymbolIcon#Glyph">
                     <Setter Property="Foreground" Value="{DynamicResource TextControlButtonForegroundPressed}" />
                 </Style>
             </Style>
-
             <Style Selector="^:disabled /template/ Border#ButtonLayoutGrid">
                 <Setter Property="Opacity" Value="0" />
             </Style>
         </ControlTheme>
-
     </SettingsExpanderItem.Resources>
     <TextBox
         MaxHeight="216"
@@ -68,11 +63,13 @@
                 Width="30"
                 Padding="{StaticResource HelperButtonThemePadding}"
                 VerticalAlignment="Stretch"
+                Classes="clearButton"
                 Command="{Binding InvokeCommand}"
                 Content="Add"
                 CornerRadius="{DynamicResource ControlCornerRadius}"
                 Focusable="False"
                 IsTabStop="False"
+                IsVisible="{Binding Value, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                 Theme="{StaticResource TextBoxAddButtonStyle}" />
         </TextBox.InnerRightContent>
     </TextBox>

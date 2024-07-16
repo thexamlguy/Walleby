@@ -29,7 +29,7 @@
     </SettingsExpander.Action>
     <SettingsExpander.Footer>
         <Grid>
-            <TextBox Text="{Binding Value}">
+            <TextBox Classes="clearButton" Text="{Binding Value}">
                 <TextBox.Styles>
                     <Style Selector="TextBox.Write">
                         <Setter Property="MaxWidth" Value="{Binding Width}" />
