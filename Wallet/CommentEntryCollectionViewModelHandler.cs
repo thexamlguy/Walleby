@@ -14,7 +14,7 @@ public class CommentEntryCollectionViewModelHandler(IServiceFactory serviceFacto
             List<Comment> values = configuration.Value is not null ? new List<Comment>(configuration.Value) : [];
             double? width = configuration.Width;
 
-            if (serviceFactory.Create<CommentEntryCollectionViewModel>(args => args.Initialize(), 
+            if (serviceFactory.Create<CommentEntryCollectionViewModel>(args => args.Initialize(),
                 [.. args.Parameters, configuration, label, values, false, false, width])
                 is CommentEntryCollectionViewModel viewModel)
             {
@@ -30,4 +30,3 @@ public class CommentEntryCollectionViewModelHandler(IServiceFactory serviceFacto
         return Task.FromResult<IItemEntryViewModel?>(default);
     }
 }
-

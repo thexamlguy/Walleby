@@ -35,17 +35,17 @@ public class WalletActivatedHandler(IWalletHostCollection wallets,
 
             int index = sortedWallets.IndexOf(host);
 
-            if (host.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() is 
+            if (host.Services.GetRequiredService<IConfigurationDescriptor<WalletConfiguration>>() is
                 ConfigurationDescriptor<WalletConfiguration> descriptor)
             {
                 if (host.Services.GetRequiredService<IServiceFactory>() is IServiceFactory serviceFactory)
                 {
                     IDecoratorService<ProfileImage<IImageDescriptor>> profileImageDecorator =
                         host.Services.GetRequiredService<IDecoratorService<ProfileImage<IImageDescriptor>>>();
-                    
+
                     ProfileImage<IImageDescriptor>? profileImage = profileImageDecorator.Value;
-                    if (serviceFactory.Create<WalletNavigationViewModel>(args => args.Initialize(), 
-                        descriptor.Name, profileImage?.Value, false) 
+                    if (serviceFactory.Create<WalletNavigationViewModel>(args => args.Initialize(),
+                        descriptor.Name, profileImage?.Value, false)
                         is WalletNavigationViewModel viewModel)
                     {
                         publisher.Publish(Insert.As<IWalletNavigationViewModel>(index, viewModel),

@@ -1,4 +1,4 @@
 ﻿namespace Wallet;
 
-public interface INavigationViewModel : 
+public interface INavigationViewModel :
     IDisposable;

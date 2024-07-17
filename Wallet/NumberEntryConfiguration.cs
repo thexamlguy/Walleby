@@ -1,6 +1,6 @@
 ﻿namespace Wallet;
 
-public record NumberEntryConfiguration : 
+public record NumberEntryConfiguration :
     ItemEntryConfiguration<string>
 {
     public int MinLength { get; set; }

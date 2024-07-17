@@ -4,10 +4,10 @@ using Wallet.Data;
 
 namespace Wallet;
 
-public class CountCategoriesHandler(IDbContextFactory<WalletContext> dbContextFactory) : 
+public class CountCategoriesHandler(IDbContextFactory<WalletContext> dbContextFactory) :
     IHandler<CountEventArgs<Item>, IReadOnlyCollection<(string, int)>>
 {
-    public async Task<IReadOnlyCollection<(string, int)>> Handle(CountEventArgs<Item> args, 
+    public async Task<IReadOnlyCollection<(string, int)>> Handle(CountEventArgs<Item> args,
         CancellationToken cancellationToken)
     {
         using WalletContext context = await dbContextFactory.CreateDbContextAsync(cancellationToken);

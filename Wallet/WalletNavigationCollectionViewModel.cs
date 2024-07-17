@@ -8,11 +8,11 @@ public partial class WalletNavigationCollectionViewModel :
     ObservableCollection<IWalletNavigationViewModel>,
     INotificationHandler<SelectionEventArgs<INavigationViewModel>>
 {
-    public WalletNavigationCollectionViewModel(IServiceProvider provider, 
+    public WalletNavigationCollectionViewModel(IServiceProvider provider,
         IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
-        ISubscriber subscriber, 
+        ISubscriber subscriber,
         IDisposer disposer,
         IContentTemplate template) : base(provider, factory, mediator, publisher, subscriber, disposer)
     {

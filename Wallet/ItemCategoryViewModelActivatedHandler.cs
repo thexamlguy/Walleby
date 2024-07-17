@@ -12,7 +12,7 @@ public class ItemCategoryViewModelActivatedHandler(IItemConfigurationCollection 
         bool selected = true;
         foreach (KeyValuePair<string, Func<ItemConfiguration>> configuration in configurations)
         {
-            if (serviceFactory.Create<ItemCategoryNavigationViewModel>(args => args.Initialize(), 
+            if (serviceFactory.Create<ItemCategoryNavigationViewModel>(args => args.Initialize(),
                 configuration.Key, selected)
                 is ItemCategoryNavigationViewModel viewModel)
             {

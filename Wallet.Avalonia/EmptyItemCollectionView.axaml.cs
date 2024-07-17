@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace Wallet.Avalonia;
 
-public partial class EmptyItemCollectionView : 
+public partial class EmptyItemCollectionView :
     UserControl
 {
-    public EmptyItemCollectionView() => 
+    public EmptyItemCollectionView() =>
         InitializeComponent();
 }

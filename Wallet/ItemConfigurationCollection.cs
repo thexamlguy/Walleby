@@ -2,6 +2,6 @@
 
 namespace Wallet;
 
-public class ItemConfigurationCollection(IDictionary<string, Func<ItemConfiguration>> dictionary) : 
+public class ItemConfigurationCollection(IDictionary<string, Func<ItemConfiguration>> dictionary) :
     ReadOnlyDictionary<string, Func<ItemConfiguration>>(dictionary),
     IItemConfigurationCollection;

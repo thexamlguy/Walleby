@@ -17,7 +17,7 @@ public class ItemNavigationCollectionViewModelActivatedHandler(IMediator mediato
             cache.Clear();
             bool selected = true;
 
-            IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>? results = 
+            IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite, bool Archived)>? results =
                 await mediator.Handle<QueryEventArgs<Wallet<(string?, string?)>>,
                     IReadOnlyCollection<(Guid Id, string Name, string Category, bool Favourite,
                     bool Archived)>>(Query.As(new Wallet<(string?, string?)>((configuration.Filter, configuration.Query))));
@@ -31,8 +31,8 @@ public class ItemNavigationCollectionViewModelActivatedHandler(IMediator mediato
                     IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider
                         .GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
-                    if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(), configuration.Filter, 
-                        Id, Name, "Description", Category, selected, Favourite, Archived) 
+                    if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(), configuration.Filter,
+                        Id, Name, "Description", Category, selected, Favourite, Archived)
                         is ItemNavigationViewModel viewModel)
                     {
                         Item<(Guid, string)> item = new((Id, Name));

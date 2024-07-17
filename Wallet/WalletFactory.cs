@@ -12,7 +12,7 @@ public class WalletFactory(ISecurityKeyFactory securityKeyFactory,
     IWalletFactory
 {
     public async Task<bool> Create(string name,
-        string password, 
+        string password,
         IImageDescriptor? imageDescriptor)
     {
         if (securityKeyFactory.Create(Encoding.UTF8.GetBytes(password)) is SecurityKey key)

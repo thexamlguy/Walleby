@@ -4,6 +4,6 @@ namespace Wallet.Avalonia;
 
 public partial class SearchWalletActionView : UserControl
 {
-    public SearchWalletActionView() => 
+    public SearchWalletActionView() =>
         InitializeComponent();
 }

@@ -5,7 +5,7 @@ namespace Wallet.Avalonia
     public partial class MaskedTextEntryView :
         SettingsExpander
     {
-        public MaskedTextEntryView() => 
+        public MaskedTextEntryView() =>
             InitializeComponent();
     }
 }

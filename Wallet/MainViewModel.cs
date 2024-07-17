@@ -32,7 +32,6 @@ public partial class MainViewModel :
             Reset(args =>
             {
                 args.SetSource(wallet, () => wallet);
-                SelectedItem = wallet;
             }, false);
         }
         else

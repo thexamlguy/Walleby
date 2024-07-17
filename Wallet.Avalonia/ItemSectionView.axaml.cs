@@ -5,6 +5,6 @@ namespace Wallet.Avalonia;
 public partial class ItemSectionView :
     UserControl
 {
-    public ItemSectionView() => 
+    public ItemSectionView() =>
         InitializeComponent();
 }

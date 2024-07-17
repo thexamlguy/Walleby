@@ -7,5 +7,5 @@ public partial class DropdownEntryViewModel(IServiceProvider provider,
     IMediator mediator,
     IPublisher publisher,
     ISubscriber subscriber,
-    IDisposer disposer, 
+    IDisposer disposer,
     string? value = default) : Observable<string>(provider, factory, mediator, publisher, subscriber, disposer, value);

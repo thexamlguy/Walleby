@@ -3,9 +3,9 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class WalletCollectionInitializer(IHostEnvironment environment, 
+public class WalletCollectionInitializer(IHostEnvironment environment,
     IComponentFactory componentFactory,
-    IWalletHostCollection wallets) : 
+    IWalletHostCollection wallets) :
     IInitialization
 {
     public void Initialize()

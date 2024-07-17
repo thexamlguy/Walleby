@@ -1,14 +1,14 @@
-﻿using Wallet.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using Toolkit.Foundation;
+using Wallet.Data;
 
 namespace Wallet;
 
-public class ItemHandler(IDbContextFactory<WalletContext> dbContextFactory) : 
+public class ItemHandler(IDbContextFactory<WalletContext> dbContextFactory) :
     IHandler<RequestEventArgs<Item<Guid>>, (Guid, string, string?, string, ItemConfiguration?)>
 {
-    public async Task<(Guid, string, string?, string, ItemConfiguration?)> Handle(RequestEventArgs<Item<Guid>> args, 
+    public async Task<(Guid, string, string?, string, ItemConfiguration?)> Handle(RequestEventArgs<Item<Guid>> args,
         CancellationToken cancellationToken)
     {
         if (args.Sender is Item<Guid> item)
@@ -43,7 +43,6 @@ public class ItemHandler(IDbContextFactory<WalletContext> dbContextFactory) :
                     }
                     catch
                     {
-
                     }
                 }
 

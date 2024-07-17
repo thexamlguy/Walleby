@@ -12,7 +12,7 @@ public class OpenWalletHandler(IConfigurationDescriptor<WalletConfiguration> des
     public async Task<bool> Handle(OpenEventArgs<Wallet<string>> args,
         CancellationToken cancellationToken)
     {
-        if (args.Sender is Wallet<string> Wallet && 
+        if (args.Sender is Wallet<string> Wallet &&
             descriptor.Name is { Length: > 0 } name &&
             Wallet.Value is { Length: > 0 } password)
         {
@@ -22,10 +22,10 @@ public class OpenWalletHandler(IConfigurationDescriptor<WalletConfiguration> des
                 byte[]? salt = Convert.FromBase64String(keyPart[0]);
                 byte[]? encryptedKey = Convert.FromBase64String(keyPart[1]);
 
-                if (securityKeyFactory.Create(Encoding.UTF8.GetBytes(password), 
+                if (securityKeyFactory.Create(Encoding.UTF8.GetBytes(password),
                     encryptedKey, salt) is SecurityKey securityKey)
                 {
-                    if (await walletConnectionFactory.Create(name, Convert.ToBase64String(securityKey.DecryptedKey)) 
+                    if (await walletConnectionFactory.Create(name, Convert.ToBase64String(securityKey.DecryptedKey))
                         is WalletConnection connection)
                     {
                         walletConnectionDecorator.Set(connection);

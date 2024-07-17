@@ -4,6 +4,6 @@ namespace Wallet.Avalonia;
 
 public partial class ItemContentView : UserControl
 {
-    public ItemContentView() => 
+    public ItemContentView() =>
         InitializeComponent();
 }

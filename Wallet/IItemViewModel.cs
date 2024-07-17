@@ -1,4 +1,4 @@
 ﻿namespace Wallet;
 
-public interface IItemViewModel : 
+public interface IItemViewModel :
     IDisposable;

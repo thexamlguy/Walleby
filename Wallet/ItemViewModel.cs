@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Toolkit.Foundation;
-using Wallet.Data;
 
 namespace Wallet;
 

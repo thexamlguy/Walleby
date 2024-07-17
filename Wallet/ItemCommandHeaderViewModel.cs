@@ -26,7 +26,7 @@ public partial class ItemCommandHeaderViewModel(IServiceProvider provider,
                 }
             });
         }
-     
+
         return Task.CompletedTask;
     }
 }

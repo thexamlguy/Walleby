@@ -1,5 +1,4 @@
-﻿
-namespace Wallet
+﻿namespace Wallet
 {
     public interface IWalletConnectionFactory
     {

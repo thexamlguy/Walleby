@@ -25,9 +25,9 @@ public class ConfirmUpdateItemHandler(IDecoratorService<Item<(Guid, string)>> it
 
                 (Guid id, _) = item.Value;
 
-                await mediator.Handle<UpdateEventArgs<Item<(Guid, string, string, IImageDescriptor?, 
+                await mediator.Handle<UpdateEventArgs<Item<(Guid, string, string, IImageDescriptor?,
                     ItemConfiguration)>>, bool>(new UpdateEventArgs<Item<(Guid, string, string, IImageDescriptor?,
-                    ItemConfiguration)>>(new Item<(Guid, string, string, IImageDescriptor?, ItemConfiguration)>((id, 
+                    ItemConfiguration)>>(new Item<(Guid, string, string, IImageDescriptor?, ItemConfiguration)>((id,
                     name, category, imageDescriptor, itemConfiguration))));
 
                 Item<(Guid, string)> newItem = new((id, name));

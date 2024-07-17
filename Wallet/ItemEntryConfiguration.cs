@@ -14,7 +14,7 @@ namespace Wallet;
 [JsonDerivedType(typeof(DateEntryConfiguration), typeDiscriminator: "Date")]
 [JsonDerivedType(typeof(HyperlinkEntryConfiguration), typeDiscriminator: "Hyperlink")]
 [JsonDerivedType(typeof(PinEntryConfiguration), typeDiscriminator: "Pin")]
-public record ItemEntryConfiguration<TValue> : 
+public record ItemEntryConfiguration<TValue> :
     IItemEntryConfiguration<TValue>
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]

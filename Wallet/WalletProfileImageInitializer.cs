@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class WalletProfileImageInitializer(IHostEnvironment environment, 
+public class WalletProfileImageInitializer(IHostEnvironment environment,
     IImageReader reader,
     IDecoratorService<ProfileImage<IImageDescriptor>> profileImageDecorator) :
     IInitialization

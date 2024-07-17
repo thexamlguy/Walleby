@@ -20,7 +20,7 @@ public class ConfirmCreateItemHandler(IMediator mediator,
                 Guid id = Guid.NewGuid();
 
                 await mediator.Handle<CreateEventArgs<(Guid, string, string, IImageDescriptor?,
-                    ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, string, string, IImageDescriptor?, 
+                    ItemConfiguration)>, bool>(new CreateEventArgs<(Guid, string, string, IImageDescriptor?,
                     ItemConfiguration)>((id, name, category, imageDescriptor ?? default, itemConfiguration)));
 
                 Item<(Guid, string, string)> item = new((id, name, category));

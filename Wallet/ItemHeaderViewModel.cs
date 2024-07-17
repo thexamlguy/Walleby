@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class ItemHeaderViewModel : 
+public partial class ItemHeaderViewModel :
     Observable<string>,
     IHandler<ValidateEventArgs<ItemEntry>, bool>,
     INotificationHandler<UpdateEventArgs<ItemEntry>>,
@@ -110,7 +110,7 @@ public partial class ItemHeaderViewModel :
     private async Task Import() => ImageDescriptor = await Mediator.Handle<CreateEventArgs<ProfileImage>,
         IImageDescriptor>(Create.As<ProfileImage>());
 
-    partial void OnImageDescriptorChanged(IImageDescriptor? value)
+    private partial void OnImageDescriptorChanged(IImageDescriptor? value)
     {
         if (configuration is not null)
         {
@@ -118,7 +118,7 @@ public partial class ItemHeaderViewModel :
         }
     }
 
-    partial void OnImageDescriptorChanged(IImageDescriptor? oldValue,
+    private partial void OnImageDescriptorChanged(IImageDescriptor? oldValue,
         IImageDescriptor? newValue)
     {
         if (configuration is not null)

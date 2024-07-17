@@ -23,5 +23,5 @@ public record ItemEntity
 
     public ICollection<TagEntity> Tags { get; set; } = new List<TagEntity>();
 
-    public ICollection<BlobEntity> Blobs { get; set;  } = new List<BlobEntity>();
+    public ICollection<BlobEntity> Blobs { get; set; } = new List<BlobEntity>();
 }

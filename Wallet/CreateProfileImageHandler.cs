@@ -2,8 +2,8 @@
 
 namespace Wallet;
 
-public class CreateProfileImageHandler(IFileProvider fileProvider, 
-    IImageReader imageReader) : 
+public class CreateProfileImageHandler(IFileProvider fileProvider,
+    IImageReader imageReader) :
     IHandler<CreateEventArgs<ProfileImage>, IImageDescriptor?>
 {
     public async Task<IImageDescriptor?> Handle(CreateEventArgs<ProfileImage> args,

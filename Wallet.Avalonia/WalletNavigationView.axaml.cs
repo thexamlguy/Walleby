@@ -1,4 +1,3 @@
-using Avalonia.Controls;
 using System;
 using Toolkit.UI.Controls.Avalonia;
 
@@ -7,7 +6,7 @@ namespace Wallet.Avalonia;
 public partial class WalletNavigationView :
     OverflowItem
 {
-    public WalletNavigationView() => 
+    public WalletNavigationView() =>
         InitializeComponent();
 
     protected override Type StyleKeyOverride =>

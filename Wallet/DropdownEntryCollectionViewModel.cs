@@ -2,18 +2,18 @@
 
 namespace Wallet;
 
-public partial class DropdownEntryCollectionViewModel : 
+public partial class DropdownEntryCollectionViewModel :
     ItemEntryCollectionViewModel<DropdownEntryViewModel, object>
 {
     public DropdownEntryCollectionViewModel(IServiceProvider provider,
-        IServiceFactory factory, 
+        IServiceFactory factory,
         IMediator mediator,
         IPublisher publisher,
         ISubscriber subscriber,
-        IDisposer disposer, 
+        IDisposer disposer,
         IEnumerable<DropdownEntryViewModel> items,
         ItemState state,
-        DropdownEntryCollectionConfiguration configuration, 
+        DropdownEntryCollectionConfiguration configuration,
         string key,
         object value,
         bool isConcealed,

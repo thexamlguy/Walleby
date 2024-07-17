@@ -1,13 +1,13 @@
-﻿using Wallet.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Toolkit.Foundation;
+using Wallet.Data;
 
 namespace Wallet;
 
-public class UpdateItemStateHandler(IDbContextFactory<WalletContext> dbContextFactory) : 
+public class UpdateItemStateHandler(IDbContextFactory<WalletContext> dbContextFactory) :
     IHandler<UpdateEventArgs<(Guid, int)>, bool>
 {
-    public async Task<bool> Handle(UpdateEventArgs<(Guid, int)> args, 
+    public async Task<bool> Handle(UpdateEventArgs<(Guid, int)> args,
         CancellationToken cancellationToken)
     {
         if (args.Sender is (Guid id, int state))

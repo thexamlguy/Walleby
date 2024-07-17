@@ -1,6 +1,4 @@
-﻿using Toolkit.Foundation;
-
-namespace Wallet;
+﻿namespace Wallet;
 
 public record Closed
 {

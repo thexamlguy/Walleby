@@ -83,7 +83,7 @@ public record ItemConfiguration
                         Label = "Name on account"
                     },
                     new DropdownEntryCollectionConfiguration
-                    {                        
+                    {
                         Label = "Type",
                         Values = [
                             "Checking Account",

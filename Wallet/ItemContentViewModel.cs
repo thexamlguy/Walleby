@@ -18,7 +18,7 @@ public partial class ItemContentViewModel(IServiceProvider provider,
 
     public Task Handle(NotifyEventArgs<ItemCategory<string>> args)
     {
-        if (args.Sender is ItemCategory<string> category 
+        if (args.Sender is ItemCategory<string> category
             && category.Value is string value)
         {
             Activate(() => new ActivationBuilder(new ActivationEventArgs<IItemEntryViewModel,

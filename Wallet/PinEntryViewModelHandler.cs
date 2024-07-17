@@ -14,7 +14,7 @@ public class PinEntryViewModelHandler(IServiceFactory serviceFactory) :
             string? value = $"{configuration.Value}" ?? "";
             double? width = configuration.Width;
 
-            if (serviceFactory.Create<PinEntryViewModel>(args => args.Initialize(), 
+            if (serviceFactory.Create<PinEntryViewModel>(args => args.Initialize(),
                 [.. args.Parameters, configuration, label, value, true, false, width])
                 is PinEntryViewModel viewModel)
             {

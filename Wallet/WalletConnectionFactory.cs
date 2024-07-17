@@ -1,6 +1,6 @@
-﻿using Wallet.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Wallet.Data;
 
 namespace Wallet;
 

@@ -15,7 +15,7 @@ public class DateEntryViewModelHandler(IServiceFactory serviceFactory) :
             DateTimeOffset? value = configuration.Value is not null ? configuration.Value : DateTimeOffset.Now;
             double? width = configuration.Width;
 
-            if (serviceFactory.Create<DateEntryViewModel>(args => args.Initialize(), 
+            if (serviceFactory.Create<DateEntryViewModel>(args => args.Initialize(),
                 [.. args.Parameters, configuration, label, value, false, false, width])
                 is DateEntryViewModel viewModel)
             {

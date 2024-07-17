@@ -24,11 +24,10 @@ public class ArchiveItemHandler(IDecoratorService<Item<(Guid, string)>> decorato
                     cache.Remove(item);
                     publisher.Publish(Changed.As<Item>());
                 }
-            } 
+            }
         }
         catch
         {
-
         }
     }
 }

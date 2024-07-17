@@ -39,8 +39,10 @@ public partial class CommentEntryCollectionViewModel(IServiceProvider provider,
         }
         else
         {
-            RemoveAt(Count - 1);
+            if (Count > 0)
+            {
+                RemoveAt(Count - 1);
+            }
         }
     }
 }
-

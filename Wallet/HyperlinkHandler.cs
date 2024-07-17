@@ -3,7 +3,7 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public class HyperlinkHandler : 
+public class HyperlinkHandler :
     INotificationHandler<CreateEventArgs<Hyperlink>>
 {
     public Task Handle(CreateEventArgs<Hyperlink> args)
@@ -16,7 +16,6 @@ public class HyperlinkHandler :
             }
             catch
             {
-
             }
         }
 

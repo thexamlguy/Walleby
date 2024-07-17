@@ -2,7 +2,7 @@
 
 namespace Wallet;
 
-public partial class DigitRule : 
+public partial class DigitRule :
     IPasswordRule
 {
     public int CalculateScore(string password) =>

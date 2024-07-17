@@ -1,6 +1,6 @@
-﻿using Wallet.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Toolkit.Foundation;
+using Wallet.Data;
 
 namespace Wallet;
 
@@ -24,7 +24,7 @@ public class ItemImageHandler(IDbContextFactory<WalletContext> dbContextFactory,
                 })
                 .FirstOrDefaultAsync(cancellationToken);
 
-            if (result is not null && 
+            if (result is not null &&
                 result.Image is BlobEntity image &&
                 image.Data is { Length: > 0 } data)
             {

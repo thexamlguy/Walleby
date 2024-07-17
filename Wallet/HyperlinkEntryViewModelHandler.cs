@@ -14,7 +14,7 @@ public class HyperlinkEntryViewModelHandler(IServiceFactory serviceFactory) :
             string? value = $"{configuration.Value}" ?? "";
             double? width = configuration.Width;
 
-            if (serviceFactory.Create<HyperlinkEntryViewModel>(args => args.Initialize(), 
+            if (serviceFactory.Create<HyperlinkEntryViewModel>(args => args.Initialize(),
                 [.. args.Parameters, configuration, label, value, false, false, width])
                 is HyperlinkEntryViewModel viewModel)
             {

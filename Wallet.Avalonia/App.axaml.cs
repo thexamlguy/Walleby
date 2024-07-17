@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Wallet.Data;
+using FluentAvalonia.Core;
 using HotAvalonia;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -11,8 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Toolkit.Avalonia;
 using Toolkit.Foundation;
-using FluentAvalonia.Core;
-using Avalonia.Controls;
+using Wallet.Data;
 
 namespace Wallet.Avalonia;
 
@@ -50,7 +49,7 @@ public partial class App : Application
             .AddConfiguration("Item:Server", ItemConfiguration.Server)
             .AddConfiguration("Item:Education Record", ItemConfiguration.EducationRecord)
             .AddConfiguration("Item:Travel Documents", ItemConfiguration.TravelDocuments)
-            .AddConfiguration("Item:Concert Ticket", ItemConfiguration.ConcertTicket)            
+            .AddConfiguration("Item:Concert Ticket", ItemConfiguration.ConcertTicket)
             .ConfigureServices((context, services) =>
             {
                 services.AddAvalonia();
@@ -95,11 +94,11 @@ public partial class App : Application
                                 provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>().OrderBy(x => x.Name) ??
                                 Enumerable.Empty<IConfigurationDescriptor<ItemConfiguration>>();
 
-                            return new ItemConfigurationCollection(items.ToDictionary(x => x.Name, 
+                            return new ItemConfigurationCollection(items.ToDictionary(x => x.Name,
                                 x => (Func<ItemConfiguration>)(() => x.Value)));
                         });
 
-                        services.TryAddSingleton<IDecoratorService<ProfileImage<IImageDescriptor>>, 
+                        services.TryAddSingleton<IDecoratorService<ProfileImage<IImageDescriptor>>,
                             DecoratorService<ProfileImage<IImageDescriptor>>>();
 
                         services.TryAddSingleton<IDecoratorService<SecurityKey>, DecoratorService<SecurityKey>>();
@@ -115,7 +114,7 @@ public partial class App : Application
 
                         services.AddHandler<ItemHandler>();
                         services.AddHandler<ItemImageHandler>();
-                  
+
                         services.AddHandler<CreateItemHandler>();
                         services.AddHandler<DeleteItemHandler>();
                         services.AddHandler<UpdateItemHander>();
@@ -160,7 +159,7 @@ public partial class App : Application
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddHandler<ItemNavigationViewModelActivatedHandler>();
-               
+
                         services.AddTemplate<EmptyItemCollectionViewModel, EmptyItemCollectionView>("EmptyItemCollection");
 
                         services.AddScoped<IDecoratorService<ItemHeaderConfiguration>, DecoratorService<ItemHeaderConfiguration>>();
@@ -202,7 +201,7 @@ public partial class App : Application
                         services.AddHandler<ConfirmUpdateItemHandler>(nameof(ItemState.Write));
                         services.AddHandler<ConfirmCreateItemHandler>(nameof(ItemState.New));
                         services.AddHandler<ConfirmDeleteItemHandler>();
-    
+
                         services.AddHandler<HyperlinkHandler>();
 
                         services.AddHandler<ItemChangedHandler>(ServiceLifetime.Singleton);

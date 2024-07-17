@@ -2,9 +2,9 @@ using Toolkit.UI.Controls.Avalonia;
 
 namespace Wallet.Avalonia;
 
-public partial class CategoriesNavigationView : 
+public partial class CategoriesNavigationView :
     NavigationViewItem
 {
-    public CategoriesNavigationView() => 
+    public CategoriesNavigationView() =>
         InitializeComponent();
 }

@@ -1,15 +1,15 @@
-﻿using Wallet.Data;
-using LinqKit;
+﻿using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using Toolkit.Foundation;
+using Wallet.Data;
 
 namespace Wallet;
 
 public class QueryWalletHandler(IDbContextFactory<WalletContext> dbContextFactory) :
     IHandler<QueryEventArgs<Wallet<(string, string)>>, IReadOnlyCollection<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)>>
 {
-    public async Task<IReadOnlyCollection<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)>> 
-        Handle(QueryEventArgs<Wallet<(string, string)>> args,CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)>>
+        Handle(QueryEventArgs<Wallet<(string, string)>> args, CancellationToken cancellationToken)
     {
         List<(Guid Id, string? Name, string Category, bool Favourite, bool Archived)> items = [];
         if (args.Sender is Wallet<(string, string)> Wallet)
@@ -41,7 +41,6 @@ public class QueryWalletHandler(IDbContextFactory<WalletContext> dbContextFactor
                 predicate = predicate.And(x => x.State != 2)
                     .And(x => EF.Functions.Like(x.Category, $"%{filter}%"));
             }
-
 
             if (text is { Length: > 0 })
             {

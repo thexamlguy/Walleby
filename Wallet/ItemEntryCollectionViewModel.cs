@@ -4,7 +4,7 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class ItemEntryCollectionViewModel<TItem, TValue> : 
+public partial class ItemEntryCollectionViewModel<TItem, TValue> :
     ObservableCollection<TItem, string, TValue>,
     IItemEntryViewModel,
     IHandler<ValidateEventArgs<ItemEntry>, bool>,
@@ -97,7 +97,6 @@ public partial class ItemEntryCollectionViewModel<TItem, TValue> :
 
     protected virtual void OnStateChanged()
     {
-
     }
 
     public Task Handle(ConfirmEventArgs<Item> args)

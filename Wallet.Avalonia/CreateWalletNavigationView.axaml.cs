@@ -4,6 +4,6 @@ namespace Wallet.Avalonia;
 
 public partial class CreateWalletNavigationView : SettingsExpander
 {
-    public CreateWalletNavigationView() => 
+    public CreateWalletNavigationView() =>
         InitializeComponent();
 }

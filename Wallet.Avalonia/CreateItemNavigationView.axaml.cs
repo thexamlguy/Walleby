@@ -5,6 +5,6 @@ namespace Wallet.Avalonia;
 public partial class CreateItemNavigationView :
     NavigationViewItem
 {
-    public CreateItemNavigationView() => 
+    public CreateItemNavigationView() =>
         InitializeComponent();
 }

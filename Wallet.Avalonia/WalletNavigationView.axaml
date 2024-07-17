@@ -5,12 +5,13 @@
     xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:vm="using:Wallet"
     x:DataType="vm:WalletNavigationViewModel"
+    BadgeBrush="{DynamicResource SystemFillColorAttentionBrush}"
     BadgePath="F1 M 10 3.799999 C 8.559999 3.799999 7.226666 4.16 6 4.879999 C 4.773333 5.6 3.8 6.573334 3.08 7.799999 C 2.36 9.026667 2 10.360001 2 11.799999 C 2 13.24 2.36 14.573334 3.08 15.799999 C 3.8 17.026667 4.773333 18 6 18.719999 C 7.226666 19.439999 8.559999 19.799999 10 19.799999 C 11.439999 19.799999 12.773333 19.439999 14 18.719999 C 15.226665 18 16.199999 17.026667 16.92 15.799999 C 17.639999 14.573334 18 13.24 18 11.799999 C 18 10.360001 17.639999 9.026667 16.92 7.799999 C 16.199999 6.573334 15.226665 5.6 14 4.879999 C 12.773333 4.16 11.439999 3.799999 10 3.799999 Z "
     BadgePlacement="BottomRight"
     BadgeSize="10"
     ContentTemplate="{x:Null}"
     Foreground="#4CAF50"
-    IsBadgeVisible="True"
+    IsBadgeVisible="{Binding IsOpened}"
     ListBoxExtension.IsItemInvokedEnabled="True"
     ToolTip.Tip="{Binding Name}">
     <OverflowItem.Resources>

@@ -16,6 +16,6 @@ public class ApplicationSplashScreen :
 
     public int MinimumShowTime => 2000;
 
-    public Task RunTasks(CancellationToken cancellationToken) => 
+    public Task RunTasks(CancellationToken cancellationToken) =>
         Task.CompletedTask;
 }

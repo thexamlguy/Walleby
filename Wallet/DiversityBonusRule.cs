@@ -2,7 +2,7 @@
 
 namespace Wallet;
 
-public partial class DiversityBonusRule : 
+public partial class DiversityBonusRule :
     IPasswordRule
 {
     public int CalculateScore(string password)

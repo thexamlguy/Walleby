@@ -5,7 +5,7 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-public partial class OpenWalletViewModel : 
+public partial class OpenWalletViewModel :
     Observable
 {
     [ObservableProperty]
@@ -22,10 +22,10 @@ public partial class OpenWalletViewModel :
     private string password;
 
     public OpenWalletViewModel(IValidation validation,
-        IServiceProvider provider, 
+        IServiceProvider provider,
         IServiceFactory factory,
-        IMediator mediator, 
-        IPublisher publisher, 
+        IMediator mediator,
+        IPublisher publisher,
         ISubscriber subscriber,
         IDisposer disposer,
         string name,
@@ -42,8 +42,8 @@ public partial class OpenWalletViewModel :
     {
         using (await new ActivityLock(this))
         {
-            if (await Validation.Validate(() => Password, [new ValidationRule(async () => 
-                await Mediator.Handle<OpenEventArgs<Wallet<string>>, bool>(Open.As(new Wallet<string>(Password))), 
+            if (await Validation.Validate(() => Password, [new ValidationRule(async () =>
+                await Mediator.Handle<OpenEventArgs<Wallet<string>>, bool>(Open.As(new Wallet<string>(Password))),
                     "The password is incorrect, please try again.")]))
             {
                 Publisher.Publish(Opened.As<Wallet>());

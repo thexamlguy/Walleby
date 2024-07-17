@@ -3,10 +3,10 @@ using System;
 
 namespace Wallet.Avalonia;
 
-public partial class ItemNavigationView : 
+public partial class ItemNavigationView :
     ListBoxItem
 {
-    public ItemNavigationView() => 
+    public ItemNavigationView() =>
         InitializeComponent();
 
     protected override Type StyleKeyOverride =>
