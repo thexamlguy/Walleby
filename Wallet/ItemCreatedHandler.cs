@@ -18,7 +18,7 @@ public class ItemCreatedHandler(IServiceProvider serviceProvider,
             IServiceFactory serviceFactory = serviceScope.ServiceProvider.GetRequiredService<IServiceFactory>();
             IDecoratorService<Item<(Guid, string)>> decoratorService = serviceScope.ServiceProvider.GetRequiredService<IDecoratorService<Item<(Guid, string)>>>();
 
-            if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(),
+            if (serviceFactory.Create<ItemNavigationViewModel>(args => args.Initialize(), "All",
                 id, name, "Description", category, true)
                 is ItemNavigationViewModel viewModel)
             {

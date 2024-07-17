@@ -3,9 +3,9 @@ using Toolkit.Foundation;
 
 namespace Wallet;
 
-[Notification(typeof(CreateEventArgs<ItemNavigationViewModel>), nameof(ItemNavigationCollectionViewModel))]
-[Notification(typeof(InsertEventArgs<ItemNavigationViewModel>), nameof(ItemNavigationCollectionViewModel))]
-[Notification(typeof(MoveToEventArgs<ItemNavigationViewModel>), nameof(ItemNavigationCollectionViewModel))]
+[Notification(typeof(CreateEventArgs<ItemNavigationViewModel>), nameof(Filter))]
+[Notification(typeof(InsertEventArgs<ItemNavigationViewModel>), nameof(Filter))]
+[Notification(typeof(MoveToEventArgs<ItemNavigationViewModel>), nameof(Filter))]
 [Notification(typeof(NotifyEventArgs<Search<string>>), nameof(ItemNavigationCollectionViewModel))]
 public partial class ItemNavigationCollectionViewModel :
     ObservableCollection<ItemNavigationViewModel>,
@@ -31,9 +31,13 @@ public partial class ItemNavigationCollectionViewModel :
     {
         Template = template;
         Named = $"{named}";
+        Filter = filter;
 
         this.configuration = configuration with { Filter = filter };
     }
+
+    [ObservableProperty]
+    private string? filter;
 
     public IContentTemplate Template { get; set; }
 

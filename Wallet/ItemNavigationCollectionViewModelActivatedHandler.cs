@@ -40,7 +40,7 @@ public class ItemNavigationCollectionViewModelActivatedHandler(IMediator mediato
                         decoratorService.Set(item);
                         cache.Add(item);
 
-                        publisher.Publish(Create.As(viewModel), nameof(ItemNavigationCollectionViewModel));
+                        publisher.Publish(Create.As(viewModel), configuration.Filter);
                     }
 
                     selected = false;
