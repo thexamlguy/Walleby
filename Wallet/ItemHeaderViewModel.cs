@@ -110,7 +110,7 @@ public partial class ItemHeaderViewModel :
     private async Task Import() => ImageDescriptor = await Mediator.Handle<CreateEventArgs<ProfileImage>,
         IImageDescriptor>(Create.As<ProfileImage>());
 
-    private partial void OnImageDescriptorChanged(IImageDescriptor? value)
+    partial void OnImageDescriptorChanged(IImageDescriptor? value)
     {
         if (configuration is not null)
         {
@@ -118,7 +118,7 @@ public partial class ItemHeaderViewModel :
         }
     }
 
-    private partial void OnImageDescriptorChanged(IImageDescriptor? oldValue,
+    partial void OnImageDescriptorChanged(IImageDescriptor? oldValue,
         IImageDescriptor? newValue)
     {
         if (configuration is not null)
