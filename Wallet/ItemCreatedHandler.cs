@@ -28,8 +28,7 @@ public class ItemCreatedHandler(IServiceProvider serviceProvider,
                 int index = cache.IndexOf(cachedItem);
                 decoratorService.Set(cachedItem);
 
-                publisher.Publish(Insert.As(index, viewModel),
-                    nameof(ItemNavigationCollectionViewModel));
+                publisher.Publish(Insert.As(index, viewModel), "All");
             }
         }
 

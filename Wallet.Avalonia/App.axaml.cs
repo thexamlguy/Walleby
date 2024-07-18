@@ -73,6 +73,8 @@ public partial class App : Application
                         services.AddTransient(_ =>
                             provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>());
 
+                        services.AddInitializer<WalletActivityService>();
+
                         services.AddTransient<IWalletFactory, WalletFactory>();
 
                         services.AddTransient<IKeyGenerator, KeyGenerator>();
