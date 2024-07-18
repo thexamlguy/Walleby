@@ -3,11 +3,11 @@ using Timer = System.Threading.Timer;
 
 namespace Wallet;
 
-public class WalletInactivityTimer(WalletConfiguration configuration,
+public class WalletInactivity(WalletConfiguration configuration,
     IUserInteraction userInteraction, 
     ISubscriber subscriber,
     IPublisher publisher) :
-    IWalletInactivityTimer,
+    IWalletInactivity,
     INotificationHandler<ActivatedEventArgs<Wallet>>,
     INotificationHandler<DeactivatedEventArgs<Wallet>>,
     INotificationHandler<OpenedEventArgs<Wallet>>,

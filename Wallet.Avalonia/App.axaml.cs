@@ -76,7 +76,7 @@ public partial class App : Application
                         services.AddTransient(_ =>
                             provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>());
 
-                        services.AddInitializer<WalletInactivityTimer>();
+                        services.AddInitializer<WalletInactivity>();
 
                         services.AddTransient<IWalletFactory, WalletFactory>();
 

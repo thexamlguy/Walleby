@@ -2,6 +2,6 @@
 
 namespace Wallet;
 
-public interface IWalletInactivityTimer :
+public interface IWalletInactivity :
     IInitialization, 
     IDisposable;
