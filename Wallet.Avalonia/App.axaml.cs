@@ -57,7 +57,8 @@ public partial class App : Application
 
                 if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
                 {
-                    services.AddTemplate<MainWindowViewModel, MainWindow>("MainWindow");
+                    services.AddTemplate<MainWindowViewModel, 
+                        MainWindow>("MainWindow");
                 }
 
                 services.AddHandler<WalletActivatedHandler>();
@@ -65,15 +66,17 @@ public partial class App : Application
                 {
                     args.AddServices(services =>
                     {
-                        services.AddTransient<IComparer<Item<(Guid, string)>>>(provider => Comparer<Item<(Guid, string)>>.Create((x, z) =>
-                            StringComparer.CurrentCultureIgnoreCase.Compare(x.Value.Item2, z.Value.Item2)));
+                        services.AddSingleton<IUserInteraction, UserInteraction>();
+
+                        services.AddTransient<IComparer<Item<(Guid, string)>>>(provider => Comparer<Item<(Guid Id, string Name)>>.Create((x, z) =>
+                            StringComparer.CurrentCultureIgnoreCase.Compare(x.Value.Name, z.Value.Name)));
 
                         services.AddCache<Item<(Guid, string)>>();
 
                         services.AddTransient(_ =>
                             provider.GetServices<IConfigurationDescriptor<ItemConfiguration>>());
 
-                        services.AddInitializer<WalletActivityService>();
+                        services.AddInitializer<WalletInactivityTimer>();
 
                         services.AddTransient<IWalletFactory, WalletFactory>();
 
@@ -106,7 +109,8 @@ public partial class App : Application
                         services.TryAddSingleton<IDecoratorService<SecurityKey>, DecoratorService<SecurityKey>>();
                         services.TryAddSingleton<IDecoratorService<WalletConnection>, DecoratorService<WalletConnection>>();
 
-                        services.AddTransient<IConnection>(provider => provider.GetRequiredService<IDecoratorService<WalletConnection>>().Value!);
+                        services.AddTransient<IConnection>(provider =>
+                            provider.GetRequiredService<IDecoratorService<WalletConnection>>().Value!);
 
                         services.AddDbContextFactory<WalletContext>();
 
@@ -148,24 +152,29 @@ public partial class App : Application
                         services.AddTemplate<BackActionViewModel, BackActionView>();
                         services.AddTemplate<SearchWalletActionViewModel, SearchWalletActionView>();
 
-                        services.AddTemplate<ItemCategoryNavigationCollectionViewModel, ItemCategoryNavigationCollectionView>("ItemCategoryCollection");
+                        services.AddTemplate<ItemCategoryNavigationCollectionViewModel,
+                            ItemCategoryNavigationCollectionView>("ItemCategoryCollection");
                         services.AddTemplate<ItemCategoryNavigationViewModel, ItemCategoryNavigationView>();
 
                         services.AddHandler<CategoriesNavigationViewModelActivationHandler>();
 
                         services.AddHandler<ItemCategoryViewModelActivatedHandler>();
 
-                        services.AddScoped<IDecoratorService<Item<(Guid, string)>>, DecoratorService<Item<(Guid, string)>>>();
+                        services.AddScoped<IDecoratorService<Item<(Guid, string)>>, 
+                            DecoratorService<Item<(Guid, string)>>>();
 
                         services.AddTemplate<AddItemNavigationViewModel, AddItemNavigationView>();
 
                         services.AddTemplate<ItemNavigationViewModel, ItemNavigationView>();
                         services.AddHandler<ItemNavigationViewModelActivatedHandler>();
 
-                        services.AddTemplate<EmptyItemCollectionViewModel, EmptyItemCollectionView>("EmptyItemCollection");
+                        services.AddTemplate<EmptyItemCollectionViewModel, 
+                            EmptyItemCollectionView>("EmptyItemCollection");
 
-                        services.AddScoped<IDecoratorService<ItemHeaderConfiguration>, DecoratorService<ItemHeaderConfiguration>>();
-                        services.AddScoped<IDecoratorService<ItemConfiguration>, DecoratorService<ItemConfiguration>>();
+                        services.AddScoped<IDecoratorService<ItemHeaderConfiguration>, 
+                            DecoratorService<ItemHeaderConfiguration>>();
+                        services.AddScoped<IDecoratorService<ItemConfiguration>,
+                            DecoratorService<ItemConfiguration>>();
 
                         services.AddTemplate<ItemViewModel, ItemView>("Item");
 
