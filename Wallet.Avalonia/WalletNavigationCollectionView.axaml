@@ -6,7 +6,7 @@
     x:DataType="vm:WalletNavigationCollectionViewModel">
     <Overflow
         HorizontalAlignment="Center"
-        ItemTemplate="{ReflectionBinding Template}"
+        ItemContainerTemplateSelector="{ReflectionBinding Template}"
         ItemsSource="{Binding}"
         SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
         <Overflow.Styles>

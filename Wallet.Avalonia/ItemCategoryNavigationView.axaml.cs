@@ -1,8 +1,9 @@
-using Avalonia.Controls;
+using Toolkit.UI.Controls.Avalonia;
 
 namespace Wallet.Avalonia;
 
-public partial class ItemCategoryNavigationView : ListBoxItem
+public partial class ItemCategoryNavigationView :
+    ListViewItem
 {
     public ItemCategoryNavigationView() =>
         InitializeComponent();

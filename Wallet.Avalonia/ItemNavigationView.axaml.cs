@@ -1,14 +1,10 @@
-using Avalonia.Controls;
-using System;
+using Toolkit.UI.Controls.Avalonia;
 
 namespace Wallet.Avalonia;
 
 public partial class ItemNavigationView :
-    ListBoxItem
+    ListViewItem
 {
     public ItemNavigationView() =>
         InitializeComponent();
-
-    protected override Type StyleKeyOverride =>
-        typeof(ListBoxItem);
 }

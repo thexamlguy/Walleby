@@ -4,17 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:DataType="vm:ItemCategoryNavigationCollectionViewModel">
-    <ListBox
+    <ListView
         Margin="2,-1,0,0"
         AutoScrollToSelectedItem="True"
-        ItemTemplate="{ReflectionBinding Template}"
+        ItemContainerTemplateSelector="{ReflectionBinding Template}"
         ItemsSource="{Binding}"
         SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
         SelectionMode="Single">
-        <ListBox.Styles>
-            <Style Selector="ListBoxItem">
+        <ListView.Styles>
+            <Style Selector="ListViewItem">
                 <Setter Property="IsSelected" Value="{ReflectionBinding Selected, Mode=TwoWay}" />
             </Style>
-        </ListBox.Styles>
-    </ListBox>
+        </ListView.Styles>
+    </ListView>
 </UserControl>

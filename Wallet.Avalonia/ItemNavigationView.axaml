@@ -1,14 +1,13 @@
-<ListBoxItem
+<ListViewItem
     x:Class="Wallet.Avalonia.ItemNavigationView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:DataType="vm:ItemNavigationViewModel"
-    ContentTemplate="{x:Null}"
     ListBoxExtension.IsItemInvokedEnabled="True">
-    <ListBoxItem.Resources>
+    <ListViewItem.Resources>
         <SolidColorBrush x:Key="StarredIconForegroundBrush" Color="#FFEDB120" />
-    </ListBoxItem.Resources>
+    </ListViewItem.Resources>
     <Interaction.Behaviors>
         <AttachedEventTriggerBehaviour RoutedEvent="{x:Static ListBoxExtension.ItemInvokedEvent}">
             <NavigateAction
@@ -52,4 +51,4 @@
             <TextBlock Opacity="0.7" Text="{Binding Name}" />
         </StackPanel>
     </Grid>
-</ListBoxItem>
+</ListViewItem>

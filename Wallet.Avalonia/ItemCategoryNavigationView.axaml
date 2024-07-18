@@ -1,4 +1,4 @@
-<ListBoxItem
+<ListViewItem
     x:Class="Wallet.Avalonia.ItemCategoryNavigationView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -25,4 +25,4 @@
             VerticalAlignment="Center"
             Text="{Binding Name}" />
     </Grid>
-</ListBoxItem>
+</ListViewItem>

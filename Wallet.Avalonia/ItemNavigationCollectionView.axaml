@@ -25,10 +25,10 @@
             <NavigateAction Region="{Binding Named, StringFormat='{}{0}:Content'}" Route="EmptyItemCollection" />
         </DataTriggerBehavior>
     </Interaction.Behaviors>
-    <TemplateListBox
+	<ListView
         Margin="2,-1,0,0"
         AutoScrollToSelectedItem="True"
-        ItemTemplate="{ReflectionBinding Template}"
+        ItemContainerTemplateSelector="{ReflectionBinding Template}"
         ItemsSource="{Binding}"
         SelectedItem="{Binding SelectedItem}"
         SelectionMode="Single" />
