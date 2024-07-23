@@ -6,5 +6,6 @@
     x:DataType="vm:CommentEntryCollectionViewModel"
     Header="{Binding Key}"
     IsExpanded="True"
+    IsToggleable="{Binding Count}"
     ItemTemplate="{ReflectionBinding Template}"
     ItemsSource="{Binding}" />

@@ -10,7 +10,7 @@
     <Interaction.Behaviors>
         <AttachedEventTriggerBehaviour RoutedEvent="{x:Static NavigationViewExtension.ItemInvokedEvent}">
             <NavigateAction Region="Left" Route="ItemCategoryCollection">
-                <Parameter Key="Transition" Value="FromRight" />
+                <Parameter Key="Transition" Value="Suppress" />
                 <Parameter Key="IsBackStackEnabled" Value="{x:True}" />
                 <Parameter Key="ClearBackStack" Value="[2-2]" />
             </NavigateAction>
