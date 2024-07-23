@@ -21,9 +21,6 @@
                 <Parameter Key="Favourite" Value="{Binding IsFavourite}" />
                 <Parameter Key="Archived" Value="{Binding IsArchived}" />
                 <Parameter Key="State" Value="{x:Static vm:ItemState.Read}" />
-                <Parameter Key="Transition" Value="Suppress" />
-                <Parameter Key="IsBackStackEnabled" Value="{x:False}" />
-                <Parameter Key="ClearBackStack" Value="{x:True}" />
             </NavigateAction>
         </AttachedEventTriggerBehaviour>
         <EventTriggerBehavior EventName="AttachedToVisualTree">
