@@ -60,7 +60,7 @@
             Width="400"
             Margin="0,-24,0,0"
             IsEnabled="{Binding !IsActive}"
-            Spacing="18">
+            Spacing="16">
             <Grid HorizontalAlignment="Center">
                 <PersonPicture
                     Width="{StaticResource PersonPictureSize}"
@@ -100,16 +100,21 @@
                 </DropDownButton>
             </Grid>
             <StackPanel>
-                <TextBlock Margin="0,0,0,6" Text="Name" />
+                <TextBlock Margin="0,0,0,8" Text="Name" />
                 <TextBox Text="{Binding Name}" Watermark="e.g. Personal" />
             </StackPanel>
             <StackPanel>
-                <TextBlock Margin="0,0,0,6" Text="Password" />
+                <TextBlock Margin="0,0,0,8" Text="Password" />
                 <TextBox
                     Classes="revealPasswordButton"
                     PasswordChar="&#x25CF;"
                     Text="{Binding Password}" />
             </StackPanel>
+            <InfoBar
+                IsClosable="False"
+                IsOpen="{Binding Validation.Errors[Name], Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                Message="{Binding Validation.Errors[Name]}"
+                Severity="Error" />
         </StackPanel>
         <ProgressRing
             Width="48"

@@ -50,8 +50,15 @@ public partial class CreateWalletViewModel :
     {
         using (await new ActivityLock(this))
         {
-            IsConfirmed = await Mediator.Handle<CreateEventArgs<Wallet<(string, string, IImageDescriptor?)>>,
-                bool>(Create.As(new Wallet<(string, string, IImageDescriptor?)>((Name, Password, ImageDescriptor))));
+            if (await Mediator.Handle<CreateEventArgs<Wallet<(string, string, IImageDescriptor?)>>,
+                Result>(Create.As(new Wallet<(string, string, IImageDescriptor?)>((Name, Password, ImageDescriptor)))) is Result result)
+            {
+                if (await Validation.Validate(() => Name, [new ValidationRule(() => result.Error != Error.Duplicated, 
+                    "This wallet name already exist.")]))
+                {
+                    IsConfirmed = true;
+                }
+            }
 
             return IsConfirmed;
         }
@@ -68,7 +75,7 @@ public partial class CreateWalletViewModel :
     {
         if (args.PropertyName is string name)
         {
-            _ = Validation.Validate(name);
+            Validation.Validate(name);
         }
 
         base.OnPropertyChanged(args);
