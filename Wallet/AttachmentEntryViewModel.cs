@@ -8,4 +8,4 @@ public partial class AttachmentEntryViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer,
-    string? value = default) : Observable<string>(provider, factory, mediator, publisher, subscriber, disposer, value);
+    Attachment? value = default) : Observable<Attachment>(provider, factory, mediator, publisher, subscriber, disposer, value);

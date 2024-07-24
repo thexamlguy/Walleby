@@ -114,6 +114,7 @@ public partial class App : Application
 
                         services.AddDbContextFactory<WalletContext>();
 
+                        services.AddHandler<CreateFileAttachmentHandler>();
                         services.AddHandler<CreateProfileImageHandler>();
 
                         services.AddHandler<QueryWalletHandler>();
@@ -186,12 +187,13 @@ public partial class App : Application
 
                         services.AddTemplate<ItemSectionViewModel, ItemSectionView>();
 
-                        services.AddTemplate<TextEntryViewModel, TextEntryView>();
-
                         services.AddTemplate<CreateCommentEntryViewModel, CreateCommentEntryView>();
                         services.AddTemplate<CommentEntryViewModel, CommentEntryView>();
                         services.AddTemplate<CommentEntryCollectionViewModel, CommentEntryCollectionView>();
 
+                        services.AddTemplate<AttachmentEntryCollectionViewModel, AttachmentEntryCollectionView>();
+
+                        services.AddTemplate<TextEntryViewModel, TextEntryView>();
                         services.AddTemplate<PasswordEntryViewModel, PasswordEntryView>();
                         services.AddTemplate<MaskedTextEntryViewModel, MaskedTextEntryView>();
                         services.AddTemplate<DropdownEntryCollectionViewModel, DropdownEntryCollectionView>();
@@ -222,6 +224,7 @@ public partial class App : Application
                         services.AddHandler<FavouriteItemHandler>();
                         services.AddHandler<UnfavouriteItemHandler>();
 
+                        services.AddHandler<AttachmentEntryCollectionViewModelHandler>(nameof(AttachmentEntryCollectionConfiguration));
                         services.AddHandler<TextEntryViewModelHandler>(nameof(TextEntryConfiguration));
                         services.AddHandler<CommentEntryCollectionViewModelHandler>(nameof(CommentEntryCollectionConfiguration));
                         services.AddHandler<PasswordEntryViewModelHandler>(nameof(PasswordEntryConfiguration));

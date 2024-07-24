@@ -1,4 +1,5 @@
-﻿using Toolkit.Foundation;
+﻿using CommunityToolkit.Mvvm.Input;
+using Toolkit.Foundation;
 
 namespace Wallet;
 
@@ -9,9 +10,31 @@ public partial class AttachmentEntryCollectionViewModel(IServiceProvider provide
     ISubscriber subscriber,
     IDisposer disposer,
     ItemState state,
-    IItemEntryConfiguration<ICollection<Comment>> configuration,
+    IItemEntryConfiguration<ICollection<Attachment>> configuration,
     string key,
-    ICollection<Comment> value,
+    ICollection<Attachment> value,
     bool isConcealed,
     bool isRevealed,
-    double width) : ItemEntryCollectionViewModel<AttachmentEntryViewModel, ICollection<Comment>>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width);
+    double width) : ItemEntryCollectionViewModel<AttachmentEntryViewModel, ICollection<Attachment>>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width)
+{
+    [RelayCommand]
+    private async Task Invoke()
+    {
+        if (await Mediator.Handle<CreateEventArgs<FileAttachment>, IReadOnlyCollection<IFileDescriptor>>(Create.As<FileAttachment>()) 
+            is IReadOnlyCollection<IFileDescriptor> fileDescriptors)
+        {
+            foreach (IFileDescriptor file in fileDescriptors)
+            {
+                Attachment attachment = new()
+                {
+                    Name = file.Name,
+                    Path = file.Path,
+                    DateTime = DateTimeOffset.Now
+                };
+
+                Add<AttachmentEntryViewModel>(attachment);
+                Value.Add(attachment);
+            }
+        }
+    }
+}

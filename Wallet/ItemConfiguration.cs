@@ -159,7 +159,7 @@ public record ItemConfiguration
                 {
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -180,7 +180,7 @@ public record ItemConfiguration
                     },
                     new AttachmentEntryCollectionConfiguration
                     {
-                        Label = "Attachments",
+                        Label = "Attachments"
                     }
                 }
             }
@@ -221,11 +221,11 @@ public record ItemConfiguration
                     },
                     new AttachmentEntryCollectionConfiguration
                     {
-                        Label = "Ticket"
+                        Label = "Attachments"
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -319,7 +319,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -344,7 +344,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -434,7 +434,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -475,7 +475,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -520,7 +520,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -573,7 +573,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -622,7 +622,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -671,7 +671,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -740,7 +740,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -880,7 +880,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -941,7 +941,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
@@ -998,7 +998,7 @@ public record ItemConfiguration
                     },
                     new CommentEntryCollectionConfiguration
                     {
-                        Label = "Notes"
+                        Label = "Comments"
                     }
                 }
             }
