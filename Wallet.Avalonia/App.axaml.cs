@@ -192,6 +192,8 @@ public partial class App : Application
                         services.AddTemplate<CommentEntryCollectionViewModel, CommentEntryCollectionView>();
 
                         services.AddTemplate<AttachmentEntryCollectionViewModel, AttachmentEntryCollectionView>();
+                        services.AddTemplate<AttachmentEntryViewModel, AttachmentEntryView>();
+                        services.AddTemplate<LocalAttachmentEntryViewModel, AttachmentEntryView>();
 
                         services.AddTemplate<TextEntryViewModel, TextEntryView>();
                         services.AddTemplate<PasswordEntryViewModel, PasswordEntryView>();

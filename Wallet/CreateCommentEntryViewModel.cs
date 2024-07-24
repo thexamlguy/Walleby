@@ -14,7 +14,7 @@ public partial class CreateCommentEntryViewModel(IServiceProvider provider,
     [RelayCommand]
     private void Invoke()
     {
-        Publisher.Publish(Create.As(new Comment { Text = Value, DateTime = DateTimeOffset.Now }));
+        Publisher.Publish(Create.As(new Comment { Text = Value, Created = DateTimeOffset.Now }));
         Value = null;
     }
 }

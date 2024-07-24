@@ -4,5 +4,5 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:DataType="vm:CommentEntryViewModel"
-    Content="{Binding Value}"
-    Description="{Binding Key}" />
+    Content="{Binding Comment}"
+    Description="{Binding Created}" />

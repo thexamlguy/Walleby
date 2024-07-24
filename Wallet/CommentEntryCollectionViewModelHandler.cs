@@ -18,9 +18,9 @@ public class CommentEntryCollectionViewModelHandler(IServiceFactory serviceFacto
                 [.. args.Parameters, configuration, label, values, false, false, width])
                 is CommentEntryCollectionViewModel viewModel)
             {
-                foreach (Comment value in values.OrderByDescending(x => x.DateTime))
+                foreach (Comment value in values.OrderByDescending(x => x.Created))
                 {
-                    viewModel.Add<CommentEntryViewModel>(value.DateTime, value.Text);
+                    viewModel.Add<CommentEntryViewModel>(value.Created, value.Text);
                 }
 
                 return Task.FromResult<IItemEntryViewModel?>(viewModel);

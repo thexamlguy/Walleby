@@ -1,0 +1,6 @@
+<SettingsExpanderItem
+    x:Class="Wallet.Avalonia.AttachmentEntryView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    Welcome to Avalonia!
+</SettingsExpanderItem>

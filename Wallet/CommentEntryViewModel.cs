@@ -1,4 +1,5 @@
-﻿using Toolkit.Foundation;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Toolkit.Foundation;
 
 namespace Wallet;
 
@@ -8,6 +9,13 @@ public partial class CommentEntryViewModel(IServiceProvider provider,
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer,
-    DateTimeOffset key,
-    string? value = default) : Observable<DateTimeOffset, string>(provider, factory, mediator, publisher, subscriber, disposer, key, value),
-    ICommentEntryViewModel;
+    DateTimeOffset created,
+    string comment) : Observable(provider, factory, mediator, publisher, subscriber, disposer),
+    ICommentEntryViewModel
+{
+    [ObservableProperty]
+    private DateTimeOffset created = created;
+
+    [ObservableProperty]
+    private string comment = comment;
+}

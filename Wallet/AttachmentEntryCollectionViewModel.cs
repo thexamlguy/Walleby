@@ -9,14 +9,17 @@ public partial class AttachmentEntryCollectionViewModel(IServiceProvider provide
     IPublisher publisher,
     ISubscriber subscriber,
     IDisposer disposer,
+    IContentTemplate template,
     ItemState state,
     IItemEntryConfiguration<ICollection<Attachment>> configuration,
     string key,
     ICollection<Attachment> value,
     bool isConcealed,
     bool isRevealed,
-    double width) : ItemEntryCollectionViewModel<AttachmentEntryViewModel, ICollection<Attachment>>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width)
+    double width) : ItemEntryCollectionViewModel<IAttachmentEntryViewModel, ICollection<Attachment>>(provider, factory, mediator, publisher, subscriber, disposer, state, configuration, key, value, isConcealed, isRevealed, width)
 {
+    public IContentTemplate Template { get; set; } = template;
+
     [RelayCommand]
     private async Task Invoke()
     {
@@ -25,14 +28,19 @@ public partial class AttachmentEntryCollectionViewModel(IServiceProvider provide
         {
             foreach (IFileDescriptor file in fileDescriptors)
             {
+                string path = file.Path;
+                DateTimeOffset created = DateTimeOffset.Now;
+                string name = file.Name;
+                int size = file.Size;
+
                 Attachment attachment = new()
                 {
-                    Name = file.Name,
-                    Path = file.Path,
-                    DateTime = DateTimeOffset.Now
+                    Name = name,
+                    Path = path,
+                    DateTime = created
                 };
 
-                Add<AttachmentEntryViewModel>(attachment);
+                Add<LocalAttachmentEntryViewModel>(path, created, size, name);
                 Value.Add(attachment);
             }
         }

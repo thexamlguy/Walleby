@@ -30,7 +30,7 @@ public partial class CommentEntryCollectionViewModel : ItemEntryCollectionViewMo
     {
         if (args.Sender is Comment comment)
         {
-            Insert<CommentEntryViewModel>(0, comment.DateTime, comment.Text);
+            Insert<CommentEntryViewModel>(0, comment.Created, comment.Text);
             Value.Add(comment);
         }
 
