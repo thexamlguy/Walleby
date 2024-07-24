@@ -11,7 +11,7 @@ public partial class LocalAttachmentEntryViewModel(IServiceProvider provider,
     IDisposer disposer,
     string path,
     DateTimeOffset created,
-    int size,
+    long size,
     string name) : Observable(provider, factory, mediator, publisher, subscriber, disposer),
     IAttachmentEntryViewModel
 {
@@ -22,7 +22,7 @@ public partial class LocalAttachmentEntryViewModel(IServiceProvider provider,
     private string path = path;
 
     [ObservableProperty]
-    private int size = size;
+    private long size = size;
 
     [ObservableProperty]
     private string name = name;

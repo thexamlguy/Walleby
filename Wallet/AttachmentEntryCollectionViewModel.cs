@@ -31,7 +31,7 @@ public partial class AttachmentEntryCollectionViewModel(IServiceProvider provide
                 string path = file.Path;
                 DateTimeOffset created = DateTimeOffset.Now;
                 string name = file.Name;
-                int size = file.Size;
+                long size = file.Size;
 
                 Attachment attachment = new()
                 {
