@@ -22,7 +22,7 @@
         <Thickness x:Key="TextControlMargin">0</Thickness>
         <Thickness x:Key="TextControlPadding">10,5,6,6</Thickness>
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
-        <Thickness x:Key="TextControlCompactMargin">0,-3,0,0</Thickness>
+        <Thickness x:Key="TextControlCompactMargin">0</Thickness>
     </SettingsExpander.Resources>
     <SettingsExpander.Action>
         <ItemEntryActionView />

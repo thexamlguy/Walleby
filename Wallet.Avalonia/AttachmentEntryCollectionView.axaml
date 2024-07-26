@@ -6,7 +6,7 @@
     x:DataType="vm:AttachmentEntryCollectionViewModel"
     Header="{Binding Key}"
     IsExpanded="True"
-    IsToggleable="{Binding Count}"
+    IsExpandable="{Binding Count}"
     ItemTemplate="{ReflectionBinding Template}"
     ItemsSource="{Binding}">
     <SettingsExpander.Action>

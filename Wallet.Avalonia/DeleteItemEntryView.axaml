@@ -1,14 +1,14 @@
 <UserControl
-    x:Class="Wallet.Avalonia.ItemEntryActionView"
+    x:Class="Wallet.Avalonia.DeleteItemEntryView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Wallet"
     x:CompileBindings="False"
     DataContext="{Binding $parent[SettingsExpander].DataContext}">
     <UserControl.Resources>
-        <Thickness x:Key="MoreButtonMargin">12,0,0,0</Thickness>
+        <Thickness x:Key="MoreButtonMargin">0</Thickness>
         <Thickness x:Key="MoreButtonPadding">5,0,5,0</Thickness>
-        <x:Double x:Key="MoreButtonMinWidth">32</x:Double>
+        <x:Double x:Key="MoreButtonMinWidth">24</x:Double>
         <x:Double x:Key="MoreButtonMinHeight">32</x:Double>
     </UserControl.Resources>
     <Button
@@ -17,14 +17,10 @@
         MinHeight="{StaticResource MoreButtonMinHeight}"
         Margin="{StaticResource MoreButtonMargin}"
         Padding="{StaticResource MoreButtonPadding}"
-        VerticalAlignment="Center"
         HorizontalContentAlignment="Center"
         VerticalContentAlignment="Center"
         Theme="{StaticResource TransparentButton}">
-        <Viewbox
-            Width="14"
-            Height="14"
-            Margin="0,2,0,0">
+        <Viewbox Width="14" Height="14">
             <PathIcon
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
