@@ -40,6 +40,8 @@ public partial class OpenWalletViewModel :
     [RelayCommand]
     private async Task Invoke()
     {
+        Validation.Clear();
+
         using (await new ActivityLock(this))
         {
             bool result = await Mediator.Handle<OpenEventArgs<Wallet<string>>, bool>(Open.As(new Wallet<string>(Password)));
