@@ -24,9 +24,7 @@
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
         <Thickness x:Key="TextControlCompactMargin">0</Thickness>
     </SettingsExpander.Resources>
-    <SettingsExpander.Icon>
-        <DeleteItemEntryView />
-    </SettingsExpander.Icon>
+    <SettingsExpander.Icon />
     <SettingsExpander.Action>
         <ItemEntryActionView />
     </SettingsExpander.Action>

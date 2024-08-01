@@ -5,4 +5,4 @@
     xmlns:vm="using:Wallet"
     x:DataType="vm:CommentEntryViewModel"
     Content="{Binding Comment}"
-    Description="{Binding Created}" />
+    Description="{Binding Created, StringFormat=f}" />

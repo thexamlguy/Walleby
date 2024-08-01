@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Reactive.Disposables;
+using System.Reflection;
 using Toolkit.Foundation;
 
 namespace Wallet;
@@ -7,6 +8,7 @@ public class ItemContentViewModelActivationHandler(IDecoratorService<Item<(Guid,
     IDecoratorService<ItemConfiguration> itemConfigurationDecorator,
     IMediator mediator,
     IServiceFactory serviceFactory,
+    IDisposer disposer,
     IPublisher publisher) :
     INotificationHandler<ActivationEventArgs<ItemSectionViewModel>>
 {
@@ -39,6 +41,12 @@ public class ItemContentViewModelActivationHandler(IDecoratorService<Item<(Guid,
                                     if (await mediator.Handle<object, IItemEntryViewModel?>(message,
                                         entryConfiguration.GetType().Name) is IItemEntryViewModel entryViewModel)
                                     {
+                                        // Should this be here?
+                                        disposer.Add(entryViewModel, Disposable.Create(() =>
+                                        {
+                                            configurationSection.Entries.Remove(entryConfiguration);
+                                        }));
+
                                         publisher.Publish(Create.As(entryViewModel), id);
                                     }
                                 }

@@ -7,6 +7,7 @@ namespace Wallet;
 public partial class ItemEntryViewModel<TValue> :
     Observable<string, TValue>,
     IItemEntryViewModel,
+    IRemovable,
     IHandler<ValidateEventArgs<ItemEntry>, bool>,
     INotificationHandler<ConfirmEventArgs<ItemEntry>>,
     INotificationHandler<UpdateEventArgs<ItemEntry>>,
@@ -69,6 +70,8 @@ public partial class ItemEntryViewModel<TValue> :
         return Task.CompletedTask;
     }
 
+   
+
     public async Task<bool> Handle(ValidateEventArgs<ItemEntry> args,
         CancellationToken cancellationToken)
     {
@@ -79,6 +82,9 @@ public partial class ItemEntryViewModel<TValue> :
 
         return await Task.FromResult(true);
     }
+
+    [RelayCommand]
+    private void Remove() => Dispose();
 
     [RelayCommand]
     private void Copy() => Publisher.Publish(Write.As(new Clipboard<object>($"{Value}")));
