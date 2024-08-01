@@ -7,14 +7,17 @@
     <Button
         Width="{StaticResource ButtonWidth}"
         Height="{StaticResource ButtonHeight}"
+        Padding="0"
         VerticalAlignment="Center"
         Command="{Binding InvokeCommand}"
         ToolTip.Tip="Save">
-        <Viewbox Width="14" Height="14">
-            <PathIcon
+        <Viewbox Height="20">
+            <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Data="F1 M 3.36 11.959999 C 3.28 11.853333 3.173333 11.799999 3.04 11.799999 C 2.906667 11.799999 2.786666 11.846666 2.68 11.94 C 2.573333 12.033334 2.513333 12.146667 2.5 12.28 C 2.486667 12.413334 2.533333 12.533333 2.64 12.639999 L 6.64 17.119999 C 6.719999 17.226665 6.833333 17.286667 6.98 17.299999 C 7.126667 17.313332 7.253333 17.266666 7.36 17.16 L 17.84 6.639999 C 17.946667 6.56 18 6.446667 18 6.299999 C 18 6.153334 17.953331 6.033334 17.859999 5.94 C 17.766666 5.846666 17.646666 5.799999 17.5 5.799999 C 17.353333 5.799999 17.239998 5.853333 17.16 5.96 L 7.04 16.08 Z " />
+                FontFamily="{StaticResource FluentThemeFontFamily}"
+                FontSize="16"
+                Text="&#xE3EA;" />
         </Viewbox>
     </Button>
 </UserControl>
