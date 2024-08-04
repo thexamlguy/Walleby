@@ -8,6 +8,25 @@
         <ItemsControl.Styles>
             <Style Selector="ContentPresenter">
                 <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="(Interaction.Behaviors)">
+                    <BehaviorCollectionTemplate>
+                        <BehaviorCollection>
+                            <ItemDragBehavior
+                                HorizontalDragThreshold="3"
+                                Orientation="Vertical"
+                                VerticalDragThreshold="3" />
+                        </BehaviorCollection>
+                    </BehaviorCollectionTemplate>
+                </Setter>
+            </Style>
+            <Style Selector="ContentPresenter:not(:dragging)">
+                <Setter Property="Transitions">
+                    <Setter.Value>
+                        <Transitions>
+                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+                        </Transitions>
+                    </Setter.Value>
+                </Setter>
             </Style>
         </ItemsControl.Styles>
         <ItemsControl.ItemsPanel>

@@ -7,116 +7,169 @@
     Header="{Binding Key}"
     IsExpanded="False">
     <SettingsExpander.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.ThemeDictionaries>
-				<ResourceDictionary x:Key="Light">
-					<StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="ControlStrokeColorDefaultBrush" />
-					<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="ControlStrokeColorDefaultBrush" />
-				</ResourceDictionary>
-				<ResourceDictionary x:Key="Dark">
-					<StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="SubtleFillColorTransparentBrush" />
-					<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="SubtleFillColorTransparentBrush" />
-				</ResourceDictionary>
-			</ResourceDictionary.ThemeDictionaries>
-		</ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="ControlStrokeColorDefaultBrush" />
+                    <StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="ControlStrokeColorDefaultBrush" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="SubtleFillColorTransparentBrush" />
+                    <StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="SubtleFillColorTransparentBrush" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+        <Thickness x:Key="ButtonMargin">0,0,12,0</Thickness>
+        <Thickness x:Key="ButtonPadding">0</Thickness>
+        <x:Double x:Key="ButtonMinWidth">32</x:Double>
+        <x:Double x:Key="ButtonMinHeight">32</x:Double>
         <Thickness x:Key="TextControlMargin">0</Thickness>
+        <Thickness x:Key="TextControlPadding">10,6,6,5</Thickness>
         <Thickness x:Key="TextControlCompactPadding">0</Thickness>
         <Thickness x:Key="TextControlCompactMargin">0</Thickness>
         <Thickness x:Key="DatePickerHostPadding">0,5,0,6</Thickness>
         <Thickness x:Key="DatePickerHostMonthPadding">9,5,0,6</Thickness>
     </SettingsExpander.Resources>
+    <SettingsExpander.Styles>
+        <Style Selector="SettingsExpander.Write">
+            <Style Selector="^ /template/ SettingsExpanderItem#ContentHost">
+                <Style Selector="^ /template/ ContentPresenter#FooterPresenter">
+                    <Setter Property="MinWidth" Value="{Binding Width}" />
+                </Style>
+                <Style Selector="^:footerBottom /template/ ContentPresenter#FooterPresenter">
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="MinWidth" Value="0" />
+                </Style>
+            </Style>
+            <Style Selector="^ DatePicker">
+                <Setter Property="MaxWidth" Value="{Binding Width}" />
+                <Setter Property="MinWidth" Value="{Binding Width}" />
+                <Setter Property="IsVisible" Value="True" />
+                <Setter Property="Height" Value="32" />
+            </Style>
+            <Style Selector="^ TextBox">
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+        </Style>
+        <Style Selector="SettingsExpander.Read">
+            <Style Selector="^ /template/ SettingsExpanderItem#ContentHost">
+                <Style Selector="^ /template/ ContentPresenter#FooterPresenter">
+                    <Setter Property="MinWidth" Value="0" />
+                </Style>
+                <Style Selector="^:footerBottom /template/ ContentPresenter#FooterPresenter">
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="MinWidth" Value="0" />
+                </Style>
+            </Style>
+            <Style Selector="^ TextBox">
+                <Setter Property="MinWidth" Value="0" />
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Margin" Value="{StaticResource TextControlCompactMargin}" />
+                <Setter Property="Padding" Value="{StaticResource TextControlCompactPadding}" />
+                <Setter Property="MinHeight" Value="0" />
+                <Setter Property="TextWrapping" Value="NoWrap" />
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
+                <Style Selector="^:pointerover">
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
+                        </Setter.Value>
+                    </Setter>
+                    <Style Selector="^ /template/ Border#PART_BorderElement">
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                        <Setter Property="Background" Value="Transparent" />
+                    </Style>
+                </Style>
+                <Style Selector="^:focus">
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
+                        </Setter.Value>
+                    </Setter>
+                    <Style Selector="^ /template/ Border#PART_BorderElement">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                    </Style>
+                </Style>
+            </Style>
+            <Style Selector="^ DatePicker">
+                <Setter Property="MinWidth" Value="0" />
+                <Setter Property="MinHeight" Value="0" />
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+        </Style>
+    </SettingsExpander.Styles>
+    <Interaction.Behaviors>
+        <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
+            <AddClassAction ClassName="Read" RemoveIfExists="True" />
+            <RemoveClassAction ClassName="Write" />
+        </DataTriggerBehavior>
+        <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
+            <AddClassAction ClassName="Write" RemoveIfExists="True" />
+            <RemoveClassAction ClassName="Read" />
+        </DataTriggerBehavior>
+        <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
+            <AddClassAction ClassName="Write" RemoveIfExists="True" />
+            <RemoveClassAction ClassName="Read" />
+        </DataTriggerBehavior>
+    </Interaction.Behaviors>
+    <SettingsExpander.Icon>
+        <Button
+            Grid.Column="1"
+            MinWidth="{StaticResource ButtonMinWidth}"
+            MinHeight="{StaticResource ButtonMinHeight}"
+            Margin="{StaticResource ButtonMargin}"
+            Padding="{StaticResource ButtonPadding}"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Command="{Binding RemoveCommand}"
+            Theme="{StaticResource TransparentButton}">
+            <Viewbox Height="20">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource FluentThemeFontFamily}"
+                    FontSize="16"
+                    Text="&#xED75;" />
+            </Viewbox>
+            <Button.Styles>
+                <Style Selector="Button.Hide">
+                    <Setter Property="IsVisible" Value="True" />
+                </Style>
+                <Style Selector="Button.Show">
+                    <Setter Property="IsVisible" Value="False" />
+                </Style>
+            </Button.Styles>
+            <Interaction.Behaviors>
+                <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
+                    <AddClassAction ClassName="Show" RemoveIfExists="True" />
+                    <RemoveClassAction ClassName="Hide" />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
+                    <AddClassAction ClassName="Hide" RemoveIfExists="True" />
+                    <RemoveClassAction ClassName="Show" />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
+                    <AddClassAction ClassName="Hide" RemoveIfExists="True" />
+                    <RemoveClassAction ClassName="Show" />
+                </DataTriggerBehavior>
+            </Interaction.Behaviors>
+        </Button>
+    </SettingsExpander.Icon>
     <SettingsExpander.Action>
         <ItemEntryActionView />
     </SettingsExpander.Action>
     <SettingsExpander.Footer>
         <Grid>
-            <DatePicker SelectedDate="{Binding Value}">
-                <DatePicker.Styles>
-                    <Style Selector="DatePicker.Write">
-                        <Setter Property="MaxWidth" Value="{Binding Width}" />
-                        <Setter Property="MinWidth" Value="{Binding Width}" />
-                        <Setter Property="IsVisible" Value="True" />
-                        <Setter Property="Height" Value="32" />
-                    </Style>
-                    <Style Selector="DatePicker.Read">
-                        <Setter Property="MinWidth" Value="0" />
-                        <Setter Property="MinHeight" Value="0" />
-                        <Setter Property="IsVisible" Value="False" />
-                    </Style>
-                </DatePicker.Styles>
-                <Interaction.Behaviors>
-                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
-                        <AddClassAction ClassName="Read" RemoveIfExists="True" />
-                        <RemoveClassAction ClassName="Write" />
-                    </DataTriggerBehavior>
-                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
-                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
-                        <RemoveClassAction ClassName="Read" />
-                    </DataTriggerBehavior>
-                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
-                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
-                        <RemoveClassAction ClassName="Read" />
-                    </DataTriggerBehavior>
-                </Interaction.Behaviors>
-            </DatePicker>
-            <TextBox Text="{Binding Value, StringFormat=d}">
-                <TextBox.Styles>
-                    <Style Selector="TextBox.Write">
-                        <Setter Property="IsVisible" Value="False" />
-                    </Style>
-                    <Style Selector="TextBox.Read">
-                        <Setter Property="MinWidth" Value="0" />
-                        <Setter Property="IsReadOnly" Value="True" />
-                        <Setter Property="BorderBrush" Value="Transparent" />
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="IsVisible" Value="True" />
-                        <Setter Property="Margin" Value="{StaticResource TextControlCompactMargin}" />
-                        <Setter Property="Padding" Value="{StaticResource TextControlCompactPadding}" />
-                        <Setter Property="MinHeight" Value="0" />
-                        <Setter Property="Foreground">
-                            <Setter.Value>
-                                <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style Selector="^:pointerover">
-                            <Setter Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Style Selector="^ /template/ Border#PART_BorderElement">
-                                <Setter Property="BorderBrush" Value="Transparent" />
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </Style>
-                        <Style Selector="^:focus">
-                            <Setter Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.7" Color="{DynamicResource TextFillColorPrimary}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Style Selector="^ /template/ Border#PART_BorderElement">
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="BorderBrush" Value="Transparent" />
-                            </Style>
-                        </Style>
-                    </Style>
-                </TextBox.Styles>
-                <Interaction.Behaviors>
-                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Read}">
-                        <AddClassAction ClassName="Read" RemoveIfExists="True" />
-                        <RemoveClassAction ClassName="Write" />
-                    </DataTriggerBehavior>
-                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.New}">
-                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
-                        <RemoveClassAction ClassName="Read" />
-                    </DataTriggerBehavior>
-                    <DataTriggerBehavior Binding="{Binding State}" Value="{x:Static vm:ItemState.Write}">
-                        <AddClassAction ClassName="Write" RemoveIfExists="True" />
-                        <RemoveClassAction ClassName="Read" />
-                    </DataTriggerBehavior>
-                </Interaction.Behaviors>
-            </TextBox>
+            <DatePicker SelectedDate="{Binding Value}" />
+            <TextBox Text="{Binding Value, StringFormat=d}" />
         </Grid>
     </SettingsExpander.Footer>
 </SettingsExpander>

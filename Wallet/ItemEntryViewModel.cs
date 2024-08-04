@@ -70,7 +70,6 @@ public partial class ItemEntryViewModel<TValue> :
         return Task.CompletedTask;
     }
 
-   
 
     public async Task<bool> Handle(ValidateEventArgs<ItemEntry> args,
         CancellationToken cancellationToken)

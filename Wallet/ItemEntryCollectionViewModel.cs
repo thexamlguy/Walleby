@@ -95,10 +95,6 @@ public partial class ItemEntryCollectionViewModel<TItem, TValue> :
         return Task.CompletedTask;
     }
 
-    protected virtual void OnStateChanged()
-    {
-    }
-
     public Task Handle(ConfirmEventArgs<Item> args)
     {
         Commit();
@@ -120,12 +116,20 @@ public partial class ItemEntryCollectionViewModel<TItem, TValue> :
         return await Task.FromResult(true);
     }
 
+    protected virtual void OnStateChanged()
+    {
+
+    }
+
+
     [RelayCommand]
     private void Copy() => Publisher.Publish(Write.As(new Clipboard<object>($"{Value}")));
 
     [RelayCommand]
     private void Hide() => IsRevealed = false;
 
+    [RelayCommand]
+    private void Remove() => Dispose();
     [RelayCommand]
     private void Reveal() => IsRevealed = true;
 }
